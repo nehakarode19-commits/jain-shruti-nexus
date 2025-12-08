@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { Layout } from "@/components/layout/Layout";
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -8,6 +9,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Checkbox } from "@/components/ui/checkbox";
 import { useToast } from "@/hooks/use-toast";
 import { Link } from "react-router-dom";
+import { useDemoAuth } from "@/contexts/DemoAuthContext";
 import { 
   Scroll, 
   Mail, 
@@ -15,11 +17,14 @@ import {
   User, 
   ArrowRight,
   Eye,
-  EyeOff
+  EyeOff,
+  AlertTriangle
 } from "lucide-react";
 
 const Auth = () => {
   const { toast } = useToast();
+  const navigate = useNavigate();
+  const { login, isAuthenticated } = useDemoAuth();
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -34,17 +39,33 @@ const Auth = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [agreeTerms, setAgreeTerms] = useState(false);
 
+  // Redirect if already authenticated
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate("/");
+    }
+  }, [isAuthenticated, navigate]);
+
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
     
-    // Simulate login - will be replaced with actual auth
-    await new Promise(resolve => setTimeout(resolve, 1000));
+    // Demo login
+    const success = await login(loginEmail, loginPassword);
     
-    toast({
-      title: "Login Feature Coming Soon",
-      description: "Authentication will be enabled once the backend is connected.",
-    });
+    if (success) {
+      toast({
+        title: "Welcome back!",
+        description: "You have been logged in successfully.",
+      });
+      navigate("/");
+    } else {
+      toast({
+        title: "Invalid Credentials",
+        description: "For demo, use: admin@jambushruti.com / demo123",
+        variant: "destructive",
+      });
+    }
     
     setIsLoading(false);
   };
@@ -72,15 +93,20 @@ const Auth = () => {
 
     setIsLoading(true);
     
-    // Simulate registration - will be replaced with actual auth
-    await new Promise(resolve => setTimeout(resolve, 1000));
+    // Demo registration - auto login with provided credentials
+    await new Promise(resolve => setTimeout(resolve, 500));
+    
+    // Store demo user
+    const userData = { email: registerEmail, role: "user", name: registerName };
+    localStorage.setItem("demo_auth", JSON.stringify(userData));
     
     toast({
-      title: "Registration Feature Coming Soon",
-      description: "Account creation will be enabled once the backend is connected.",
+      title: "Account Created!",
+      description: `Welcome ${registerName}! You are now logged in.`,
     });
     
-    setIsLoading(false);
+    // Force page reload to update auth state
+    window.location.href = "/";
   };
 
   return (
@@ -98,6 +124,20 @@ const Auth = () => {
                   Jambu-Shruti
                 </span>
               </Link>
+            </div>
+
+            {/* Demo Notice */}
+            <div className="mb-6 p-4 rounded-lg bg-amber-500/10 border border-amber-500/30 flex items-start gap-3 animate-fade-up">
+              <AlertTriangle className="h-5 w-5 text-amber-500 flex-shrink-0 mt-0.5" />
+              <div className="text-sm">
+                <p className="font-medium text-amber-600 dark:text-amber-400">Demo Mode</p>
+                <p className="text-muted-foreground mt-1">
+                  For demo login use:<br />
+                  <strong>Email:</strong> admin@jambushruti.com<br />
+                  <strong>Password:</strong> demo123<br />
+                  <span className="text-xs">Or create a new account to test registration.</span>
+                </p>
+              </div>
             </div>
 
             <Card variant="elevated" className="animate-fade-up delay-100">
@@ -121,7 +161,7 @@ const Auth = () => {
                             type="email"
                             required
                             className="pl-10"
-                            placeholder="your@email.com"
+                            placeholder="admin@jambushruti.com"
                             value={loginEmail}
                             onChange={(e) => setLoginEmail(e.target.value)}
                           />
@@ -136,7 +176,7 @@ const Auth = () => {
                             type={showPassword ? "text" : "password"}
                             required
                             className="pl-10 pr-10"
-                            placeholder="••••••••"
+                            placeholder="demo123"
                             value={loginPassword}
                             onChange={(e) => setLoginPassword(e.target.value)}
                           />
