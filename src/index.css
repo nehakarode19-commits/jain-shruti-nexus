@@ -205,9 +205,12 @@ html {
     @apply leading-relaxed text-lg font-normal;
   }
 
-  /* Card and box base font size */
-  .card, [class*="Card"], .glass-card, .glass-premium, .glass-glow {
+  /* Card and box base font size - 18px throughout */
+  .card, [class*="Card"], .glass-card, .glass-premium, .glass-glow, 
+  .glass, .glass-dark, .interactive-card, [class*="box"], [class*="Box"],
+  article, aside, section > div {
     font-size: 18px;
+    line-height: 1.6;
   }
 
   ::selection {
@@ -325,22 +328,32 @@ html {
     @apply -translate-y-1 shadow-elevated;
   }
 
-  /* Section Styles - Reduced spacing */
+  /* Section Styles - Reduced spacing for tighter layout */
   .section-padding {
-    @apply py-10 md:py-14 lg:py-18;
+    @apply py-8 md:py-10 lg:py-14;
   }
 
   .section-padding-sm {
-    @apply py-8 md:py-10 lg:py-12;
+    @apply py-6 md:py-8 lg:py-10;
   }
 
-  /* Container Variants */
+  .section-padding-lg {
+    @apply py-10 md:py-14 lg:py-18;
+  }
+
+  /* Container Variants - Minimal side padding, 1800px max width */
   .container-narrow {
-    @apply max-w-3xl mx-auto px-4;
+    @apply max-w-3xl mx-auto px-3 sm:px-4;
   }
 
   .container-wide {
-    @apply max-w-7xl mx-auto px-4 lg:px-8;
+    @apply mx-auto px-3 sm:px-4 lg:px-5;
+    max-width: 1800px;
+  }
+
+  .container-full {
+    @apply mx-auto px-2 sm:px-3 lg:px-4;
+    max-width: 1800px;
   }
 
   /* Button Glow Effect */
