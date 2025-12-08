@@ -24,6 +24,7 @@ import Privacy from "./pages/Privacy";
 import Terms from "./pages/Terms";
 import Gallery from "./pages/Gallery";
 import Books from "./pages/Books";
+import BookDetails from "./pages/BookDetails";
 import Articles from "./pages/Articles";
 import NotFound from "./pages/NotFound";
 
@@ -97,6 +98,7 @@ const App = () => (
               {/* Gallery & Books */}
               <Route path="/gallery" element={<Gallery />} />
               <Route path="/books" element={<Books />} />
+              <Route path="/books/:id" element={<BookDetails />} />
               <Route path="/articles" element={<Articles />} />
               
               {/* Scholars */}
