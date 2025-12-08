@@ -9,35 +9,46 @@ import {
   Award, 
   Quote,
   Scroll,
-  Calendar
+  Calendar,
+  MapPin,
+  Users,
+  Image
 } from "lucide-react";
+import { gurudevBio, galleryImages } from "@/data/gurudevData";
 
 const milestones = [
-  { year: "1923", event: "Birth and early life" },
-  { year: "1946", event: "Initiation into monkhood (Diksha)" },
-  { year: "1960s", event: "Began extensive manuscript research" },
-  { year: "1970s", event: "Published critical editions of Agamas" },
-  { year: "1980s", event: "International recognition for scholarly work" },
-  { year: "2000s", event: "Continued teaching and research" },
+  { year: "1923", event: "Born as Chunilal Bhogilal Joitram in Mandal, Gujarat into a deeply religious family" },
+  { year: "1946", event: "Initiation into monkhood (Diksha) in the Tapa Gaccha order of Shwetambar Jainism" },
+  { year: "1950s", event: "Began intensive study of ancient texts and manuscripts" },
+  { year: "1960s", event: "Started extensive manuscript research and preservation work" },
+  { year: "1970s", event: "Published critical editions of Jain Agamas" },
+  { year: "1980s", event: "Received international recognition for scholarly contributions" },
+  { year: "1990s", event: "Continued teaching and mentoring new generation of scholars" },
+  { year: "2009", event: "Attained Samadhi, leaving behind an unparalleled legacy of scholarship" },
 ];
 
 const achievements = [
   {
     icon: BookOpen,
     title: "Scholarly Works",
-    description: "Authored and edited over 50 critical editions of Jain Agamas and philosophical texts",
+    description: "Authored and edited over 50 critical editions of Jain Agamas and philosophical texts including Sthananga Sutra, Anuyogdwar Sutra, and Dvadasharam Naychakram",
   },
   {
     icon: Globe,
     title: "Languages Mastered",
-    description: "Proficient in Sanskrit, Prakrit, Ardhamagadhi, Gujarati, Hindi, and other classical languages",
+    description: "Proficient in Sanskrit, Prakrit, Ardhamagadhi, Gujarati, Hindi, and other classical languages essential for Jain scriptural studies",
   },
   {
     icon: Award,
     title: "Manuscript Preservation",
-    description: "Catalogued and preserved thousands of rare Jain manuscripts across India",
+    description: "Catalogued and preserved thousands of rare Jain manuscripts across India, including the comprehensive Hastlikhit Granthsuchi series",
   },
 ];
+
+const familyInfo = {
+  father: { name: gurudevBio.fatherName, years: gurudevBio.fatherYears },
+  mother: { name: gurudevBio.motherName, years: gurudevBio.motherYears },
+};
 
 const AboutGurudev = () => {
   return (
@@ -45,7 +56,7 @@ const AboutGurudev = () => {
       {/* Hero */}
       <section className="py-16 lg:py-24 bg-gradient-hero lotus-pattern">
         <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto">
+          <div className="max-w-6xl mx-auto">
             <Link 
               to="/about" 
               className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-primary mb-6"
@@ -55,41 +66,115 @@ const AboutGurudev = () => {
             
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               <div className="animate-fade-up">
+                <p className="text-primary font-display text-lg mb-2">
+                  {gurudevBio.hindiName}
+                </p>
                 <h1 className="font-display text-4xl sm:text-5xl font-bold text-foreground mb-6">
-                  Gurudev Muni Jambuvijayji Maharaj
+                  Gurudev Muni Jambuvijayji Maharaj Saheb
                 </h1>
                 <p className="text-lg text-muted-foreground mb-6">
-                  A towering figure in Jain scholarship, Gurudev dedicated his life to preserving 
-                  and propagating the profound wisdom of Jain philosophy. His contributions to 
-                  manuscript research and textual criticism remain unparalleled.
+                  {gurudevBio.shortBio}
                 </p>
-                <Button variant="spiritual" asChild>
-                  <Link to="/guruvani">
-                    Explore Guruvani
-                    <Scroll className="h-4 w-4 ml-2" />
-                  </Link>
-                </Button>
+                
+                {/* Key Facts */}
+                <div className="grid grid-cols-2 gap-4 mb-8">
+                  <div className="flex items-start gap-3">
+                    <MapPin className="h-5 w-5 text-primary mt-0.5" />
+                    <div>
+                      <p className="text-sm text-muted-foreground">Birth Place</p>
+                      <p className="font-medium text-foreground">{gurudevBio.birthPlace}</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <Calendar className="h-5 w-5 text-primary mt-0.5" />
+                    <div>
+                      <p className="text-sm text-muted-foreground">Life Span</p>
+                      <p className="font-medium text-foreground">{gurudevBio.birthYear}–{gurudevBio.deathYear}</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <Users className="h-5 w-5 text-primary mt-0.5" />
+                    <div>
+                      <p className="text-sm text-muted-foreground">Order</p>
+                      <p className="font-medium text-foreground text-sm">{gurudevBio.order}</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <BookOpen className="h-5 w-5 text-primary mt-0.5" />
+                    <div>
+                      <p className="text-sm text-muted-foreground">Birth Name</p>
+                      <p className="font-medium text-foreground">{gurudevBio.birthName}</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="flex flex-wrap gap-4">
+                  <Button variant="spiritual" asChild>
+                    <Link to="/guruvani">
+                      Explore Guruvani
+                      <Scroll className="h-4 w-4 ml-2" />
+                    </Link>
+                  </Button>
+                  <Button variant="outline" asChild>
+                    <Link to="/gallery">
+                      Photo Gallery
+                      <Image className="h-4 w-4 ml-2" />
+                    </Link>
+                  </Button>
+                </div>
               </div>
 
-              {/* Image placeholder */}
+              {/* Gurudev's Photo */}
               <div className="animate-fade-up delay-200">
-                <div className="aspect-[4/5] rounded-2xl bg-gradient-to-br from-secondary via-card to-cream shadow-elevated overflow-hidden flex items-center justify-center">
-                  <div className="text-center p-8">
-                    <div className="w-32 h-32 mx-auto mb-6 rounded-full bg-gradient-to-br from-primary to-gold flex items-center justify-center shadow-glow">
-                      <Scroll className="h-16 w-16 text-primary-foreground" />
-                    </div>
-                    <h3 className="font-display text-2xl font-bold text-foreground mb-2">
-                      Gurudev Muni
-                    </h3>
-                    <p className="text-muted-foreground">
-                      Jambuvijayji Maharaj
-                    </p>
-                    <p className="text-sm text-muted-foreground mt-2">
-                      (1923 - 2009)
+                <div className="relative rounded-2xl overflow-hidden shadow-elevated">
+                  <img 
+                    src={gurudevBio.mainImage}
+                    alt="Jambuvijayji Maharaj Saheb in white robes sitting cross-legged"
+                    className="w-full h-auto"
+                  />
+                  <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-background/90 to-transparent p-6">
+                    <p className="text-sm text-muted-foreground">
+                      Gurudev Muni Jambuvijayji Maharaj Saheb
                     </p>
                   </div>
                 </div>
+                
+                {/* Centenary Logo */}
+                <div className="flex justify-center mt-6">
+                  <img 
+                    src={gurudevBio.centenaryLogo}
+                    alt="100th Anniversary Celebration Logo"
+                    className="h-32 w-auto"
+                  />
+                </div>
               </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Family Background */}
+      <section className="py-12 bg-secondary/30">
+        <div className="container mx-auto px-4">
+          <div className="max-w-3xl mx-auto">
+            <h2 className="font-display text-2xl font-bold text-foreground text-center mb-8">
+              Family Background
+            </h2>
+            <div className="grid md:grid-cols-2 gap-6">
+              <Card variant="default">
+                <CardContent className="p-6 text-center">
+                  <p className="text-sm text-muted-foreground mb-1">Father</p>
+                  <p className="font-display font-semibold text-foreground">{familyInfo.father.name}</p>
+                  <p className="text-sm text-muted-foreground">({familyInfo.father.years})</p>
+                </CardContent>
+              </Card>
+              <Card variant="default">
+                <CardContent className="p-6 text-center">
+                  <p className="text-sm text-muted-foreground mb-1">Mother</p>
+                  <p className="font-display font-semibold text-foreground">{familyInfo.mother.name}</p>
+                  <p className="text-sm text-muted-foreground">({familyInfo.mother.years})</p>
+                </CardContent>
+              </Card>
             </div>
           </div>
         </div>
@@ -165,7 +250,7 @@ const AboutGurudev = () => {
                   <h3 className="font-display text-xl font-semibold text-foreground mb-3">
                     {item.title}
                   </h3>
-                  <p className="text-muted-foreground">
+                  <p className="text-muted-foreground text-sm">
                     {item.description}
                   </p>
                 </CardContent>
@@ -175,8 +260,41 @@ const AboutGurudev = () => {
         </div>
       </section>
 
-      {/* CTA */}
+      {/* Photo Gallery Preview */}
       <section className="py-16 bg-background">
+        <div className="container mx-auto px-4">
+          <div className="flex items-center justify-between mb-8">
+            <h2 className="font-display text-2xl font-bold text-foreground">
+              Photo Gallery
+            </h2>
+            <Button variant="outline" asChild>
+              <Link to="/gallery">
+                View All Photos
+                <ArrowRight className="h-4 w-4 ml-2" />
+              </Link>
+            </Button>
+          </div>
+
+          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
+            {galleryImages.slice(0, 6).map((image, index) => (
+              <Link 
+                key={index}
+                to="/gallery"
+                className="aspect-square rounded-xl overflow-hidden group shadow-soft hover:shadow-elevated transition-all"
+              >
+                <img
+                  src={image.thumb}
+                  alt={image.alt || `Gurudev Photo ${index + 1}`}
+                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                />
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section className="py-16 bg-secondary/30">
         <div className="container mx-auto px-4 text-center">
           <h2 className="font-display text-2xl font-bold text-foreground mb-4">
             Continue Exploring

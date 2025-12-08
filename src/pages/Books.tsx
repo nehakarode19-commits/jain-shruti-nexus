@@ -1,0 +1,178 @@
+import { useState } from "react";
+import { Layout } from "@/components/layout/Layout";
+import { books } from "@/data/gurudevData";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Card, CardContent } from "@/components/ui/card";
+import { Search, ExternalLink, BookOpen, Filter } from "lucide-react";
+import { Link } from "react-router-dom";
+
+const categories = [
+  "All",
+  "Agam",
+  "Guruvani",
+  "Sutra",
+  "Granthsuchi",
+  "Tika",
+  "Other"
+];
+
+const Books = () => {
+  const [searchQuery, setSearchQuery] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("All");
+
+  const filteredBooks = books.filter((book) => {
+    const matchesSearch = book.title.toLowerCase().includes(searchQuery.toLowerCase());
+    const matchesCategory = 
+      selectedCategory === "All" || 
+      book.title.toLowerCase().includes(selectedCategory.toLowerCase());
+    return matchesSearch && matchesCategory;
+  });
+
+  return (
+    <Layout>
+      {/* Hero */}
+      <section className="py-16 lg:py-20 bg-gradient-hero lotus-pattern">
+        <div className="container mx-auto px-4">
+          <div className="max-w-3xl mx-auto text-center animate-fade-up">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-secondary/80 border border-primary/20 text-sm mb-6">
+              <BookOpen className="h-4 w-4 text-primary" />
+              <span className="text-muted-foreground">{books.length} Sacred Texts</span>
+            </div>
+            <h1 className="font-display text-4xl sm:text-5xl font-bold text-foreground mb-6">
+              Books & <span className="text-gradient-gold">Publications</span>
+            </h1>
+            <p className="text-lg text-muted-foreground">
+              Explore the scholarly works edited and published by Gurudev Muni Jambuvijayji Maharaj Saheb, 
+              including critical editions of Jain Agamas, Sutras, and philosophical texts.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Search and Filter */}
+      <section className="py-8 bg-background border-b border-border sticky top-16 z-10">
+        <div className="container mx-auto px-4">
+          <div className="flex flex-col md:flex-row gap-4 items-center justify-between">
+            <div className="relative w-full md:w-96">
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+              <Input
+                placeholder="Search books..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="pl-10"
+              />
+            </div>
+
+            <div className="flex flex-wrap gap-2 items-center">
+              <Filter className="h-4 w-4 text-muted-foreground" />
+              {categories.map((category) => (
+                <Button
+                  key={category}
+                  variant={selectedCategory === category ? "hero" : "outline"}
+                  size="sm"
+                  onClick={() => setSelectedCategory(category)}
+                >
+                  {category}
+                </Button>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Books Grid */}
+      <section className="py-12 lg:py-16 bg-background">
+        <div className="container mx-auto px-4">
+          <div className="mb-6">
+            <p className="text-muted-foreground">
+              Showing {filteredBooks.length} of {books.length} books
+            </p>
+          </div>
+
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-6">
+            {filteredBooks.map((book, index) => (
+              <a
+                key={index}
+                href={book.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group"
+              >
+                <Card 
+                  variant="interactive" 
+                  className="overflow-hidden h-full animate-fade-up"
+                  style={{ animationDelay: `${(index % 12) * 50}ms` }}
+                >
+                  <div className="aspect-square bg-secondary/50 overflow-hidden">
+                    <img
+                      src={book.image}
+                      alt={book.title}
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                    />
+                  </div>
+                  <CardContent className="p-4">
+                    <h3 className="font-display font-semibold text-foreground text-sm line-clamp-2 group-hover:text-primary transition-colors">
+                      {book.title}
+                    </h3>
+                    <div className="flex items-center gap-1 mt-2 text-xs text-muted-foreground">
+                      <ExternalLink className="h-3 w-3" />
+                      <span>View Details</span>
+                    </div>
+                  </CardContent>
+                </Card>
+              </a>
+            ))}
+          </div>
+
+          {filteredBooks.length === 0 && (
+            <div className="text-center py-16">
+              <BookOpen className="h-16 w-16 text-muted-foreground/30 mx-auto mb-4" />
+              <h3 className="font-display text-xl font-semibold text-foreground mb-2">
+                No books found
+              </h3>
+              <p className="text-muted-foreground mb-4">
+                Try adjusting your search or filter criteria
+              </p>
+              <Button variant="outline" onClick={() => { setSearchQuery(""); setSelectedCategory("All"); }}>
+                Clear Filters
+              </Button>
+            </div>
+          )}
+        </div>
+      </section>
+
+      {/* External Link */}
+      <section className="py-12 bg-gradient-spiritual">
+        <div className="container mx-auto px-4 text-center">
+          <h2 className="font-display text-2xl font-bold text-foreground mb-4">
+            Browse Complete Collection
+          </h2>
+          <p className="text-muted-foreground mb-6 max-w-xl mx-auto">
+            Visit the official Siddhi Jambu Parivar website to browse and access 
+            the complete collection of Gurudev's published works.
+          </p>
+          <div className="flex flex-wrap justify-center gap-4">
+            <Button variant="hero" asChild>
+              <a
+                href="https://siddhijambuparivar.com/shop/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Visit Full Collection
+                <ExternalLink className="h-4 w-4 ml-2" />
+              </a>
+            </Button>
+            <Button variant="outline" asChild>
+              <Link to="/library">
+                Library Catalog
+              </Link>
+            </Button>
+          </div>
+        </div>
+      </section>
+    </Layout>
+  );
+};
+
+export default Books;
