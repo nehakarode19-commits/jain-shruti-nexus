@@ -31,6 +31,7 @@ const catalogItems = [
     description: "A comprehensive scholarly work illuminating the profound teachings of the Jain Agamas. This text provides detailed analysis and interpretation of ancient Jain scriptures, making them accessible to modern readers while preserving their spiritual essence.",
     publisher: "Shri Mahavira Jaina Vidyalaya",
     pages: 450,
+    image: "https://siddhijambuparivar.com/wp-content/uploads/2019/07/Agam-02-Ang-02-Sutrakrutang-Sutra-370x400.jpg",
   },
   {
     id: 2,
@@ -45,6 +46,7 @@ const catalogItems = [
     description: "A historical exploration of Jain philosophy tracing its development through the centuries. This work examines the evolution of Jain thought and its contributions to Indian philosophical traditions.",
     publisher: "Jain Vishva Bharati",
     pages: 380,
+    image: "https://siddhijambuparivar.com/wp-content/uploads/2019/07/Agam-03-Ang-03-Sthananga-Sutra-Part-01-370x400.jpg",
   },
   {
     id: 3,
@@ -59,6 +61,7 @@ const catalogItems = [
     description: "An exquisitely illustrated manuscript of the Kalpasutra, one of the most important Jain texts. This rare 15th-century copy features traditional Jain miniature paintings depicting the lives of the Tirthankaras.",
     publisher: "Traditional Manuscript",
     pages: 120,
+    image: "https://siddhijambuparivar.com/wp-content/uploads/2019/07/Dwadashanram-Naychakram-Part-1-Tika-370x400.jpg",
   },
   {
     id: 4,
@@ -73,6 +76,7 @@ const catalogItems = [
     description: "The foundational text of Jain philosophy with detailed commentary. Umaswati's masterwork presents the seven tattvas (realities) in a systematic manner, serving as the basis for understanding Jain metaphysics.",
     publisher: "Shri Mahavira Jaina Vidyalaya",
     pages: 520,
+    image: "https://siddhijambuparivar.com/wp-content/uploads/2019/07/Agam-06-Ang-06-Gnatadharma-Sutra-370x400.jpg",
   },
   {
     id: 5,
@@ -87,6 +91,7 @@ const catalogItems = [
     description: "A rare manuscript of the beloved devotional hymn composed by Acharya Manatunga. This stotra, consisting of 48 verses, is considered one of the most powerful Jain prayers and is recited daily by devotees worldwide.",
     publisher: "Traditional Manuscript",
     pages: 28,
+    image: "https://siddhijambuparivar.com/wp-content/uploads/2019/07/Dwadashanram-Naychakram-Part-2-Tika-370x400.jpg",
   },
   {
     id: 6,
@@ -101,6 +106,7 @@ const catalogItems = [
     description: "A scholarly examination of Jain ethical principles and their application in modern life. This work explores the five great vows, the concept of ahimsa, and how Jain moral philosophy remains relevant today.",
     publisher: "Motilal Banarsidass",
     pages: 290,
+    image: "https://siddhijambuparivar.com/wp-content/uploads/2019/07/Guruvani-1-370x400.jpg",
   },
 ];
 
@@ -163,19 +169,13 @@ const LibraryItemDetails = () => {
         <div className="container mx-auto px-4">
           <div className="grid lg:grid-cols-2 gap-12 items-start">
             {/* Item Visual */}
-            <div className="relative">
-              <div className="aspect-[4/5] max-w-md mx-auto lg:mx-0 bg-gradient-to-br from-secondary/50 to-secondary rounded-2xl overflow-hidden shadow-elegant flex items-center justify-center">
-                <div className="text-center p-8">
-                  <div className="w-24 h-24 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-6">
-                    <ItemIcon className="h-12 w-12 text-primary" />
-                  </div>
-                  <h3 className="font-display text-xl font-bold text-foreground mb-2">
-                    {item.type}
-                  </h3>
-                  <p className="text-sm text-muted-foreground">
-                    {item.category}
-                  </p>
-                </div>
+            <div className="relative group">
+              <div className="aspect-[4/5] max-w-md mx-auto lg:mx-0 bg-secondary/30 rounded-2xl overflow-hidden shadow-elegant">
+                <img 
+                  src={item.image}
+                  alt={item.title}
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                />
               </div>
               {/* Availability Badge */}
               <Badge 

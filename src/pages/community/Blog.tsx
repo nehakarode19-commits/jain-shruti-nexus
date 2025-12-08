@@ -119,9 +119,11 @@ const Blog = () => {
                       <span>{filteredPosts[0].readTime}</span>
                     </div>
                   </div>
-                  <Button variant="hero" className="w-fit">
-                    Read Article
-                    <ArrowRight className="h-4 w-4 ml-2" />
+                  <Button variant="hero" className="w-fit" asChild>
+                    <Link to={`/community/blog/${filteredPosts[0].id}`}>
+                      Read Article
+                      <ArrowRight className="h-4 w-4 ml-2" />
+                    </Link>
                   </Button>
                 </CardContent>
               </div>
@@ -141,47 +143,52 @@ const Blog = () => {
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {filteredPosts.slice(selectedCategory === "All" && searchQuery === "" ? 1 : 0).map((post, index) => (
-              <Card 
-                key={post.id}
-                variant="interactive"
-                className="overflow-hidden group animate-fade-up"
-                style={{ animationDelay: `${index * 100}ms` }}
+              <Link 
+                key={post.id} 
+                to={`/community/blog/${post.id}`}
+                className="group"
               >
-                <div className="aspect-[16/10] overflow-hidden">
-                  <img 
-                    src={post.image}
-                    alt={post.title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  />
-                </div>
-                <CardContent className="p-6">
-                  <div className="flex items-center gap-3 mb-3">
-                    <span className="px-2 py-1 rounded-full bg-primary/10 text-primary text-xs font-medium">
-                      {post.category}
-                    </span>
-                    <span className="text-xs text-muted-foreground flex items-center gap-1">
-                      <Clock className="h-3 w-3" />
-                      {post.readTime}
-                    </span>
+                <Card 
+                  variant="interactive"
+                  className="overflow-hidden animate-fade-up h-full"
+                  style={{ animationDelay: `${index * 100}ms` }}
+                >
+                  <div className="aspect-[16/10] overflow-hidden">
+                    <img 
+                      src={post.image}
+                      alt={post.title}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
                   </div>
-                  <h3 className="font-display text-lg font-semibold text-foreground mb-2 line-clamp-2 group-hover:text-primary transition-colors">
-                    {post.title}
-                  </h3>
-                  <p className="text-sm text-muted-foreground mb-4 line-clamp-2">
-                    {post.excerpt}
-                  </p>
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                      <User className="h-3 w-3" />
-                      <span>{post.author}</span>
+                  <CardContent className="p-6">
+                    <div className="flex items-center gap-3 mb-3">
+                      <span className="px-2 py-1 rounded-full bg-primary/10 text-primary text-xs font-medium">
+                        {post.category}
+                      </span>
+                      <span className="text-xs text-muted-foreground flex items-center gap-1">
+                        <Clock className="h-3 w-3" />
+                        {post.readTime}
+                      </span>
                     </div>
-                    <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                      <Calendar className="h-3 w-3" />
-                      <span>{post.date}</span>
+                    <h3 className="font-display text-lg font-semibold text-foreground mb-2 line-clamp-2 group-hover:text-primary transition-colors">
+                      {post.title}
+                    </h3>
+                    <p className="text-sm text-muted-foreground mb-4 line-clamp-2">
+                      {post.excerpt}
+                    </p>
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                        <User className="h-3 w-3" />
+                        <span>{post.author}</span>
+                      </div>
+                      <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                        <Calendar className="h-3 w-3" />
+                        <span>{post.date}</span>
+                      </div>
                     </div>
-                  </div>
-                </CardContent>
-              </Card>
+                  </CardContent>
+                </Card>
+              </Link>
             ))}
           </div>
 
