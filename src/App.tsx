@@ -22,6 +22,18 @@ import Gallery from "./pages/Gallery";
 import Books from "./pages/Books";
 import NotFound from "./pages/NotFound";
 
+// LMS Pages
+import LMSDashboard from "./pages/lms/LMSDashboard";
+import BookEntry from "./pages/lms/BookEntry";
+import BookIssue from "./pages/lms/BookIssue";
+import BookReceive from "./pages/lms/BookReceive";
+import Manuscripts from "./pages/lms/Manuscripts";
+import Members from "./pages/lms/Members";
+import Approvals from "./pages/lms/Approvals";
+import Reports from "./pages/lms/Reports";
+import TicketManagement from "./pages/lms/TicketManagement";
+import LMSSettings from "./pages/lms/LMSSettings";
+
 const queryClient = new QueryClient();
 
 const App = () => (
