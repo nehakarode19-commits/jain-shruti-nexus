@@ -59,10 +59,10 @@ const About = () => {
       <section className="py-16 lg:py-24 bg-gradient-hero lotus-pattern">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto text-center">
-            <h1 className="font-display text-4xl sm:text-5xl font-bold text-foreground mb-6 animate-fade-up">
+            <h1 className="font-heading text-4xl sm:text-5xl font-bold text-foreground mb-6 animate-fade-up">
               About Jambushrusti
             </h1>
-            <p className="text-lg text-muted-foreground animate-fade-up delay-100">
+            <p className="font-body text-muted-foreground animate-fade-up delay-100">
               A comprehensive digital ecosystem dedicated to preserving, researching, 
               and sharing the timeless wisdom of Jain philosophy through the teachings 
               of Gurudev Muni Jambuvijayji Maharaj.
@@ -75,10 +75,10 @@ const About = () => {
       <section className="py-16 lg:py-24 bg-background">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="font-display text-3xl font-bold text-foreground mb-4">
+            <h2 className="font-heading text-3xl font-bold text-foreground mb-4">
               Our Vision & Mission
             </h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto">
+            <p className="font-body text-muted-foreground max-w-2xl mx-auto">
               To create the world's most comprehensive and accessible platform for 
               Jain scholarship and spiritual exploration.
             </p>
@@ -94,10 +94,10 @@ const About = () => {
                 <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto mb-4">
                   <item.icon className="h-8 w-8 text-primary" />
                 </div>
-                <h3 className="font-display text-xl font-semibold text-foreground mb-2">
+                <h3 className="font-heading text-xl font-semibold text-foreground mb-2">
                   {item.title}
                 </h3>
-                <p className="text-muted-foreground">
+                <p className="font-body text-muted-foreground">
                   {item.description}
                 </p>
               </div>
@@ -110,7 +110,7 @@ const About = () => {
       <section className="py-16 lg:py-24 bg-gradient-spiritual">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="font-display text-3xl font-bold text-foreground mb-4">
+            <h2 className="font-heading text-3xl font-bold text-foreground mb-4">
               What Jambushrusti Offers
             </h2>
           </div>
@@ -132,10 +132,10 @@ const About = () => {
               >
                 <CardContent className="p-6">
                   <BookOpen className="h-6 w-6 text-primary mb-3" />
-                  <h3 className="font-display font-semibold text-foreground mb-1">
+                  <h3 className="font-heading font-semibold text-foreground mb-1">
                     {item.title}
                   </h3>
-                  <p className="text-sm text-muted-foreground">{item.desc}</p>
+                  <p className="font-body text-muted-foreground">{item.desc}</p>
                 </CardContent>
               </Card>
             ))}
@@ -147,7 +147,7 @@ const About = () => {
       <section className="py-16 lg:py-24 bg-background">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="font-display text-3xl font-bold text-foreground mb-4">
+            <h2 className="font-heading text-3xl font-bold text-foreground mb-4">
               Explore More
             </h2>
           </div>
@@ -164,10 +164,10 @@ const About = () => {
                   <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
                     <section.icon className="h-6 w-6 text-primary" />
                   </div>
-                  <CardTitle className="text-lg">{section.title}</CardTitle>
+                  <CardTitle className="font-heading text-lg">{section.title}</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-sm text-muted-foreground mb-4">
+                  <p className="font-body text-muted-foreground mb-4">
                     {section.description}
                   </p>
                   <Button variant="ghost" size="sm" asChild>

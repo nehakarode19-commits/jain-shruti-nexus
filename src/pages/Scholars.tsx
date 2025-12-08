@@ -81,10 +81,10 @@ const Scholars = () => {
               <GraduationCap className="h-4 w-4 text-primary" />
               <span className="text-primary">Scholar Portal</span>
             </div>
-            <h1 className="font-display text-4xl sm:text-5xl font-bold text-foreground mb-6 animate-fade-up delay-100">
+            <h1 className="font-heading text-4xl sm:text-5xl font-bold text-foreground mb-6 animate-fade-up delay-100">
               Scholars & Researchers
             </h1>
-            <p className="text-lg text-muted-foreground animate-fade-up delay-200">
+            <p className="font-body text-muted-foreground animate-fade-up delay-200">
               Join our community of scholars dedicated to advancing Jain studies 
               and preserving ancient wisdom through rigorous research.
             </p>
@@ -119,10 +119,10 @@ const Scholars = () => {
                   <feature.icon className="h-6 w-6 text-primary" />
                 </div>
                 <div>
-                  <h3 className="font-display font-semibold text-foreground mb-1">
+                  <h3 className="font-heading font-semibold text-foreground mb-1">
                     {feature.title}
                   </h3>
-                  <p className="text-sm text-muted-foreground">
+                  <p className="font-body text-muted-foreground">
                     {feature.description}
                   </p>
                 </div>
@@ -136,10 +136,10 @@ const Scholars = () => {
       <section className="py-16 lg:py-24 bg-background">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="font-display text-3xl font-bold text-foreground mb-4">
+            <h2 className="font-heading text-3xl font-bold text-foreground mb-4">
               Featured Scholars
             </h2>
-            <p className="text-muted-foreground">
+            <p className="font-body text-muted-foreground">
               Distinguished members of our research community
             </p>
           </div>
@@ -158,9 +158,9 @@ const Scholars = () => {
                       {scholar.name.split(' ').map(n => n[0]).join('')}
                     </div>
                     <div className="flex-1">
-                      <CardTitle className="text-lg mb-1">{scholar.name}</CardTitle>
-                      <p className="text-sm text-muted-foreground">{scholar.affiliation}</p>
-                      <div className="flex items-center gap-1 text-xs text-muted-foreground mt-1">
+                      <CardTitle className="font-heading text-lg mb-1">{scholar.name}</CardTitle>
+                      <p className="font-body text-muted-foreground">{scholar.affiliation}</p>
+                      <div className="flex items-center gap-1 font-body text-muted-foreground mt-1">
                         <MapPin className="h-3 w-3" />
                         {scholar.location}
                       </div>
@@ -176,7 +176,7 @@ const Scholars = () => {
                     ))}
                   </div>
                   <div className="flex items-center justify-between">
-                    <span className="text-sm text-muted-foreground">
+                    <span className="font-body text-muted-foreground">
                       {scholar.contributions} research entries
                     </span>
                     <Button variant="ghost" size="sm">
@@ -194,10 +194,10 @@ const Scholars = () => {
       {/* CTA */}
       <section className="py-16 bg-gradient-spiritual">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="font-display text-2xl font-bold text-foreground mb-4">
+          <h2 className="font-heading text-2xl font-bold text-foreground mb-4">
             Become a Contributing Scholar
           </h2>
-          <p className="text-muted-foreground mb-8 max-w-lg mx-auto">
+          <p className="font-body text-muted-foreground mb-8 max-w-lg mx-auto">
             Apply to join our scholarly community. Get access to research tools, 
             contribute to the knowledge base, and connect with fellow researchers.
           </p>

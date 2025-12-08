@@ -190,25 +190,45 @@ html {
     @apply tracking-tight;
   }
 
-  h1 { @apply text-4xl md:text-5xl lg:text-6xl font-bold; }
+  h1 { @apply text-4xl md:text-5xl font-bold; }
   h2 { @apply text-3xl md:text-4xl font-semibold; }
-  h3 { @apply text-2xl md:text-3xl font-semibold; }
-  h4 { @apply text-xl md:text-2xl font-medium; }
+  h3 { @apply text-xl md:text-2xl font-semibold; }
+  h4 { @apply text-lg md:text-xl font-medium; }
 
-  /* Body text - Inter 400-500 */
-  p, span, li, td, th, label, input, textarea, select, button {
+  /* Body text - Poppins for consistency */
+  p, span, li, td, th, label, input, textarea, select, button, a {
     font-family: var(--font-body);
+    font-size: 1rem;
+    line-height: 1.7;
   }
 
+  /* Consistent base paragraph styling */
   p {
-    @apply leading-relaxed text-lg font-normal;
+    @apply leading-relaxed font-normal;
+    font-size: 1rem;
   }
 
-  /* Card and box base font size - 18px throughout */
+  /* Global consistent text sizing - 16px base */
+  body {
+    font-size: 16px;
+  }
+
+  /* Card and box base font size - consistent throughout */
   .card, [class*="Card"], .glass-card, .glass-premium, .glass-glow, 
   .glass, .glass-dark, .interactive-card, [class*="box"], [class*="Box"],
-  article, aside, section > div {
-    font-size: 18px;
+  article, aside, section > div, footer, header, nav {
+    font-size: 1rem;
+    line-height: 1.7;
+  }
+
+  /* Specific text size utilities for consistency */
+  .text-content {
+    font-size: 1rem;
+    line-height: 1.7;
+  }
+
+  .text-small {
+    font-size: 0.875rem;
     line-height: 1.6;
   }
 

@@ -30,10 +30,10 @@ const Books = () => {
               <BookOpen className="h-4 w-4 text-primary" />
               <span className="text-muted-foreground">{books.length} Sacred Texts</span>
             </div>
-            <h1 className="font-display text-4xl sm:text-5xl font-bold text-foreground mb-6">
+            <h1 className="font-heading text-4xl sm:text-5xl font-bold text-foreground mb-6">
               Books & <span className="text-gradient-gold">Publications</span>
             </h1>
-            <p className="text-lg text-muted-foreground">
+            <p className="font-body text-muted-foreground">
               Explore the scholarly works edited and published by Gurudev Muni Jambuvijayji Maharaj Saheb, 
               including critical editions of Jain Agamas, Sutras, and philosophical texts.
             </p>
@@ -115,16 +115,16 @@ const Books = () => {
                     )}
                   </div>
                   <CardContent className="p-4">
-                    <h3 className="font-display font-semibold text-foreground text-sm line-clamp-2 group-hover:text-primary transition-colors mb-2">
+                    <h3 className="font-heading font-semibold text-foreground line-clamp-2 group-hover:text-primary transition-colors mb-2">
                       {book.title}
                     </h3>
                     {book.language && (
-                      <div className="flex items-center gap-1 text-xs text-muted-foreground mb-2">
+                      <div className="flex items-center gap-1 font-body text-muted-foreground mb-2">
                         <Globe className="h-3 w-3" />
                         <span>{book.language}</span>
                       </div>
                     )}
-                    <div className="flex items-center gap-1 text-xs text-primary">
+                    <div className="flex items-center gap-1 font-body text-primary">
                       <ExternalLink className="h-3 w-3" />
                       <span>View Details</span>
                     </div>
@@ -137,10 +137,10 @@ const Books = () => {
           {filteredBooks.length === 0 && (
             <div className="text-center py-16">
               <BookOpen className="h-16 w-16 text-muted-foreground/30 mx-auto mb-4" />
-              <h3 className="font-display text-xl font-semibold text-foreground mb-2">
+              <h3 className="font-heading text-xl font-semibold text-foreground mb-2">
                 No books found
               </h3>
-              <p className="text-muted-foreground mb-4">
+              <p className="font-body text-muted-foreground mb-4">
                 Try adjusting your search or filter criteria
               </p>
               <Button variant="outline" onClick={() => { setSearchQuery(""); setSelectedCategory("All"); }}>
@@ -154,7 +154,7 @@ const Books = () => {
       {/* Category Stats */}
       <section className="py-12 bg-secondary/30">
         <div className="container mx-auto px-4">
-          <h2 className="font-display text-2xl font-bold text-foreground text-center mb-8">
+          <h2 className="font-heading text-2xl font-bold text-foreground text-center mb-8">
             Browse by Category
           </h2>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 max-w-4xl mx-auto">
@@ -168,8 +168,8 @@ const Books = () => {
                   onClick={() => setSelectedCategory(category)}
                 >
                   <CardContent className="p-4 text-center">
-                    <p className="font-display font-semibold text-foreground">{category}</p>
-                    <p className="text-sm text-muted-foreground">{count} books</p>
+                    <p className="font-heading font-semibold text-foreground">{category}</p>
+                    <p className="font-body text-muted-foreground">{count} books</p>
                   </CardContent>
                 </Card>
               );
@@ -181,10 +181,10 @@ const Books = () => {
       {/* External Link */}
       <section className="py-12 bg-gradient-spiritual">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="font-display text-2xl font-bold text-foreground mb-4">
+          <h2 className="font-heading text-2xl font-bold text-foreground mb-4">
             Browse Complete Collection
           </h2>
-          <p className="text-muted-foreground mb-6 max-w-xl mx-auto">
+          <p className="font-body text-muted-foreground mb-6 max-w-xl mx-auto">
             Visit the official Siddhi Jambu Parivar website to browse and access 
             the complete collection of Gurudev's published works.
           </p>
