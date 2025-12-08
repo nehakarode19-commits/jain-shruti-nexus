@@ -10,96 +10,13 @@ import {
   Search, 
   BookOpen, 
   Scroll as ScrollIcon,
-  Filter,
   MapPin,
   Calendar,
   User,
   Info,
   ArrowRight
 } from "lucide-react";
-
-// Import book cover images - matched to titles
-import agam02Sutrakrutang from "@/assets/books/agam-02-sutrakrutang.png";
-import agam03Sthananga from "@/assets/books/agam-03-sthananga-new.png";
-import agam06Gnatadharma from "@/assets/books/agam-06-gnatadharma.png";
-import agam45Anuyogdwar from "@/assets/books/agam-45-anuyogdwar.png";
-import dwadashanramPart1 from "@/assets/books/dwadashanram-part1.png";
-import dwadashanramPart2 from "@/assets/books/dwadashanram-part2.png";
-
-const catalogItems = [
-  {
-    id: 1,
-    type: "Book",
-    title: "Agam 02 Ang 02 Sutrakrutang Sutra",
-    author: "Muni Jambuvijayji",
-    year: "2022",
-    language: "Sanskrit",
-    category: "Agama Studies",
-    available: true,
-    location: "Rack A-12",
-    image: agam02Sutrakrutang,
-  },
-  {
-    id: 2,
-    type: "Book",
-    title: "Agam 03 Ang 03 Sthananga Sutra Part 01",
-    author: "Muni Jambuvijayji",
-    year: "2022",
-    language: "Sanskrit",
-    category: "Agama Studies",
-    available: true,
-    location: "Rack A-13",
-    image: agam03Sthananga,
-  },
-  {
-    id: 3,
-    type: "Book",
-    title: "Agam 06 Ang 06 Gnatadharma Sutra",
-    author: "Muni Jambuvijayji",
-    year: "2022",
-    language: "Sanskrit",
-    category: "Agama Studies",
-    available: true,
-    location: "Rack A-14",
-    image: agam06Gnatadharma,
-  },
-  {
-    id: 4,
-    type: "Book",
-    title: "Agam 45 Chulika 02 Anuyogdwar Sutra",
-    author: "Muni Jambuvijayji",
-    year: "2022",
-    language: "Sanskrit",
-    category: "Agama Studies",
-    available: true,
-    location: "Rack A-15",
-    image: agam45Anuyogdwar,
-  },
-  {
-    id: 5,
-    type: "Book",
-    title: "Dvadasharam Naychakram Part 1 Tika",
-    author: "Muni Jambuvijayji",
-    year: "2020",
-    language: "Sanskrit",
-    category: "Philosophy",
-    available: true,
-    location: "Rack B-01",
-    image: dwadashanramPart1,
-  },
-  {
-    id: 6,
-    type: "Book",
-    title: "Dvadasharam Naychakram Part 2 Tika",
-    author: "Muni Jambuvijayji",
-    year: "2020",
-    language: "Sanskrit",
-    category: "Philosophy",
-    available: true,
-    location: "Rack B-02",
-    image: dwadashanramPart2,
-  },
-];
+import { catalogItems } from "@/data/libraryData";
 
 const Library = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -120,9 +37,9 @@ const Library = () => {
       <section className="py-16 lg:py-20 bg-gradient-hero lotus-pattern">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto text-center">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-sage/10 border border-sage/20 text-sm mb-6 animate-fade-up">
-              <LibraryIcon className="h-4 w-4 text-sage" />
-              <span className="text-sage">Muni Jambuvijay Research Center</span>
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-sm mb-6 animate-fade-up">
+              <LibraryIcon className="h-4 w-4 text-primary" />
+              <span className="text-primary">Muni Jambuvijay Research Center</span>
             </div>
             <h1 className="font-display text-4xl sm:text-5xl font-bold text-foreground mb-6 animate-fade-up delay-100">
               Library Catalog
@@ -146,7 +63,7 @@ const Library = () => {
       </section>
 
       {/* Search & Filter */}
-      <section className="py-8 bg-background border-b border-border sticky top-16 z-40">
+      <section className="py-8 bg-card border-b border-border sticky top-16 z-40">
         <div className="container mx-auto px-4">
           <div className="flex flex-col md:flex-row gap-4 items-center">
             <div className="relative flex-1 w-full">
@@ -190,16 +107,16 @@ const Library = () => {
       {/* Catalog Grid */}
       <section className="py-12 bg-background">
         <div className="container mx-auto px-4">
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {filteredItems.map((item, index) => (
               <Link key={item.id} to={`/library/${item.id}`} className="group">
                 <Card 
                   variant="interactive"
-                  className="animate-fade-up h-full overflow-hidden"
+                  className="animate-fade-up h-full overflow-hidden bg-card"
                   style={{ animationDelay: `${index * 50}ms` }}
                 >
                   {/* Cover Image */}
-                  <div className="aspect-[4/3] overflow-hidden bg-secondary/50 relative">
+                  <div className="aspect-[3/4] overflow-hidden bg-secondary/50 relative">
                     <img 
                       src={item.image}
                       alt={item.title}
@@ -219,7 +136,7 @@ const Library = () => {
                       </Badge>
                       <Badge 
                         variant={item.available ? "outline" : "secondary"}
-                        className={`text-xs ${item.available ? "bg-background/90 text-sage border-sage" : "bg-background/90"}`}
+                        className={`text-xs ${item.available ? "bg-card/90 text-primary border-primary" : "bg-card/90"}`}
                       >
                         {item.available ? "Available" : "Reference Only"}
                       </Badge>
@@ -227,7 +144,7 @@ const Library = () => {
                   </div>
                   
                   <CardHeader className="pb-2">
-                    <CardTitle className="text-lg group-hover:text-primary transition-colors line-clamp-2">{item.title}</CardTitle>
+                    <CardTitle className="text-base group-hover:text-primary transition-colors line-clamp-2">{item.title}</CardTitle>
                     <div className="text-xs text-primary font-medium">
                       {item.category}
                     </div>
