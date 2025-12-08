@@ -20,7 +20,7 @@ import {
 
 // Import book cover images - matched to titles
 import agam02Sutrakrutang from "@/assets/books/agam-02-sutrakrutang.png";
-import agam03Sthananga from "@/assets/books/agam-03-sthananga-01.png";
+import agam03Sthananga from "@/assets/books/agam-03-sthananga-new.png";
 import agam06Gnatadharma from "@/assets/books/agam-06-gnatadharma.png";
 import agam45Anuyogdwar from "@/assets/books/agam-45-anuyogdwar.png";
 import dwadashanramPart1 from "@/assets/books/dwadashanram-part1.png";
@@ -78,7 +78,7 @@ const catalogItems = [
   {
     id: 5,
     type: "Book",
-    title: "Dwadashanram Part 1",
+    title: "Dvadasharam Naychakram Part 1 Tika",
     author: "Muni Jambuvijayji",
     year: "2020",
     language: "Sanskrit",
@@ -90,7 +90,7 @@ const catalogItems = [
   {
     id: 6,
     type: "Book",
-    title: "Dwadashanram Part 2",
+    title: "Dvadasharam Naychakram Part 2 Tika",
     author: "Muni Jambuvijayji",
     year: "2020",
     language: "Sanskrit",
