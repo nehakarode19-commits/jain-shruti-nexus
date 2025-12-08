@@ -2,47 +2,35 @@ import { Link } from "react-router-dom";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Calendar, ArrowRight, Clock, MapPin, BookOpen, Newspaper } from "lucide-react";
-
-const upcomingEvents = [
-  {
-    title: "Saturday Pravachan",
-    date: "Every Saturday",
-    time: "10:00 AM - 12:00 PM",
-    location: "Online & In-Person",
-    type: "Regular",
-  },
-  {
-    title: "Paryushan Mahaparva",
-    date: "September 12-19, 2024",
-    time: "Various Sessions",
-    location: "Shantigram",
-    type: "Festival",
-  },
-  {
-    title: "Research Workshop",
-    date: "October 5, 2024",
-    time: "2:00 PM - 5:00 PM",
-    location: "Online",
-    type: "Workshop",
-  },
-];
-
-const latestPosts = [
-  {
-    title: "Understanding Anekantavada in Modern Context",
-    excerpt: "Exploring the Jain philosophy of multiple perspectives and its relevance today...",
-    date: "March 15, 2024",
-    category: "Philosophy",
-  },
-  {
-    title: "Preservation of Ancient Manuscripts",
-    excerpt: "Our ongoing efforts to digitize and preserve rare Jain texts...",
-    date: "March 10, 2024",
-    category: "Research",
-  },
-];
+import { events, blogPosts } from "@/data/gurudevData";
 
 export function CommunitySection() {
+  // Get first 3 events
+  const upcomingEvents = [
+    ...events.slice(0, 2).map(e => ({
+      title: e.titleEn || e.title,
+      date: e.date,
+      time: "Various Sessions",
+      location: "Muni Jambuvijay Research Center",
+      type: e.type,
+    })),
+    {
+      title: "Saturday Pravachan",
+      date: "Every Saturday",
+      time: "10:00 AM - 12:00 PM",
+      location: "Online & In-Person",
+      type: "Regular",
+    },
+  ];
+
+  // Get first 2 blog posts
+  const latestPosts = blogPosts.slice(0, 2).map(post => ({
+    title: post.title,
+    excerpt: post.excerpt,
+    date: post.date,
+    category: post.category,
+  }));
+
   return (
     <section className="py-16 lg:py-24 bg-gradient-warm">
       <div className="container mx-auto px-4">

@@ -10,74 +10,9 @@ import {
   User, 
   ArrowRight, 
   BookOpen,
-  Tag,
   Clock
 } from "lucide-react";
-
-const blogPosts = [
-  {
-    id: 1,
-    title: "The Significance of Jain Agamas in Modern Times",
-    excerpt: "Exploring how the ancient Jain scriptures remain relevant and guide us in contemporary life...",
-    author: "Dr. Pravin Mehta",
-    date: "December 1, 2024",
-    readTime: "5 min read",
-    category: "Philosophy",
-    image: "https://siddhijambuparivar.com/wp-content/uploads/2022/11/43-min.jpg"
-  },
-  {
-    id: 2,
-    title: "Gurudev's Contribution to Manuscript Preservation",
-    excerpt: "A detailed look at how Muni Jambuvijayji Maharaj Saheb revolutionized the preservation of Jain texts...",
-    author: "Scholar Hemant Shah",
-    date: "November 25, 2024",
-    readTime: "8 min read",
-    category: "History",
-    image: "https://siddhijambuparivar.com/wp-content/uploads/2022/11/99-min.jpg"
-  },
-  {
-    id: 3,
-    title: "Understanding Prakrit: The Language of Jain Scriptures",
-    excerpt: "An introduction to Prakrit language and its importance in studying original Jain texts...",
-    author: "Prof. Nalini Joshi",
-    date: "November 18, 2024",
-    readTime: "6 min read",
-    category: "Education",
-    image: "https://siddhijambuparivar.com/wp-content/uploads/2022/11/111-min.jpg"
-  },
-  {
-    id: 4,
-    title: "The Art of Jain Manuscript Illustration",
-    excerpt: "Discover the beautiful artistic traditions preserved in illuminated Jain manuscripts...",
-    author: "Dr. Anjali Desai",
-    date: "November 10, 2024",
-    readTime: "7 min read",
-    category: "Art & Culture",
-    image: "https://siddhijambuparivar.com/wp-content/uploads/2022/11/107-min.jpg"
-  },
-  {
-    id: 5,
-    title: "Janm Shatabdi Mahotsav: Celebrating 100 Years",
-    excerpt: "Highlights from the centenary celebrations of Gurudev's birth and their lasting impact...",
-    author: "Jambu Parivar",
-    date: "October 28, 2024",
-    readTime: "4 min read",
-    category: "Events",
-    image: "https://siddhijambuparivar.com/wp-content/uploads/2022/11/101-min.jpg"
-  },
-  {
-    id: 6,
-    title: "Digital Preservation of Ancient Wisdom",
-    excerpt: "How technology is helping preserve and share Jain knowledge for future generations...",
-    author: "Tech Team",
-    date: "October 15, 2024",
-    readTime: "5 min read",
-    category: "Technology",
-    image: "https://siddhijambuparivar.com/wp-content/uploads/2022/11/96-min.jpg"
-  },
-];
-
-const categories = ["All", "Philosophy", "History", "Education", "Art & Culture", "Events", "Technology"];
+import { blogPosts, blogCategories } from "@/data/gurudevData";
 
 const Blog = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -99,7 +34,7 @@ const Blog = () => {
           <div className="max-w-3xl mx-auto text-center animate-fade-up">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-secondary/80 border border-primary/20 text-sm mb-6">
               <BookOpen className="h-4 w-4 text-primary" />
-              <span className="text-muted-foreground">Insights & Articles</span>
+              <span className="text-muted-foreground">{blogPosts.length} Articles</span>
             </div>
             <h1 className="font-display text-4xl sm:text-5xl font-bold text-foreground mb-6">
               Blog & <span className="text-gradient-gold">Insights</span>
@@ -127,7 +62,7 @@ const Blog = () => {
             </div>
 
             <div className="flex flex-wrap gap-2">
-              {categories.map((category) => (
+              {blogCategories.map((category) => (
                 <Button
                   key={category}
                   variant={selectedCategory === category ? "hero" : "outline"}
@@ -142,11 +77,70 @@ const Blog = () => {
         </div>
       </section>
 
-      {/* Blog Posts */}
+      {/* Featured Post */}
+      {filteredPosts.length > 0 && selectedCategory === "All" && searchQuery === "" && (
+        <section className="py-12 bg-background">
+          <div className="container mx-auto px-4">
+            <Card variant="feature" className="overflow-hidden max-w-5xl mx-auto">
+              <div className="grid md:grid-cols-2">
+                <div className="aspect-[4/3] md:aspect-auto overflow-hidden">
+                  <img 
+                    src={filteredPosts[0].image}
+                    alt={filteredPosts[0].title}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <CardContent className="p-8 flex flex-col justify-center">
+                  <div className="flex items-center gap-3 mb-4">
+                    <span className="px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-medium">
+                      Featured
+                    </span>
+                    <span className="px-3 py-1 rounded-full bg-secondary text-muted-foreground text-sm">
+                      {filteredPosts[0].category}
+                    </span>
+                  </div>
+                  <h2 className="font-display text-2xl font-bold text-foreground mb-4">
+                    {filteredPosts[0].title}
+                  </h2>
+                  <p className="text-muted-foreground mb-6">
+                    {filteredPosts[0].excerpt}
+                  </p>
+                  <div className="flex items-center gap-4 text-sm text-muted-foreground mb-6">
+                    <div className="flex items-center gap-2">
+                      <User className="h-4 w-4" />
+                      <span>{filteredPosts[0].author}</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <Calendar className="h-4 w-4" />
+                      <span>{filteredPosts[0].date}</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <Clock className="h-4 w-4" />
+                      <span>{filteredPosts[0].readTime}</span>
+                    </div>
+                  </div>
+                  <Button variant="hero" className="w-fit">
+                    Read Article
+                    <ArrowRight className="h-4 w-4 ml-2" />
+                  </Button>
+                </CardContent>
+              </div>
+            </Card>
+          </div>
+        </section>
+      )}
+
+      {/* Blog Posts Grid */}
       <section className="py-12 lg:py-16 bg-background">
         <div className="container mx-auto px-4">
+          <div className="mb-6">
+            <p className="text-muted-foreground">
+              Showing {filteredPosts.length} articles
+            </p>
+          </div>
+
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {filteredPosts.map((post, index) => (
+            {filteredPosts.slice(selectedCategory === "All" && searchQuery === "" ? 1 : 0).map((post, index) => (
               <Card 
                 key={post.id}
                 variant="interactive"
