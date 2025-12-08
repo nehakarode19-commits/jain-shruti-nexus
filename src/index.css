@@ -194,7 +194,12 @@ html {
   h4 { @apply text-xl md:text-2xl font-medium; }
 
   p {
-    @apply leading-relaxed;
+    @apply leading-relaxed text-lg;
+  }
+
+  /* Card and box base font size */
+  .card, [class*="Card"], .glass-card, .glass-premium, .glass-glow {
+    font-size: 18px;
   }
 
   ::selection {
@@ -312,13 +317,13 @@ html {
     @apply -translate-y-1 shadow-elevated;
   }
 
-  /* Section Styles */
+  /* Section Styles - Reduced spacing */
   .section-padding {
-    @apply py-16 md:py-24 lg:py-32;
+    @apply py-10 md:py-14 lg:py-18;
   }
 
   .section-padding-sm {
-    @apply py-12 md:py-16 lg:py-20;
+    @apply py-8 md:py-10 lg:py-12;
   }
 
   /* Container Variants */

@@ -11,7 +11,7 @@ export function HeroSection() {
   };
 
   return (
-    <section className="relative overflow-hidden min-h-[90vh] flex items-center bg-gradient-hero">
+    <section className="relative overflow-hidden min-h-[85vh] flex items-center bg-gradient-hero">
       {/* Animated background elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <GlowOrb color="primary" size="lg" className="-top-40 -right-40" />
@@ -39,7 +39,7 @@ export function HeroSection() {
         ))}
       </div>
 
-      <div className="container mx-auto px-4 py-16 lg:py-24 relative">
+      <div className="container mx-auto px-3 py-10 lg:py-14 relative">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           {/* Content */}
           <div className="space-y-8">
