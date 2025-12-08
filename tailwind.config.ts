@@ -23,8 +23,9 @@ export default {
     extend: {
       fontFamily: {
         display: ['Poppins', 'system-ui', 'sans-serif'],
-        body: ['Poppins', 'system-ui', 'sans-serif'],
-        accent: ['Poppins', 'system-ui', 'sans-serif'],
+        heading: ['Poppins', 'system-ui', 'sans-serif'],
+        body: ['Inter', 'system-ui', 'sans-serif'],
+        sans: ['Inter', 'system-ui', 'sans-serif'],
       },
       fontSize: {
         '2xs': ['0.625rem', { lineHeight: '0.875rem' }],
