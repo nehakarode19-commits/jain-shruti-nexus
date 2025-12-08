@@ -42,13 +42,7 @@ const navigationItems = [
   {
     title: "Research",
     href: "/research",
-    items: [
-      { title: "Research Hub", href: "/research", description: "Jain Knowledge & Research Ecosystem" },
-      { title: "SodhSanchay", href: "/research/sodhsanchay", description: "Research metadata entry" },
-      { title: "SodhSandarbh", href: "/research/sodhsandarbh", description: "Search & export research data" },
-      { title: "Śabdasaṅgraha", href: "/research/shabdasangraha", description: "Search inside Jain PDFs" },
-      { title: "Shastrasandarbha", href: "/research/shastrasandarbha", description: "AI-powered global book finder" },
-    ],
+    description: "Jain Knowledge & Research Ecosystem",
   },
   {
     title: "Library",
