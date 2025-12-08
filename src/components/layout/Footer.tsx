@@ -6,7 +6,7 @@ const footerLinks = {
     { title: "About Jambu-Shruti", href: "/about" },
     { title: "Gurudev Muni Jambuvijayji", href: "/about/gurudev" },
     { title: "Gurudev Parivar", href: "/about/parivar" },
-    { title: "Jambuji Jnan Kendra", href: "/about/jnan-kendra" },
+    { title: "Jambuji Gyan Kendra", href: "/about/gyan-kendra" },
   ],
   research: [
     { title: "Research Hub", href: "/research" },

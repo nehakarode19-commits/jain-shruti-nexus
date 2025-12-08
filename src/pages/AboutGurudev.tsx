@@ -307,8 +307,8 @@ const AboutGurudev = () => {
               </Link>
             </Button>
             <Button variant="outline" asChild>
-              <Link to="/about/jnan-kendra">
-                Jnan Kendra
+              <Link to="/about/gyan-kendra">
+                Gyan Kendra
                 <ArrowRight className="h-4 w-4 ml-2" />
               </Link>
             </Button>

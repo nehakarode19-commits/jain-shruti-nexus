@@ -16,7 +16,7 @@ const highlights = [
   },
   {
     icon: Building2,
-    title: "Jnan Kendra",
+    title: "Gyan Kendra",
     description: "Digital museum preserving Gurudev's legacy",
   },
 ];
@@ -111,7 +111,7 @@ export function AboutPreview() {
                 <Link to="/about/parivar">Gurudev Parivar</Link>
               </Button>
               <Button variant="outline" asChild>
-                <Link to="/about/jnan-kendra">Jnan Kendra</Link>
+                <Link to="/about/gyan-kendra">Gyan Kendra</Link>
               </Button>
             </div>
           </div>
