@@ -18,6 +18,14 @@ import {
   ArrowRight
 } from "lucide-react";
 
+// Import book cover images
+import agam02Cover from "@/assets/books/agam-02-sutrakrutang.png";
+import agam03Cover from "@/assets/books/agam-03-sthananga-01.png";
+import agam06Cover from "@/assets/books/agam-06-gnatadharma.png";
+import dwadashanramPart1 from "@/assets/books/dwadashanram-part1.png";
+import dwadashanramPart2 from "@/assets/books/dwadashanram-part2.png";
+import guruvani1Cover from "@/assets/books/guruvani-1.jpg";
+
 const catalogItems = [
   {
     id: 1,
@@ -29,7 +37,7 @@ const catalogItems = [
     category: "Agama Studies",
     available: true,
     location: "Rack A-12",
-    image: "https://siddhijambuparivar.com/wp-content/uploads/2019/07/Agam-02-Ang-02-Sutrakrutang-Sutra-370x400.jpg",
+    image: agam02Cover,
   },
   {
     id: 2,
@@ -41,7 +49,7 @@ const catalogItems = [
     category: "Philosophy",
     available: true,
     location: "Rack B-05",
-    image: "https://siddhijambuparivar.com/wp-content/uploads/2019/07/Agam-03-Ang-03-Sthananga-Sutra-Part-01-370x400.jpg",
+    image: agam03Cover,
   },
   {
     id: 3,
@@ -53,7 +61,7 @@ const catalogItems = [
     category: "Scripture",
     available: false,
     location: "Special Collection",
-    image: "https://siddhijambuparivar.com/wp-content/uploads/2019/07/Dwadashanram-Naychakram-Part-1-Tika-370x400.jpg",
+    image: dwadashanramPart1,
   },
   {
     id: 4,
@@ -65,7 +73,7 @@ const catalogItems = [
     category: "Philosophy",
     available: true,
     location: "Rack A-03",
-    image: "https://siddhijambuparivar.com/wp-content/uploads/2019/07/Agam-06-Ang-06-Gnatadharma-Sutra-370x400.jpg",
+    image: agam06Cover,
   },
   {
     id: 5,
@@ -77,7 +85,7 @@ const catalogItems = [
     category: "Devotional",
     available: false,
     location: "Special Collection",
-    image: "https://siddhijambuparivar.com/wp-content/uploads/2019/07/Dwadashanram-Naychakram-Part-2-Tika-370x400.jpg",
+    image: dwadashanramPart2,
   },
   {
     id: 6,
@@ -89,7 +97,7 @@ const catalogItems = [
     category: "Ethics",
     available: true,
     location: "Rack C-08",
-    image: "https://siddhijambuparivar.com/wp-content/uploads/2019/07/Guruvani-1-370x400.jpg",
+    image: guruvani1Cover,
   },
 ];
 

@@ -18,6 +18,14 @@ import {
   Mail
 } from "lucide-react";
 
+// Import book cover images
+import agam02Cover from "@/assets/books/agam-02-sutrakrutang.png";
+import agam03Cover from "@/assets/books/agam-03-sthananga-01.png";
+import agam06Cover from "@/assets/books/agam-06-gnatadharma.png";
+import dwadashanramPart1 from "@/assets/books/dwadashanram-part1.png";
+import dwadashanramPart2 from "@/assets/books/dwadashanram-part2.png";
+import guruvani1Cover from "@/assets/books/guruvani-1.jpg";
+
 const catalogItems = [
   {
     id: 1,
@@ -32,7 +40,7 @@ const catalogItems = [
     description: "A comprehensive scholarly work illuminating the profound teachings of the Jain Agamas. This text provides detailed analysis and interpretation of ancient Jain scriptures, making them accessible to modern readers while preserving their spiritual essence.",
     publisher: "Shri Mahavira Jaina Vidyalaya",
     pages: 450,
-    image: "https://siddhijambuparivar.com/wp-content/uploads/2019/07/Agam-02-Ang-02-Sutrakrutang-Sutra-370x400.jpg",
+    image: agam02Cover,
   },
   {
     id: 2,
@@ -47,7 +55,7 @@ const catalogItems = [
     description: "A historical exploration of Jain philosophy tracing its development through the centuries. This work examines the evolution of Jain thought and its contributions to Indian philosophical traditions.",
     publisher: "Jain Vishva Bharati",
     pages: 380,
-    image: "https://siddhijambuparivar.com/wp-content/uploads/2019/07/Agam-03-Ang-03-Sthananga-Sutra-Part-01-370x400.jpg",
+    image: agam03Cover,
   },
   {
     id: 3,
@@ -62,7 +70,7 @@ const catalogItems = [
     description: "An exquisitely illustrated manuscript of the Kalpasutra, one of the most important Jain texts. This rare 15th-century copy features traditional Jain miniature paintings depicting the lives of the Tirthankaras.",
     publisher: "Traditional Manuscript",
     pages: 120,
-    image: "https://siddhijambuparivar.com/wp-content/uploads/2019/07/Dwadashanram-Naychakram-Part-1-Tika-370x400.jpg",
+    image: dwadashanramPart1,
   },
   {
     id: 4,
@@ -77,7 +85,7 @@ const catalogItems = [
     description: "The foundational text of Jain philosophy with detailed commentary. Umaswati's masterwork presents the seven tattvas (realities) in a systematic manner, serving as the basis for understanding Jain metaphysics.",
     publisher: "Shri Mahavira Jaina Vidyalaya",
     pages: 520,
-    image: "https://siddhijambuparivar.com/wp-content/uploads/2019/07/Agam-06-Ang-06-Gnatadharma-Sutra-370x400.jpg",
+    image: agam06Cover,
   },
   {
     id: 5,
@@ -92,7 +100,7 @@ const catalogItems = [
     description: "A rare manuscript of the beloved devotional hymn composed by Acharya Manatunga. This stotra, consisting of 48 verses, is considered one of the most powerful Jain prayers and is recited daily by devotees worldwide.",
     publisher: "Traditional Manuscript",
     pages: 28,
-    image: "https://siddhijambuparivar.com/wp-content/uploads/2019/07/Dwadashanram-Naychakram-Part-2-Tika-370x400.jpg",
+    image: dwadashanramPart2,
   },
   {
     id: 6,
@@ -107,7 +115,7 @@ const catalogItems = [
     description: "A scholarly examination of Jain ethical principles and their application in modern life. This work explores the five great vows, the concept of ahimsa, and how Jain moral philosophy remains relevant today.",
     publisher: "Motilal Banarsidass",
     pages: 290,
-    image: "https://siddhijambuparivar.com/wp-content/uploads/2019/07/Guruvani-1-370x400.jpg",
+    image: guruvani1Cover,
   },
 ];
 
