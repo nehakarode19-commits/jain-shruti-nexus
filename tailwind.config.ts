@@ -22,8 +22,8 @@ export default {
     },
     extend: {
       fontFamily: {
-        display: ['Playfair Display', 'Georgia', 'serif'],
-        body: ['Inter', 'system-ui', 'sans-serif'],
+        display: ['Poppins', 'system-ui', 'sans-serif'],
+        body: ['Poppins', 'system-ui', 'sans-serif'],
         accent: ['Poppins', 'system-ui', 'sans-serif'],
       },
       fontSize: {
@@ -89,9 +89,11 @@ export default {
           DEFAULT: "hsl(var(--sage))",
           light: "hsl(var(--sage-light))",
         },
+        /* #2B3A4A header/footer, #4A6FA5 primary blue */
         slate: {
-          DEFAULT: "hsl(var(--slate))",
-          light: "hsl(var(--slate-light))",
+          DEFAULT: "hsl(210 27% 23%)",
+          light: "hsl(215 38% 47%)",
+          dark: "hsl(206 30% 17%)",
         },
         ivory: "hsl(var(--ivory))",
         cream: "hsl(var(--cream))",
