@@ -18,6 +18,8 @@ import CommunityEvents from "./pages/CommunityEvents";
 import Search from "./pages/Search";
 import Privacy from "./pages/Privacy";
 import Terms from "./pages/Terms";
+import Gallery from "./pages/Gallery";
+import Books from "./pages/Books";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -50,6 +52,10 @@ const App = () => (
           
           {/* Library */}
           <Route path="/library" element={<Library />} />
+          
+          {/* Gallery & Books */}
+          <Route path="/gallery" element={<Gallery />} />
+          <Route path="/books" element={<Books />} />
           
           {/* Scholars */}
           <Route path="/scholars" element={<Scholars />} />
