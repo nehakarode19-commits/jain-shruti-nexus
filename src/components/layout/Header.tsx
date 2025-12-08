@@ -43,7 +43,10 @@ const navigationItems = [
   {
     title: "Library",
     href: "/library",
-    description: "Browse our catalog",
+    items: [
+      { title: "Library Catalog", href: "/library", description: "Browse our book & manuscript collection" },
+      { title: "LMS Admin", href: "/lms", description: "Library Management System (Staff Only)" },
+    ],
   },
   {
     title: "Scholars",
