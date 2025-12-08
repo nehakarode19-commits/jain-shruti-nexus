@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { BookOpen, Search, GraduationCap, Scroll, Sparkles, ArrowRight } from "lucide-react";
+import { BookOpen, Search, GraduationCap, Scroll, Sparkles, ArrowRight, Image } from "lucide-react";
+import { gurudevBio } from "@/data/gurudevData";
 
 export function HeroSection() {
   return (
@@ -22,12 +23,15 @@ export function HeroSection() {
             </div>
 
             <div className="space-y-4">
+              <p className="text-primary font-display text-lg">
+                {gurudevBio.hindiName}
+              </p>
               <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground leading-tight">
                 Jain Knowledge &{" "}
                 <span className="text-gradient-gold">Research Ecosystem</span>
               </h1>
               <p className="text-lg text-muted-foreground max-w-lg">
-                Explore the profound teachings of Gurudev Muni Jambuvijayji. 
+                Explore the profound teachings of Gurudev Muni Jambuvijayji Maharaj Saheb ({gurudevBio.birthYear}–{gurudevBio.deathYear}). 
                 Discover sacred texts, research tools, and a community dedicated 
                 to preserving Jain philosophy.
               </p>
@@ -53,7 +57,7 @@ export function HeroSection() {
               {[
                 { icon: BookOpen, label: "Library", href: "/library" },
                 { icon: GraduationCap, label: "Scholars", href: "/scholars" },
-                { icon: Sparkles, label: "AI Search", href: "/research/shabdasangraha" },
+                { icon: Image, label: "Photo Gallery", href: "/gallery" },
               ].map((item) => (
                 <Link
                   key={item.label}
@@ -68,43 +72,52 @@ export function HeroSection() {
             </div>
           </div>
 
-          {/* Hero Visual */}
+          {/* Hero Visual - Gurudev's Photo */}
           <div className="relative animate-fade-up delay-200">
-            <div className="relative aspect-square max-w-lg mx-auto">
+            <div className="relative max-w-lg mx-auto">
               {/* Decorative rings */}
-              <div className="absolute inset-0 rounded-full border border-primary/10 animate-pulse" />
-              <div className="absolute inset-4 rounded-full border border-gold/20" />
-              <div className="absolute inset-8 rounded-full border border-primary/10" />
+              <div className="absolute -inset-4 rounded-2xl border border-primary/10 animate-pulse" />
+              <div className="absolute -inset-8 rounded-2xl border border-gold/20" />
               
-              {/* Central image placeholder */}
-              <div className="absolute inset-12 rounded-full bg-gradient-to-br from-secondary via-card to-cream shadow-elevated overflow-hidden flex items-center justify-center">
-                <div className="text-center p-8">
-                  <div className="w-24 h-24 mx-auto mb-4 rounded-full bg-gradient-to-br from-primary to-gold flex items-center justify-center shadow-glow">
-                    <Scroll className="h-12 w-12 text-primary-foreground" />
-                  </div>
-                  <h3 className="font-display text-xl font-semibold text-foreground mb-2">
-                    Gurudev Muni
+              {/* Gurudev's Image */}
+              <div className="relative rounded-2xl bg-gradient-to-br from-secondary via-card to-cream shadow-elevated overflow-hidden">
+                <img 
+                  src={gurudevBio.mainImage}
+                  alt="Jambuvijayji Maharaj Saheb in white robes sitting cross-legged"
+                  className="w-full h-auto object-cover"
+                />
+                
+                {/* Overlay with name */}
+                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-background/90 via-background/50 to-transparent p-6">
+                  <h3 className="font-display text-xl font-semibold text-foreground">
+                    Gurudev Muni Jambuvijayji
                   </h3>
                   <p className="text-sm text-muted-foreground">
-                    Jambuvijayji Maharaj
+                    Maharaj Saheb ({gurudevBio.birthYear}–{gurudevBio.deathYear})
                   </p>
                 </div>
               </div>
 
+              {/* Centenary Logo */}
+              <div className="absolute -top-4 -right-4 animate-float">
+                <div className="w-24 h-24 rounded-full bg-card shadow-soft overflow-hidden border-2 border-gold/30">
+                  <img 
+                    src={gurudevBio.centenaryLogo}
+                    alt="100th Anniversary Logo"
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+              </div>
+
               {/* Floating elements */}
-              <div className="absolute top-8 right-8 animate-float">
-                <div className="w-16 h-16 rounded-xl bg-card shadow-soft flex items-center justify-center border border-primary/20">
-                  <BookOpen className="h-8 w-8 text-primary" />
+              <div className="absolute -bottom-4 -left-4 animate-float delay-300">
+                <div className="w-14 h-14 rounded-xl bg-card shadow-soft flex items-center justify-center border border-primary/20">
+                  <BookOpen className="h-7 w-7 text-primary" />
                 </div>
               </div>
-              <div className="absolute bottom-12 left-4 animate-float delay-300">
-                <div className="w-14 h-14 rounded-xl bg-card shadow-soft flex items-center justify-center border border-burgundy/20">
-                  <GraduationCap className="h-7 w-7 text-burgundy" />
-                </div>
-              </div>
-              <div className="absolute bottom-24 right-0 animate-float delay-500">
-                <div className="w-12 h-12 rounded-xl bg-card shadow-soft flex items-center justify-center border border-gold/30">
-                  <Sparkles className="h-6 w-6 text-gold" />
+              <div className="absolute top-1/2 -right-6 animate-float delay-500">
+                <div className="w-12 h-12 rounded-xl bg-card shadow-soft flex items-center justify-center border border-burgundy/20">
+                  <GraduationCap className="h-6 w-6 text-burgundy" />
                 </div>
               </div>
             </div>

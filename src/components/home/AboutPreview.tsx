@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Quote, Scroll, Users, Building2 } from "lucide-react";
+import { ArrowRight, Quote, Scroll, Users, Building2, Image } from "lucide-react";
+import { gurudevBio, galleryImages } from "@/data/gurudevData";
 
 const highlights = [
   {
@@ -30,13 +31,10 @@ export function AboutPreview() {
             <div>
               <p className="text-primary font-medium mb-2">About Gurudev</p>
               <h2 className="font-display text-3xl sm:text-4xl font-bold text-foreground mb-4">
-                Muni Jambuvijayji Maharaj
+                Muni Jambuvijayji Maharaj Saheb
               </h2>
               <p className="text-muted-foreground text-lg leading-relaxed">
-                A revered Jain saint and scholar whose life was dedicated to preserving 
-                and propagating the profound wisdom of Jain philosophy. His scholarly 
-                contributions span multiple languages, and his teachings continue to 
-                guide seekers on the path of spiritual enlightenment.
+                {gurudevBio.shortBio}
               </p>
             </div>
 
@@ -52,16 +50,42 @@ export function AboutPreview() {
               </p>
             </div>
 
-            <Button variant="subtle" size="lg" asChild>
-              <Link to="/about/gurudev">
-                Read Full Biography
-                <ArrowRight className="h-4 w-4 ml-2" />
-              </Link>
-            </Button>
+            <div className="flex flex-wrap gap-4">
+              <Button variant="subtle" size="lg" asChild>
+                <Link to="/about/gurudev">
+                  Read Full Biography
+                  <ArrowRight className="h-4 w-4 ml-2" />
+                </Link>
+              </Button>
+              <Button variant="outline" size="lg" asChild>
+                <Link to="/gallery">
+                  <Image className="h-4 w-4 mr-2" />
+                  Photo Gallery
+                </Link>
+              </Button>
+            </div>
           </div>
 
-          {/* Highlights */}
+          {/* Right Side - Photo + Highlights */}
           <div className="space-y-6">
+            {/* Photo Grid Preview */}
+            <div className="grid grid-cols-3 gap-2 mb-6">
+              {galleryImages.slice(0, 3).map((image, index) => (
+                <Link 
+                  key={index}
+                  to="/gallery"
+                  className="aspect-square rounded-xl overflow-hidden group shadow-soft hover:shadow-elevated transition-all"
+                >
+                  <img
+                    src={image.thumb}
+                    alt={image.alt || `Gurudev Photo ${index + 1}`}
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                  />
+                </Link>
+              ))}
+            </div>
+
+            {/* Highlights */}
             {highlights.map((item, index) => (
               <div 
                 key={item.title}
