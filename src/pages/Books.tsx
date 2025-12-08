@@ -89,11 +89,9 @@ const Books = () => {
 
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-6">
             {filteredBooks.map((book, index) => (
-              <a
+              <Link
                 key={book.id}
-                href={book.link}
-                target="_blank"
-                rel="noopener noreferrer"
+                to={`/books/${book.id}`}
                 className="group"
               >
                 <Card 
@@ -132,7 +130,7 @@ const Books = () => {
                     </div>
                   </CardContent>
                 </Card>
-              </a>
+              </Link>
             ))}
           </div>
 
