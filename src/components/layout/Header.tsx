@@ -105,18 +105,18 @@ export function Header() {
   };
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border/50 bg-background/95 backdrop-blur-md supports-[backdrop-filter]:bg-background/80">
+    <header className="sticky top-0 z-50 w-full border-b border-white/10 bg-slate backdrop-blur-md">
       <div className="container mx-auto flex h-16 items-center justify-between px-4 lg:px-8">
         {/* Logo */}
         <Link to="/" className="flex items-center gap-3 group">
           <div className="relative flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-primary to-gold shadow-soft group-hover:shadow-glow transition-all duration-300">
-            <Scroll className="h-5 w-5 text-primary-foreground" />
+            <Scroll className="h-5 w-5 text-white" />
           </div>
           <div className="flex flex-col">
-            <span className="font-display text-lg font-bold text-foreground leading-tight">
+            <span className="font-display text-lg font-bold text-white leading-tight">
               Jambushrusti
             </span>
-            <span className="text-[10px] text-muted-foreground tracking-wide">
+            <span className="text-[10px] text-white/60 tracking-wide">
               Jain Knowledge Ecosystem
             </span>
           </div>
@@ -129,22 +129,22 @@ export function Header() {
               <NavigationMenuItem key={item.title}>
                 {item.items ? (
                   <>
-                    <NavigationMenuTrigger className="bg-transparent hover:bg-secondary/50 data-[state=open]:bg-secondary/50">
+                    <NavigationMenuTrigger className="bg-transparent text-white/90 hover:bg-white/10 hover:text-white data-[state=open]:bg-white/10 data-[state=open]:text-white">
                       {item.title}
                     </NavigationMenuTrigger>
                     <NavigationMenuContent>
-                      <ul className="grid w-[400px] gap-2 p-4 md:w-[500px] md:grid-cols-2">
+                      <ul className="grid w-[400px] gap-2 p-4 md:w-[500px] md:grid-cols-2 bg-card">
                         {item.items.map((subItem) => (
                           <li key={subItem.title}>
                             <NavigationMenuLink asChild>
                               <Link
                                 to={subItem.href}
                                 className={cn(
-                                  "block select-none space-y-1 rounded-lg p-3 leading-none no-underline outline-none transition-colors hover:bg-secondary hover:text-secondary-foreground focus:bg-secondary focus:text-secondary-foreground",
+                                  "block select-none space-y-1 rounded-lg p-3 leading-none no-underline outline-none transition-colors hover:bg-secondary hover:text-foreground focus:bg-secondary focus:text-foreground",
                                   location.pathname === subItem.href && "bg-secondary"
                                 )}
                               >
-                                <div className="text-sm font-medium leading-none">{subItem.title}</div>
+                                <div className="text-sm font-medium leading-none text-foreground">{subItem.title}</div>
                                 <p className="line-clamp-2 text-xs leading-snug text-muted-foreground">
                                   {subItem.description}
                                 </p>
@@ -160,8 +160,8 @@ export function Header() {
                     <Link
                       to={item.href}
                       className={cn(
-                        "group inline-flex h-9 w-max items-center justify-center rounded-lg bg-transparent px-4 py-2 text-sm font-medium transition-colors hover:bg-secondary/50 hover:text-secondary-foreground focus:bg-secondary focus:text-secondary-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50",
-                        location.pathname === item.href && "bg-secondary/50"
+                        "group inline-flex h-9 w-max items-center justify-center rounded-lg bg-transparent px-4 py-2 text-sm font-medium text-white/90 transition-colors hover:bg-white/10 hover:text-white focus:bg-white/10 focus:text-white focus:outline-none disabled:pointer-events-none disabled:opacity-50",
+                        location.pathname === item.href && "bg-white/10 text-white"
                       )}
                     >
                       {item.title}
@@ -175,12 +175,12 @@ export function Header() {
 
         {/* Right Actions */}
         <div className="flex items-center gap-3">
-          <Button variant="ghost" size="icon" className="hidden md:flex" asChild>
+          <Button variant="ghost" size="icon" className="hidden md:flex text-white/80 hover:text-white hover:bg-white/10" asChild>
             <Link to="/search">
               <Search className="h-4 w-4" />
             </Link>
           </Button>
-          <Button variant="subtle" size="sm" className="hidden md:flex" asChild>
+          <Button variant="ghost" size="sm" className="hidden md:flex text-white/80 hover:text-white hover:bg-white/10" asChild>
             <Link to="/contact">
               <Mail className="h-4 w-4 mr-2" />
               Contact
@@ -190,7 +190,7 @@ export function Header() {
           {isAuthenticated && user ? (
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button variant="outline" size="sm" className="hidden md:flex gap-2">
+                <Button variant="outline" size="sm" className="hidden md:flex gap-2 border-white/20 text-white hover:bg-white/10 hover:text-white">
                   <span>{ROLE_ICONS[user.role]}</span>
                   <span className="max-w-[100px] truncate">{user.name}</span>
                 </Button>
@@ -239,7 +239,7 @@ export function Header() {
           {/* Mobile Menu */}
           <Sheet open={mobileOpen} onOpenChange={setMobileOpen}>
             <SheetTrigger asChild className="lg:hidden">
-              <Button variant="ghost" size="icon">
+              <Button variant="ghost" size="icon" className="text-white hover:bg-white/10">
                 <Menu className="h-5 w-5" />
               </Button>
             </SheetTrigger>
