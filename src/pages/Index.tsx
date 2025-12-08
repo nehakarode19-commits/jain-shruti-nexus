@@ -4,6 +4,7 @@ import { FeaturesSection } from "@/components/home/FeaturesSection";
 import { AboutPreview } from "@/components/home/AboutPreview";
 import { GuruvaniPreview } from "@/components/home/GuruvaniPreview";
 import { CommunitySection } from "@/components/home/CommunitySection";
+import { AdaniFoundation } from "@/components/home/AdaniFoundation";
 import { CTASection } from "@/components/home/CTASection";
 
 const Index = () => {
@@ -13,6 +14,7 @@ const Index = () => {
       <FeaturesSection />
       <AboutPreview />
       <GuruvaniPreview />
+      <AdaniFoundation />
       <CommunitySection />
       <CTASection />
     </Layout>

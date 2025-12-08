@@ -24,6 +24,14 @@ import Gallery from "./pages/Gallery";
 import Books from "./pages/Books";
 import NotFound from "./pages/NotFound";
 
+// About Section Pages
+import GurudevParivar from "./pages/about/GurudevParivar";
+import GyanKendra from "./pages/about/GyanKendra";
+
+// Community Pages
+import Blog from "./pages/community/Blog";
+import News from "./pages/community/News";
+
 // Research Modules
 import SodhSanchay from "./pages/research/SodhSanchay";
 import SodhSandarbh from "./pages/research/SodhSandarbh";
@@ -59,8 +67,8 @@ const App = () => (
             {/* About Section */}
             <Route path="/about" element={<About />} />
             <Route path="/about/gurudev" element={<AboutGurudev />} />
-            <Route path="/about/parivar" element={<About />} />
-            <Route path="/about/gyan-kendra" element={<About />} />
+            <Route path="/about/parivar" element={<GurudevParivar />} />
+            <Route path="/about/gyan-kendra" element={<GyanKendra />} />
             
             {/* Guruvani */}
             <Route path="/guruvani" element={<Guruvani />} />
@@ -85,8 +93,8 @@ const App = () => (
             {/* Community */}
             <Route path="/community" element={<CommunityEvents />} />
             <Route path="/community/events" element={<CommunityEvents />} />
-            <Route path="/community/blog" element={<CommunityEvents />} />
-            <Route path="/community/news" element={<CommunityEvents />} />
+            <Route path="/community/blog" element={<Blog />} />
+            <Route path="/community/news" element={<News />} />
             
             {/* Auth */}
             <Route path="/auth" element={<Auth />} />
