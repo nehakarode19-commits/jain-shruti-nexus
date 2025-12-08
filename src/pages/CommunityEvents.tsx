@@ -8,13 +8,33 @@ import {
   MapPin, 
   Users,
   ArrowRight,
-  Video
+  Video,
+  ExternalLink
 } from "lucide-react";
+import { events } from "@/data/gurudevData";
 
-const events = [
+// Combined events - imported + additional scheduled events
+const allEvents = [
+  // Imported events from siddhijambuparivar.com
+  ...events.map(e => ({
+    id: e.id,
+    title: e.titleEn || e.title,
+    titleOriginal: e.title,
+    type: e.type,
+    date: e.date,
+    time: "Various Sessions",
+    location: "Muni Jambuvijay Research Center",
+    speaker: "Community Event",
+    description: `${e.titleEn || e.title} - Join us for this important community event.`,
+    isOnline: false,
+    image: e.image,
+    link: e.link,
+  })),
+  // Additional scheduled events
   {
-    id: 1,
+    id: 101,
     title: "Saturday Pravachan",
+    titleOriginal: "शनिवारी प्रवचन",
     type: "Regular",
     date: "Every Saturday",
     time: "10:00 AM - 12:00 PM",
@@ -24,8 +44,9 @@ const events = [
     isOnline: true,
   },
   {
-    id: 2,
+    id: 102,
     title: "Paryushan Mahaparva 2024",
+    titleOriginal: "पर्युषण महापर्व २०२४",
     type: "Festival",
     date: "September 12-19, 2024",
     time: "Various Sessions",
@@ -35,8 +56,9 @@ const events = [
     isOnline: false,
   },
   {
-    id: 3,
+    id: 103,
     title: "Research Methodology Workshop",
+    titleOriginal: "शोध कार्यशाला",
     type: "Workshop",
     date: "October 5, 2024",
     time: "2:00 PM - 5:00 PM",
@@ -46,8 +68,9 @@ const events = [
     isOnline: true,
   },
   {
-    id: 4,
+    id: 104,
     title: "Introduction to Prakrit Language",
+    titleOriginal: "प्राकृत भाषा परिचय",
     type: "Course",
     date: "Starting November 1, 2024",
     time: "6:00 PM - 7:30 PM (Weekends)",
@@ -57,8 +80,9 @@ const events = [
     isOnline: true,
   },
   {
-    id: 5,
+    id: 105,
     title: "Manuscript Exhibition",
+    titleOriginal: "हस्तलिखित प्रदर्शनी",
     type: "Exhibition",
     date: "December 15-20, 2024",
     time: "10:00 AM - 6:00 PM",
@@ -78,10 +102,10 @@ const CommunityEvents = () => {
           <div className="max-w-3xl mx-auto text-center">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-sm mb-6 animate-fade-up">
               <Calendar className="h-4 w-4 text-primary" />
-              <span className="text-primary">Community</span>
+              <span className="text-primary">{allEvents.length} Events</span>
             </div>
             <h1 className="font-display text-4xl sm:text-5xl font-bold text-foreground mb-6 animate-fade-up delay-100">
-              Events & Workshops
+              Events & <span className="text-gradient-gold">Workshops</span>
             </h1>
             <p className="text-lg text-muted-foreground animate-fade-up delay-200">
               Join our lectures, workshops, festivals, and community gatherings 
@@ -91,11 +115,60 @@ const CommunityEvents = () => {
         </div>
       </section>
 
-      {/* Events List */}
+      {/* Featured Events from siddhijambuparivar.com */}
+      <section className="py-12 bg-secondary/30">
+        <div className="container mx-auto px-4">
+          <h2 className="font-display text-2xl font-bold text-foreground text-center mb-8">
+            Featured Events
+          </h2>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
+            {events.map((event, index) => (
+              <Card 
+                key={event.id}
+                variant="interactive"
+                className="overflow-hidden animate-fade-up"
+                style={{ animationDelay: `${index * 100}ms` }}
+              >
+                {event.image && (
+                  <div className="aspect-video overflow-hidden">
+                    <img 
+                      src={event.image} 
+                      alt={event.titleEn || event.title}
+                      className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                    />
+                  </div>
+                )}
+                <CardContent className="p-6">
+                  <Badge variant="default" className="mb-3">{event.type}</Badge>
+                  <h3 className="font-display text-lg font-semibold text-foreground mb-2">
+                    {event.titleEn}
+                  </h3>
+                  <p className="text-sm text-primary mb-3">{event.title}</p>
+                  <div className="flex items-center gap-2 text-sm text-muted-foreground mb-4">
+                    <Calendar className="h-4 w-4" />
+                    <span>{event.date}</span>
+                  </div>
+                  <Button variant="outline" size="sm" asChild>
+                    <a href={event.link} target="_blank" rel="noopener noreferrer">
+                      Learn More
+                      <ExternalLink className="h-3 w-3 ml-2" />
+                    </a>
+                  </Button>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* All Events List */}
       <section className="py-16 lg:py-24 bg-background">
         <div className="container mx-auto px-4">
+          <h2 className="font-display text-2xl font-bold text-foreground text-center mb-12">
+            Upcoming & Scheduled Events
+          </h2>
           <div className="max-w-4xl mx-auto space-y-6">
-            {events.map((event, index) => (
+            {allEvents.filter(e => e.id >= 100).map((event, index) => (
               <Card 
                 key={event.id}
                 variant="feature"
@@ -115,6 +188,9 @@ const CommunityEvents = () => {
                         )}
                       </div>
                       <CardTitle className="text-xl">{event.title}</CardTitle>
+                      {event.titleOriginal && (
+                        <p className="text-sm text-primary mt-1">{event.titleOriginal}</p>
+                      )}
                     </div>
                   </div>
                 </CardHeader>
@@ -155,6 +231,28 @@ const CommunityEvents = () => {
               </Card>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* External Link */}
+      <section className="py-12 bg-secondary/30">
+        <div className="container mx-auto px-4 text-center">
+          <h2 className="font-display text-xl font-bold text-foreground mb-4">
+            View More Events
+          </h2>
+          <p className="text-muted-foreground mb-6 max-w-lg mx-auto">
+            Visit the official Siddhi Jambu Parivar website for complete event listings and details.
+          </p>
+          <Button variant="outline" asChild>
+            <a 
+              href="https://siddhijambuparivar.com/events-list/" 
+              target="_blank" 
+              rel="noopener noreferrer"
+            >
+              View All Events
+              <ExternalLink className="h-4 w-4 ml-2" />
+            </a>
+          </Button>
         </div>
       </section>
 

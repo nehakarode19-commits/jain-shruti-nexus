@@ -1,21 +1,12 @@
 import { useState } from "react";
 import { Layout } from "@/components/layout/Layout";
-import { books } from "@/data/gurudevData";
+import { books, bookCategories } from "@/data/gurudevData";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
-import { Search, ExternalLink, BookOpen, Filter } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import { Search, ExternalLink, BookOpen, Filter, Globe } from "lucide-react";
 import { Link } from "react-router-dom";
-
-const categories = [
-  "All",
-  "Agam",
-  "Guruvani",
-  "Sutra",
-  "Granthsuchi",
-  "Tika",
-  "Other"
-];
 
 const Books = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -25,7 +16,7 @@ const Books = () => {
     const matchesSearch = book.title.toLowerCase().includes(searchQuery.toLowerCase());
     const matchesCategory = 
       selectedCategory === "All" || 
-      book.title.toLowerCase().includes(selectedCategory.toLowerCase());
+      book.category === selectedCategory;
     return matchesSearch && matchesCategory;
   });
 
@@ -57,7 +48,7 @@ const Books = () => {
             <div className="relative w-full md:w-96">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
               <Input
-                placeholder="Search books..."
+                placeholder="Search books by title..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="pl-10"
@@ -66,7 +57,7 @@ const Books = () => {
 
             <div className="flex flex-wrap gap-2 items-center">
               <Filter className="h-4 w-4 text-muted-foreground" />
-              {categories.map((category) => (
+              {bookCategories.map((category) => (
                 <Button
                   key={category}
                   variant={selectedCategory === category ? "hero" : "outline"}
@@ -84,16 +75,22 @@ const Books = () => {
       {/* Books Grid */}
       <section className="py-12 lg:py-16 bg-background">
         <div className="container mx-auto px-4">
-          <div className="mb-6">
+          <div className="mb-6 flex items-center justify-between">
             <p className="text-muted-foreground">
               Showing {filteredBooks.length} of {books.length} books
             </p>
+            {selectedCategory !== "All" && (
+              <Badge variant="secondary" className="gap-1">
+                <Filter className="h-3 w-3" />
+                {selectedCategory}
+              </Badge>
+            )}
           </div>
 
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-6">
             {filteredBooks.map((book, index) => (
               <a
-                key={index}
+                key={book.id}
                 href={book.link}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -104,18 +101,32 @@ const Books = () => {
                   className="overflow-hidden h-full animate-fade-up"
                   style={{ animationDelay: `${(index % 12) * 50}ms` }}
                 >
-                  <div className="aspect-square bg-secondary/50 overflow-hidden">
+                  <div className="aspect-square bg-secondary/50 overflow-hidden relative">
                     <img
                       src={book.image}
                       alt={book.title}
                       className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                     />
+                    {book.category && (
+                      <Badge 
+                        variant="secondary" 
+                        className="absolute top-2 left-2 text-[10px] bg-background/90 backdrop-blur-sm"
+                      >
+                        {book.category}
+                      </Badge>
+                    )}
                   </div>
                   <CardContent className="p-4">
-                    <h3 className="font-display font-semibold text-foreground text-sm line-clamp-2 group-hover:text-primary transition-colors">
+                    <h3 className="font-display font-semibold text-foreground text-sm line-clamp-2 group-hover:text-primary transition-colors mb-2">
                       {book.title}
                     </h3>
-                    <div className="flex items-center gap-1 mt-2 text-xs text-muted-foreground">
+                    {book.language && (
+                      <div className="flex items-center gap-1 text-xs text-muted-foreground mb-2">
+                        <Globe className="h-3 w-3" />
+                        <span>{book.language}</span>
+                      </div>
+                    )}
+                    <div className="flex items-center gap-1 text-xs text-primary">
                       <ExternalLink className="h-3 w-3" />
                       <span>View Details</span>
                     </div>
@@ -139,6 +150,33 @@ const Books = () => {
               </Button>
             </div>
           )}
+        </div>
+      </section>
+
+      {/* Category Stats */}
+      <section className="py-12 bg-secondary/30">
+        <div className="container mx-auto px-4">
+          <h2 className="font-display text-2xl font-bold text-foreground text-center mb-8">
+            Browse by Category
+          </h2>
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 max-w-4xl mx-auto">
+            {bookCategories.filter(c => c !== "All").map((category) => {
+              const count = books.filter(b => b.category === category).length;
+              return (
+                <Card 
+                  key={category}
+                  variant="interactive"
+                  className="cursor-pointer"
+                  onClick={() => setSelectedCategory(category)}
+                >
+                  <CardContent className="p-4 text-center">
+                    <p className="font-display font-semibold text-foreground">{category}</p>
+                    <p className="text-sm text-muted-foreground">{count} books</p>
+                  </CardContent>
+                </Card>
+              );
+            })}
+          </div>
         </div>
       </section>
 
