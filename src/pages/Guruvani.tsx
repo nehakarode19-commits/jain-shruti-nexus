@@ -27,6 +27,7 @@ const guruvaniItems = [
     excerpt: "The soul is eternal, ever-conscious, and inherently pure. Through right knowledge and conduct, one realizes the true nature of the self...",
     tags: ["Philosophy", "Jiva", "Moksha"],
     restricted: false,
+    image: "https://siddhijambuparivar.com/wp-content/uploads/2022/11/96-min.jpg",
   },
   {
     id: 2,
@@ -37,6 +38,7 @@ const guruvaniItems = [
     excerpt: "A comprehensive examination of reality as presented in the foundational Jain scripture by Umaswati...",
     tags: ["Agama", "Tattvartha", "Commentary"],
     restricted: false,
+    image: "https://siddhijambuparivar.com/wp-content/uploads/2022/11/99-min.jpg",
   },
   {
     id: 3,
@@ -47,6 +49,7 @@ const guruvaniItems = [
     excerpt: "The path of a monk requires unwavering dedication to ahimsa, truthfulness, and self-discipline...",
     tags: ["Monkhood", "Guidance", "Discipline"],
     restricted: true,
+    image: "https://siddhijambuparivar.com/wp-content/uploads/2022/11/43-min.jpg",
   },
   {
     id: 4,
@@ -57,6 +60,7 @@ const guruvaniItems = [
     excerpt: "The doctrine of many-sidedness teaches us that truth can be perceived from multiple perspectives...",
     tags: ["Philosophy", "Anekanta", "Logic"],
     restricted: false,
+    image: "https://siddhijambuparivar.com/wp-content/uploads/2022/11/48-min.jpg",
   },
   {
     id: 5,
@@ -67,6 +71,7 @@ const guruvaniItems = [
     excerpt: "The preservation of ancient Jain manuscripts requires careful attention to material, environment, and documentation...",
     tags: ["Manuscripts", "Preservation", "Research"],
     restricted: true,
+    image: "https://siddhijambuparivar.com/wp-content/uploads/2022/11/111-min.jpg",
   },
   {
     id: 6,
@@ -77,6 +82,7 @@ const guruvaniItems = [
     excerpt: "Right faith is the foundation of spiritual progress. Without samyak darshan, neither knowledge nor conduct can lead to liberation...",
     tags: ["Philosophy", "Samyak", "Faith"],
     restricted: false,
+    image: "https://siddhijambuparivar.com/wp-content/uploads/2022/11/76-min.jpg",
   },
 ];
 
@@ -198,54 +204,65 @@ const Guruvani = () => {
                 >
                   <Card 
                     variant="interactive"
-                    className="animate-fade-up h-full"
+                    className="animate-fade-up h-full overflow-hidden"
                     style={{ animationDelay: `${index * 50}ms` }}
                   >
-                    <CardHeader>
-                      <div className="flex items-start justify-between mb-2">
-                        <div className="flex items-center gap-2">
-                          <div className="w-10 h-10 rounded-lg bg-burgundy/10 flex items-center justify-center">
-                            <Icon className="h-5 w-5 text-burgundy" />
-                          </div>
-                          {item.restricted && (
-                            <Lock className="h-4 w-4 text-muted-foreground" />
-                          )}
-                        </div>
-                        <Badge variant="secondary" className="text-xs">
+                    {/* Cover Image */}
+                    <div className="aspect-[4/3] overflow-hidden bg-secondary/30 relative">
+                      <img 
+                        src={item.image}
+                        alt={item.title}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      />
+                      <div className="absolute top-3 left-3 right-3 flex items-start justify-between">
+                        <Badge variant="secondary" className="text-xs bg-background/90 backdrop-blur-sm border-0">
+                          <Icon className="h-3 w-3 mr-1" />
+                          {item.type}
+                        </Badge>
+                        {item.restricted && (
+                          <Badge variant="outline" className="text-xs bg-background/90 backdrop-blur-sm">
+                            <Lock className="h-3 w-3 mr-1" />
+                            Restricted
+                          </Badge>
+                        )}
+                      </div>
+                    </div>
+                    
+                    <CardHeader className="pb-2">
+                      <div className="flex items-center gap-2 mb-2">
+                        <Badge variant="outline" className="text-xs">
                           {item.language}
                         </Badge>
+                        <span className="text-xs text-muted-foreground">{item.date}</span>
                       </div>
-                      <CardTitle className="text-lg group-hover:text-primary transition-colors">
+                      <CardTitle className="text-lg group-hover:text-primary transition-colors line-clamp-2">
                         {item.title}
                       </CardTitle>
-                      <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                        <span>{item.type}</span>
-                        <span>•</span>
-                        <span>{item.date}</span>
-                      </div>
                     </CardHeader>
-                    <CardContent>
-                      <p className="text-sm text-muted-foreground line-clamp-3 mb-4">
+                    <CardContent className="pt-0">
+                      <p className="text-sm text-muted-foreground line-clamp-2 mb-4">
                         {item.excerpt}
                       </p>
                       <div className="flex flex-wrap gap-1.5 mb-4">
-                        {item.tags.map((tag) => (
+                        {item.tags.slice(0, 3).map((tag) => (
                           <Badge key={tag} variant="outline" className="text-xs">
                             {tag}
                           </Badge>
                         ))}
                       </div>
-                      {item.restricted ? (
-                        <div className="w-full text-center py-2 rounded-md border border-border text-sm text-muted-foreground">
-                          <Lock className="h-3.5 w-3.5 inline mr-2" />
-                          Sign In to Access
-                        </div>
-                      ) : (
-                        <div className="w-full text-center py-2 text-sm text-primary group-hover:underline">
-                          Read More
-                          <ArrowRight className="h-3.5 w-3.5 inline ml-2 group-hover:translate-x-1 transition-transform" />
-                        </div>
-                      )}
+                      <div className="pt-3 border-t border-border">
+                        {item.restricted ? (
+                          <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground">
+                            <Lock className="h-3.5 w-3.5" />
+                            <span>Sign In to Access</span>
+                          </div>
+                        ) : (
+                          <div className="flex items-center justify-center text-sm text-primary group-hover:underline">
+                            Read More
+                            <ArrowRight className="h-3.5 w-3.5 ml-1 group-hover:translate-x-1 transition-transform" />
+                          </div>
+                        )}
+                      </div>
                     </CardContent>
                   </Card>
                 </Link>
