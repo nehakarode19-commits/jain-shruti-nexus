@@ -13,8 +13,10 @@ import Index from "./pages/Index";
 import About from "./pages/About";
 import AboutGurudev from "./pages/AboutGurudev";
 import Guruvani from "./pages/Guruvani";
+import GuruvaniDetails from "./pages/GuruvaniDetails";
 import Research from "./pages/Research";
 import Library from "./pages/Library";
+import LibraryItemDetails from "./pages/LibraryItemDetails";
 import Scholars from "./pages/Scholars";
 import Contact from "./pages/Contact";
 import Auth from "./pages/Auth";
@@ -84,6 +86,7 @@ const App = () => (
               
               {/* Guruvani */}
               <Route path="/guruvani" element={<Guruvani />} />
+              <Route path="/guruvani/:id" element={<GuruvaniDetails />} />
               
               {/* Research Hub */}
               <Route path="/research" element={<Research />} />
@@ -94,6 +97,7 @@ const App = () => (
               
               {/* Library */}
               <Route path="/library" element={<Library />} />
+              <Route path="/library/:id" element={<LibraryItemDetails />} />
               
               {/* Gallery & Books */}
               <Route path="/gallery" element={<Gallery />} />
