@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap');
+/* Fonts are loaded via index.html for better performance */
 
 /* Global Smooth Scrolling */
 html {
@@ -84,10 +84,10 @@ html {
     --shadow-glow: 0 0 50px hsl(215 38% 47% / 0.15), 0 0 20px hsl(42 75% 50% / 0.1);
     --shadow-card: 0 2px 8px hsl(0 0% 20% / 0.06), 0 4px 16px -6px hsl(0 0% 20% / 0.08);
 
-    /* Typography */
+    /* Typography - Poppins for headings, Inter for body */
     --font-display: 'Poppins', system-ui, sans-serif;
-    --font-body: 'Poppins', system-ui, sans-serif;
-    --font-accent: 'Poppins', system-ui, sans-serif;
+    --font-heading: 'Poppins', system-ui, sans-serif;
+    --font-body: 'Inter', system-ui, sans-serif;
 
     /* Sidebar - #2B3A4A */
     --sidebar-background: 210 27% 23%;
@@ -180,12 +180,15 @@ html {
   }
 
   body {
-    @apply bg-background text-foreground font-body antialiased;
+    @apply bg-background text-foreground antialiased;
+    font-family: var(--font-body);
     font-feature-settings: "cv02", "cv03", "cv04", "cv11";
   }
 
+  /* Headings - Poppins 600-700 */
   h1, h2, h3, h4, h5, h6 {
-    @apply font-display tracking-tight;
+    font-family: var(--font-heading);
+    @apply tracking-tight;
   }
 
   h1 { @apply text-4xl md:text-5xl lg:text-6xl font-bold; }
@@ -193,8 +196,13 @@ html {
   h3 { @apply text-2xl md:text-3xl font-semibold; }
   h4 { @apply text-xl md:text-2xl font-medium; }
 
+  /* Body text - Inter 400-500 */
+  p, span, li, td, th, label, input, textarea, select, button {
+    font-family: var(--font-body);
+  }
+
   p {
-    @apply leading-relaxed text-lg;
+    @apply leading-relaxed text-lg font-normal;
   }
 
   /* Card and box base font size */
