@@ -29,7 +29,7 @@ const guruvaniItems = [
 
 export function GuruvaniPreview() {
   return (
-    <section className="py-16 lg:py-24 bg-background">
+    <section className="py-10 lg:py-14 bg-background">
       <div className="container mx-auto px-4">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-12">

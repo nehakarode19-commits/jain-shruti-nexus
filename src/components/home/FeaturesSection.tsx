@@ -60,7 +60,7 @@ const researchTools = [
 
 export function FeaturesSection() {
   return (
-    <section className="py-16 lg:py-24 bg-background relative overflow-hidden">
+    <section className="py-10 lg:py-14 bg-background relative overflow-hidden">
       {/* Background decoration */}
       <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-border to-transparent" />
       <div className="absolute -top-40 left-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl pointer-events-none" />

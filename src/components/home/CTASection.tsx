@@ -90,7 +90,7 @@ const ctaCards = [
 
 export function CTASection() {
   return (
-    <section className="py-16 lg:py-24 relative overflow-hidden">
+    <section className="py-10 lg:py-14 relative overflow-hidden">
       {/* Animated gradient background */}
       <div className="absolute inset-0 animated-gradient" />
       <div className="absolute inset-0 bg-background/80" />
