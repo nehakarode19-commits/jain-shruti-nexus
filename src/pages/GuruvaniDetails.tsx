@@ -1,5 +1,6 @@
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { Layout } from "@/components/layout/Layout";
+import { PageBreadcrumb } from "@/components/ui/page-breadcrumb";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
@@ -201,20 +202,13 @@ const GuruvaniDetails = () => {
 
   return (
     <Layout>
-      {/* Back Navigation */}
-      <section className="py-4 bg-secondary/30 border-b border-border">
-        <div className="container mx-auto px-4">
-          <Button 
-            variant="ghost" 
-            size="sm" 
-            onClick={() => navigate(-1)}
-            className="gap-2"
-          >
-            <ArrowLeft className="h-4 w-4" />
-            Back to Guruvani
-          </Button>
-        </div>
-      </section>
+      {/* Breadcrumb */}
+      <PageBreadcrumb 
+        items={[
+          { label: "Guruvani", href: "/guruvani" },
+          { label: item.title }
+        ]}
+      />
 
       {/* Hero with Quote */}
       <section className="py-8 bg-burgundy/5 border-b border-burgundy/10">

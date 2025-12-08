@@ -97,23 +97,26 @@ const Articles = () => {
               </div>
 
               {/* Articles Grid */}
-              <div className="grid md:grid-cols-2 gap-6">
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {filteredArticles.map((article, index) => (
-                  <Card 
+                  <Link
                     key={article.id}
-                    variant="interactive"
-                    className="overflow-hidden group animate-fade-up"
-                    style={{ animationDelay: `${index * 100}ms` }}
+                    to={`/articles/${article.id}`}
+                    className="group"
                   >
-                    <div className="grid md:grid-cols-3 h-full">
-                      <div className="aspect-square md:aspect-auto overflow-hidden">
+                    <Card 
+                      variant="interactive"
+                      className="overflow-hidden h-full animate-fade-up"
+                      style={{ animationDelay: `${index * 100}ms` }}
+                    >
+                      <div className="aspect-[4/3] overflow-hidden">
                         <img 
                           src={article.image}
                           alt={article.titleEn}
                           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                         />
                       </div>
-                      <CardContent className="md:col-span-2 p-6 flex flex-col justify-center">
+                      <CardContent className="p-5">
                         <div className="flex items-center gap-2 mb-3">
                           <Badge variant="default">{article.category}</Badge>
                           <Badge variant="outline" className="gap-1">
@@ -121,20 +124,26 @@ const Articles = () => {
                             {article.language}
                           </Badge>
                         </div>
-                        <h3 className="font-display text-lg font-semibold text-foreground mb-1 group-hover:text-primary transition-colors">
+                        <h3 className="font-display text-lg font-semibold text-foreground mb-1 group-hover:text-primary transition-colors line-clamp-2">
                           {article.titleEn}
                         </h3>
                         <p className="text-sm text-primary mb-2">{article.title}</p>
                         <p className="text-sm text-muted-foreground mb-3 line-clamp-2">
                           {article.excerpt}
                         </p>
-                        <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                          <User className="h-3 w-3" />
-                          <span>{article.author}</span>
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                            <User className="h-3 w-3" />
+                            <span>{article.author}</span>
+                          </div>
+                          <span className="text-xs text-primary flex items-center gap-1">
+                            Read More
+                            <ArrowRight className="h-3 w-3 group-hover:translate-x-1 transition-transform" />
+                          </span>
                         </div>
                       </CardContent>
-                    </div>
-                  </Card>
+                    </Card>
+                  </Link>
                 ))}
               </div>
 

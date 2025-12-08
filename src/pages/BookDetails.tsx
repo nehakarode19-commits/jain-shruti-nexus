@@ -1,8 +1,9 @@
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { Layout } from "@/components/layout/Layout";
+import { PageBreadcrumb } from "@/components/ui/page-breadcrumb";
+import { SimilarItems } from "@/components/ui/similar-items";
 import { books } from "@/data/gurudevData";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { 
   ArrowLeft, 
@@ -58,20 +59,13 @@ const BookDetails = () => {
 
   return (
     <Layout>
-      {/* Back Navigation */}
-      <section className="py-4 bg-secondary/30 border-b border-border">
-        <div className="container mx-auto px-4">
-          <Button 
-            variant="ghost" 
-            size="sm" 
-            onClick={() => navigate(-1)}
-            className="gap-2"
-          >
-            <ArrowLeft className="h-4 w-4" />
-            Back to Books
-          </Button>
-        </div>
-      </section>
+      {/* Breadcrumb */}
+      <PageBreadcrumb 
+        items={[
+          { label: "Books", href: "/books" },
+          { label: book.title }
+        ]}
+      />
 
       {/* Book Details */}
       <section className="py-12 lg:py-16 bg-background">
@@ -169,52 +163,17 @@ const BookDetails = () => {
       </section>
 
       {/* Similar Products */}
-      {similarBooks.length > 0 && (
-        <section className="py-16 bg-gradient-spiritual relative overflow-hidden">
-          {/* Decorative Pattern */}
-          <div className="absolute inset-0 lotus-pattern opacity-30" />
-          
-          <div className="container mx-auto px-4 relative z-10">
-            <div className="text-center mb-10">
-              <span className="text-xs font-medium tracking-widest text-primary uppercase">
-                Shop More
-              </span>
-              <h2 className="font-display text-2xl lg:text-3xl font-bold text-foreground mt-2">
-                Similar Products
-              </h2>
-            </div>
-
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
-              {similarBooks.map((similarBook, index) => (
-                <Link
-                  key={similarBook.id}
-                  to={`/books/${similarBook.id}`}
-                  className="group"
-                >
-                  <Card 
-                    variant="interactive" 
-                    className="overflow-hidden h-full animate-fade-up bg-background/80 backdrop-blur-sm"
-                    style={{ animationDelay: `${index * 100}ms` }}
-                  >
-                    <div className="aspect-square bg-secondary/50 overflow-hidden">
-                      <img
-                        src={similarBook.image}
-                        alt={similarBook.title}
-                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                      />
-                    </div>
-                    <CardContent className="p-3">
-                      <h3 className="font-display font-medium text-foreground text-sm line-clamp-2 group-hover:text-primary transition-colors">
-                        {similarBook.title}
-                      </h3>
-                    </CardContent>
-                  </Card>
-                </Link>
-              ))}
-            </div>
-          </div>
-        </section>
-      )}
+      <SimilarItems
+        title="Similar Books"
+        subtitle="Explore More"
+        items={similarBooks.map(b => ({
+          id: b.id,
+          title: b.title,
+          image: b.image,
+          category: b.category
+        }))}
+        basePath="/books"
+      />
 
       {/* CTA Section */}
       <section className="py-12 bg-background border-t border-border">

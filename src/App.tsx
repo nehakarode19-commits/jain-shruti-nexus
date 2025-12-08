@@ -28,6 +28,7 @@ import Gallery from "./pages/Gallery";
 import Books from "./pages/Books";
 import BookDetails from "./pages/BookDetails";
 import Articles from "./pages/Articles";
+import ArticleDetails from "./pages/ArticleDetails";
 import NotFound from "./pages/NotFound";
 
 // About Section Pages
@@ -105,6 +106,7 @@ const App = () => (
               <Route path="/books" element={<Books />} />
               <Route path="/books/:id" element={<BookDetails />} />
               <Route path="/articles" element={<Articles />} />
+              <Route path="/articles/:id" element={<ArticleDetails />} />
               
               {/* Scholars */}
               <Route path="/scholars" element={<Scholars />} />
