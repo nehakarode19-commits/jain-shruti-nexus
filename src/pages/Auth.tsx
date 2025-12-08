@@ -9,7 +9,14 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Checkbox } from "@/components/ui/checkbox";
 import { useToast } from "@/hooks/use-toast";
 import { Link } from "react-router-dom";
-import { useDemoAuth } from "@/contexts/DemoAuthContext";
+import { useAdminAuth, UserRole, ROLE_LABELS, ROLE_DESCRIPTIONS, AVAILABLE_ROLES } from "@/contexts/AdminAuthContext";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { 
   Scroll, 
   Mail, 
@@ -18,15 +25,29 @@ import {
   ArrowRight,
   Eye,
   EyeOff,
-  AlertTriangle
+  UserCircle,
+  Loader2
 } from "lucide-react";
+
+const ROLE_ICONS: Record<UserRole, string> = {
+  superadmin: "👑",
+  admin: "🛡️",
+  scholar: "📚",
+  librarian: "📖",
+  user: "👤",
+  public: "🌐",
+};
 
 const Auth = () => {
   const { toast } = useToast();
   const navigate = useNavigate();
-  const { login, isAuthenticated } = useDemoAuth();
+  const { login, isAuthenticated, user } = useAdminAuth();
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [loginMode, setLoginMode] = useState<"role" | "credentials" | "register">("role");
+
+  // Role selection state
+  const [selectedRole, setSelectedRole] = useState<UserRole | "">("");
 
   // Login state
   const [loginEmail, setLoginEmail] = useState("");
@@ -41,28 +62,77 @@ const Auth = () => {
 
   // Redirect if already authenticated
   useEffect(() => {
-    if (isAuthenticated) {
-      navigate("/");
+    if (isAuthenticated && user) {
+      const redirectPath = getRedirectPath(user.role);
+      navigate(redirectPath);
     }
-  }, [isAuthenticated, navigate]);
+  }, [isAuthenticated, user, navigate]);
 
-  const handleLogin = async (e: React.FormEvent) => {
+  const getRedirectPath = (role: UserRole): string => {
+    switch (role) {
+      case "superadmin":
+      case "admin":
+        return "/admin/dashboard";
+      case "librarian":
+        return "/lms/dashboard";
+      case "scholar":
+        return "/research";
+      default:
+        return "/";
+    }
+  };
+
+  const handleRoleLogin = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    if (!selectedRole) {
+      toast({
+        title: "Select a role",
+        description: "Please select a role to continue",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    setIsLoading(true);
+
+    try {
+      const result = await login("", "", selectedRole);
+      
+      if (result.success) {
+        toast({
+          title: "Welcome!",
+          description: `Logged in as ${ROLE_LABELS[selectedRole]}`,
+        });
+        navigate(result.redirectTo || "/", { replace: true });
+      } else {
+        toast({
+          title: "Login failed",
+          description: result.error || "Something went wrong",
+          variant: "destructive",
+        });
+      }
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleCredentialsLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
     
-    // Demo login
-    const success = await login(loginEmail, loginPassword);
+    const result = await login(loginEmail, loginPassword);
     
-    if (success) {
+    if (result.success) {
       toast({
         title: "Welcome back!",
         description: "You have been logged in successfully.",
       });
-      navigate("/");
+      navigate(result.redirectTo || "/", { replace: true });
     } else {
       toast({
         title: "Invalid Credentials",
-        description: "For demo, use: admin@jambushruti.com / demo123",
+        description: result.error || "Please check your email and password",
         variant: "destructive",
       });
     }
@@ -98,7 +168,7 @@ const Auth = () => {
     
     // Store demo user
     const userData = { email: registerEmail, role: "user", name: registerName };
-    localStorage.setItem("demo_auth", JSON.stringify(userData));
+    localStorage.setItem("admin_auth", JSON.stringify(userData));
     
     toast({
       title: "Account Created!",
@@ -126,32 +196,97 @@ const Auth = () => {
               </Link>
             </div>
 
-            {/* Demo Notice */}
-            <div className="mb-6 p-4 rounded-lg bg-amber-500/10 border border-amber-500/30 flex items-start gap-3 animate-fade-up">
-              <AlertTriangle className="h-5 w-5 text-amber-500 flex-shrink-0 mt-0.5" />
-              <div className="text-sm">
-                <p className="font-medium text-amber-600 dark:text-amber-400">Demo Mode</p>
-                <p className="text-muted-foreground mt-1">
-                  For demo login use:<br />
-                  <strong>Email:</strong> admin@jambushruti.com<br />
-                  <strong>Password:</strong> demo123<br />
-                  <span className="text-xs">Or create a new account to test registration.</span>
-                </p>
-              </div>
-            </div>
-
             <Card variant="elevated" className="animate-fade-up delay-100">
-              <Tabs defaultValue="login">
+              <Tabs value={loginMode} onValueChange={(v) => setLoginMode(v as "role" | "credentials" | "register")}>
                 <CardHeader className="pb-4">
-                  <TabsList className="grid w-full grid-cols-2">
-                    <TabsTrigger value="login">Sign In</TabsTrigger>
-                    <TabsTrigger value="register">Create Account</TabsTrigger>
+                  <TabsList className="grid w-full grid-cols-3">
+                    <TabsTrigger value="role" className="text-xs sm:text-sm">
+                      <UserCircle className="h-4 w-4 mr-1 hidden sm:inline" />
+                      Role
+                    </TabsTrigger>
+                    <TabsTrigger value="credentials" className="text-xs sm:text-sm">
+                      <Lock className="h-4 w-4 mr-1 hidden sm:inline" />
+                      Sign In
+                    </TabsTrigger>
+                    <TabsTrigger value="register" className="text-xs sm:text-sm">
+                      <User className="h-4 w-4 mr-1 hidden sm:inline" />
+                      Register
+                    </TabsTrigger>
                   </TabsList>
                 </CardHeader>
                 <CardContent>
-                  {/* Login Tab */}
-                  <TabsContent value="login" className="mt-0">
-                    <form onSubmit={handleLogin} className="space-y-4">
+                  {/* Role Selection Tab */}
+                  <TabsContent value="role" className="mt-0">
+                    <form onSubmit={handleRoleLogin} className="space-y-4">
+                      <div className="space-y-2">
+                        <Label className="text-sm font-medium">
+                          Select Your Role
+                        </Label>
+                        <Select value={selectedRole} onValueChange={(v) => setSelectedRole(v as UserRole)}>
+                          <SelectTrigger className="h-12 rounded-xl border-border focus:border-primary bg-background">
+                            <SelectValue placeholder="Choose a role to login..." />
+                          </SelectTrigger>
+                          <SelectContent className="bg-background border border-border shadow-lg z-50">
+                            {AVAILABLE_ROLES.map((role) => (
+                              <SelectItem key={role} value={role} className="py-3 cursor-pointer focus:bg-muted">
+                                <div className="flex items-center gap-3">
+                                  <span className="text-lg">{ROLE_ICONS[role]}</span>
+                                  <div className="text-left">
+                                    <div className="font-medium text-foreground">{ROLE_LABELS[role]}</div>
+                                    <div className="text-xs text-muted-foreground">{ROLE_DESCRIPTIONS[role]}</div>
+                                  </div>
+                                </div>
+                              </SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
+                      </div>
+
+                      {selectedRole && (
+                        <div className="p-4 bg-muted/50 rounded-xl border border-border/50 animate-in fade-in-50 duration-200">
+                          <div className="flex items-center gap-3 mb-2">
+                            <span className="text-2xl">{ROLE_ICONS[selectedRole]}</span>
+                            <div>
+                              <h4 className="font-semibold text-foreground">{ROLE_LABELS[selectedRole]}</h4>
+                              <p className="text-xs text-muted-foreground">{ROLE_DESCRIPTIONS[selectedRole]}</p>
+                            </div>
+                          </div>
+                          <div className="mt-3 pt-3 border-t border-border/50">
+                            <p className="text-xs text-muted-foreground">
+                              <strong>Access includes:</strong>{" "}
+                              {selectedRole === "superadmin" && "All admin modules, user management, system settings"}
+                              {selectedRole === "admin" && "CMS, content management, approvals, user management"}
+                              {selectedRole === "scholar" && "Research portal, manuscript access requests, submissions"}
+                              {selectedRole === "librarian" && "LMS dashboard, book management, member management"}
+                              {selectedRole === "user" && "Public site, personal bookmarks, profile settings"}
+                              {selectedRole === "public" && "Public website, research tools (read-only)"}
+                            </p>
+                          </div>
+                        </div>
+                      )}
+
+                      <Button 
+                        type="submit" 
+                        variant="hero" 
+                        className="w-full"
+                        disabled={isLoading || !selectedRole}
+                      >
+                        {isLoading ? (
+                          <>
+                            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                            Signing in...
+                          </>
+                        ) : (
+                          <>Continue as {selectedRole ? ROLE_LABELS[selectedRole] : "..."}</>
+                        )}
+                        {!isLoading && <ArrowRight className="h-4 w-4 ml-2" />}
+                      </Button>
+                    </form>
+                  </TabsContent>
+
+                  {/* Credentials Login Tab */}
+                  <TabsContent value="credentials" className="mt-0">
+                    <form onSubmit={handleCredentialsLogin} className="space-y-4">
                       <div className="space-y-2">
                         <Label htmlFor="login-email">Email</Label>
                         <div className="relative">
@@ -176,7 +311,7 @@ const Auth = () => {
                             type={showPassword ? "text" : "password"}
                             required
                             className="pl-10 pr-10"
-                            placeholder="demo123"
+                            placeholder="••••••••"
                             value={loginPassword}
                             onChange={(e) => setLoginPassword(e.target.value)}
                           />
@@ -213,6 +348,17 @@ const Auth = () => {
                         <ArrowRight className="h-4 w-4 ml-2" />
                       </Button>
                     </form>
+
+                    {/* Demo Credentials */}
+                    <div className="mt-4 p-3 bg-muted/50 rounded-lg border border-border/50">
+                      <p className="text-xs text-muted-foreground mb-2 font-medium">Demo Credentials:</p>
+                      <div className="grid gap-1 text-[10px]">
+                        <div className="flex justify-between"><span>👑 Super Admin:</span><code>superadmin@jambushruti.com / super123</code></div>
+                        <div className="flex justify-between"><span>🛡️ Admin:</span><code>admin@jambushruti.com / admin123</code></div>
+                        <div className="flex justify-between"><span>📚 Scholar:</span><code>scholar@jambushruti.com / scholar123</code></div>
+                        <div className="flex justify-between"><span>📖 Librarian:</span><code>librarian@jambushruti.com / lib123</code></div>
+                      </div>
+                    </div>
                   </TabsContent>
 
                   {/* Register Tab */}
