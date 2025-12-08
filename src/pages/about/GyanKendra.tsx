@@ -243,10 +243,10 @@ const GyanKendra = () => {
                     <div className="flex items-center gap-3">
                       <Mail className="h-5 w-5 text-primary" />
                       <a 
-                        href="mailto:contact@jambushruti.org"
+                        href="mailto:contact@jambushrusti.org"
                         className="text-sm text-primary hover:underline"
                       >
-                        contact@jambushruti.org
+                        contact@jambushrusti.org
                       </a>
                     </div>
                   </div>

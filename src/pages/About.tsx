@@ -60,7 +60,7 @@ const About = () => {
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto text-center">
             <h1 className="font-display text-4xl sm:text-5xl font-bold text-foreground mb-6 animate-fade-up">
-              About Jambu-Shruti
+              About Jambushrusti
             </h1>
             <p className="text-lg text-muted-foreground animate-fade-up delay-100">
               A comprehensive digital ecosystem dedicated to preserving, researching, 
@@ -111,7 +111,7 @@ const About = () => {
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="font-display text-3xl font-bold text-foreground mb-4">
-              What Jambu-Shruti Offers
+              What Jambushrusti Offers
             </h2>
           </div>
 

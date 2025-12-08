@@ -14,7 +14,7 @@ export default function Search() {
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto text-center mb-12">
             <h1 className="font-display text-4xl lg:text-5xl font-bold text-foreground mb-4">
-              Search Jambu-Shruti
+              Search Jambushrusti
             </h1>
             <p className="text-lg text-muted-foreground">
               Find books, manuscripts, research entries, and Guruvani across our entire ecosystem.

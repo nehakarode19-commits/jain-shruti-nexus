@@ -63,7 +63,7 @@ export default function LMSSettings() {
                   <Input
                     id="adminEmail"
                     type="email"
-                    defaultValue="admin@jambushruti.org"
+                    defaultValue="admin@jambushrusti.org"
                   />
                 </div>
                 <div className="space-y-2">
@@ -107,7 +107,7 @@ export default function LMSSettings() {
                   <Input
                     id="libraryEmail"
                     type="email"
-                    defaultValue="library@jambushruti.org"
+                    defaultValue="library@jambushrusti.org"
                   />
                 </div>
                 <div className="space-y-2">

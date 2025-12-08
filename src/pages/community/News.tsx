@@ -79,7 +79,7 @@ const News = () => {
               News & <span className="text-gradient-gold">Announcements</span>
             </h1>
             <p className="text-lg text-muted-foreground">
-              Stay informed about events, updates, and announcements from Jambu-Shruti 
+              Stay informed about events, updates, and announcements from Jambushrusti 
               and the Siddhi Jambu Parivar community.
             </p>
           </div>

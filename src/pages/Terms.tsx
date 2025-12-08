@@ -19,7 +19,7 @@ export default function Terms() {
                 1. Acceptance of Terms
               </h2>
               <p>
-                By accessing and using Jambu-Shruti, you accept and agree to be bound by these 
+                By accessing and using Jambushrusti, you accept and agree to be bound by these 
                 Terms of Service. If you do not agree to these terms, please do not use our services.
               </p>
 
@@ -45,7 +45,7 @@ export default function Terms() {
                 4. Intellectual Property
               </h2>
               <p>
-                All content on Jambu-Shruti, including texts, manuscripts, research entries, and 
+                All content on Jambushrusti, including texts, manuscripts, research entries, and 
                 Guruvani materials, are protected by copyright and other intellectual property laws. 
                 Unauthorized reproduction or distribution is prohibited.
               </p>
@@ -54,7 +54,7 @@ export default function Terms() {
                 5. Research Submissions
               </h2>
               <p>
-                By submitting research entries to SodhSanchay, you grant Jambu-Shruti the right to 
+                By submitting research entries to SodhSanchay, you grant Jambushrusti the right to 
                 store, display, and share your submissions within the platform for scholarly purposes.
               </p>
 
@@ -62,7 +62,7 @@ export default function Terms() {
                 6. Limitation of Liability
               </h2>
               <p>
-                Jambu-Shruti shall not be liable for any indirect, incidental, special, or 
+                Jambushrusti shall not be liable for any indirect, incidental, special, or 
                 consequential damages arising from your use of our services.
               </p>
 
@@ -71,7 +71,7 @@ export default function Terms() {
               </h2>
               <p>
                 For any questions regarding these Terms of Service, please contact us at 
-                contact@jambushruti.org.
+                contact@jambushrusti.org.
               </p>
             </div>
           </div>

@@ -70,7 +70,7 @@ export function AdminSidebar() {
                 Admin Panel
               </span>
               <span className="text-[10px] text-muted-foreground">
-                Jambu-Shruti
+                Jambushrusti
               </span>
             </div>
           </div>

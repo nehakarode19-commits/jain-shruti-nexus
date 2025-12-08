@@ -2,12 +2,12 @@ import { createContext, useContext, useState, useEffect, ReactNode } from "react
 
 // DEMO ADMIN CREDENTIALS - For production, use Lovable Cloud
 const ADMIN_CREDENTIALS = [
-  { email: "superadmin@jambushruti.com", password: "super123", role: "superadmin", name: "Super Admin" },
-  { email: "admin@jambushruti.com", password: "admin123", role: "admin", name: "Admin User" },
-  { email: "scholar@jambushruti.com", password: "scholar123", role: "scholar", name: "Scholar User" },
-  { email: "librarian@jambushruti.com", password: "lib123", role: "librarian", name: "Librarian User" },
-  { email: "user@jambushruti.com", password: "user123", role: "user", name: "Registered User" },
-  { email: "public@jambushruti.com", password: "public123", role: "public", name: "Public Visitor" },
+  { email: "superadmin@jambushrusti.com", password: "super123", role: "superadmin", name: "Super Admin" },
+  { email: "admin@jambushrusti.com", password: "admin123", role: "admin", name: "Admin User" },
+  { email: "scholar@jambushrusti.com", password: "scholar123", role: "scholar", name: "Scholar User" },
+  { email: "librarian@jambushrusti.com", password: "lib123", role: "librarian", name: "Librarian User" },
+  { email: "user@jambushrusti.com", password: "user123", role: "user", name: "Registered User" },
+  { email: "public@jambushrusti.com", password: "public123", role: "public", name: "Public Visitor" },
 ];
 
 export type UserRole = "public" | "user" | "scholar" | "librarian" | "admin" | "superadmin";

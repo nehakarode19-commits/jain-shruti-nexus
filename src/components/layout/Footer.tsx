@@ -3,7 +3,7 @@ import { Scroll, Mail, MapPin, Phone, ExternalLink } from "lucide-react";
 
 const footerLinks = {
   about: [
-    { title: "About Jambu-Shruti", href: "/about" },
+    { title: "About Jambushrusti", href: "/about" },
     { title: "Gurudev Muni Jambuvijayji", href: "/about/gurudev" },
     { title: "Gurudev Parivar", href: "/about/parivar" },
     { title: "Jambuji Gyan Kendra", href: "/about/gyan-kendra" },
@@ -42,7 +42,7 @@ export function Footer() {
               </div>
               <div className="flex flex-col">
                 <span className="font-display text-lg font-bold text-foreground">
-                  Jambu-Shruti
+                  Jambushrusti
                 </span>
                 <span className="text-xs text-muted-foreground">
                   Jain Knowledge Ecosystem
@@ -60,8 +60,8 @@ export function Footer() {
               </div>
               <div className="flex items-center gap-2">
                 <Mail className="h-4 w-4 text-primary" />
-                <a href="mailto:contact@jambushruti.org" className="hover:text-primary transition-colors">
-                  contact@jambushruti.org
+                <a href="mailto:contact@jambushrusti.org" className="hover:text-primary transition-colors">
+                  contact@jambushrusti.org
                 </a>
               </div>
             </div>
@@ -122,7 +122,7 @@ export function Footer() {
         {/* Bottom Bar */}
         <div className="mt-12 pt-8 border-t border-border flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-xs text-muted-foreground">
-            © {new Date().getFullYear()} Jambu-Shruti. All rights reserved.
+            © {new Date().getFullYear()} Jambushrusti. All rights reserved.
           </p>
           <div className="flex items-center gap-4">
             {footerLinks.legal.map((link) => (

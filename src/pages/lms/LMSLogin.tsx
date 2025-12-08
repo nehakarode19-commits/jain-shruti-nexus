@@ -51,7 +51,7 @@ const LMSLogin = () => {
               <Scroll className="h-6 w-6 text-primary-foreground" />
             </div>
             <span className="font-display text-2xl font-bold text-foreground">
-              Jambu-Shruti LMS
+              Jambushrusti LMS
             </span>
           </Link>
         </div>
@@ -63,7 +63,7 @@ const LMSLogin = () => {
             <p className="font-medium text-amber-600 dark:text-amber-400">Demo Mode</p>
             <p className="text-muted-foreground mt-1">
               Use these credentials to login:<br />
-              <strong>Email:</strong> admin@jambushruti.com<br />
+              <strong>Email:</strong> admin@jambushrusti.com<br />
               <strong>Password:</strong> demo123
             </p>
           </div>
@@ -85,7 +85,7 @@ const LMSLogin = () => {
                     type="email"
                     required
                     className="pl-10"
-                    placeholder="admin@jambushruti.com"
+                    placeholder="admin@jambushrusti.com"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                   />

@@ -209,7 +209,7 @@ As we continue to study and apply these teachings, we honor the legacy of great 
                     Contributing Author
                   </p>
                   <p className="text-sm text-muted-foreground">
-                    A dedicated contributor to Jambu-Shruti, sharing insights on Jain philosophy, 
+                    A dedicated contributor to Jambushrusti, sharing insights on Jain philosophy, 
                     Gurudev's teachings, and the preservation of ancient wisdom.
                   </p>
                 </div>

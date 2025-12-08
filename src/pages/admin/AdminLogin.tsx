@@ -129,7 +129,7 @@ export default function AdminLogin() {
           </div>
           <div>
             <CardTitle className="text-2xl font-display font-bold text-foreground">
-              Jambu-Shruti Portal
+              Jambushrusti Portal
             </CardTitle>
             <CardDescription className="text-muted-foreground mt-2">
               Role-Based Access System
@@ -227,7 +227,7 @@ export default function AdminLogin() {
                     <Input
                       id="email"
                       type="email"
-                      placeholder="admin@jambushruti.com"
+                      placeholder="admin@jambushrusti.com"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       className="pl-10 h-11 rounded-xl border-border/50 focus:border-primary"
@@ -307,19 +307,19 @@ export default function AdminLogin() {
                 <div className="grid gap-1.5 text-xs max-h-32 overflow-y-auto">
                   <div className="flex justify-between items-center p-1.5 bg-background rounded-lg">
                     <span className="text-muted-foreground">👑 Super Admin:</span>
-                    <code className="text-foreground font-mono text-[10px]">superadmin@jambushruti.com / super123</code>
+                    <code className="text-foreground font-mono text-[10px]">superadmin@jambushrusti.com / super123</code>
                   </div>
                   <div className="flex justify-between items-center p-1.5 bg-background rounded-lg">
                     <span className="text-muted-foreground">🛡️ Admin:</span>
-                    <code className="text-foreground font-mono text-[10px]">admin@jambushruti.com / admin123</code>
+                    <code className="text-foreground font-mono text-[10px]">admin@jambushrusti.com / admin123</code>
                   </div>
                   <div className="flex justify-between items-center p-1.5 bg-background rounded-lg">
                     <span className="text-muted-foreground">📚 Scholar:</span>
-                    <code className="text-foreground font-mono text-[10px]">scholar@jambushruti.com / scholar123</code>
+                    <code className="text-foreground font-mono text-[10px]">scholar@jambushrusti.com / scholar123</code>
                   </div>
                   <div className="flex justify-between items-center p-1.5 bg-background rounded-lg">
                     <span className="text-muted-foreground">📖 Librarian:</span>
-                    <code className="text-foreground font-mono text-[10px]">librarian@jambushruti.com / lib123</code>
+                    <code className="text-foreground font-mono text-[10px]">librarian@jambushrusti.com / lib123</code>
                   </div>
                 </div>
               </div>

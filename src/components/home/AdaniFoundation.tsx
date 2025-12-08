@@ -123,7 +123,7 @@ export function AdaniFoundation() {
                 <div className="text-center md:text-left">
                   <blockquote className="text-lg md:text-xl text-foreground font-display italic mb-2">
                     "Preserving cultural heritage is preserving our identity. We are honored to 
-                    support the mission of Jambu-Shruti in safeguarding the wisdom of Jain philosophy 
+                    support the mission of Jambushrusti in safeguarding the wisdom of Jain philosophy 
                     for future generations."
                   </blockquote>
                   <cite className="text-sm text-muted-foreground not-italic">
