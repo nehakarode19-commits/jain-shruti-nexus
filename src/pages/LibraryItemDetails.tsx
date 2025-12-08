@@ -20,7 +20,7 @@ import {
 
 // Import book cover images - matched to titles
 import agam02Sutrakrutang from "@/assets/books/agam-02-sutrakrutang.png";
-import agam03Sthananga from "@/assets/books/agam-03-sthananga-01.png";
+import agam03Sthananga from "@/assets/books/agam-03-sthananga-new.png";
 import agam06Gnatadharma from "@/assets/books/agam-06-gnatadharma.png";
 import agam45Anuyogdwar from "@/assets/books/agam-45-anuyogdwar.png";
 import dwadashanramPart1 from "@/assets/books/dwadashanram-part1.png";
@@ -90,14 +90,14 @@ const catalogItems = [
   {
     id: 5,
     type: "Book",
-    title: "Dwadashanram Part 1",
+    title: "Dvadasharam Naychakram Part 1 Tika",
     author: "Muni Jambuvijayji",
     year: "2020",
     language: "Sanskrit",
     category: "Philosophy",
     available: true,
     location: "Rack B-01",
-    description: "Part one of the comprehensive work on the twelve contemplations (Dwadashanupreksha) that form an essential part of Jain spiritual practice for developing detachment and wisdom.",
+    description: "Part one of the comprehensive Dvadasharam Naychakram with detailed Tika (commentary). This work provides insights into Jain logic and epistemology.",
     publisher: "Shri Mahavira Jaina Vidyalaya",
     pages: 350,
     image: dwadashanramPart1,
@@ -105,14 +105,14 @@ const catalogItems = [
   {
     id: 6,
     type: "Book",
-    title: "Dwadashanram Part 2",
+    title: "Dvadasharam Naychakram Part 2 Tika",
     author: "Muni Jambuvijayji",
     year: "2020",
     language: "Sanskrit",
     category: "Philosophy",
     available: true,
     location: "Rack B-02",
-    description: "The continuation of Dwadashanram, this volume completes the exposition of the twelve contemplations, providing deeper insights into Jain meditation practices.",
+    description: "The continuation of Dvadasharam Naychakram Tika, completing the exposition of Jain logical principles and philosophical arguments.",
     publisher: "Shri Mahavira Jaina Vidyalaya",
     pages: 320,
     image: dwadashanramPart2,
