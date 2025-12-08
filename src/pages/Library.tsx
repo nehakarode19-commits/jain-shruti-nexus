@@ -29,6 +29,7 @@ const catalogItems = [
     category: "Agama Studies",
     available: true,
     location: "Rack A-12",
+    image: "https://siddhijambuparivar.com/wp-content/uploads/2019/07/Agam-02-Ang-02-Sutrakrutang-Sutra-370x400.jpg",
   },
   {
     id: 2,
@@ -40,6 +41,7 @@ const catalogItems = [
     category: "Philosophy",
     available: true,
     location: "Rack B-05",
+    image: "https://siddhijambuparivar.com/wp-content/uploads/2019/07/Agam-03-Ang-03-Sthananga-Sutra-Part-01-370x400.jpg",
   },
   {
     id: 3,
@@ -51,6 +53,7 @@ const catalogItems = [
     category: "Scripture",
     available: false,
     location: "Special Collection",
+    image: "https://siddhijambuparivar.com/wp-content/uploads/2019/07/Dwadashanram-Naychakram-Part-1-Tika-370x400.jpg",
   },
   {
     id: 4,
@@ -62,6 +65,7 @@ const catalogItems = [
     category: "Philosophy",
     available: true,
     location: "Rack A-03",
+    image: "https://siddhijambuparivar.com/wp-content/uploads/2019/07/Agam-06-Ang-06-Gnatadharma-Sutra-370x400.jpg",
   },
   {
     id: 5,
@@ -73,6 +77,7 @@ const catalogItems = [
     category: "Devotional",
     available: false,
     location: "Special Collection",
+    image: "https://siddhijambuparivar.com/wp-content/uploads/2019/07/Dwadashanram-Naychakram-Part-2-Tika-370x400.jpg",
   },
   {
     id: 6,
@@ -84,6 +89,7 @@ const catalogItems = [
     category: "Ethics",
     available: true,
     location: "Rack C-08",
+    image: "https://siddhijambuparivar.com/wp-content/uploads/2019/07/Guruvani-1-370x400.jpg",
   },
 ];
 
@@ -181,11 +187,17 @@ const Library = () => {
               <Link key={item.id} to={`/library/${item.id}`} className="group">
                 <Card 
                   variant="interactive"
-                  className="animate-fade-up h-full"
+                  className="animate-fade-up h-full overflow-hidden"
                   style={{ animationDelay: `${index * 50}ms` }}
                 >
-                  <CardHeader>
-                    <div className="flex items-start justify-between mb-2">
+                  {/* Cover Image */}
+                  <div className="aspect-[4/3] overflow-hidden bg-secondary/50 relative">
+                    <img 
+                      src={item.image}
+                      alt={item.title}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                    <div className="absolute top-3 left-3 right-3 flex items-start justify-between">
                       <Badge 
                         variant={item.type === "Book" ? "default" : "secondary"}
                         className="text-xs"
@@ -199,21 +211,24 @@ const Library = () => {
                       </Badge>
                       <Badge 
                         variant={item.available ? "outline" : "secondary"}
-                        className={`text-xs ${item.available ? "text-sage border-sage" : ""}`}
+                        className={`text-xs ${item.available ? "bg-background/90 text-sage border-sage" : "bg-background/90"}`}
                       >
                         {item.available ? "Available" : "Reference Only"}
                       </Badge>
                     </div>
-                    <CardTitle className="text-lg group-hover:text-primary transition-colors">{item.title}</CardTitle>
-                    <div className="text-xs text-muted-foreground">
+                  </div>
+                  
+                  <CardHeader className="pb-2">
+                    <CardTitle className="text-lg group-hover:text-primary transition-colors line-clamp-2">{item.title}</CardTitle>
+                    <div className="text-xs text-primary font-medium">
                       {item.category}
                     </div>
                   </CardHeader>
-                  <CardContent>
-                    <div className="space-y-2 text-sm text-muted-foreground">
+                  <CardContent className="pt-0">
+                    <div className="space-y-1.5 text-sm text-muted-foreground">
                       <div className="flex items-center gap-2">
                         <User className="h-3.5 w-3.5" />
-                        <span>{item.author}</span>
+                        <span className="line-clamp-1">{item.author}</span>
                       </div>
                       <div className="flex items-center gap-2">
                         <Calendar className="h-3.5 w-3.5" />

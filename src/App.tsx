@@ -36,6 +36,7 @@ import GyanKendra from "./pages/about/GyanKendra";
 
 // Community Pages
 import Blog from "./pages/community/Blog";
+import BlogDetails from "./pages/community/BlogDetails";
 import News from "./pages/community/News";
 
 // Research Modules
@@ -112,6 +113,7 @@ const App = () => (
               <Route path="/community" element={<CommunityEvents />} />
               <Route path="/community/events" element={<CommunityEvents />} />
               <Route path="/community/blog" element={<Blog />} />
+              <Route path="/community/blog/:id" element={<BlogDetails />} />
               <Route path="/community/news" element={<News />} />
               
               {/* Auth */}
