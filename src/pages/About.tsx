@@ -46,9 +46,9 @@ const sections = [
   },
   {
     icon: Building2,
-    title: "Jambuji Jnan Kendra",
+    title: "Jambuji Gyan Kendra",
     description: "Visit our digital museum preserving Gurudev's creations and works",
-    href: "/about/jnan-kendra",
+    href: "/about/gyan-kendra",
   },
 ];
 

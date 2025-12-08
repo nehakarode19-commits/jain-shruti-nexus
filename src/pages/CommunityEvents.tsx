@@ -62,7 +62,7 @@ const events = [
     type: "Exhibition",
     date: "December 15-20, 2024",
     time: "10:00 AM - 6:00 PM",
-    location: "Jnan Kendra, Shantigram",
+    location: "Gyan Kendra, Shantigram",
     speaker: "Curated Exhibition",
     description: "Rare manuscript display featuring illuminated Jain texts and historical documents from the center's collection.",
     isOnline: false,

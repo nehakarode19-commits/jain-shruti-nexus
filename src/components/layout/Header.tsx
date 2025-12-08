@@ -21,7 +21,7 @@ const navigationItems = [
       { title: "About Jambu-Shruti", href: "/about", description: "Vision & mission of our platform" },
       { title: "Gurudev Muni Jambuvijayji", href: "/about/gurudev", description: "Life journey & spiritual contributions" },
       { title: "Gurudev Parivar", href: "/about/parivar", description: "Lineage & disciples" },
-      { title: "Jambuji Jnan Kendra", href: "/about/jnan-kendra", description: "Digital museum of teachings" },
+      { title: "Jambuji Gyan Kendra", href: "/about/gyan-kendra", description: "Digital museum of teachings" },
     ],
   },
   {
