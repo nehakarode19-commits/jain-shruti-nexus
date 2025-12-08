@@ -24,6 +24,12 @@ import Gallery from "./pages/Gallery";
 import Books from "./pages/Books";
 import NotFound from "./pages/NotFound";
 
+// Research Modules
+import SodhSanchay from "./pages/research/SodhSanchay";
+import SodhSandarbh from "./pages/research/SodhSandarbh";
+import Shabdasangraha from "./pages/research/Shabdasangraha";
+import Shastrasandarbha from "./pages/research/Shastrasandarbha";
+
 // LMS Pages
 import LMSLogin from "./pages/lms/LMSLogin";
 import LMSDashboard from "./pages/lms/LMSDashboard";
@@ -61,10 +67,10 @@ const App = () => (
             
             {/* Research Hub */}
             <Route path="/research" element={<Research />} />
-            <Route path="/research/sodhsanchay" element={<Research />} />
-            <Route path="/research/sodhsandarbh" element={<Research />} />
-            <Route path="/research/shabdasangraha" element={<Research />} />
-            <Route path="/research/shastrasandarbha" element={<Research />} />
+            <Route path="/research/sodhsanchay" element={<SodhSanchay />} />
+            <Route path="/research/sodhsandarbh" element={<SodhSandarbh />} />
+            <Route path="/research/shabdasangraha" element={<Shabdasangraha />} />
+            <Route path="/research/shastrasandarbha" element={<Shastrasandarbha />} />
             
             {/* Library */}
             <Route path="/library" element={<Library />} />
