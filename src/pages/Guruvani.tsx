@@ -118,10 +118,10 @@ const Guruvani = () => {
               <Scroll className="h-4 w-4 text-burgundy" />
               <span className="text-burgundy">Sacred Teachings</span>
             </div>
-            <h1 className="font-display text-4xl sm:text-5xl font-bold text-foreground mb-6 animate-fade-up delay-100">
+            <h1 className="font-heading text-4xl sm:text-5xl font-bold text-foreground mb-6 animate-fade-up delay-100">
               Guruvani
             </h1>
-            <p className="text-lg text-muted-foreground animate-fade-up delay-200">
+            <p className="font-body text-lg text-muted-foreground animate-fade-up delay-200">
               Explore the profound discourses, written works, letters, and spiritual guidance 
               from Gurudev Muni Jambuvijayji Maharaj.
             </p>
@@ -134,7 +134,7 @@ const Guruvani = () => {
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto text-center">
             <Quote className="h-8 w-8 text-burgundy/30 mx-auto mb-3" />
-            <blockquote className="font-display text-lg italic text-foreground">
+            <blockquote className="font-heading text-lg italic text-foreground">
               "The lamp of knowledge dispels the darkness of ignorance. Seek truth with humility and devotion."
             </blockquote>
           </div>
@@ -184,10 +184,10 @@ const Guruvani = () => {
           <div className="mb-8 p-4 rounded-xl bg-secondary/50 border border-border flex items-start gap-4">
             <Lock className="h-5 w-5 text-muted-foreground shrink-0 mt-0.5" />
             <div>
-              <p className="text-sm text-foreground font-medium mb-1">
+              <p className="font-body text-base text-foreground font-medium mb-1">
                 Some content requires authentication
               </p>
-              <p className="text-sm text-muted-foreground">
+              <p className="font-body text-base text-muted-foreground">
                 Items marked with a lock icon require you to be logged in. Scholars may request access to restricted materials.
               </p>
             </div>
@@ -235,12 +235,12 @@ const Guruvani = () => {
                         </Badge>
                         <span className="text-xs text-muted-foreground">{item.date}</span>
                       </div>
-                      <CardTitle className="text-lg group-hover:text-primary transition-colors line-clamp-2">
+                      <CardTitle className="font-heading text-lg group-hover:text-primary transition-colors line-clamp-2">
                         {item.title}
                       </CardTitle>
                     </CardHeader>
                     <CardContent className="pt-0">
-                      <p className="text-sm text-muted-foreground line-clamp-2 mb-4">
+                      <p className="font-body text-base text-muted-foreground line-clamp-2 mb-4">
                         {item.excerpt}
                       </p>
                       <div className="flex flex-wrap gap-1.5 mb-4">
@@ -252,12 +252,12 @@ const Guruvani = () => {
                       </div>
                       <div className="pt-3 border-t border-border">
                         {item.restricted ? (
-                          <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground">
+                          <div className="flex items-center justify-center gap-2 font-body text-base text-muted-foreground">
                             <Lock className="h-3.5 w-3.5" />
                             <span>Sign In to Access</span>
                           </div>
                         ) : (
-                          <div className="flex items-center justify-center text-sm text-primary group-hover:underline">
+                          <div className="flex items-center justify-center font-body text-base text-primary group-hover:underline">
                             Read More
                             <ArrowRight className="h-3.5 w-3.5 ml-1 group-hover:translate-x-1 transition-transform" />
                           </div>
@@ -281,10 +281,10 @@ const Guruvani = () => {
       {/* Request Access CTA */}
       <section className="py-16 bg-gradient-spiritual">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="font-display text-2xl font-bold text-foreground mb-4">
+          <h2 className="font-heading text-2xl font-bold text-foreground mb-4">
             Access Restricted Teachings
           </h2>
-          <p className="text-muted-foreground mb-8 max-w-lg mx-auto">
+          <p className="font-body text-base text-muted-foreground mb-8 max-w-lg mx-auto">
             Scholars and dedicated seekers can request access to restricted Guruvani materials. 
             Create an account and apply through the Scholar Portal.
           </p>
