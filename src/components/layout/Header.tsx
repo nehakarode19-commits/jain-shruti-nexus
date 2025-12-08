@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import {
   NavigationMenu,
@@ -10,8 +10,18 @@ import {
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { Menu, X, BookOpen, Users, Search, GraduationCap, Calendar, Mail, Scroll, Library, Sparkles } from "lucide-react";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { Menu, Search, Mail, Scroll, LogOut, User, Settings, LayoutDashboard } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useAdminAuth, ROLE_LABELS, UserRole } from "@/contexts/AdminAuthContext";
+import { useToast } from "@/hooks/use-toast";
 
 const navigationItems = [
   {
@@ -64,9 +74,44 @@ const navigationItems = [
   },
 ];
 
+const ROLE_ICONS: Record<UserRole, string> = {
+  superadmin: "👑",
+  admin: "🛡️",
+  scholar: "📚",
+  librarian: "📖",
+  user: "👤",
+  public: "🌐",
+};
+
 export function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
+  const { isAuthenticated, user, logout } = useAdminAuth();
+  const { toast } = useToast();
+
+  const handleLogout = () => {
+    logout();
+    toast({
+      title: "Logged out",
+      description: "You have been logged out successfully.",
+    });
+    navigate("/");
+  };
+
+  const getDashboardPath = (role: UserRole): string => {
+    switch (role) {
+      case "superadmin":
+      case "admin":
+        return "/admin/dashboard";
+      case "librarian":
+        return "/lms/dashboard";
+      case "scholar":
+        return "/research";
+      default:
+        return "/";
+    }
+  };
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/50 bg-background/95 backdrop-blur-md supports-[backdrop-filter]:bg-background/80">
@@ -150,11 +195,55 @@ export function Header() {
               Contact
             </Link>
           </Button>
-          <Button variant="hero" size="sm" className="hidden md:flex" asChild>
-            <Link to="/auth">
-              Sign In
-            </Link>
-          </Button>
+          
+          {isAuthenticated && user ? (
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="outline" size="sm" className="hidden md:flex gap-2">
+                  <span>{ROLE_ICONS[user.role]}</span>
+                  <span className="max-w-[100px] truncate">{user.name}</span>
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end" className="w-56">
+                <DropdownMenuLabel className="font-normal">
+                  <div className="flex flex-col space-y-1">
+                    <p className="text-sm font-medium">{user.name}</p>
+                    <p className="text-xs text-muted-foreground">{ROLE_LABELS[user.role]}</p>
+                  </div>
+                </DropdownMenuLabel>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem asChild>
+                  <Link to={getDashboardPath(user.role)} className="cursor-pointer">
+                    <LayoutDashboard className="mr-2 h-4 w-4" />
+                    Dashboard
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link to="/profile" className="cursor-pointer">
+                    <User className="mr-2 h-4 w-4" />
+                    Profile
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link to="/settings" className="cursor-pointer">
+                    <Settings className="mr-2 h-4 w-4" />
+                    Settings
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem onClick={handleLogout} className="cursor-pointer text-destructive focus:text-destructive">
+                  <LogOut className="mr-2 h-4 w-4" />
+                  Logout
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          ) : (
+            <Button variant="hero" size="sm" className="hidden md:flex" asChild>
+              <Link to="/auth">
+                Sign In
+              </Link>
+            </Button>
+          )}
 
           {/* Mobile Menu */}
           <Sheet open={mobileOpen} onOpenChange={setMobileOpen}>
@@ -194,9 +283,37 @@ export function Header() {
                   <Button variant="subtle" asChild onClick={() => setMobileOpen(false)}>
                     <Link to="/contact">Contact</Link>
                   </Button>
-                  <Button variant="hero" asChild onClick={() => setMobileOpen(false)}>
-                    <Link to="/auth">Sign In</Link>
-                  </Button>
+                  {isAuthenticated && user ? (
+                    <>
+                      <div className="flex items-center gap-2 p-2 bg-muted rounded-lg">
+                        <span>{ROLE_ICONS[user.role]}</span>
+                        <div className="flex-1">
+                          <p className="text-sm font-medium">{user.name}</p>
+                          <p className="text-xs text-muted-foreground">{ROLE_LABELS[user.role]}</p>
+                        </div>
+                      </div>
+                      <Button variant="outline" asChild onClick={() => setMobileOpen(false)}>
+                        <Link to={getDashboardPath(user.role)}>
+                          <LayoutDashboard className="mr-2 h-4 w-4" />
+                          Dashboard
+                        </Link>
+                      </Button>
+                      <Button 
+                        variant="destructive" 
+                        onClick={() => {
+                          handleLogout();
+                          setMobileOpen(false);
+                        }}
+                      >
+                        <LogOut className="mr-2 h-4 w-4" />
+                        Logout
+                      </Button>
+                    </>
+                  ) : (
+                    <Button variant="hero" asChild onClick={() => setMobileOpen(false)}>
+                      <Link to="/auth">Sign In</Link>
+                    </Button>
+                  )}
                 </div>
               </nav>
             </SheetContent>
