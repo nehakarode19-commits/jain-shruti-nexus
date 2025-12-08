@@ -15,6 +15,9 @@ import Scholars from "./pages/Scholars";
 import Contact from "./pages/Contact";
 import Auth from "./pages/Auth";
 import CommunityEvents from "./pages/CommunityEvents";
+import Search from "./pages/Search";
+import Privacy from "./pages/Privacy";
+import Terms from "./pages/Terms";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -62,6 +65,13 @@ const App = () => (
           
           {/* Contact */}
           <Route path="/contact" element={<Contact />} />
+          
+          {/* Search */}
+          <Route path="/search" element={<Search />} />
+          
+          {/* Legal */}
+          <Route path="/privacy" element={<Privacy />} />
+          <Route path="/terms" element={<Terms />} />
           
           {/* Catch-all */}
           <Route path="*" element={<NotFound />} />
