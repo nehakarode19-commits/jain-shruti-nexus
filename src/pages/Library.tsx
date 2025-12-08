@@ -18,86 +18,86 @@ import {
   ArrowRight
 } from "lucide-react";
 
-// Import book cover images
-import agam02Cover from "@/assets/books/agam-02-sutrakrutang.png";
-import agam03Cover from "@/assets/books/agam-03-sthananga-01.png";
-import agam06Cover from "@/assets/books/agam-06-gnatadharma.png";
+// Import book cover images - matched to titles
+import agam02Sutrakrutang from "@/assets/books/agam-02-sutrakrutang.png";
+import agam03Sthananga from "@/assets/books/agam-03-sthananga-01.png";
+import agam06Gnatadharma from "@/assets/books/agam-06-gnatadharma.png";
+import agam45Anuyogdwar from "@/assets/books/agam-45-anuyogdwar.png";
 import dwadashanramPart1 from "@/assets/books/dwadashanram-part1.png";
 import dwadashanramPart2 from "@/assets/books/dwadashanram-part2.png";
-import guruvani1Cover from "@/assets/books/guruvani-1.jpg";
 
 const catalogItems = [
   {
     id: 1,
     type: "Book",
-    title: "Āgama Prakāśa",
+    title: "Agam 02 Ang 02 Sutrakrutang Sutra",
     author: "Muni Jambuvijayji",
-    year: "1985",
+    year: "2022",
     language: "Sanskrit",
     category: "Agama Studies",
     available: true,
     location: "Rack A-12",
-    image: agam02Cover,
+    image: agam02Sutrakrutang,
   },
   {
     id: 2,
     type: "Book",
-    title: "Jain Darshan ka Itihas",
-    author: "Dr. Nathmal Tatia",
-    year: "1972",
-    language: "Hindi",
-    category: "Philosophy",
+    title: "Agam 03 Ang 03 Sthananga Sutra Part 01",
+    author: "Muni Jambuvijayji",
+    year: "2022",
+    language: "Sanskrit",
+    category: "Agama Studies",
     available: true,
-    location: "Rack B-05",
-    image: agam03Cover,
+    location: "Rack A-13",
+    image: agam03Sthananga,
   },
   {
     id: 3,
-    type: "Manuscript",
-    title: "Kalpasutra (Illustrated)",
-    author: "Traditional",
-    year: "15th Century",
-    language: "Prakrit",
-    category: "Scripture",
-    available: false,
-    location: "Special Collection",
-    image: dwadashanramPart1,
+    type: "Book",
+    title: "Agam 06 Ang 06 Gnatadharma Sutra",
+    author: "Muni Jambuvijayji",
+    year: "2022",
+    language: "Sanskrit",
+    category: "Agama Studies",
+    available: true,
+    location: "Rack A-14",
+    image: agam06Gnatadharma,
   },
   {
     id: 4,
     type: "Book",
-    title: "Tattvartha Sutra with Bhashya",
-    author: "Umaswati",
-    year: "1990",
+    title: "Agam 45 Chulika 02 Anuyogdwar Sutra",
+    author: "Muni Jambuvijayji",
+    year: "2022",
     language: "Sanskrit",
-    category: "Philosophy",
+    category: "Agama Studies",
     available: true,
-    location: "Rack A-03",
-    image: agam06Cover,
+    location: "Rack A-15",
+    image: agam45Anuyogdwar,
   },
   {
     id: 5,
-    type: "Manuscript",
-    title: "Bhaktamara Stotra",
-    author: "Acharya Manatunga",
-    year: "8th Century",
+    type: "Book",
+    title: "Dwadashanram Part 1",
+    author: "Muni Jambuvijayji",
+    year: "2020",
     language: "Sanskrit",
-    category: "Devotional",
-    available: false,
-    location: "Special Collection",
-    image: dwadashanramPart2,
+    category: "Philosophy",
+    available: true,
+    location: "Rack B-01",
+    image: dwadashanramPart1,
   },
   {
     id: 6,
     type: "Book",
-    title: "Jain Ethics and Morality",
-    author: "Dr. Padmanabh Jaini",
-    year: "1998",
-    language: "English",
-    category: "Ethics",
+    title: "Dwadashanram Part 2",
+    author: "Muni Jambuvijayji",
+    year: "2020",
+    language: "Sanskrit",
+    category: "Philosophy",
     available: true,
-    location: "Rack C-08",
-    image: guruvani1Cover,
+    location: "Rack B-02",
+    image: dwadashanramPart2,
   },
 ];
 
