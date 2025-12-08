@@ -83,10 +83,10 @@ const Contact = () => {
       <section className="py-16 lg:py-20 bg-gradient-hero lotus-pattern">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto text-center">
-            <h1 className="font-display text-4xl sm:text-5xl font-bold text-foreground mb-6 animate-fade-up">
+            <h1 className="font-heading text-4xl sm:text-5xl font-bold text-foreground mb-6 animate-fade-up">
               Contact Us
             </h1>
-            <p className="text-lg text-muted-foreground animate-fade-up delay-100">
+            <p className="font-body text-muted-foreground animate-fade-up delay-100">
               Have questions about our research, library, or programs? 
               We'd love to hear from you.
             </p>
@@ -100,7 +100,7 @@ const Contact = () => {
           <div className="grid lg:grid-cols-3 gap-12 max-w-6xl mx-auto">
             {/* Contact Info */}
             <div className="space-y-6">
-              <h2 className="font-display text-2xl font-bold text-foreground mb-6">
+              <h2 className="font-heading text-2xl font-bold text-foreground mb-6">
                 Get in Touch
               </h2>
               {contactInfo.map((item, index) => (
@@ -113,8 +113,8 @@ const Contact = () => {
                     <item.icon className="h-5 w-5 text-primary" />
                   </div>
                   <div>
-                    <h3 className="font-medium text-foreground">{item.title}</h3>
-                    <p className="text-sm text-muted-foreground whitespace-pre-line">
+                    <h3 className="font-heading font-medium text-foreground">{item.title}</h3>
+                    <p className="font-body text-muted-foreground whitespace-pre-line">
                       {item.content}
                     </p>
                   </div>

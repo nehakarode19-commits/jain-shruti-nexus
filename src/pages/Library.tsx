@@ -41,10 +41,10 @@ const Library = () => {
               <LibraryIcon className="h-4 w-4 text-primary" />
               <span className="text-primary">Muni Jambuvijay Research Center</span>
             </div>
-            <h1 className="font-display text-4xl sm:text-5xl font-bold text-foreground mb-6 animate-fade-up delay-100">
+            <h1 className="font-heading text-4xl sm:text-5xl font-bold text-foreground mb-6 animate-fade-up delay-100">
               Library Catalog
             </h1>
-            <p className="text-lg text-muted-foreground animate-fade-up delay-200">
+            <p className="font-body text-foreground/80 animate-fade-up delay-200">
               Browse our extensive collection of Jain books, manuscripts, and scholarly resources. 
               Located at Shantigram.
             </p>
@@ -55,7 +55,7 @@ const Library = () => {
       {/* Info Banner */}
       <section className="py-4 bg-secondary/50 border-y border-border">
         <div className="container mx-auto px-4">
-          <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground">
+          <div className="flex items-center justify-center gap-2 font-body text-muted-foreground">
             <Info className="h-4 w-4" />
             <span>This is a view-only catalog. For library access, please contact the librarian.</span>
           </div>
@@ -144,13 +144,13 @@ const Library = () => {
                   </div>
                   
                   <CardHeader className="pb-2">
-                    <CardTitle className="text-base group-hover:text-primary transition-colors line-clamp-2">{item.title}</CardTitle>
-                    <div className="text-xs text-primary font-medium">
+                    <CardTitle className="font-heading text-lg group-hover:text-primary transition-colors line-clamp-2">{item.title}</CardTitle>
+                    <div className="font-body text-primary font-medium">
                       {item.category}
                     </div>
                   </CardHeader>
                   <CardContent className="pt-0">
-                    <div className="space-y-1.5 text-sm text-muted-foreground">
+                    <div className="space-y-1.5 font-body text-muted-foreground">
                       <div className="flex items-center gap-2">
                         <User className="h-3.5 w-3.5" />
                         <span className="line-clamp-1">{item.author}</span>
@@ -165,10 +165,10 @@ const Library = () => {
                       </div>
                     </div>
                     <div className="mt-4 pt-4 border-t border-border flex items-center justify-between">
-                      <Badge variant="outline" className="text-xs">
+                      <Badge variant="outline">
                         {item.language}
                       </Badge>
-                      <span className="text-xs text-primary flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                      <span className="font-body text-primary flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
                         View Details <ArrowRight className="h-3 w-3" />
                       </span>
                     </div>
@@ -189,10 +189,10 @@ const Library = () => {
       {/* Contact CTA */}
       <section className="py-16 bg-gradient-spiritual">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="font-display text-2xl font-bold text-foreground mb-4">
+          <h2 className="font-heading text-2xl font-bold text-foreground mb-4">
             Visit Our Library
           </h2>
-          <p className="text-muted-foreground mb-8 max-w-lg mx-auto">
+          <p className="font-body text-muted-foreground mb-8 max-w-lg mx-auto">
             Located at Muni Jambuvijay Research Center, Shantigram. 
             Contact us to schedule a visit or inquire about specific materials.
           </p>

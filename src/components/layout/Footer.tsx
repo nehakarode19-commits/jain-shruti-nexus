@@ -41,19 +41,19 @@ export function Footer() {
                 <Scroll className="h-5 w-5 text-primary-foreground" />
               </div>
               <div className="flex flex-col">
-                <span className="font-display text-lg font-bold text-foreground">
+                <span className="font-heading text-lg font-bold text-foreground">
                   Jambushrusti
                 </span>
-                <span className="text-xs text-muted-foreground">
+                <span className="font-body text-muted-foreground">
                   Jain Knowledge Ecosystem
                 </span>
               </div>
             </Link>
-            <p className="text-sm text-muted-foreground max-w-sm mb-6">
+            <p className="font-body text-muted-foreground max-w-sm mb-6">
               Preserving and sharing the timeless wisdom of Jain philosophy through 
               Gurudev Muni Jambuvijayji's teachings, research tools, and scholarly resources.
             </p>
-            <div className="space-y-2 text-sm text-muted-foreground">
+            <div className="space-y-2 font-body text-muted-foreground">
               <div className="flex items-center gap-2">
                 <MapPin className="h-4 w-4 text-primary" />
                 <span>Muni Jambuvijay Research Center, Shantigram</span>
@@ -69,13 +69,13 @@ export function Footer() {
 
           {/* About Links */}
           <div>
-            <h4 className="font-display font-semibold text-foreground mb-4">About</h4>
+            <h4 className="font-heading font-semibold text-foreground mb-4">About</h4>
             <ul className="space-y-2">
               {footerLinks.about.map((link) => (
                 <li key={link.href}>
                   <Link
                     to={link.href}
-                    className="text-sm text-muted-foreground hover:text-primary transition-colors"
+                    className="font-body text-muted-foreground hover:text-primary transition-colors"
                   >
                     {link.title}
                   </Link>
@@ -86,13 +86,13 @@ export function Footer() {
 
           {/* Research Links */}
           <div>
-            <h4 className="font-display font-semibold text-foreground mb-4">Research</h4>
+            <h4 className="font-heading font-semibold text-foreground mb-4">Research</h4>
             <ul className="space-y-2">
               {footerLinks.research.map((link) => (
                 <li key={link.href}>
                   <Link
                     to={link.href}
-                    className="text-sm text-muted-foreground hover:text-primary transition-colors"
+                    className="font-body text-muted-foreground hover:text-primary transition-colors"
                   >
                     {link.title}
                   </Link>
@@ -103,13 +103,13 @@ export function Footer() {
 
           {/* Community Links */}
           <div>
-            <h4 className="font-display font-semibold text-foreground mb-4">Community</h4>
+            <h4 className="font-heading font-semibold text-foreground mb-4">Community</h4>
             <ul className="space-y-2">
               {footerLinks.community.map((link) => (
                 <li key={link.href}>
                   <Link
                     to={link.href}
-                    className="text-sm text-muted-foreground hover:text-primary transition-colors"
+                    className="font-body text-muted-foreground hover:text-primary transition-colors"
                   >
                     {link.title}
                   </Link>
@@ -121,7 +121,7 @@ export function Footer() {
 
         {/* Bottom Bar */}
         <div className="mt-12 pt-8 border-t border-border flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-xs text-muted-foreground">
+          <p className="font-body text-muted-foreground">
             © {new Date().getFullYear()} Jambushrusti. All rights reserved.
           </p>
           <div className="flex items-center gap-4">
@@ -129,14 +129,14 @@ export function Footer() {
               <Link
                 key={link.href}
                 to={link.href}
-                className="text-xs text-muted-foreground hover:text-primary transition-colors"
+                className="font-body text-muted-foreground hover:text-primary transition-colors"
               >
                 {link.title}
               </Link>
             ))}
             <Link
               to="/admin"
-              className="text-xs text-muted-foreground/50 hover:text-muted-foreground transition-colors"
+              className="font-body text-muted-foreground/50 hover:text-muted-foreground transition-colors"
             >
               Admin
             </Link>
