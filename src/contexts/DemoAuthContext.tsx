@@ -2,7 +2,7 @@ import { createContext, useContext, useState, useEffect, ReactNode } from "react
 
 // DEMO ONLY - For production, use proper authentication with Lovable Cloud
 const DEMO_CREDENTIALS = {
-  email: "admin@jambushruti.com",
+  email: "admin@jambushrusti.com",
   password: "demo123"
 };
 

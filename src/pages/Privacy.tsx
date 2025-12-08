@@ -53,7 +53,7 @@ export default function Privacy() {
               </h2>
               <p>
                 If you have any questions about this Privacy Policy, please contact us at 
-                contact@jambushruti.org.
+                contact@jambushrusti.org.
               </p>
             </div>
           </div>

@@ -48,7 +48,7 @@ export function LMSSidebar() {
           <Library className="h-8 w-8 text-primary shrink-0" />
           {!collapsed && (
             <div className="overflow-hidden">
-              <h1 className="font-bold text-foreground text-lg leading-tight">Jambu-Shruti</h1>
+              <h1 className="font-bold text-foreground text-lg leading-tight">Jambushrusti</h1>
               <p className="text-xs text-muted-foreground">Library Management</p>
             </div>
           )}

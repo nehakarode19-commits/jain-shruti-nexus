@@ -191,7 +191,7 @@ const Auth = () => {
                   <Scroll className="h-6 w-6 text-primary-foreground" />
                 </div>
                 <span className="font-display text-2xl font-bold text-foreground">
-                  Jambu-Shruti
+                  Jambushrusti
                 </span>
               </Link>
             </div>
@@ -296,7 +296,7 @@ const Auth = () => {
                             type="email"
                             required
                             className="pl-10"
-                            placeholder="admin@jambushruti.com"
+                            placeholder="admin@jambushrusti.com"
                             value={loginEmail}
                             onChange={(e) => setLoginEmail(e.target.value)}
                           />
@@ -353,10 +353,10 @@ const Auth = () => {
                     <div className="mt-4 p-3 bg-muted/50 rounded-lg border border-border/50">
                       <p className="text-xs text-muted-foreground mb-2 font-medium">Demo Credentials:</p>
                       <div className="grid gap-1 text-[10px]">
-                        <div className="flex justify-between"><span>👑 Super Admin:</span><code>superadmin@jambushruti.com / super123</code></div>
-                        <div className="flex justify-between"><span>🛡️ Admin:</span><code>admin@jambushruti.com / admin123</code></div>
-                        <div className="flex justify-between"><span>📚 Scholar:</span><code>scholar@jambushruti.com / scholar123</code></div>
-                        <div className="flex justify-between"><span>📖 Librarian:</span><code>librarian@jambushruti.com / lib123</code></div>
+                        <div className="flex justify-between"><span>👑 Super Admin:</span><code>superadmin@jambushrusti.com / super123</code></div>
+                        <div className="flex justify-between"><span>🛡️ Admin:</span><code>admin@jambushrusti.com / admin123</code></div>
+                        <div className="flex justify-between"><span>📚 Scholar:</span><code>scholar@jambushrusti.com / scholar123</code></div>
+                        <div className="flex justify-between"><span>📖 Librarian:</span><code>librarian@jambushrusti.com / lib123</code></div>
                       </div>
                     </div>
                   </TabsContent>

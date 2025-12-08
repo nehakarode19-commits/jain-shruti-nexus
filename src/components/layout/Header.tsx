@@ -28,7 +28,7 @@ const navigationItems = [
     title: "About",
     href: "/about",
     items: [
-      { title: "About Jambu-Shruti", href: "/about", description: "Vision & mission of our platform" },
+      { title: "About Jambushrusti", href: "/about", description: "Vision & mission of our platform" },
       { title: "Gurudev Muni Jambuvijayji", href: "/about/gurudev", description: "Life journey & spiritual contributions" },
       { title: "Gurudev Parivar", href: "/about/parivar", description: "Lineage & disciples" },
       { title: "Jambuji Gyan Kendra", href: "/about/gyan-kendra", description: "Digital museum of teachings" },
@@ -114,7 +114,7 @@ export function Header() {
           </div>
           <div className="flex flex-col">
             <span className="font-display text-lg font-bold text-foreground leading-tight">
-              Jambu-Shruti
+              Jambushrusti
             </span>
             <span className="text-[10px] text-muted-foreground tracking-wide">
               Jain Knowledge Ecosystem

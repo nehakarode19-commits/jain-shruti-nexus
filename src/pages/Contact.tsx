@@ -30,7 +30,7 @@ const contactInfo = [
   {
     icon: Mail,
     title: "Email",
-    content: "contact@jambushruti.org",
+    content: "contact@jambushrusti.org",
   },
   {
     icon: Phone,
