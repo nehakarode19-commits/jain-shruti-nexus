@@ -134,6 +134,12 @@ export function Footer() {
                 {link.title}
               </Link>
             ))}
+            <Link
+              to="/admin"
+              className="text-xs text-muted-foreground/50 hover:text-muted-foreground transition-colors"
+            >
+              Admin
+            </Link>
           </div>
         </div>
       </div>
