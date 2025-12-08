@@ -89,6 +89,10 @@ export default {
           DEFAULT: "hsl(var(--sage))",
           light: "hsl(var(--sage-light))",
         },
+        slate: {
+          DEFAULT: "hsl(var(--slate))",
+          light: "hsl(var(--slate-light))",
+        },
         ivory: "hsl(var(--ivory))",
         cream: "hsl(var(--cream))",
         terracotta: "hsl(var(--terracotta))",
