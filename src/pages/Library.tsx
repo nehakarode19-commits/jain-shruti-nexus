@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { Layout } from "@/components/layout/Layout";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -13,7 +14,8 @@ import {
   MapPin,
   Calendar,
   User,
-  Info
+  Info,
+  ArrowRight
 } from "lucide-react";
 
 const catalogItems = [
@@ -176,59 +178,63 @@ const Library = () => {
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {filteredItems.map((item, index) => (
-              <Card 
-                key={item.id}
-                variant="default"
-                className="animate-fade-up"
-                style={{ animationDelay: `${index * 50}ms` }}
-              >
-                <CardHeader>
-                  <div className="flex items-start justify-between mb-2">
-                    <Badge 
-                      variant={item.type === "Book" ? "default" : "secondary"}
-                      className="text-xs"
-                    >
-                      {item.type === "Book" ? (
-                        <BookOpen className="h-3 w-3 mr-1" />
-                      ) : (
-                        <ScrollIcon className="h-3 w-3 mr-1" />
-                      )}
-                      {item.type}
-                    </Badge>
-                    <Badge 
-                      variant={item.available ? "outline" : "secondary"}
-                      className={`text-xs ${item.available ? "text-sage border-sage" : ""}`}
-                    >
-                      {item.available ? "Available" : "Reference Only"}
-                    </Badge>
-                  </div>
-                  <CardTitle className="text-lg">{item.title}</CardTitle>
-                  <div className="text-xs text-muted-foreground">
-                    {item.category}
-                  </div>
-                </CardHeader>
-                <CardContent>
-                  <div className="space-y-2 text-sm text-muted-foreground">
-                    <div className="flex items-center gap-2">
-                      <User className="h-3.5 w-3.5" />
-                      <span>{item.author}</span>
+              <Link key={item.id} to={`/library/${item.id}`} className="group">
+                <Card 
+                  variant="interactive"
+                  className="animate-fade-up h-full"
+                  style={{ animationDelay: `${index * 50}ms` }}
+                >
+                  <CardHeader>
+                    <div className="flex items-start justify-between mb-2">
+                      <Badge 
+                        variant={item.type === "Book" ? "default" : "secondary"}
+                        className="text-xs"
+                      >
+                        {item.type === "Book" ? (
+                          <BookOpen className="h-3 w-3 mr-1" />
+                        ) : (
+                          <ScrollIcon className="h-3 w-3 mr-1" />
+                        )}
+                        {item.type}
+                      </Badge>
+                      <Badge 
+                        variant={item.available ? "outline" : "secondary"}
+                        className={`text-xs ${item.available ? "text-sage border-sage" : ""}`}
+                      >
+                        {item.available ? "Available" : "Reference Only"}
+                      </Badge>
                     </div>
-                    <div className="flex items-center gap-2">
-                      <Calendar className="h-3.5 w-3.5" />
-                      <span>{item.year}</span>
+                    <CardTitle className="text-lg group-hover:text-primary transition-colors">{item.title}</CardTitle>
+                    <div className="text-xs text-muted-foreground">
+                      {item.category}
                     </div>
-                    <div className="flex items-center gap-2">
-                      <MapPin className="h-3.5 w-3.5" />
-                      <span>{item.location}</span>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="space-y-2 text-sm text-muted-foreground">
+                      <div className="flex items-center gap-2">
+                        <User className="h-3.5 w-3.5" />
+                        <span>{item.author}</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <Calendar className="h-3.5 w-3.5" />
+                        <span>{item.year}</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <MapPin className="h-3.5 w-3.5" />
+                        <span>{item.location}</span>
+                      </div>
                     </div>
-                  </div>
-                  <div className="mt-4 pt-4 border-t border-border">
-                    <Badge variant="outline" className="text-xs">
-                      {item.language}
-                    </Badge>
-                  </div>
-                </CardContent>
-              </Card>
+                    <div className="mt-4 pt-4 border-t border-border flex items-center justify-between">
+                      <Badge variant="outline" className="text-xs">
+                        {item.language}
+                      </Badge>
+                      <span className="text-xs text-primary flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                        View Details <ArrowRight className="h-3 w-3" />
+                      </span>
+                    </div>
+                  </CardContent>
+                </Card>
+              </Link>
             ))}
           </div>
 

@@ -191,61 +191,64 @@ const Guruvani = () => {
             {filteredItems.map((item, index) => {
               const Icon = typeIcons[item.type] || FileText;
               return (
-                <Card 
-                  key={item.id}
-                  variant="interactive"
-                  className="group animate-fade-up"
-                  style={{ animationDelay: `${index * 50}ms` }}
+                <Link 
+                  key={item.id} 
+                  to={item.restricted ? "/auth" : `/guruvani/${item.id}`}
+                  className="group"
                 >
-                  <CardHeader>
-                    <div className="flex items-start justify-between mb-2">
-                      <div className="flex items-center gap-2">
-                        <div className="w-10 h-10 rounded-lg bg-burgundy/10 flex items-center justify-center">
-                          <Icon className="h-5 w-5 text-burgundy" />
+                  <Card 
+                    variant="interactive"
+                    className="animate-fade-up h-full"
+                    style={{ animationDelay: `${index * 50}ms` }}
+                  >
+                    <CardHeader>
+                      <div className="flex items-start justify-between mb-2">
+                        <div className="flex items-center gap-2">
+                          <div className="w-10 h-10 rounded-lg bg-burgundy/10 flex items-center justify-center">
+                            <Icon className="h-5 w-5 text-burgundy" />
+                          </div>
+                          {item.restricted && (
+                            <Lock className="h-4 w-4 text-muted-foreground" />
+                          )}
                         </div>
-                        {item.restricted && (
-                          <Lock className="h-4 w-4 text-muted-foreground" />
-                        )}
-                      </div>
-                      <Badge variant="secondary" className="text-xs">
-                        {item.language}
-                      </Badge>
-                    </div>
-                    <CardTitle className="text-lg group-hover:text-primary transition-colors">
-                      {item.title}
-                    </CardTitle>
-                    <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                      <span>{item.type}</span>
-                      <span>•</span>
-                      <span>{item.date}</span>
-                    </div>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-sm text-muted-foreground line-clamp-3 mb-4">
-                      {item.excerpt}
-                    </p>
-                    <div className="flex flex-wrap gap-1.5 mb-4">
-                      {item.tags.map((tag) => (
-                        <Badge key={tag} variant="outline" className="text-xs">
-                          {tag}
+                        <Badge variant="secondary" className="text-xs">
+                          {item.language}
                         </Badge>
-                      ))}
-                    </div>
-                    {item.restricted ? (
-                      <Button variant="outline" size="sm" className="w-full" asChild>
-                        <Link to="/auth">
-                          <Lock className="h-3.5 w-3.5 mr-2" />
+                      </div>
+                      <CardTitle className="text-lg group-hover:text-primary transition-colors">
+                        {item.title}
+                      </CardTitle>
+                      <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                        <span>{item.type}</span>
+                        <span>•</span>
+                        <span>{item.date}</span>
+                      </div>
+                    </CardHeader>
+                    <CardContent>
+                      <p className="text-sm text-muted-foreground line-clamp-3 mb-4">
+                        {item.excerpt}
+                      </p>
+                      <div className="flex flex-wrap gap-1.5 mb-4">
+                        {item.tags.map((tag) => (
+                          <Badge key={tag} variant="outline" className="text-xs">
+                            {tag}
+                          </Badge>
+                        ))}
+                      </div>
+                      {item.restricted ? (
+                        <div className="w-full text-center py-2 rounded-md border border-border text-sm text-muted-foreground">
+                          <Lock className="h-3.5 w-3.5 inline mr-2" />
                           Sign In to Access
-                        </Link>
-                      </Button>
-                    ) : (
-                      <Button variant="ghost" size="sm" className="w-full group/btn">
-                        Read More
-                        <ArrowRight className="h-3.5 w-3.5 ml-2 group-hover/btn:translate-x-1 transition-transform" />
-                      </Button>
-                    )}
-                  </CardContent>
-                </Card>
+                        </div>
+                      ) : (
+                        <div className="w-full text-center py-2 text-sm text-primary group-hover:underline">
+                          Read More
+                          <ArrowRight className="h-3.5 w-3.5 inline ml-2 group-hover:translate-x-1 transition-transform" />
+                        </div>
+                      )}
+                    </CardContent>
+                  </Card>
+                </Link>
               );
             })}
           </div>
