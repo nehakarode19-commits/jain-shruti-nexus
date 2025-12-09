@@ -1,29 +1,29 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Database, Search, FileText, Globe, ArrowRight } from "lucide-react";
+import { Database, Search, FileText, Globe, ArrowRight, Sparkles } from "lucide-react";
 
 const researchTools = [
   {
     title: "SodhSanchay",
-    description: "Store and organize structured research notes and metadata.",
+    description: "Store & organize research notes",
     icon: Database,
     href: "/research/sodhsanchay",
   },
   {
     title: "SodhSandarbh",
-    description: "Powerful search with advanced filters and easy export.",
+    description: "Advanced search & export",
     icon: Search,
     href: "/research/sodhsandarbh",
   },
   {
     title: "Śabdasaṅgraha",
-    description: "AI-powered full-text search inside Jain PDFs.",
+    description: "AI full-text PDF search",
     icon: FileText,
     href: "/research/shabdasangraha",
   },
   {
     title: "Shastrasandarbha",
-    description: "Find Jain books across Archive.org, HathiTrust & more.",
+    description: "Find books across archives",
     icon: Globe,
     href: "/research/shastrasandarbha",
   },
@@ -31,46 +31,54 @@ const researchTools = [
 
 export function ResearchToolsSection() {
   return (
-    <section className="py-12 lg:py-16 bg-secondary/30">
-      <div className="container mx-auto px-4">
+    <section className="py-16 lg:py-24 bg-gradient-to-b from-primary/5 to-secondary/30 relative overflow-hidden">
+      {/* Background decorations */}
+      <div className="absolute top-10 left-10 w-64 h-64 bg-primary/5 rounded-full blur-3xl" />
+      <div className="absolute bottom-10 right-10 w-48 h-48 bg-primary/5 rounded-full blur-2xl" />
+      
+      <div className="container mx-auto px-4 relative">
         {/* Section Header */}
-        <div className="text-center mb-8">
-          <p className="text-primary font-medium mb-2">Research Ecosystem</p>
-          <h2 className="font-heading text-2xl md:text-3xl font-bold text-foreground mb-2">
-            Four Powerful AI Research Tools
+        <div className="text-center mb-12">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 mb-4">
+            <Sparkles className="h-4 w-4 text-primary" />
+            <span className="text-sm text-primary font-medium">AI-Powered Research</span>
+          </div>
+          <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground mb-3">
+            Four Powerful Research Tools
           </h2>
-          <p className="text-muted-foreground max-w-xl mx-auto text-sm">
-            An integrated ecosystem for scholars and seekers to explore Jain knowledge.
+          <p className="text-muted-foreground max-w-2xl mx-auto">
+            An integrated ecosystem for scholars and seekers to explore Jain knowledge with AI assistance.
           </p>
         </div>
 
-        {/* Tools - Single Row */}
-        <div className="flex flex-wrap justify-center gap-4 mb-8">
+        {/* Tools - Grid Layout for better visibility */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
           {researchTools.map((tool) => (
             <Link 
               key={tool.title}
               to={tool.href}
-              className="group flex items-center gap-3 px-5 py-3 rounded-full bg-card border border-border/50 hover:border-primary/30 hover:shadow-soft transition-all"
+              className="group p-6 rounded-2xl bg-card border border-border/50 hover:border-primary/40 hover:shadow-elevated transition-all text-center"
             >
-              <div className="w-9 h-9 rounded-full bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
-                <tool.icon className="h-4 w-4 text-primary" />
+              <div className="w-14 h-14 mx-auto rounded-2xl bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                <tool.icon className="h-6 w-6 text-primary" />
               </div>
-              <div className="text-left">
-                <h3 className="font-semibold text-foreground text-sm group-hover:text-primary transition-colors">
-                  {tool.title}
-                </h3>
-                <p className="text-xs text-muted-foreground hidden sm:block max-w-[180px]">
-                  {tool.description}
-                </p>
+              <h3 className="font-heading font-semibold text-foreground mb-2 group-hover:text-primary transition-colors">
+                {tool.title}
+              </h3>
+              <p className="text-sm text-muted-foreground">
+                {tool.description}
+              </p>
+              <div className="mt-4 flex items-center justify-center gap-1 text-primary opacity-0 group-hover:opacity-100 transition-opacity">
+                <span className="text-sm font-medium">Explore</span>
+                <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
               </div>
-              <ArrowRight className="h-4 w-4 text-muted-foreground group-hover:text-primary group-hover:translate-x-1 transition-all" />
             </Link>
           ))}
         </div>
 
         {/* CTA */}
         <div className="text-center">
-          <Button variant="outline" size="sm" asChild>
+          <Button variant="hero" size="lg" asChild>
             <Link to="/research">
               Explore Research Hub
               <ArrowRight className="h-4 w-4 ml-2" />
