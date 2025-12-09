@@ -11,6 +11,13 @@ import { useToast } from "@/hooks/use-toast";
 import { Link } from "react-router-dom";
 import { useAdminAuth, UserRole, ROLE_LABELS, ROLE_DESCRIPTIONS } from "@/contexts/AdminAuthContext";
 import { 
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { 
   Scroll, 
   Mail, 
   Lock, 
@@ -18,8 +25,26 @@ import {
   ArrowRight,
   Eye,
   EyeOff,
-  Loader2
+  Loader2,
+  Crown,
+  Shield,
+  GraduationCap,
+  BookOpen,
+  UserCheck,
+  Globe
 } from "lucide-react";
+
+// Extended roles for display (includes Public Visitor which isn't a DB role)
+type DisplayRole = UserRole | "visitor";
+
+const DISPLAY_ROLES: { value: DisplayRole; label: string; description: string; icon: React.ReactNode }[] = [
+  { value: "superadmin", label: "Super Admin", description: "Full system access, manage admins & settings", icon: <Crown className="h-4 w-4 text-amber-500" /> },
+  { value: "admin", label: "Admin", description: "CMS control, content management, approvals", icon: <Shield className="h-4 w-4 text-red-500" /> },
+  { value: "scholar", label: "Scholar", description: "Research portal, submissions, access requests", icon: <GraduationCap className="h-4 w-4 text-blue-500" /> },
+  { value: "librarian", label: "Librarian", description: "Library management system access", icon: <BookOpen className="h-4 w-4 text-gray-600" /> },
+  { value: "user", label: "Registered User", description: "Public site + bookmarks & profile", icon: <UserCheck className="h-4 w-4 text-gray-500" /> },
+  { value: "visitor", label: "Public Visitor", description: "Public website access only", icon: <Globe className="h-4 w-4 text-green-500" /> },
+];
 
 const Auth = () => {
   const { toast } = useToast();
@@ -27,7 +52,8 @@ const Auth = () => {
   const { login, signup, isAuthenticated, isLoading: authLoading, user } = useAdminAuth();
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [mode, setMode] = useState<"login" | "register">("login");
+  const [activeTab, setActiveTab] = useState<"role" | "login" | "register">("role");
+  const [selectedRole, setSelectedRole] = useState<DisplayRole | "">("");
 
   // Login state
   const [loginEmail, setLoginEmail] = useState("");
@@ -59,6 +85,17 @@ const Auth = () => {
         return "/research";
       default:
         return "/";
+    }
+  };
+
+  const handleRoleSelect = (role: DisplayRole) => {
+    setSelectedRole(role);
+    if (role === "visitor") {
+      // Public visitor - just go to home
+      navigate("/");
+    } else {
+      // Move to login tab for other roles
+      setActiveTab("login");
     }
   };
 
@@ -143,7 +180,7 @@ const Auth = () => {
         title: "Account Created!",
         description: "You can now log in with your credentials.",
       });
-      setMode("login");
+      setActiveTab("login");
       setLoginEmail(registerEmail);
       setRegisterPassword("");
       setConfirmPassword("");
@@ -186,9 +223,13 @@ const Auth = () => {
             </div>
 
             <Card variant="elevated" className="animate-fade-up delay-100">
-              <Tabs value={mode} onValueChange={(v) => setMode(v as "login" | "register")}>
+              <Tabs value={activeTab} onValueChange={(v) => setActiveTab(v as "role" | "login" | "register")}>
                 <CardHeader className="pb-4">
-                  <TabsList className="grid w-full grid-cols-2">
+                  <TabsList className="grid w-full grid-cols-3">
+                    <TabsTrigger value="role" className="text-xs sm:text-sm">
+                      <Globe className="h-4 w-4 mr-1 hidden sm:inline" />
+                      Role
+                    </TabsTrigger>
                     <TabsTrigger value="login" className="text-xs sm:text-sm">
                       <Lock className="h-4 w-4 mr-1 hidden sm:inline" />
                       Sign In
@@ -200,9 +241,44 @@ const Auth = () => {
                   </TabsList>
                 </CardHeader>
                 <CardContent>
+                  {/* Role Selection Tab */}
+                  <TabsContent value="role" className="mt-0">
+                    <div className="space-y-4">
+                      <Label>Select Your Role</Label>
+                      <Select value={selectedRole} onValueChange={(value) => handleRoleSelect(value as DisplayRole)}>
+                        <SelectTrigger className="w-full">
+                          <SelectValue placeholder="Choose a role to login..." />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {DISPLAY_ROLES.map((role) => (
+                            <SelectItem key={role.value} value={role.value} className="py-3">
+                              <div className="flex items-start gap-3">
+                                {role.icon}
+                                <div>
+                                  <div className="font-medium">{role.label}</div>
+                                  <div className="text-xs text-muted-foreground">{role.description}</div>
+                                </div>
+                              </div>
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                      <p className="text-sm text-muted-foreground text-center mt-4">
+                        Select your role to proceed to the appropriate login or access the public website.
+                      </p>
+                    </div>
+                  </TabsContent>
+
                   {/* Credentials Login Tab */}
                   <TabsContent value="login" className="mt-0">
                     <form onSubmit={handleCredentialsLogin} className="space-y-4">
+                      {selectedRole && selectedRole !== "visitor" && (
+                        <div className="p-3 bg-muted rounded-lg mb-4">
+                          <p className="text-sm text-muted-foreground">
+                            Logging in as: <span className="font-medium text-foreground">{DISPLAY_ROLES.find(r => r.value === selectedRole)?.label}</span>
+                          </p>
+                        </div>
+                      )}
                       <div className="space-y-2">
                         <Label htmlFor="login-email">Email</Label>
                         <div className="relative">
