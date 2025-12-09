@@ -13,16 +13,18 @@ import { CTASection } from "@/components/home/CTASection";
 const Index = () => {
   return (
     <Layout>
-      <HeroSection />
-      <AboutPreview />
-      <WhoWeServeSection />
-      <FeaturesHighlight />
-      <ResearchToolsSection />
-      <GuruvaniPreview />
-      <CommunitySection />
-      <GalleryPreview />
-      <AdaniFoundation />
-      <CTASection />
+      <div className="bg-background">
+        <HeroSection />
+        <AboutPreview />
+        <WhoWeServeSection />
+        <FeaturesHighlight />
+        <ResearchToolsSection />
+        <GuruvaniPreview />
+        <CommunitySection />
+        <GalleryPreview />
+        <AdaniFoundation />
+        <CTASection />
+      </div>
     </Layout>
   );
 };
