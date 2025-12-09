@@ -71,7 +71,6 @@ const ROLE_ICONS: Record<UserRole, string> = {
   scholar: "📚",
   librarian: "📖",
   user: "👤",
-  public: "🌐",
 };
 
 export function Header() {
