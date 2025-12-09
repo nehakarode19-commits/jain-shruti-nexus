@@ -14,9 +14,9 @@ const Index = () => {
       <AboutPreview />
       <ResearchToolsSection />
       <GuruvaniPreview />
-      <AdaniFoundation />
       <CommunitySection />
       <CTASection />
+      <AdaniFoundation />
     </Layout>
   );
 };
