@@ -118,9 +118,9 @@ export default function AdminLogin() {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-spiritual p-4">
-      <div className="absolute inset-0 lotus-pattern opacity-30" />
+      <div className="absolute inset-0 lotus-pattern opacity-30 pointer-events-none" />
       
-      <Card className="w-full max-w-md relative z-10 shadow-elevated border-0 rounded-2xl overflow-hidden">
+      <Card className="w-full max-w-md relative z-10 shadow-elevated border-0 rounded-2xl overflow-hidden will-change-auto">
         <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary via-gold to-primary" />
         
         <CardHeader className="text-center space-y-4 pt-8">
@@ -166,8 +166,9 @@ export default function AdminLogin() {
                       placeholder="admin@jambushrusti.com"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
-                      className="pl-10 h-11 rounded-xl border-border/50 focus:border-primary"
+                      className="pl-10 h-11 rounded-xl border-border/50"
                       disabled={isLoading}
+                      autoComplete="email"
                     />
                   </div>
                 </div>
@@ -184,13 +185,14 @@ export default function AdminLogin() {
                       placeholder="••••••••"
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
-                      className="pl-10 pr-10 h-11 rounded-xl border-border/50 focus:border-primary"
+                      className="pl-10 pr-10 h-11 rounded-xl border-border/50"
                       disabled={isLoading}
+                      autoComplete="current-password"
                     />
                     <button
                       type="button"
                       onClick={() => setShowPassword(!showPassword)}
-                      className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
+                      className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
                     >
                       {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
                     </button>
@@ -242,8 +244,9 @@ export default function AdminLogin() {
                       placeholder="Your full name"
                       value={fullName}
                       onChange={(e) => setFullName(e.target.value)}
-                      className="pl-10 h-11 rounded-xl border-border/50 focus:border-primary"
+                      className="pl-10 h-11 rounded-xl border-border/50"
                       disabled={isLoading}
+                      autoComplete="name"
                     />
                   </div>
                 </div>
@@ -260,8 +263,9 @@ export default function AdminLogin() {
                       placeholder="you@example.com"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
-                      className="pl-10 h-11 rounded-xl border-border/50 focus:border-primary"
+                      className="pl-10 h-11 rounded-xl border-border/50"
                       disabled={isLoading}
+                      autoComplete="email"
                     />
                   </div>
                 </div>
@@ -278,13 +282,14 @@ export default function AdminLogin() {
                       placeholder="Min. 6 characters"
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
-                      className="pl-10 pr-10 h-11 rounded-xl border-border/50 focus:border-primary"
+                      className="pl-10 pr-10 h-11 rounded-xl border-border/50"
                       disabled={isLoading}
+                      autoComplete="new-password"
                     />
                     <button
                       type="button"
                       onClick={() => setShowPassword(!showPassword)}
-                      className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
+                      className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
                     >
                       {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
                     </button>
