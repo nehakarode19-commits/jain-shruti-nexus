@@ -1,35 +1,31 @@
 import { useState } from "react";
 import { Layout } from "@/components/layout/Layout";
+import { useArticlesFromDB } from "@/hooks/useContent";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Link } from "react-router-dom";
 import { 
   Search, 
   FileText, 
   User, 
-  Globe,
   ArrowRight,
-  Download,
   ExternalLink,
   ScrollText,
-  BookOpen
+  Loader2
 } from "lucide-react";
-import { articles, documents, articleCategories } from "@/data/gurudevData";
+import { format } from "date-fns";
 
 const Articles = () => {
   const [searchQuery, setSearchQuery] = useState("");
-  const [selectedCategory, setSelectedCategory] = useState("All");
+  const { data: articles = [], isLoading } = useArticlesFromDB();
 
   const filteredArticles = articles.filter((article) => {
     const matchesSearch = 
       article.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      article.titleEn.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      article.excerpt.toLowerCase().includes(searchQuery.toLowerCase());
-    const matchesCategory = selectedCategory === "All" || article.category === selectedCategory;
-    return matchesSearch && matchesCategory;
+      (article.excerpt || "").toLowerCase().includes(searchQuery.toLowerCase());
+    return matchesSearch;
   });
 
   return (
@@ -40,7 +36,7 @@ const Articles = () => {
           <div className="max-w-3xl mx-auto text-center animate-fade-up">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-secondary/80 border border-primary/20 text-sm mb-6">
               <ScrollText className="h-4 w-4 text-primary" />
-              <span className="text-muted-foreground">Tributes & Articles</span>
+              <span className="text-muted-foreground">{articles.length} Articles</span>
             </div>
             <h1 className="font-heading text-4xl sm:text-5xl font-bold text-foreground mb-6">
               Articles & <span className="text-gradient-gold">Tributes</span>
@@ -53,50 +49,36 @@ const Articles = () => {
         </div>
       </section>
 
-      {/* Tabs */}
-      <section className="py-8 bg-background">
+      {/* Search */}
+      <section className="py-8 bg-background border-b border-border">
         <div className="container mx-auto px-4">
-          <Tabs defaultValue="articles" className="w-full">
-            <TabsList className="grid w-full max-w-md mx-auto grid-cols-2">
-              <TabsTrigger value="articles" className="gap-2">
-                <FileText className="h-4 w-4" />
-                Articles ({articles.length})
-              </TabsTrigger>
-              <TabsTrigger value="documents" className="gap-2">
-                <BookOpen className="h-4 w-4" />
-                Documents ({documents.length})
-              </TabsTrigger>
-            </TabsList>
+          <div className="relative w-full md:w-96">
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+            <Input
+              placeholder="Search articles..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="pl-10"
+            />
+          </div>
+        </div>
+      </section>
 
-            {/* Articles Tab */}
-            <TabsContent value="articles" className="mt-8">
-              {/* Search and Filter */}
-              <div className="flex flex-col md:flex-row gap-4 items-center justify-between mb-8">
-                <div className="relative w-full md:w-96">
-                  <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                  <Input
-                    placeholder="Search articles..."
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                    className="pl-10"
-                  />
-                </div>
-
-                <div className="flex flex-wrap gap-2">
-                  {articleCategories.map((category) => (
-                    <Button
-                      key={category}
-                      variant={selectedCategory === category ? "hero" : "outline"}
-                      size="sm"
-                      onClick={() => setSelectedCategory(category)}
-                    >
-                      {category}
-                    </Button>
-                  ))}
-                </div>
+      {/* Articles Grid */}
+      <section className="py-12 lg:py-16 bg-background">
+        <div className="container mx-auto px-4">
+          {isLoading ? (
+            <div className="flex items-center justify-center py-16">
+              <Loader2 className="h-8 w-8 animate-spin text-primary" />
+            </div>
+          ) : (
+            <>
+              <div className="mb-6">
+                <p className="text-muted-foreground">
+                  Showing {filteredArticles.length} articles
+                </p>
               </div>
 
-              {/* Articles Grid */}
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {filteredArticles.map((article, index) => (
                   <Link
@@ -111,30 +93,25 @@ const Articles = () => {
                     >
                       <div className="aspect-[4/3] overflow-hidden">
                         <img 
-                          src={article.image}
-                          alt={article.titleEn}
+                          src={article.cover_image || "https://siddhijambuparivar.com/wp-content/uploads/2022/11/96-min.jpg"}
+                          alt={article.title}
                           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                         />
                       </div>
                       <CardContent className="p-5">
                         <div className="flex items-center gap-2 mb-3">
-                          <Badge variant="default">{article.category}</Badge>
-                          <Badge variant="outline" className="gap-1">
-                            <Globe className="h-3 w-3" />
-                            {article.language}
-                          </Badge>
+                          {article.category && <Badge variant="default">{article.category}</Badge>}
                         </div>
                         <h3 className="font-heading text-lg font-semibold text-foreground mb-1 group-hover:text-primary transition-colors line-clamp-2">
-                          {article.titleEn}
+                          {article.title}
                         </h3>
-                        <p className="font-body text-base text-primary mb-2">{article.title}</p>
                         <p className="font-body text-base text-muted-foreground mb-3 line-clamp-2">
                           {article.excerpt}
                         </p>
                         <div className="flex items-center justify-between">
                           <div className="flex items-center gap-2 font-body text-base text-muted-foreground">
                             <User className="h-3 w-3" />
-                            <span>{article.author}</span>
+                            <span>{article.author || "Research Team"}</span>
                           </div>
                           <span className="font-body text-base text-primary flex items-center gap-1">
                             Read More
@@ -154,59 +131,15 @@ const Articles = () => {
                     No articles found
                   </h3>
                   <p className="font-body text-base text-muted-foreground mb-4">
-                    Try adjusting your search or filter criteria
+                    Try adjusting your search criteria
                   </p>
-                  <Button variant="outline" onClick={() => { setSearchQuery(""); setSelectedCategory("All"); }}>
-                    Clear Filters
+                  <Button variant="outline" onClick={() => setSearchQuery("")}>
+                    Clear Search
                   </Button>
                 </div>
               )}
-            </TabsContent>
-
-            {/* Documents Tab */}
-            <TabsContent value="documents" className="mt-8">
-              <div className="max-w-3xl mx-auto">
-                <div className="space-y-4">
-                  {documents.map((doc, index) => (
-                    <Card 
-                      key={doc.id}
-                      variant="feature"
-                      className="animate-fade-up"
-                      style={{ animationDelay: `${index * 100}ms` }}
-                    >
-                      <CardContent className="p-6">
-                        <div className="flex items-start gap-4">
-                          <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
-                            <FileText className="h-6 w-6 text-primary" />
-                          </div>
-                          <div className="flex-1">
-                            <div className="flex items-center gap-2 mb-2">
-                              <Badge variant="secondary">{doc.type}</Badge>
-                              <Badge variant="outline" className="gap-1">
-                                <Globe className="h-3 w-3" />
-                                {doc.language}
-                              </Badge>
-                            </div>
-                            <h3 className="font-heading text-lg font-semibold text-foreground mb-1">
-                              {doc.title}
-                            </h3>
-                            <p className="font-body text-base text-primary mb-2">{doc.titleHindi}</p>
-                            <p className="font-body text-base text-muted-foreground mb-4">
-                              {doc.description}
-                            </p>
-                            <Button variant="outline" size="sm" className="gap-2">
-                              <Download className="h-4 w-4" />
-                              Download PDF
-                            </Button>
-                          </div>
-                        </div>
-                      </CardContent>
-                    </Card>
-                  ))}
-                </div>
-              </div>
-            </TabsContent>
-          </Tabs>
+            </>
+          )}
         </div>
       </section>
 
