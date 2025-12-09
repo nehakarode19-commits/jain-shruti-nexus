@@ -14,18 +14,18 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Search, Bell, Menu, LogOut, User, Settings } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { useDemoAuth } from "@/contexts/DemoAuthContext";
+import { useAdminAuth } from "@/contexts/AdminAuthContext";
 interface LMSLayoutProps {
   children: ReactNode;
 }
 
 export function LMSLayout({ children }: LMSLayoutProps) {
   const [sidebarOpen, setSidebarOpen] = useState(true);
-  const { user, logout } = useDemoAuth();
+  const { user, logout } = useAdminAuth();
   const navigate = useNavigate();
 
-  const handleLogout = () => {
-    logout();
+  const handleLogout = async () => {
+    await logout();
     navigate("/lms");
   };
   return (
@@ -77,7 +77,7 @@ export function LMSLayout({ children }: LMSLayoutProps) {
                     </AvatarFallback>
                   </Avatar>
                   <div className="hidden lg:block text-left">
-                    <p className="text-sm font-medium">{user?.email?.split('@')[0] || 'Librarian'}</p>
+                    <p className="text-sm font-medium">{user?.name || user?.email?.split('@')[0] || 'Librarian'}</p>
                     <p className="text-xs text-muted-foreground capitalize">{user?.role || 'Admin'}</p>
                   </div>
                 </Button>
