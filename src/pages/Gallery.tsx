@@ -1,28 +1,36 @@
 import { useState } from "react";
 import { Layout } from "@/components/layout/Layout";
 import { galleryImages, videos } from "@/data/gurudevData";
+import { useGalleryFromDB } from "@/hooks/useContent";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
-import { X, Image, Video, ExternalLink, ChevronLeft, ChevronRight, Download } from "lucide-react";
+import { X, Image, Video, ExternalLink, ChevronLeft, ChevronRight, Loader2 } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const Gallery = () => {
   const [selectedImage, setSelectedImage] = useState<number | null>(null);
   const [activeTab, setActiveTab] = useState<"photos" | "videos">("photos");
+  
+  const { data: dbGallery = [], isLoading } = useGalleryFromDB();
+  
+  // Use DB data if available, otherwise fall back to static
+  const displayImages = dbGallery.length > 0 
+    ? dbGallery.map(img => ({ url: img.image_url, thumb: img.image_url, alt: img.title }))
+    : galleryImages;
 
   const openLightbox = (index: number) => setSelectedImage(index);
   const closeLightbox = () => setSelectedImage(null);
   
   const goToPrevious = () => {
     if (selectedImage !== null) {
-      setSelectedImage(selectedImage === 0 ? galleryImages.length - 1 : selectedImage - 1);
+      setSelectedImage(selectedImage === 0 ? displayImages.length - 1 : selectedImage - 1);
     }
   };
   
   const goToNext = () => {
     if (selectedImage !== null) {
-      setSelectedImage(selectedImage === galleryImages.length - 1 ? 0 : selectedImage + 1);
+      setSelectedImage(selectedImage === displayImages.length - 1 ? 0 : selectedImage + 1);
     }
   };
 
@@ -42,7 +50,7 @@ const Gallery = () => {
             <div className="flex items-center justify-center gap-4 font-body text-base">
               <Badge variant="secondary" className="gap-1">
                 <Image className="h-3 w-3" />
-                {galleryImages.length} Photos
+                {displayImages.length} Photos
               </Badge>
               <Badge variant="secondary" className="gap-1">
                 <Video className="h-3 w-3" />
@@ -63,7 +71,7 @@ const Gallery = () => {
               className="gap-2"
             >
               <Image className="h-4 w-4" />
-              Photos ({galleryImages.length})
+              Photos ({displayImages.length})
             </Button>
             <Button
               variant={activeTab === "videos" ? "hero" : "outline"}
@@ -81,30 +89,38 @@ const Gallery = () => {
       {activeTab === "photos" && (
         <section className="py-12 lg:py-16 bg-background">
           <div className="container mx-auto px-4">
-            <p className="font-body text-base text-muted-foreground mb-6">
-              Showing {galleryImages.length} photos from the official collection
-            </p>
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
-              {galleryImages.map((image, index) => (
-                <div
-                  key={index}
-                  className="aspect-square rounded-xl overflow-hidden cursor-pointer group relative shadow-soft hover:shadow-elevated transition-all duration-300 animate-fade-up"
-                  style={{ animationDelay: `${(index % 18) * 30}ms` }}
-                  onClick={() => openLightbox(index)}
-                >
-                  <img
-                    src={image.thumb}
-                    alt={image.alt || `Gurudev Jambuvijayji Maharaj - Photo ${index + 1}`}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center pb-4">
-                    <span className="font-body text-base text-foreground font-medium bg-background/60 backdrop-blur-sm px-3 py-1 rounded-full">
-                      View
-                    </span>
-                  </div>
+            {isLoading ? (
+              <div className="flex items-center justify-center py-12">
+                <Loader2 className="h-8 w-8 animate-spin text-primary" />
+              </div>
+            ) : (
+              <>
+                <p className="font-body text-base text-muted-foreground mb-6">
+                  Showing {displayImages.length} photos from the official collection
+                </p>
+                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
+                  {displayImages.map((image, index) => (
+                    <div
+                      key={index}
+                      className="aspect-square rounded-xl overflow-hidden cursor-pointer group relative shadow-soft hover:shadow-elevated transition-all duration-300 animate-fade-up"
+                      style={{ animationDelay: `${(index % 18) * 30}ms` }}
+                      onClick={() => openLightbox(index)}
+                    >
+                      <img
+                        src={image.thumb}
+                        alt={image.alt || `Gurudev Jambuvijayji Maharaj - Photo ${index + 1}`}
+                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center pb-4">
+                        <span className="font-body text-base text-foreground font-medium bg-background/60 backdrop-blur-sm px-3 py-1 rounded-full">
+                          View
+                        </span>
+                      </div>
+                    </div>
+                  ))}
                 </div>
-              ))}
-            </div>
+              </>
+            )}
           </div>
         </section>
       )}
@@ -227,8 +243,8 @@ const Gallery = () => {
             {selectedImage !== null && (
               <div className="flex items-center justify-center min-h-[60vh] p-8">
                 <img
-                  src={galleryImages[selectedImage].url}
-                  alt={galleryImages[selectedImage].alt || `Gurudev Photo ${selectedImage + 1}`}
+                  src={displayImages[selectedImage].url}
+                  alt={displayImages[selectedImage].alt || `Gurudev Photo ${selectedImage + 1}`}
                   className="max-w-full max-h-[80vh] object-contain rounded-lg"
                 />
               </div>
@@ -237,11 +253,11 @@ const Gallery = () => {
             {selectedImage !== null && (
               <div className="text-center pb-6">
                 <p className="font-body text-base text-muted-foreground mb-2">
-                  {selectedImage + 1} / {galleryImages.length}
+                  {selectedImage + 1} / {displayImages.length}
                 </p>
-                {galleryImages[selectedImage].alt && (
+                {displayImages[selectedImage].alt && (
                   <p className="font-body text-base text-foreground max-w-xl mx-auto px-4">
-                    {galleryImages[selectedImage].alt}
+                    {displayImages[selectedImage].alt}
                   </p>
                 )}
               </div>
