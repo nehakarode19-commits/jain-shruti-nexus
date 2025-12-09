@@ -40,38 +40,21 @@ export function AboutPreview() {
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          {/* Image */}
-          <div className="relative">
-            <div className="rounded-2xl overflow-hidden shadow-elevated">
-              <img
-                src={gurudevBio.mainImage}
-                alt="Gurudev Muni Jambuvijayji Maharaj Saheb"
-                className="w-full h-auto object-cover"
-              />
-            </div>
-            
-            {/* Gallery preview */}
-            <div className="flex gap-2 mt-4 justify-center">
-              {galleryImages.slice(0, 4).map((image, index) => (
-                <Link 
-                  key={index}
-                  to="/gallery"
-                  className="w-16 h-16 rounded-lg overflow-hidden shadow-soft hover:shadow-elevated transition-shadow"
-                >
-                  <img
-                    src={image.thumb}
-                    alt={image.alt}
-                    className="w-full h-full object-cover hover:scale-110 transition-transform duration-300"
-                  />
-                </Link>
-              ))}
-              <Link 
-                to="/gallery"
-                className="w-16 h-16 rounded-lg bg-primary/10 flex items-center justify-center text-primary text-sm font-medium hover:bg-primary/20 transition-colors"
-              >
-                +50
-              </Link>
+        <div className="grid lg:grid-cols-2 gap-10 items-start">
+          {/* Image - Smaller */}
+          <div className="flex justify-center lg:justify-start">
+            <div className="relative max-w-xs">
+              <div className="rounded-2xl overflow-hidden shadow-elevated">
+                <img
+                  src={gurudevBio.mainImage}
+                  alt="Gurudev Muni Jambuvijayji Maharaj Saheb"
+                  className="w-full h-auto object-cover"
+                />
+              </div>
+              
+              {/* Decorative elements */}
+              <div className="absolute -bottom-3 -right-3 w-24 h-24 bg-primary/10 rounded-full -z-10" />
+              <div className="absolute -top-3 -left-3 w-16 h-16 border-2 border-primary/20 rounded-full -z-10" />
             </div>
           </div>
 
