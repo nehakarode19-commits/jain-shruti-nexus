@@ -1,16 +1,8 @@
 import { createContext, useContext, useState, useEffect, ReactNode } from "react";
+import { supabase } from "@/integrations/supabase/client";
+import { User, Session } from "@supabase/supabase-js";
 
-// DEMO ADMIN CREDENTIALS - For production, use Lovable Cloud
-const ADMIN_CREDENTIALS = [
-  { email: "superadmin@jambushrusti.com", password: "super123", role: "superadmin", name: "Super Admin" },
-  { email: "admin@jambushrusti.com", password: "admin123", role: "admin", name: "Admin User" },
-  { email: "scholar@jambushrusti.com", password: "scholar123", role: "scholar", name: "Scholar User" },
-  { email: "librarian@jambushrusti.com", password: "lib123", role: "librarian", name: "Librarian User" },
-  { email: "user@jambushrusti.com", password: "user123", role: "user", name: "Registered User" },
-  { email: "public@jambushrusti.com", password: "public123", role: "public", name: "Public Visitor" },
-];
-
-export type UserRole = "public" | "user" | "scholar" | "librarian" | "admin" | "superadmin";
+export type UserRole = "superadmin" | "admin" | "librarian" | "scholar" | "user";
 
 export const ROLE_LABELS: Record<UserRole, string> = {
   superadmin: "Super Admin",
@@ -18,7 +10,6 @@ export const ROLE_LABELS: Record<UserRole, string> = {
   scholar: "Scholar",
   librarian: "Librarian",
   user: "Registered User",
-  public: "Public Visitor",
 };
 
 export const ROLE_DESCRIPTIONS: Record<UserRole, string> = {
@@ -27,10 +18,10 @@ export const ROLE_DESCRIPTIONS: Record<UserRole, string> = {
   scholar: "Research portal, submissions, access requests",
   librarian: "Library management system access",
   user: "Public site + bookmarks & profile",
-  public: "Public website access only",
 };
 
 interface AdminUser {
+  id: string;
   email: string;
   name: string;
   role: UserRole;
@@ -39,77 +30,89 @@ interface AdminUser {
 
 interface AdminAuthContextType {
   isAuthenticated: boolean;
+  isLoading: boolean;
   user: AdminUser | null;
-  login: (email: string, password: string, selectedRole?: UserRole) => Promise<{ success: boolean; redirectTo?: string; error?: string }>;
-  logout: () => void;
+  session: Session | null;
+  login: (email: string, password: string) => Promise<{ success: boolean; redirectTo?: string; error?: string }>;
+  signup: (email: string, password: string, fullName: string) => Promise<{ success: boolean; error?: string }>;
+  logout: () => Promise<void>;
   hasRole: (roles: UserRole | UserRole[]) => boolean;
   availableRoles: UserRole[];
 }
 
 const AdminAuthContext = createContext<AdminAuthContextType | undefined>(undefined);
 
-export const AVAILABLE_ROLES: UserRole[] = ["superadmin", "admin", "scholar", "librarian", "user", "public"];
+export const AVAILABLE_ROLES: UserRole[] = ["superadmin", "admin", "scholar", "librarian", "user"];
 
 export function AdminAuthProvider({ children }: { children: ReactNode }) {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [user, setUser] = useState<AdminUser | null>(null);
+  const [session, setSession] = useState<Session | null>(null);
+
+  const fetchUserRole = async (userId: string): Promise<UserRole> => {
+    const { data, error } = await supabase
+      .from("user_roles")
+      .select("role")
+      .eq("user_id", userId)
+      .maybeSingle();
+    
+    if (error || !data) {
+      return "user";
+    }
+    return data.role as UserRole;
+  };
+
+  const fetchUserProfile = async (userId: string, email: string): Promise<AdminUser> => {
+    const { data: profile } = await supabase
+      .from("profiles")
+      .select("*")
+      .eq("user_id", userId)
+      .maybeSingle();
+    
+    const role = await fetchUserRole(userId);
+    
+    return {
+      id: userId,
+      email: email,
+      name: profile?.full_name || email.split("@")[0],
+      role,
+      avatar: profile?.avatar_url,
+    };
+  };
 
   useEffect(() => {
-    const savedAuth = localStorage.getItem("admin_auth");
-    if (savedAuth) {
-      try {
-        const parsed = JSON.parse(savedAuth);
-        setIsAuthenticated(true);
-        setUser(parsed);
-      } catch {
-        localStorage.removeItem("admin_auth");
+    // Set up auth state listener FIRST
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(
+      (event, currentSession) => {
+        setSession(currentSession);
+        
+        if (currentSession?.user) {
+          setIsAuthenticated(true);
+          // Defer fetching profile to avoid deadlock
+          setTimeout(() => {
+            fetchUserProfile(currentSession.user.id, currentSession.user.email || "").then(setUser);
+          }, 0);
+        } else {
+          setIsAuthenticated(false);
+          setUser(null);
+        }
+        setIsLoading(false);
       }
-    }
-  }, []);
-
-  const login = async (email: string, password: string, selectedRole?: UserRole): Promise<{ success: boolean; redirectTo?: string; error?: string }> => {
-    // Simulate network delay
-    await new Promise(resolve => setTimeout(resolve, 800));
-
-    // For demo mode with role selection
-    if (selectedRole) {
-      const credential = ADMIN_CREDENTIALS.find(c => c.role === selectedRole);
-      if (credential) {
-        const userData: AdminUser = {
-          email: credential.email,
-          name: credential.name,
-          role: credential.role as UserRole,
-        };
-
-        setIsAuthenticated(true);
-        setUser(userData);
-        localStorage.setItem("admin_auth", JSON.stringify(userData));
-
-        return { success: true, redirectTo: getRedirectPath(credential.role as UserRole) };
-      }
-    }
-
-    // Standard email/password login
-    const credential = ADMIN_CREDENTIALS.find(
-      c => c.email.toLowerCase() === email.toLowerCase() && c.password === password
     );
 
-    if (!credential) {
-      return { success: false, error: "Invalid email or password" };
-    }
+    // THEN check for existing session
+    supabase.auth.getSession().then(({ data: { session: existingSession } }) => {
+      setSession(existingSession);
+      if (existingSession?.user) {
+        setIsAuthenticated(true);
+        fetchUserProfile(existingSession.user.id, existingSession.user.email || "").then(setUser);
+      }
+      setIsLoading(false);
+    });
 
-    const userData: AdminUser = {
-      email: credential.email,
-      name: credential.name,
-      role: credential.role as UserRole,
-    };
-
-    setIsAuthenticated(true);
-    setUser(userData);
-    localStorage.setItem("admin_auth", JSON.stringify(userData));
-
-    return { success: true, redirectTo: getRedirectPath(credential.role as UserRole) };
-  };
+    return () => subscription.unsubscribe();
+  }, []);
 
   const getRedirectPath = (role: UserRole): string => {
     switch (role) {
@@ -122,17 +125,75 @@ export function AdminAuthProvider({ children }: { children: ReactNode }) {
         return "/research";
       case "user":
         return "/";
-      case "public":
-        return "/";
       default:
         return "/";
     }
   };
 
-  const logout = () => {
+  const login = async (email: string, password: string): Promise<{ success: boolean; redirectTo?: string; error?: string }> => {
+    try {
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email,
+        password,
+      });
+
+      if (error) {
+        return { success: false, error: error.message };
+      }
+
+      if (data.user) {
+        const userProfile = await fetchUserProfile(data.user.id, data.user.email || "");
+        setUser(userProfile);
+        setIsAuthenticated(true);
+        return { success: true, redirectTo: getRedirectPath(userProfile.role) };
+      }
+
+      return { success: false, error: "Login failed" };
+    } catch (error: any) {
+      return { success: false, error: error.message || "An error occurred" };
+    }
+  };
+
+  const signup = async (email: string, password: string, fullName: string): Promise<{ success: boolean; error?: string }> => {
+    try {
+      const redirectUrl = `${window.location.origin}/`;
+      
+      const { data, error } = await supabase.auth.signUp({
+        email,
+        password,
+        options: {
+          emailRedirectTo: redirectUrl,
+          data: {
+            full_name: fullName,
+          },
+        },
+      });
+
+      if (error) {
+        return { success: false, error: error.message };
+      }
+
+      if (data.user) {
+        // Assign default user role
+        await supabase.from("user_roles").insert({
+          user_id: data.user.id,
+          role: "user",
+        });
+        
+        return { success: true };
+      }
+
+      return { success: false, error: "Signup failed" };
+    } catch (error: any) {
+      return { success: false, error: error.message || "An error occurred" };
+    }
+  };
+
+  const logout = async () => {
+    await supabase.auth.signOut();
     setIsAuthenticated(false);
     setUser(null);
-    localStorage.removeItem("admin_auth");
+    setSession(null);
   };
 
   const hasRole = (roles: UserRole | UserRole[]): boolean => {
@@ -142,8 +203,8 @@ export function AdminAuthProvider({ children }: { children: ReactNode }) {
     // Superadmin has all permissions
     if (user.role === "superadmin") return true;
     
-    // Admin has access to admin, librarian, scholar, user, public
-    if (user.role === "admin" && roleArray.some(r => ["admin", "librarian", "scholar", "user", "public"].includes(r))) {
+    // Admin has access to admin, librarian, scholar, user
+    if (user.role === "admin" && roleArray.some(r => ["admin", "librarian", "scholar", "user"].includes(r))) {
       return true;
     }
     
@@ -151,7 +212,17 @@ export function AdminAuthProvider({ children }: { children: ReactNode }) {
   };
 
   return (
-    <AdminAuthContext.Provider value={{ isAuthenticated, user, login, logout, hasRole, availableRoles: AVAILABLE_ROLES }}>
+    <AdminAuthContext.Provider value={{ 
+      isAuthenticated, 
+      isLoading,
+      user, 
+      session,
+      login, 
+      signup,
+      logout, 
+      hasRole, 
+      availableRoles: AVAILABLE_ROLES 
+    }}>
       {children}
     </AdminAuthContext.Provider>
   );
