@@ -1,6 +1,7 @@
 import { Layout } from "@/components/layout/Layout";
 import { HeroSection } from "@/components/home/HeroSection";
 import { WhoWeServeSection } from "@/components/home/WhoWeServeSection";
+import { FeaturesHighlight } from "@/components/home/FeaturesHighlight";
 import { ResearchToolsSection } from "@/components/home/ResearchToolsSection";
 import { AboutPreview } from "@/components/home/AboutPreview";
 import { GuruvaniPreview } from "@/components/home/GuruvaniPreview";
@@ -14,6 +15,7 @@ const Index = () => {
       <HeroSection />
       <WhoWeServeSection />
       <AboutPreview />
+      <FeaturesHighlight />
       <ResearchToolsSection />
       <GuruvaniPreview />
       <CommunitySection />
