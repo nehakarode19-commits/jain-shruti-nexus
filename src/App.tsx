@@ -64,7 +64,11 @@ import AdminLogin from "./pages/admin/AdminLogin";
 import AdminDashboard from "./pages/admin/AdminDashboard";
 import UsersManagement from "./pages/admin/UsersManagement";
 import GuruvaniManagement from "./pages/admin/GuruvaniManagement";
-import { CMSPage, GalleryPage, BooksPage, ArticlesPage, BlogPage, EventsPage, ScholarsPage, ResearchPage, LMSPage, MuseumPage, AIPage, AccessRequestsPage, LogsPage, SettingsPage } from "./pages/admin/AdminModules";
+import { CMSPage, GalleryPage, ScholarsPage, ResearchPage, LMSPage, MuseumPage, AIPage, AccessRequestsPage, LogsPage, SettingsPage } from "./pages/admin/AdminModules";
+import BooksManagement from "./pages/admin/BooksManagement";
+import ArticlesManagement from "./pages/admin/ArticlesManagement";
+import BlogManagement from "./pages/admin/BlogManagement";
+import EventsManagement from "./pages/admin/EventsManagement";
 
 const queryClient = new QueryClient();
 
@@ -149,10 +153,10 @@ function AppContent() {
       <Route path="/admin/guruvani" element={<ProtectedAdminRoute><GuruvaniManagement /></ProtectedAdminRoute>} />
       <Route path="/admin/cms" element={<ProtectedAdminRoute><CMSPage /></ProtectedAdminRoute>} />
       <Route path="/admin/gallery" element={<ProtectedAdminRoute><GalleryPage /></ProtectedAdminRoute>} />
-      <Route path="/admin/books" element={<ProtectedAdminRoute><BooksPage /></ProtectedAdminRoute>} />
-      <Route path="/admin/articles" element={<ProtectedAdminRoute><ArticlesPage /></ProtectedAdminRoute>} />
-      <Route path="/admin/blog" element={<ProtectedAdminRoute><BlogPage /></ProtectedAdminRoute>} />
-      <Route path="/admin/events" element={<ProtectedAdminRoute><EventsPage /></ProtectedAdminRoute>} />
+      <Route path="/admin/books" element={<ProtectedAdminRoute><BooksManagement /></ProtectedAdminRoute>} />
+      <Route path="/admin/articles" element={<ProtectedAdminRoute><ArticlesManagement /></ProtectedAdminRoute>} />
+      <Route path="/admin/blog" element={<ProtectedAdminRoute><BlogManagement /></ProtectedAdminRoute>} />
+      <Route path="/admin/events" element={<ProtectedAdminRoute><EventsManagement /></ProtectedAdminRoute>} />
       <Route path="/admin/scholars" element={<ProtectedAdminRoute><ScholarsPage /></ProtectedAdminRoute>} />
       <Route path="/admin/research" element={<ProtectedAdminRoute><ResearchPage /></ProtectedAdminRoute>} />
       <Route path="/admin/lms" element={<ProtectedAdminRoute><LMSPage /></ProtectedAdminRoute>} />
