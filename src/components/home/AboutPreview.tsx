@@ -29,11 +29,11 @@ export function AboutPreview() {
           {/* Content */}
           <div className="space-y-8">
             <div>
-              <p className="text-primary font-medium mb-2">About Gurudev</p>
-              <h2 className="font-display text-3xl sm:text-4xl font-bold text-foreground mb-4">
+              <p className="font-body text-base text-primary font-medium mb-2">About Gurudev</p>
+              <h2 className="font-heading text-3xl sm:text-4xl font-bold text-foreground mb-4">
                 Muni Jambuvijayji Maharaj Saheb
               </h2>
-              <p className="text-muted-foreground text-lg leading-relaxed">
+              <p className="font-body text-lg text-muted-foreground leading-relaxed">
                 {gurudevBio.shortBio}
               </p>
             </div>
@@ -41,11 +41,11 @@ export function AboutPreview() {
             {/* Quote */}
             <div className="relative bg-card rounded-xl p-6 border border-primary/10 shadow-soft">
               <Quote className="absolute top-4 left-4 h-8 w-8 text-primary/20" />
-              <blockquote className="pl-8 italic text-foreground">
+              <blockquote className="font-body text-base pl-8 italic text-foreground">
                 "The pursuit of knowledge is the path to liberation. Through study 
                 and contemplation, we illuminate the darkness of ignorance."
               </blockquote>
-              <p className="mt-3 pl-8 text-sm text-muted-foreground">
+              <p className="mt-3 pl-8 font-body text-base text-muted-foreground">
                 — Gurudev Muni Jambuvijayji
               </p>
             </div>
@@ -96,10 +96,10 @@ export function AboutPreview() {
                   <item.icon className="h-6 w-6 text-primary" />
                 </div>
                 <div>
-                  <h3 className="font-display font-semibold text-foreground mb-1">
+                  <h3 className="font-heading font-semibold text-foreground mb-1">
                     {item.title}
                   </h3>
-                  <p className="text-sm text-muted-foreground">
+                  <p className="font-body text-base text-muted-foreground">
                     {item.description}
                   </p>
                 </div>

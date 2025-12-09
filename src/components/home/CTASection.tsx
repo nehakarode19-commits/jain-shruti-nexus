@@ -109,10 +109,10 @@ export function CTASection() {
               delay={index * 100}
               className="text-center glass-card p-6 rounded-2xl hover:shadow-elevated transition-shadow duration-300"
             >
-              <p className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-primary mb-1">
+              <p className="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold text-primary mb-1">
                 <AnimatedCounter value={stat.value} suffix={stat.suffix} />
               </p>
-              <p className="text-sm text-muted-foreground font-medium">{stat.label}</p>
+              <p className="font-body text-base text-muted-foreground font-medium">{stat.label}</p>
             </AnimatedContainer>
           ))}
         </div>
@@ -133,10 +133,10 @@ export function CTASection() {
                   <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-4 group-hover:scale-110 group-hover:bg-primary/20 transition-all duration-300">
                     <item.icon className="h-6 w-6 text-primary" />
                   </div>
-                  <h3 className="font-display text-lg font-semibold text-foreground mb-2 group-hover:text-primary transition-colors duration-300">
+                  <h3 className="font-heading text-lg font-semibold text-foreground mb-2 group-hover:text-primary transition-colors duration-300">
                     {item.title}
                   </h3>
-                  <p className="text-sm text-muted-foreground mb-4 flex-1">
+                  <p className="font-body text-base text-muted-foreground mb-4 flex-1">
                     {item.description}
                   </p>
                   <Button variant={item.variant} size="sm" asChild className="w-full group/btn">

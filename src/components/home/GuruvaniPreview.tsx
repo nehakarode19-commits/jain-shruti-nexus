@@ -33,14 +33,14 @@ export function GuruvaniPreview() {
       <div className="container mx-auto px-4">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-12">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-burgundy/10 border border-burgundy/20 text-sm mb-6">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-burgundy/10 border border-burgundy/20 font-body text-base mb-6">
             <Scroll className="h-4 w-4 text-burgundy" />
             <span className="text-burgundy">Sacred Teachings</span>
           </div>
-          <h2 className="font-display text-3xl sm:text-4xl font-bold text-foreground mb-4">
+          <h2 className="font-heading text-3xl sm:text-4xl font-bold text-foreground mb-4">
             Guruvani
           </h2>
-          <p className="text-muted-foreground text-lg">
+          <p className="font-body text-lg text-muted-foreground">
             Explore the profound discourses, written works, and spiritual guidance 
             from Gurudev Muni Jambuvijayji.
           </p>
@@ -61,14 +61,14 @@ export function GuruvaniPreview() {
                     <item.icon className="h-5 w-5 text-burgundy" />
                   </div>
                   <div>
-                    <p className="text-xs text-muted-foreground">{item.type}</p>
-                    <p className="text-xs text-primary font-medium">{item.date}</p>
+                    <p className="font-body text-base text-muted-foreground">{item.type}</p>
+                    <p className="font-body text-base text-primary font-medium">{item.date}</p>
                   </div>
                 </div>
-                <h3 className="font-display font-semibold text-foreground mb-2">
+                <h3 className="font-heading font-semibold text-foreground mb-2">
                   {item.title}
                 </h3>
-                <p className="text-sm text-muted-foreground line-clamp-2">
+                <p className="font-body text-base text-muted-foreground line-clamp-2">
                   {item.excerpt}
                 </p>
               </CardContent>
@@ -81,10 +81,10 @@ export function GuruvaniPreview() {
           <div className="flex items-start gap-4 p-6 rounded-xl bg-secondary/50 border border-border">
             <Lock className="h-5 w-5 text-muted-foreground shrink-0 mt-0.5" />
             <div className="flex-1">
-              <p className="text-sm text-foreground font-medium mb-1">
+              <p className="font-body text-base text-foreground font-medium mb-1">
                 Restricted Content Available
               </p>
-              <p className="text-sm text-muted-foreground mb-4">
+              <p className="font-body text-base text-muted-foreground mb-4">
                 Some Guruvani materials require authentication and approval. 
                 Scholars and registered users can request access to restricted teachings.
               </p>

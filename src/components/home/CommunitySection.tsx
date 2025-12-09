@@ -42,10 +42,10 @@ export function CommunitySection() {
                 <Calendar className="h-5 w-5 text-primary" />
               </div>
               <div>
-                <h2 className="font-display text-2xl font-bold text-foreground">
+                <h2 className="font-heading text-2xl font-bold text-foreground">
                   Upcoming Events
                 </h2>
-                <p className="text-sm text-muted-foreground">
+                <p className="font-body text-base text-muted-foreground">
                   Lectures, workshops, and gatherings
                 </p>
               </div>
@@ -63,14 +63,14 @@ export function CommunitySection() {
                     <div className="flex items-start justify-between gap-4">
                       <div className="flex-1">
                         <div className="flex items-center gap-2 mb-1">
-                          <span className="text-xs px-2 py-0.5 rounded-full bg-primary/10 text-primary font-medium">
+                          <span className="font-body text-base px-2 py-0.5 rounded-full bg-primary/10 text-primary font-medium">
                             {event.type}
                           </span>
                         </div>
-                        <h3 className="font-display font-semibold text-foreground mb-2">
+                        <h3 className="font-heading font-semibold text-foreground mb-2">
                           {event.title}
                         </h3>
-                        <div className="space-y-1 text-sm text-muted-foreground">
+                        <div className="space-y-1 font-body text-base text-muted-foreground">
                           <div className="flex items-center gap-2">
                             <Calendar className="h-3.5 w-3.5" />
                             <span>{event.date}</span>
@@ -108,10 +108,10 @@ export function CommunitySection() {
                 <BookOpen className="h-5 w-5 text-sage" />
               </div>
               <div>
-                <h2 className="font-display text-2xl font-bold text-foreground">
+                <h2 className="font-heading text-2xl font-bold text-foreground">
                   Latest Insights
                 </h2>
-                <p className="text-sm text-muted-foreground">
+                <p className="font-body text-base text-muted-foreground">
                   Articles, research updates, and news
                 </p>
               </div>
@@ -127,15 +127,15 @@ export function CommunitySection() {
                 >
                   <CardContent className="p-4">
                     <div className="flex items-center gap-2 mb-2">
-                      <span className="text-xs px-2 py-0.5 rounded-full bg-sage/10 text-sage font-medium">
+                      <span className="font-body text-base px-2 py-0.5 rounded-full bg-sage/10 text-sage font-medium">
                         {post.category}
                       </span>
-                      <span className="text-xs text-muted-foreground">{post.date}</span>
+                      <span className="font-body text-base text-muted-foreground">{post.date}</span>
                     </div>
-                    <h3 className="font-display font-semibold text-foreground mb-2">
+                    <h3 className="font-heading font-semibold text-foreground mb-2">
                       {post.title}
                     </h3>
-                    <p className="text-sm text-muted-foreground line-clamp-2">
+                    <p className="font-body text-base text-muted-foreground line-clamp-2">
                       {post.excerpt}
                     </p>
                   </CardContent>

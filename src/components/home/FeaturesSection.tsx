@@ -69,15 +69,15 @@ export function FeaturesSection() {
       <div className="container mx-auto px-4 relative">
         {/* Section Header */}
         <AnimatedContainer animation="fade-up" className="text-center max-w-3xl mx-auto mb-12 lg:mb-16">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-card text-sm mb-6">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-card font-body text-base mb-6">
             <Sparkles className="h-4 w-4 text-primary animate-pulse" />
             <span className="text-muted-foreground font-medium">Jain Knowledge Research Ecosystem</span>
           </div>
-          <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-4">
+          <h2 className="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-4">
             Four Powerful{" "}
             <span className="text-gradient-gold">Research Tools</span>
           </h2>
-          <p className="text-muted-foreground text-lg">
+          <p className="font-body text-lg text-muted-foreground">
             An integrated ecosystem designed for scholars, researchers, and seekers 
             to explore and preserve Jain knowledge.
           </p>
@@ -108,12 +108,12 @@ export function FeaturesSection() {
                     </div>
                   </div>
                   <CardTitle className="text-xl group-hover:text-primary transition-colors duration-300">{tool.title}</CardTitle>
-                  <CardDescription className="text-sm font-medium text-primary/80">
+                  <CardDescription className="font-body text-base font-medium text-primary/80">
                     {tool.subtitle}
                   </CardDescription>
                 </CardHeader>
                 <CardContent className="relative">
-                  <p className="text-muted-foreground mb-4">{tool.description}</p>
+                  <p className="font-body text-base text-muted-foreground mb-4">{tool.description}</p>
                   <Button variant="ghost" size="sm" asChild className="group/btn hover:bg-primary/10">
                     <Link to={tool.href}>
                       Learn More

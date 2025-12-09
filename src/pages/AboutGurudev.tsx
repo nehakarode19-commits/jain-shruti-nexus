@@ -66,13 +66,13 @@ const AboutGurudev = () => {
             
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               <div className="animate-fade-up">
-                <p className="text-primary font-display text-lg mb-2">
+                <p className="text-primary font-heading text-lg mb-2">
                   {gurudevBio.hindiName}
                 </p>
-                <h1 className="font-display text-4xl sm:text-5xl font-bold text-foreground mb-6">
+                <h1 className="font-heading text-4xl sm:text-5xl font-bold text-foreground mb-6">
                   Gurudev Muni Jambuvijayji Maharaj Saheb
                 </h1>
-                <p className="text-lg text-muted-foreground mb-6">
+                <p className="font-body text-lg text-muted-foreground mb-6">
                   {gurudevBio.shortBio}
                 </p>
                 
@@ -81,29 +81,29 @@ const AboutGurudev = () => {
                   <div className="flex items-start gap-3">
                     <MapPin className="h-5 w-5 text-primary mt-0.5" />
                     <div>
-                      <p className="text-sm text-muted-foreground">Birth Place</p>
-                      <p className="font-medium text-foreground">{gurudevBio.birthPlace}</p>
+                      <p className="font-body text-base text-muted-foreground">Birth Place</p>
+                      <p className="font-body font-medium text-foreground">{gurudevBio.birthPlace}</p>
                     </div>
                   </div>
                   <div className="flex items-start gap-3">
                     <Calendar className="h-5 w-5 text-primary mt-0.5" />
                     <div>
-                      <p className="text-sm text-muted-foreground">Life Span</p>
-                      <p className="font-medium text-foreground">{gurudevBio.birthYear}–{gurudevBio.deathYear}</p>
+                      <p className="font-body text-base text-muted-foreground">Life Span</p>
+                      <p className="font-body font-medium text-foreground">{gurudevBio.birthYear}–{gurudevBio.deathYear}</p>
                     </div>
                   </div>
                   <div className="flex items-start gap-3">
                     <Users className="h-5 w-5 text-primary mt-0.5" />
                     <div>
-                      <p className="text-sm text-muted-foreground">Order</p>
-                      <p className="font-medium text-foreground text-sm">{gurudevBio.order}</p>
+                      <p className="font-body text-base text-muted-foreground">Order</p>
+                      <p className="font-body font-medium text-foreground text-base">{gurudevBio.order}</p>
                     </div>
                   </div>
                   <div className="flex items-start gap-3">
                     <BookOpen className="h-5 w-5 text-primary mt-0.5" />
                     <div>
-                      <p className="text-sm text-muted-foreground">Birth Name</p>
-                      <p className="font-medium text-foreground">{gurudevBio.birthName}</p>
+                      <p className="font-body text-base text-muted-foreground">Birth Name</p>
+                      <p className="font-body font-medium text-foreground">{gurudevBio.birthName}</p>
                     </div>
                   </div>
                 </div>
@@ -133,7 +133,7 @@ const AboutGurudev = () => {
                     className="w-full h-auto"
                   />
                   <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-background/90 to-transparent p-6">
-                    <p className="text-sm text-muted-foreground">
+                    <p className="font-body text-base text-muted-foreground">
                       Gurudev Muni Jambuvijayji Maharaj Saheb
                     </p>
                   </div>
@@ -157,22 +157,22 @@ const AboutGurudev = () => {
       <section className="py-12 bg-secondary/30">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto">
-            <h2 className="font-display text-2xl font-bold text-foreground text-center mb-8">
+            <h2 className="font-heading text-2xl font-bold text-foreground text-center mb-8">
               Family Background
             </h2>
             <div className="grid md:grid-cols-2 gap-6">
               <Card variant="default">
                 <CardContent className="p-6 text-center">
-                  <p className="text-sm text-muted-foreground mb-1">Father</p>
-                  <p className="font-display font-semibold text-foreground">{familyInfo.father.name}</p>
-                  <p className="text-sm text-muted-foreground">({familyInfo.father.years})</p>
+                  <p className="font-body text-base text-muted-foreground mb-1">Father</p>
+                  <p className="font-heading font-semibold text-foreground">{familyInfo.father.name}</p>
+                  <p className="font-body text-base text-muted-foreground">({familyInfo.father.years})</p>
                 </CardContent>
               </Card>
               <Card variant="default">
                 <CardContent className="p-6 text-center">
-                  <p className="text-sm text-muted-foreground mb-1">Mother</p>
-                  <p className="font-display font-semibold text-foreground">{familyInfo.mother.name}</p>
-                  <p className="text-sm text-muted-foreground">({familyInfo.mother.years})</p>
+                  <p className="font-body text-base text-muted-foreground mb-1">Mother</p>
+                  <p className="font-heading font-semibold text-foreground">{familyInfo.mother.name}</p>
+                  <p className="font-body text-base text-muted-foreground">({familyInfo.mother.years})</p>
                 </CardContent>
               </Card>
             </div>
@@ -185,11 +185,11 @@ const AboutGurudev = () => {
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto text-center">
             <Quote className="h-10 w-10 text-burgundy/30 mx-auto mb-4" />
-            <blockquote className="font-display text-xl sm:text-2xl italic text-foreground mb-4">
+            <blockquote className="font-heading text-xl sm:text-2xl italic text-foreground mb-4">
               "True knowledge illuminates the path of liberation. Through rigorous study 
               and unwavering devotion, one attains the wisdom that transcends worldly bonds."
             </blockquote>
-            <p className="text-muted-foreground">— Gurudev Muni Jambuvijayji</p>
+            <p className="font-body text-base text-muted-foreground">— Gurudev Muni Jambuvijayji</p>
           </div>
         </div>
       </section>
@@ -197,7 +197,7 @@ const AboutGurudev = () => {
       {/* Life Journey */}
       <section className="py-16 lg:py-24 bg-background">
         <div className="container mx-auto px-4">
-          <h2 className="font-display text-3xl font-bold text-foreground text-center mb-12">
+          <h2 className="font-heading text-3xl font-bold text-foreground text-center mb-12">
             Life Journey
           </h2>
 
@@ -217,8 +217,8 @@ const AboutGurudev = () => {
                   </div>
                   <Card variant="default">
                     <CardContent className="p-4">
-                      <p className="text-sm font-medium text-primary mb-1">{milestone.year}</p>
-                      <p className="text-foreground">{milestone.event}</p>
+                      <p className="font-body text-base font-medium text-primary mb-1">{milestone.year}</p>
+                      <p className="font-body text-base text-foreground">{milestone.event}</p>
                     </CardContent>
                   </Card>
                 </div>
@@ -231,7 +231,7 @@ const AboutGurudev = () => {
       {/* Achievements */}
       <section className="py-16 lg:py-24 bg-gradient-spiritual">
         <div className="container mx-auto px-4">
-          <h2 className="font-display text-3xl font-bold text-foreground text-center mb-12">
+          <h2 className="font-heading text-3xl font-bold text-foreground text-center mb-12">
             Contributions & Achievements
           </h2>
 
@@ -247,10 +247,10 @@ const AboutGurudev = () => {
                   <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto mb-4">
                     <item.icon className="h-8 w-8 text-primary" />
                   </div>
-                  <h3 className="font-display text-xl font-semibold text-foreground mb-3">
+                  <h3 className="font-heading text-xl font-semibold text-foreground mb-3">
                     {item.title}
                   </h3>
-                  <p className="text-muted-foreground text-sm">
+                  <p className="font-body text-base text-muted-foreground">
                     {item.description}
                   </p>
                 </CardContent>
@@ -264,7 +264,7 @@ const AboutGurudev = () => {
       <section className="py-16 bg-background">
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between mb-8">
-            <h2 className="font-display text-2xl font-bold text-foreground">
+            <h2 className="font-heading text-2xl font-bold text-foreground">
               Photo Gallery
             </h2>
             <Button variant="outline" asChild>
@@ -296,7 +296,7 @@ const AboutGurudev = () => {
       {/* CTA */}
       <section className="py-16 bg-secondary/30">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="font-display text-2xl font-bold text-foreground mb-4">
+          <h2 className="font-heading text-2xl font-bold text-foreground mb-4">
             Continue Exploring
           </h2>
           <div className="flex flex-wrap justify-center gap-4">

@@ -32,14 +32,14 @@ const Gallery = () => {
       <section className="py-16 lg:py-20 bg-gradient-hero lotus-pattern">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto text-center animate-fade-up">
-            <h1 className="font-display text-4xl sm:text-5xl font-bold text-foreground mb-6">
+            <h1 className="font-heading text-4xl sm:text-5xl font-bold text-foreground mb-6">
               Photo & Video <span className="text-gradient-gold">Gallery</span>
             </h1>
-            <p className="text-lg text-muted-foreground mb-4">
+            <p className="font-body text-lg text-muted-foreground mb-4">
               Explore rare photographs and videos of Gurudev Muni Jambuvijayji Maharaj Saheb, 
               capturing moments from his life of scholarship and spiritual dedication.
             </p>
-            <div className="flex items-center justify-center gap-4 text-sm">
+            <div className="flex items-center justify-center gap-4 font-body text-base">
               <Badge variant="secondary" className="gap-1">
                 <Image className="h-3 w-3" />
                 {galleryImages.length} Photos
@@ -81,7 +81,7 @@ const Gallery = () => {
       {activeTab === "photos" && (
         <section className="py-12 lg:py-16 bg-background">
           <div className="container mx-auto px-4">
-            <p className="text-muted-foreground mb-6">
+            <p className="font-body text-base text-muted-foreground mb-6">
               Showing {galleryImages.length} photos from the official collection
             </p>
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
@@ -98,7 +98,7 @@ const Gallery = () => {
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center pb-4">
-                    <span className="text-sm text-foreground font-medium bg-background/60 backdrop-blur-sm px-3 py-1 rounded-full">
+                    <span className="font-body text-base text-foreground font-medium bg-background/60 backdrop-blur-sm px-3 py-1 rounded-full">
                       View
                     </span>
                   </div>
@@ -113,7 +113,7 @@ const Gallery = () => {
       {activeTab === "videos" && (
         <section className="py-12 lg:py-16 bg-background">
           <div className="container mx-auto px-4">
-            <p className="text-muted-foreground mb-6">
+            <p className="font-body text-base text-muted-foreground mb-6">
               Showing {videos.length} videos from official channels
             </p>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
@@ -133,12 +133,12 @@ const Gallery = () => {
                     />
                   </div>
                   <div className="p-4">
-                    <h3 className="font-display font-semibold text-foreground mb-1 line-clamp-1">
+                    <h3 className="font-heading font-semibold text-foreground mb-1 line-clamp-1">
                       {video.title}
                     </h3>
-                    <p className="text-sm text-muted-foreground mb-1">{video.channel}</p>
+                    <p className="font-body text-base text-muted-foreground mb-1">{video.channel}</p>
                     {video.description && (
-                      <p className="text-xs text-muted-foreground mb-3 line-clamp-2">
+                      <p className="font-body text-base text-muted-foreground mb-3 line-clamp-2">
                         {video.description}
                       </p>
                     )}
@@ -146,7 +146,7 @@ const Gallery = () => {
                       href={video.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 text-sm text-primary hover:underline"
+                      className="inline-flex items-center gap-2 font-body text-base text-primary hover:underline"
                     >
                       Watch on YouTube
                       <ExternalLink className="h-3 w-3" />
@@ -157,7 +157,7 @@ const Gallery = () => {
             </div>
 
             <div className="text-center mt-12">
-              <p className="text-muted-foreground mb-4">
+              <p className="font-body text-base text-muted-foreground mb-4">
                 More videos available on the official YouTube channel
               </p>
               <Button variant="outline" asChild>
@@ -178,7 +178,7 @@ const Gallery = () => {
       {/* Source Attribution */}
       <section className="py-8 bg-secondary/30">
         <div className="container mx-auto px-4 text-center">
-          <p className="text-sm text-muted-foreground">
+          <p className="font-body text-base text-muted-foreground">
             All photos and videos are sourced from{" "}
             <a 
               href="https://siddhijambuparivar.com" 
@@ -236,11 +236,11 @@ const Gallery = () => {
 
             {selectedImage !== null && (
               <div className="text-center pb-6">
-                <p className="text-muted-foreground text-sm mb-2">
+                <p className="font-body text-base text-muted-foreground mb-2">
                   {selectedImage + 1} / {galleryImages.length}
                 </p>
                 {galleryImages[selectedImage].alt && (
-                  <p className="text-foreground text-sm max-w-xl mx-auto px-4">
+                  <p className="font-body text-base text-foreground max-w-xl mx-auto px-4">
                     {galleryImages[selectedImage].alt}
                   </p>
                 )}
@@ -253,7 +253,7 @@ const Gallery = () => {
       {/* CTA */}
       <section className="py-12 bg-gradient-spiritual">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="font-display text-2xl font-bold text-foreground mb-4">
+          <h2 className="font-heading text-2xl font-bold text-foreground mb-4">
             Learn More About Gurudev
           </h2>
           <div className="flex flex-wrap justify-center gap-4">
