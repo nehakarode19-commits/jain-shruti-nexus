@@ -40,12 +40,12 @@ const latestPosts = [
 
 export function CommunitySection() {
   return (
-    <section className="py-16 lg:py-24 bg-secondary/30">
-      <div className="container mx-auto px-4">
-        <div className="grid lg:grid-cols-2 gap-12">
-          {/* Events */}
-          <div>
-            <div className="flex items-center gap-3 mb-6">
+    <section className="py-12 lg:py-16 bg-secondary/30">
+      <div className="container mx-auto px-4 space-y-12">
+        {/* Events */}
+        <div>
+          <div className="flex items-center justify-between mb-6">
+            <div className="flex items-center gap-3">
               <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
                 <Calendar className="h-5 w-5 text-primary" />
               </div>
@@ -54,49 +54,48 @@ export function CommunitySection() {
                 <p className="text-sm text-muted-foreground">Lectures, workshops & gatherings</p>
               </div>
             </div>
-
-            <div className="space-y-4 mb-6">
-              {upcomingEvents.map((event) => (
-                <div 
-                  key={event.title}
-                  className="flex gap-4 p-4 rounded-xl bg-card border border-border/50 hover:border-primary/30 hover:shadow-soft transition-all"
-                >
-                  <img 
-                    src={event.image} 
-                    alt={event.title}
-                    className="w-24 h-24 rounded-lg object-cover flex-shrink-0"
-                  />
-                  <div className="flex-1 min-w-0">
-                    <span className="text-xs px-2 py-1 rounded-full bg-primary/10 text-primary font-medium">
-                      {event.type}
-                    </span>
-                    <h3 className="font-semibold text-foreground mt-2 line-clamp-1">{event.title}</h3>
-                    <div className="mt-2 space-y-1 text-xs text-muted-foreground">
-                      <div className="flex items-center gap-1">
-                        <Calendar className="h-3 w-3" />
-                        <span>{event.date}</span>
-                      </div>
-                      <div className="flex items-center gap-1">
-                        <MapPin className="h-3 w-3" />
-                        <span className="line-clamp-1">{event.location}</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-
             <Button variant="outline" size="sm" asChild>
               <Link to="/community/events">
-                View All Events
+                View All
                 <ArrowRight className="h-4 w-4 ml-2" />
               </Link>
             </Button>
           </div>
 
-          {/* Blog */}
-          <div>
-            <div className="flex items-center gap-3 mb-6">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {upcomingEvents.map((event) => (
+              <div 
+                key={event.title}
+                className="p-4 rounded-xl bg-card border border-border/50 hover:border-primary/30 hover:shadow-soft transition-all"
+              >
+                <img 
+                  src={event.image} 
+                  alt={event.title}
+                  className="w-full h-32 rounded-lg object-cover mb-3"
+                />
+                <span className="text-xs px-2 py-1 rounded-full bg-primary/10 text-primary font-medium">
+                  {event.type}
+                </span>
+                <h3 className="font-semibold text-foreground mt-2 line-clamp-1">{event.title}</h3>
+                <div className="mt-2 space-y-1 text-xs text-muted-foreground">
+                  <div className="flex items-center gap-1">
+                    <Calendar className="h-3 w-3" />
+                    <span>{event.date}</span>
+                  </div>
+                  <div className="flex items-center gap-1">
+                    <MapPin className="h-3 w-3" />
+                    <span className="line-clamp-1">{event.location}</span>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Blog */}
+        <div>
+          <div className="flex items-center justify-between mb-6">
+            <div className="flex items-center gap-3">
               <div className="w-10 h-10 rounded-lg bg-sage/10 flex items-center justify-center">
                 <BookOpen className="h-5 w-5 text-sage" />
               </div>
@@ -105,38 +104,35 @@ export function CommunitySection() {
                 <p className="text-sm text-muted-foreground">Articles & research updates</p>
               </div>
             </div>
-
-            <div className="space-y-4 mb-6">
-              {latestPosts.map((post) => (
-                <div 
-                  key={post.title}
-                  className="flex gap-4 p-4 rounded-xl bg-card border border-border/50 hover:border-sage/30 hover:shadow-soft transition-all"
-                >
-                  <img 
-                    src={post.image} 
-                    alt={post.title}
-                    className="w-24 h-24 rounded-lg object-cover flex-shrink-0"
-                  />
-                  <div className="flex-1 min-w-0">
-                    <div className="flex items-center gap-2">
-                      <span className="text-xs px-2 py-1 rounded-full bg-sage/10 text-sage font-medium">
-                        {post.category}
-                      </span>
-                      <span className="text-xs text-muted-foreground">{post.date}</span>
-                    </div>
-                    <h3 className="font-semibold text-foreground mt-2 line-clamp-1">{post.title}</h3>
-                    <p className="text-sm text-muted-foreground mt-1 line-clamp-2">{post.excerpt}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-
             <Button variant="outline" size="sm" asChild>
               <Link to="/community/blog">
                 Read Blog
                 <ArrowRight className="h-4 w-4 ml-2" />
               </Link>
             </Button>
+          </div>
+
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {latestPosts.map((post) => (
+              <div 
+                key={post.title}
+                className="p-4 rounded-xl bg-card border border-border/50 hover:border-sage/30 hover:shadow-soft transition-all"
+              >
+                <img 
+                  src={post.image} 
+                  alt={post.title}
+                  className="w-full h-32 rounded-lg object-cover mb-3"
+                />
+                <div className="flex items-center gap-2">
+                  <span className="text-xs px-2 py-1 rounded-full bg-sage/10 text-sage font-medium">
+                    {post.category}
+                  </span>
+                  <span className="text-xs text-muted-foreground">{post.date}</span>
+                </div>
+                <h3 className="font-semibold text-foreground mt-2 line-clamp-1">{post.title}</h3>
+                <p className="text-sm text-muted-foreground mt-1 line-clamp-2">{post.excerpt}</p>
+              </div>
+            ))}
           </div>
         </div>
       </div>
