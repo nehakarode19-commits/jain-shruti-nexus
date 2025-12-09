@@ -212,7 +212,7 @@ const Auth = () => {
         <div className="container mx-auto px-4">
           <div className="max-w-md mx-auto">
             {/* Logo */}
-            <div className="text-center mb-8 animate-fade-up">
+            <div className="text-center mb-8">
               <Link to="/" className="inline-flex items-center gap-3">
                 <div className="w-12 h-12 rounded-full bg-gradient-to-br from-primary to-gold flex items-center justify-center shadow-glow">
                   <Scroll className="h-6 w-6 text-primary-foreground" />
@@ -223,7 +223,7 @@ const Auth = () => {
               </Link>
             </div>
 
-            <Card variant="elevated" className="animate-fade-up delay-100">
+            <Card variant="elevated" className="">
               <Tabs value={activeTab} onValueChange={(v) => setActiveTab(v as "role" | "login" | "register")}>
                 <CardHeader className="pb-4">
                   <TabsList className="grid w-full grid-cols-3">
