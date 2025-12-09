@@ -8,7 +8,7 @@ interface ProtectedLMSRouteProps {
 }
 
 export function ProtectedLMSRoute({ children }: ProtectedLMSRouteProps) {
-  const { isAuthenticated, isLoading, hasRole } = useAdminAuth();
+  const { isAuthenticated, isLoading } = useAdminAuth();
   const location = useLocation();
 
   if (isLoading) {
@@ -19,13 +19,9 @@ export function ProtectedLMSRoute({ children }: ProtectedLMSRouteProps) {
     );
   }
 
+  // DEMO MODE: Only check authentication, bypass role checks
   if (!isAuthenticated) {
     return <Navigate to="/lms" state={{ from: location }} replace />;
-  }
-
-  // Only allow librarian, admin, and superadmin roles
-  if (!hasRole(["librarian", "admin", "superadmin"])) {
-    return <Navigate to="/" replace />;
   }
 
   return <>{children}</>;
