@@ -104,10 +104,10 @@ const CommunityEvents = () => {
               <Calendar className="h-4 w-4 text-primary" />
               <span className="text-primary">{allEvents.length} Events</span>
             </div>
-            <h1 className="font-display text-4xl sm:text-5xl font-bold text-foreground mb-6 animate-fade-up delay-100">
+            <h1 className="font-heading text-4xl sm:text-5xl font-bold text-foreground mb-6 animate-fade-up delay-100">
               Events & <span className="text-gradient-gold">Workshops</span>
             </h1>
-            <p className="text-lg text-muted-foreground animate-fade-up delay-200">
+            <p className="font-body text-lg text-muted-foreground animate-fade-up delay-200">
               Join our lectures, workshops, festivals, and community gatherings 
               dedicated to learning and spiritual growth.
             </p>
@@ -118,7 +118,7 @@ const CommunityEvents = () => {
       {/* Featured Events from siddhijambuparivar.com */}
       <section className="py-12 bg-secondary/30">
         <div className="container mx-auto px-4">
-          <h2 className="font-display text-2xl font-bold text-foreground text-center mb-8">
+          <h2 className="font-heading text-2xl font-bold text-foreground text-center mb-8">
             Featured Events
           </h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
@@ -140,11 +140,11 @@ const CommunityEvents = () => {
                 )}
                 <CardContent className="p-6">
                   <Badge variant="default" className="mb-3">{event.type}</Badge>
-                  <h3 className="font-display text-lg font-semibold text-foreground mb-2">
+                  <h3 className="font-heading text-lg font-semibold text-foreground mb-2">
                     {event.titleEn}
                   </h3>
-                  <p className="text-sm text-primary mb-3">{event.title}</p>
-                  <div className="flex items-center gap-2 text-sm text-muted-foreground mb-4">
+                  <p className="font-body text-base text-primary mb-3">{event.title}</p>
+                  <div className="flex items-center gap-2 font-body text-base text-muted-foreground mb-4">
                     <Calendar className="h-4 w-4" />
                     <span>{event.date}</span>
                   </div>
@@ -164,7 +164,7 @@ const CommunityEvents = () => {
       {/* All Events List */}
       <section className="py-16 lg:py-24 bg-background">
         <div className="container mx-auto px-4">
-          <h2 className="font-display text-2xl font-bold text-foreground text-center mb-12">
+          <h2 className="font-heading text-2xl font-bold text-foreground text-center mb-12">
             Upcoming & Scheduled Events
           </h2>
           <div className="max-w-4xl mx-auto space-y-6">
@@ -189,15 +189,15 @@ const CommunityEvents = () => {
                       </div>
                       <CardTitle className="text-xl">{event.title}</CardTitle>
                       {event.titleOriginal && (
-                        <p className="text-sm text-primary mt-1">{event.titleOriginal}</p>
+                        <p className="font-body text-base text-primary mt-1">{event.titleOriginal}</p>
                       )}
                     </div>
                   </div>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-muted-foreground mb-4">{event.description}</p>
+                  <p className="font-body text-base text-muted-foreground mb-4">{event.description}</p>
                   <div className="grid sm:grid-cols-2 gap-4 mb-6">
-                    <div className="space-y-2 text-sm">
+                    <div className="space-y-2 font-body text-base">
                       <div className="flex items-center gap-2 text-foreground">
                         <Calendar className="h-4 w-4 text-primary" />
                         <span>{event.date}</span>
@@ -207,7 +207,7 @@ const CommunityEvents = () => {
                         <span>{event.time}</span>
                       </div>
                     </div>
-                    <div className="space-y-2 text-sm">
+                    <div className="space-y-2 font-body text-base">
                       <div className="flex items-center gap-2 text-muted-foreground">
                         <MapPin className="h-4 w-4" />
                         <span>{event.location}</span>

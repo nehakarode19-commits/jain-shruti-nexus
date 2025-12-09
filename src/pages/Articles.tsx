@@ -42,10 +42,10 @@ const Articles = () => {
               <ScrollText className="h-4 w-4 text-primary" />
               <span className="text-muted-foreground">Tributes & Articles</span>
             </div>
-            <h1 className="font-display text-4xl sm:text-5xl font-bold text-foreground mb-6">
+            <h1 className="font-heading text-4xl sm:text-5xl font-bold text-foreground mb-6">
               Articles & <span className="text-gradient-gold">Tributes</span>
             </h1>
-            <p className="text-lg text-muted-foreground">
+            <p className="font-body text-lg text-muted-foreground">
               Scholarly articles, heartfelt tributes, and important documents 
               celebrating the legacy of Gurudev Muni Jambuvijayji Maharaj Saheb.
             </p>
@@ -124,19 +124,19 @@ const Articles = () => {
                             {article.language}
                           </Badge>
                         </div>
-                        <h3 className="font-display text-lg font-semibold text-foreground mb-1 group-hover:text-primary transition-colors line-clamp-2">
+                        <h3 className="font-heading text-lg font-semibold text-foreground mb-1 group-hover:text-primary transition-colors line-clamp-2">
                           {article.titleEn}
                         </h3>
-                        <p className="text-sm text-primary mb-2">{article.title}</p>
-                        <p className="text-sm text-muted-foreground mb-3 line-clamp-2">
+                        <p className="font-body text-base text-primary mb-2">{article.title}</p>
+                        <p className="font-body text-base text-muted-foreground mb-3 line-clamp-2">
                           {article.excerpt}
                         </p>
                         <div className="flex items-center justify-between">
-                          <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                          <div className="flex items-center gap-2 font-body text-base text-muted-foreground">
                             <User className="h-3 w-3" />
                             <span>{article.author}</span>
                           </div>
-                          <span className="text-xs text-primary flex items-center gap-1">
+                          <span className="font-body text-base text-primary flex items-center gap-1">
                             Read More
                             <ArrowRight className="h-3 w-3 group-hover:translate-x-1 transition-transform" />
                           </span>
@@ -150,10 +150,10 @@ const Articles = () => {
               {filteredArticles.length === 0 && (
                 <div className="text-center py-16">
                   <FileText className="h-16 w-16 text-muted-foreground/30 mx-auto mb-4" />
-                  <h3 className="font-display text-xl font-semibold text-foreground mb-2">
+                  <h3 className="font-heading text-xl font-semibold text-foreground mb-2">
                     No articles found
                   </h3>
-                  <p className="text-muted-foreground mb-4">
+                  <p className="font-body text-base text-muted-foreground mb-4">
                     Try adjusting your search or filter criteria
                   </p>
                   <Button variant="outline" onClick={() => { setSearchQuery(""); setSelectedCategory("All"); }}>
@@ -187,11 +187,11 @@ const Articles = () => {
                                 {doc.language}
                               </Badge>
                             </div>
-                            <h3 className="font-display text-lg font-semibold text-foreground mb-1">
+                            <h3 className="font-heading text-lg font-semibold text-foreground mb-1">
                               {doc.title}
                             </h3>
-                            <p className="text-sm text-primary mb-2">{doc.titleHindi}</p>
-                            <p className="text-sm text-muted-foreground mb-4">
+                            <p className="font-body text-base text-primary mb-2">{doc.titleHindi}</p>
+                            <p className="font-body text-base text-muted-foreground mb-4">
                               {doc.description}
                             </p>
                             <Button variant="outline" size="sm" className="gap-2">
@@ -213,10 +213,10 @@ const Articles = () => {
       {/* External Link */}
       <section className="py-12 bg-secondary/30">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="font-display text-xl font-bold text-foreground mb-4">
+          <h2 className="font-heading text-xl font-bold text-foreground mb-4">
             More Content Available
           </h2>
-          <p className="text-muted-foreground mb-6 max-w-lg mx-auto">
+          <p className="font-body text-base text-muted-foreground mb-6 max-w-lg mx-auto">
             Visit the official Siddhi Jambu Parivar website for additional articles and documents.
           </p>
           <Button variant="outline" asChild>
@@ -235,7 +235,7 @@ const Articles = () => {
       {/* CTA */}
       <section className="py-12 bg-gradient-spiritual">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="font-display text-2xl font-bold text-foreground mb-4">
+          <h2 className="font-heading text-2xl font-bold text-foreground mb-4">
             Explore More
           </h2>
           <div className="flex flex-wrap justify-center gap-4">

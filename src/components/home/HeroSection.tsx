@@ -48,18 +48,18 @@ export function HeroSection() {
               style={{ animationDelay: "0ms" }}
             >
               <Sparkles className="h-4 w-4 text-primary animate-pulse" />
-              <span className="text-muted-foreground font-medium">Preserving Ancient Wisdom</span>
+              <span className="font-body text-base text-muted-foreground font-medium">Preserving Ancient Wisdom</span>
             </div>
 
             <div className="space-y-4">
               <p 
-                className="text-primary font-display text-lg animate-fade-up"
+                className="text-primary font-heading text-lg animate-fade-up"
                 style={{ animationDelay: "100ms" }}
               >
                 {gurudevBio.hindiName}
               </p>
               <h1 
-                className="font-display text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold text-foreground leading-tight animate-fade-up"
+                className="font-heading text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold text-foreground leading-tight animate-fade-up"
                 style={{ animationDelay: "200ms" }}
               >
                 Jain Knowledge &{" "}
@@ -69,7 +69,7 @@ export function HeroSection() {
                 </span>
               </h1>
               <p 
-                className="text-lg text-muted-foreground max-w-lg animate-fade-up"
+                className="font-body text-lg text-muted-foreground max-w-lg animate-fade-up"
                 style={{ animationDelay: "300ms" }}
               >
                 Explore the profound teachings of Gurudev Muni Jambuvijayji Maharaj Saheb ({gurudevBio.birthYear}–{gurudevBio.deathYear}). 
@@ -110,7 +110,7 @@ export function HeroSection() {
                 <Link
                   key={item.label}
                   to={item.href}
-                  className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-all group px-3 py-2 rounded-lg hover:bg-primary/5"
+                  className="flex items-center gap-2 font-body text-base text-muted-foreground hover:text-primary transition-all group px-3 py-2 rounded-lg hover:bg-primary/5"
                 >
                   <item.icon className="h-4 w-4 group-hover:scale-110 transition-transform" />
                   <span className="font-medium">{item.label}</span>
@@ -144,10 +144,10 @@ export function HeroSection() {
                 
                 {/* Overlay with name */}
                 <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-background/95 via-background/70 to-transparent p-6">
-                  <h3 className="font-display text-xl font-semibold text-foreground">
+                  <h3 className="font-heading text-xl font-semibold text-foreground">
                     Gurudev Muni Jambuvijayji
                   </h3>
-                  <p className="text-sm text-muted-foreground">
+                  <p className="font-body text-base text-muted-foreground">
                     Maharaj Saheb ({gurudevBio.birthYear}–{gurudevBio.deathYear})
                   </p>
                 </div>
@@ -184,7 +184,7 @@ export function HeroSection() {
           onClick={scrollToFeatures}
           className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-muted-foreground hover:text-primary transition-colors animate-bounce-soft cursor-pointer"
         >
-          <span className="text-xs font-medium">Scroll to explore</span>
+          <span className="font-body text-base font-medium">Scroll to explore</span>
           <ChevronDown className="h-5 w-5" />
         </button>
       </div>

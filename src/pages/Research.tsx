@@ -107,7 +107,7 @@ const Research = () => {
             <h1 className="font-heading text-3xl lg:text-4xl font-bold text-foreground mb-4">
               Powerful Tools for Deep Research
             </h1>
-            <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
+            <p className="font-body text-muted-foreground max-w-2xl mx-auto text-lg">
               Each tool is designed to work seamlessly together, creating a comprehensive research ecosystem.
             </p>
           </div>
@@ -130,21 +130,21 @@ const Research = () => {
                       <h3 className="font-heading text-xl font-bold text-foreground">
                         {tool.title}
                       </h3>
-                      <p className={`text-sm font-medium ${tool.subtitleColor}`}>
+                      <p className={`font-body text-base font-medium ${tool.subtitleColor}`}>
                         {tool.subtitle}
                       </p>
                     </div>
                   </div>
 
                   {/* Description */}
-                  <p className="text-muted-foreground text-sm leading-relaxed mb-5">
+                  <p className="font-body text-muted-foreground text-base leading-relaxed mb-5">
                     {tool.description}
                   </p>
 
                   {/* Features - 2 columns */}
                   <div className="grid grid-cols-2 gap-x-4 gap-y-2 mb-6">
                     {tool.features.map((feature) => (
-                      <div key={feature} className="flex items-center gap-2 text-sm text-muted-foreground">
+                      <div key={feature} className="flex items-center gap-2 font-body text-base text-muted-foreground">
                         <CheckCircle className={`h-4 w-4 shrink-0 ${tool.iconColor}`} />
                         <span>{feature}</span>
                       </div>
@@ -175,7 +175,7 @@ const Research = () => {
             <h2 className="font-heading text-2xl lg:text-3xl font-bold text-foreground mb-3">
               How It Works
             </h2>
-            <p className="text-muted-foreground">
+            <p className="font-body text-base text-muted-foreground">
               A seamless research workflow from start to finish
             </p>
           </div>
@@ -192,8 +192,8 @@ const Research = () => {
                   <div className={`w-14 h-14 rounded-full ${item.bg} flex items-center justify-center mb-3 shadow-md`}>
                     <item.icon className="h-6 w-6 text-white" />
                   </div>
-                  <p className="font-semibold text-foreground">{item.label}</p>
-                  <p className="text-xs text-muted-foreground">{item.desc}</p>
+                  <p className="font-heading font-semibold text-foreground">{item.label}</p>
+                  <p className="font-body text-base text-muted-foreground">{item.desc}</p>
                 </div>
                 {index < 3 && (
                   <ArrowRight className="h-5 w-5 text-muted-foreground/40 hidden lg:block" />
@@ -220,7 +220,7 @@ const Research = () => {
           <h2 className="font-heading text-3xl lg:text-4xl font-bold text-white mb-4">
             Ready to Start Your Research?
           </h2>
-          <p className="text-white/70 mb-8 max-w-lg mx-auto">
+          <p className="font-body text-base text-white/70 mb-8 max-w-lg mx-auto">
             Join our scholarly community and get access to all research tools. Registered scholars can also contribute to the research database.
           </p>
 
