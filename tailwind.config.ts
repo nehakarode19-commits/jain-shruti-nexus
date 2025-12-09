@@ -90,10 +90,10 @@ export default {
           DEFAULT: "hsl(var(--sage))",
           light: "hsl(var(--sage-light))",
         },
-        /* #2B3A4A header/footer, #E07B39 primary orange */
+        /* #2B3A4A header/footer, #4A6FA5 primary blue */
         slate: {
           DEFAULT: "hsl(210 27% 23%)",
-          light: "hsl(24 72% 55%)",
+          light: "hsl(214 38% 47%)",
           dark: "hsl(210 30% 12%)",
         },
         ivory: "hsl(var(--ivory))",
