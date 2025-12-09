@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { 
   Users, 
   Plus, 
@@ -11,7 +11,8 @@ import {
   UserCheck,
   UserX,
   Filter,
-  Download
+  Download,
+  Loader2
 } from "lucide-react";
 import { AdminLayout } from "@/components/admin/AdminLayout";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -53,14 +54,17 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { supabase } from "@/integrations/supabase/client";
+import { useToast } from "@/hooks/use-toast";
 
-const mockUsers = [
-  { id: 1, name: "Dr. Ramesh Mehta", email: "ramesh@example.com", role: "scholar", status: "active", lastActive: "2 hours ago" },
-  { id: 2, name: "Priya Jain", email: "priya@example.com", role: "user", status: "active", lastActive: "1 day ago" },
-  { id: 3, name: "Anil Kumar", email: "anil@example.com", role: "librarian", status: "active", lastActive: "5 mins ago" },
-  { id: 4, name: "Sita Sharma", email: "sita@example.com", role: "admin", status: "active", lastActive: "Online" },
-  { id: 5, name: "Vikram Patel", email: "vikram@example.com", role: "scholar", status: "inactive", lastActive: "1 week ago" },
-];
+interface UserData {
+  id: string;
+  name: string;
+  email: string;
+  role: string;
+  status: string;
+  lastActive: string;
+}
 
 const roleColors: Record<string, string> = {
   user: "bg-muted text-muted-foreground",
@@ -80,11 +84,145 @@ const rolePermissions = [
 ];
 
 export default function UsersManagement() {
+  const { toast } = useToast();
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedRole, setSelectedRole] = useState("all");
   const [isAddDialogOpen, setIsAddDialogOpen] = useState(false);
+  const [users, setUsers] = useState<UserData[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [isCreating, setIsCreating] = useState(false);
+  
+  // Form state
+  const [newUserName, setNewUserName] = useState("");
+  const [newUserEmail, setNewUserEmail] = useState("");
+  const [newUserRole, setNewUserRole] = useState<string>("");
+  const [newUserPassword, setNewUserPassword] = useState("");
 
-  const filteredUsers = mockUsers.filter(user => {
+  // Fetch users from database
+  const fetchUsers = async () => {
+    setIsLoading(true);
+    try {
+      const { data: profiles, error } = await supabase
+        .from("profiles")
+        .select("*")
+        .order("created_at", { ascending: false });
+
+      if (error) throw error;
+
+      // Fetch roles for each user
+      const usersWithRoles: UserData[] = await Promise.all(
+        (profiles || []).map(async (profile) => {
+          const { data: roleData } = await supabase
+            .from("user_roles")
+            .select("role")
+            .eq("user_id", profile.user_id)
+            .maybeSingle();
+
+          return {
+            id: profile.user_id,
+            name: profile.full_name || profile.email?.split("@")[0] || "Unknown",
+            email: profile.email || "",
+            role: roleData?.role || "user",
+            status: "active",
+            lastActive: new Date(profile.updated_at).toLocaleDateString(),
+          };
+        })
+      );
+
+      setUsers(usersWithRoles);
+    } catch (error: any) {
+      console.error("Error fetching users:", error);
+      toast({
+        title: "Error",
+        description: "Failed to fetch users",
+        variant: "destructive",
+      });
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchUsers();
+  }, []);
+
+  const handleCreateUser = async () => {
+    if (!newUserName || !newUserEmail || !newUserPassword || !newUserRole) {
+      toast({
+        title: "Missing fields",
+        description: "Please fill in all required fields",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    if (newUserPassword.length < 6) {
+      toast({
+        title: "Password too short",
+        description: "Password must be at least 6 characters",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    setIsCreating(true);
+    try {
+      // Create user using Supabase Auth
+      const { data: authData, error: authError } = await supabase.auth.signUp({
+        email: newUserEmail,
+        password: newUserPassword,
+        options: {
+          emailRedirectTo: `${window.location.origin}/`,
+          data: {
+            full_name: newUserName,
+          },
+        },
+      });
+
+      if (authError) throw authError;
+
+      if (authData.user) {
+        // Assign role to the new user
+        const { error: roleError } = await supabase
+          .from("user_roles")
+          .insert({
+            user_id: authData.user.id,
+            role: newUserRole as any,
+          });
+
+        if (roleError) {
+          console.error("Role assignment error:", roleError);
+          // Continue anyway, role can be assigned later
+        }
+
+        toast({
+          title: "User created",
+          description: `${newUserName} has been created with ${newUserRole} role`,
+        });
+
+        // Reset form and close dialog
+        setNewUserName("");
+        setNewUserEmail("");
+        setNewUserRole("");
+        setNewUserPassword("");
+        setIsAddDialogOpen(false);
+        
+        // Refresh users list
+        fetchUsers();
+      }
+    } catch (error: any) {
+      console.error("Error creating user:", error);
+      toast({
+        title: "Error creating user",
+        description: error.message || "Failed to create user",
+        variant: "destructive",
+      });
+    } finally {
+      setIsCreating(false);
+    }
+  };
+
+  const filteredUsers = users.filter(user => {
     const matchesSearch = user.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
                           user.email.toLowerCase().includes(searchQuery.toLowerCase());
     const matchesRole = selectedRole === "all" || user.role === selectedRole;
@@ -115,15 +253,26 @@ export default function UsersManagement() {
               <div className="space-y-4 py-4">
                 <div className="space-y-2">
                   <Label>Full Name</Label>
-                  <Input placeholder="Enter full name" className="rounded-xl" />
+                  <Input 
+                    placeholder="Enter full name" 
+                    className="rounded-xl" 
+                    value={newUserName}
+                    onChange={(e) => setNewUserName(e.target.value)}
+                  />
                 </div>
                 <div className="space-y-2">
                   <Label>Email</Label>
-                  <Input type="email" placeholder="Enter email address" className="rounded-xl" />
+                  <Input 
+                    type="email" 
+                    placeholder="Enter email address" 
+                    className="rounded-xl" 
+                    value={newUserEmail}
+                    onChange={(e) => setNewUserEmail(e.target.value)}
+                  />
                 </div>
                 <div className="space-y-2">
                   <Label>Role</Label>
-                  <Select>
+                  <Select value={newUserRole} onValueChange={setNewUserRole}>
                     <SelectTrigger className="rounded-xl">
                       <SelectValue placeholder="Select role" />
                     </SelectTrigger>
@@ -132,19 +281,39 @@ export default function UsersManagement() {
                       <SelectItem value="scholar">Scholar</SelectItem>
                       <SelectItem value="librarian">Librarian</SelectItem>
                       <SelectItem value="admin">Admin</SelectItem>
+                      <SelectItem value="superadmin">Super Admin</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
                 <div className="space-y-2">
                   <Label>Password</Label>
-                  <Input type="password" placeholder="Set initial password" className="rounded-xl" />
+                  <Input 
+                    type="password" 
+                    placeholder="Set initial password (min 6 chars)" 
+                    className="rounded-xl" 
+                    value={newUserPassword}
+                    onChange={(e) => setNewUserPassword(e.target.value)}
+                  />
                 </div>
               </div>
               <DialogFooter>
                 <Button variant="outline" onClick={() => setIsAddDialogOpen(false)} className="rounded-xl">
                   Cancel
                 </Button>
-                <Button className="rounded-xl bg-primary">Create User</Button>
+                <Button 
+                  className="rounded-xl bg-primary" 
+                  onClick={handleCreateUser}
+                  disabled={isCreating}
+                >
+                  {isCreating ? (
+                    <>
+                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                      Creating...
+                    </>
+                  ) : (
+                    "Create User"
+                  )}
+                </Button>
               </DialogFooter>
             </DialogContent>
           </Dialog>
