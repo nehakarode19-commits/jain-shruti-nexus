@@ -11,7 +11,6 @@ import {
   User, 
   ArrowRight, 
   BookOpen,
-  Clock,
   Loader2
 } from "lucide-react";
 import { format } from "date-fns";
@@ -29,153 +28,110 @@ const Blog = () => {
 
   return (
     <Layout>
-      {/* Hero */}
-      <section className="py-16 lg:py-20 bg-gradient-hero lotus-pattern">
+      {/* Hero Section - Clean and Professional */}
+      <section className="py-16 lg:py-20 bg-[#E9EEF2]">
         <div className="container mx-auto px-4">
-          <div className="max-w-3xl mx-auto text-center animate-fade-up">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-secondary/80 border border-primary/20 text-sm mb-6">
-              <BookOpen className="h-4 w-4 text-primary" />
-              <span className="text-muted-foreground">{blogPosts.length} Articles</span>
-            </div>
-            <h1 className="font-display text-4xl sm:text-5xl font-bold text-foreground mb-6">
-              Blog & <span className="text-gradient-gold">Insights</span>
-            </h1>
-            <p className="text-lg text-muted-foreground">
-              Explore articles, research insights, and stories about Jain philosophy, 
-              Gurudev's teachings, and the preservation of ancient wisdom.
+          <div className="max-w-3xl mx-auto text-center">
+            <p className="text-[#4A6FA5] font-semibold mb-3 uppercase tracking-wider text-sm">
+              Our Blog
             </p>
+            <h1 className="font-heading text-4xl sm:text-5xl font-bold text-[#2B3A4A] mb-6">
+              Blogs & Articles
+            </h1>
+            <p className="text-lg text-[#555555] mb-4">
+              Explore articles, tributes, and stories about Gurudev Muni Jambuvijayji Maharaj, 
+              his teachings, and his invaluable contributions to Jain scholarship.
+            </p>
+            <div className="w-20 h-1 bg-[#4A6FA5] mx-auto rounded-full" />
           </div>
         </div>
       </section>
 
       {/* Search */}
-      <section className="py-8 bg-background border-b border-border">
+      <section className="py-6 bg-white border-b border-[#DCE3E7]">
         <div className="container mx-auto px-4">
-          <div className="flex flex-col md:flex-row gap-4 items-center justify-between">
+          <div className="flex flex-col md:flex-row gap-4 items-center justify-between max-w-5xl mx-auto">
             <div className="relative w-full md:w-96">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[#555555]" />
               <Input
                 placeholder="Search articles..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="pl-10"
+                className="pl-10 border-[#DCE3E7] focus:border-[#4A6FA5]"
               />
             </div>
+            <p className="text-sm text-[#555555]">
+              {filteredPosts.length} articles found
+            </p>
           </div>
         </div>
       </section>
 
       {/* Blog Posts Grid */}
-      <section className="py-12 lg:py-16 bg-background">
+      <section className="py-12 lg:py-16 bg-white">
         <div className="container mx-auto px-4">
           {isLoading ? (
             <div className="flex items-center justify-center py-16">
-              <Loader2 className="h-8 w-8 animate-spin text-primary" />
+              <Loader2 className="h-8 w-8 animate-spin text-[#4A6FA5]" />
             </div>
           ) : (
             <>
-              <div className="mb-6">
-                <p className="text-muted-foreground">
-                  Showing {filteredPosts.length} articles
-                </p>
-              </div>
-
-              {/* Featured Post */}
-              {filteredPosts.length > 0 && searchQuery === "" && (
-                <Card variant="feature" className="overflow-hidden max-w-5xl mx-auto mb-12">
-                  <div className="grid md:grid-cols-2">
-                    <div className="aspect-[4/3] md:aspect-auto overflow-hidden">
+              {/* Blog Cards - 3 Column Grid like Reference */}
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                {filteredPosts.map((post, index) => (
+                  <article 
+                    key={post.id}
+                    className="group bg-white rounded-xl overflow-hidden border border-[#DCE3E7] hover:shadow-xl hover:border-[#4A6FA5] transition-all duration-300"
+                  >
+                    {/* Image */}
+                    <div className="aspect-[4/3] overflow-hidden">
                       <img 
-                        src={filteredPosts[0].cover_image || "https://siddhijambuparivar.com/wp-content/uploads/2022/11/96-min.jpg"}
-                        alt={filteredPosts[0].title}
-                        className="w-full h-full object-cover"
+                        src={post.cover_image || "https://siddhijambuparivar.com/wp-content/uploads/2022/11/96-min.jpg"}
+                        alt={post.title}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                       />
                     </div>
-                    <CardContent className="p-8 flex flex-col justify-center">
-                      <div className="flex items-center gap-3 mb-4">
-                        <span className="px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-medium">
-                          Featured
-                        </span>
-                      </div>
-                      <h2 className="font-display text-2xl font-bold text-foreground mb-4">
-                        {filteredPosts[0].title}
+
+                    {/* Content */}
+                    <div className="p-6">
+                      <h2 className="font-heading text-xl font-bold text-[#2B3A4A] mb-3 line-clamp-2 group-hover:text-[#4A6FA5] transition-colors">
+                        {post.title}
                       </h2>
-                      <p className="text-muted-foreground mb-6">
-                        {filteredPosts[0].excerpt}
+                      
+                      <p className="text-[#555555] text-sm leading-relaxed mb-5 line-clamp-4">
+                        {post.excerpt}
                       </p>
-                      <div className="flex items-center gap-4 text-sm text-muted-foreground mb-6">
-                        <div className="flex items-center gap-2">
-                          <User className="h-4 w-4" />
-                          <span>{filteredPosts[0].author || "Editorial Team"}</span>
-                        </div>
-                        <div className="flex items-center gap-2">
-                          <Calendar className="h-4 w-4" />
-                          <span>{format(new Date(filteredPosts[0].created_at), "MMM d, yyyy")}</span>
-                        </div>
-                      </div>
-                      <Button variant="hero" className="w-fit" asChild>
-                        <Link to={`/community/blog/${filteredPosts[0].id}`}>
-                          Read Article
+
+                      {/* Read More Button */}
+                      <Button 
+                        variant="outline"
+                        asChild
+                        className="border-[#4A6FA5] text-[#4A6FA5] hover:bg-[#4A6FA5] hover:text-white"
+                      >
+                        <Link to={`/community/blog/${post.id}`}>
+                          Read More
                           <ArrowRight className="h-4 w-4 ml-2" />
                         </Link>
                       </Button>
-                    </CardContent>
-                  </div>
-                </Card>
-              )}
-
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {filteredPosts.slice(searchQuery === "" ? 1 : 0).map((post, index) => (
-                  <Link 
-                    key={post.id} 
-                    to={`/community/blog/${post.id}`}
-                    className="group"
-                  >
-                    <Card 
-                      variant="interactive"
-                      className="overflow-hidden animate-fade-up h-full"
-                      style={{ animationDelay: `${index * 100}ms` }}
-                    >
-                      <div className="aspect-[16/10] overflow-hidden">
-                        <img 
-                          src={post.cover_image || "https://siddhijambuparivar.com/wp-content/uploads/2022/11/96-min.jpg"}
-                          alt={post.title}
-                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                        />
-                      </div>
-                      <CardContent className="p-6">
-                        <h3 className="font-display text-lg font-semibold text-foreground mb-2 line-clamp-2 group-hover:text-primary transition-colors">
-                          {post.title}
-                        </h3>
-                        <p className="text-sm text-muted-foreground mb-4 line-clamp-2">
-                          {post.excerpt}
-                        </p>
-                        <div className="flex items-center justify-between">
-                          <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                            <User className="h-3 w-3" />
-                            <span>{post.author || "Editorial Team"}</span>
-                          </div>
-                          <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                            <Calendar className="h-3 w-3" />
-                            <span>{format(new Date(post.created_at), "MMM d, yyyy")}</span>
-                          </div>
-                        </div>
-                      </CardContent>
-                    </Card>
-                  </Link>
+                    </div>
+                  </article>
                 ))}
               </div>
 
               {filteredPosts.length === 0 && (
-                <div className="text-center py-16">
-                  <BookOpen className="h-16 w-16 text-muted-foreground/30 mx-auto mb-4" />
-                  <h3 className="font-display text-xl font-semibold text-foreground mb-2">
+                <div className="text-center py-16 max-w-md mx-auto">
+                  <BookOpen className="h-16 w-16 text-[#DCE3E7] mx-auto mb-4" />
+                  <h3 className="font-heading text-xl font-semibold text-[#2B3A4A] mb-2">
                     No articles found
                   </h3>
-                  <p className="text-muted-foreground mb-4">
+                  <p className="text-[#555555] mb-4">
                     Try adjusting your search criteria
                   </p>
-                  <Button variant="outline" onClick={() => setSearchQuery("")}>
+                  <Button 
+                    variant="outline" 
+                    onClick={() => setSearchQuery("")}
+                    className="border-[#4A6FA5] text-[#4A6FA5]"
+                  >
                     Clear Search
                   </Button>
                 </div>
@@ -186,17 +142,24 @@ const Blog = () => {
       </section>
 
       {/* Subscribe CTA */}
-      <section className="py-16 bg-gradient-spiritual">
+      <section className="py-16 bg-[#2B3A4A]">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="font-display text-2xl font-bold text-foreground mb-4">
+          <h2 className="font-heading text-2xl md:text-3xl font-bold text-white mb-4">
             Stay Updated
           </h2>
-          <p className="text-muted-foreground mb-6 max-w-xl mx-auto">
-            Subscribe to receive the latest articles and insights about Jain philosophy and research
+          <p className="text-white/70 mb-8 max-w-xl mx-auto">
+            Subscribe to receive the latest articles and insights about Jain philosophy, 
+            Gurudev's teachings, and research updates.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
-            <Input placeholder="Enter your email" type="email" />
-            <Button variant="hero">Subscribe</Button>
+            <Input 
+              placeholder="Enter your email" 
+              type="email" 
+              className="bg-white/10 border-white/20 text-white placeholder:text-white/50"
+            />
+            <Button className="bg-[#4A6FA5] hover:bg-[#3A5F95] text-white">
+              Subscribe
+            </Button>
           </div>
         </div>
       </section>
