@@ -4,9 +4,27 @@
 
 /* Fonts are loaded via index.html for better performance */
 
-/* Global Smooth Scrolling */
+/* Global Smooth Scrolling - All devices */
 html {
   scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch; /* iOS smooth scrolling */
+}
+
+/* Ensure smooth scrolling on all scrollable elements */
+* {
+  scroll-behavior: smooth;
+}
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  html, * {
+    scroll-behavior: auto;
+  }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
 
 @layer base {
@@ -888,4 +906,88 @@ html {
   50% {
     box-shadow: 0 0 40px hsl(var(--primary) / 0.5);
   }
+}
+
+/* Enhanced Button Micro-interactions */
+button, .btn, [role="button"] {
+  transition: all 0.2s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+button:active, .btn:active, [role="button"]:active {
+  transform: scale(0.98);
+}
+
+/* Card Hover Lift Effect */
+.card-hover {
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), 
+              box-shadow 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.card-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-elevated);
+}
+
+/* Link Underline Animation */
+.link-animated {
+  position: relative;
+  text-decoration: none;
+}
+
+.link-animated::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: -2px;
+  left: 0;
+  background-color: hsl(var(--primary));
+  transition: width 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.link-animated:hover::after {
+  width: 100%;
+}
+
+/* Image Zoom on Hover */
+.img-zoom {
+  overflow: hidden;
+}
+
+.img-zoom img {
+  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.img-zoom:hover img {
+  transform: scale(1.08);
+}
+
+/* Fade on Scroll - applies to sections */
+.fade-section {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.fade-section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Smooth anchor scrolling offset for fixed header */
+html {
+  scroll-padding-top: 80px;
+}
+
+/* Focus visible for keyboard navigation */
+:focus-visible {
+  outline: 2px solid hsl(var(--primary));
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Selection styling */
+::selection {
+  background-color: hsl(var(--primary) / 0.2);
+  color: hsl(var(--foreground));
 }
