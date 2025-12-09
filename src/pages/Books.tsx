@@ -1,16 +1,19 @@
 import { useState } from "react";
 import { Layout } from "@/components/layout/Layout";
-import { books, bookCategories } from "@/data/gurudevData";
+import { useBooksFromDB } from "@/hooks/useContent";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Search, ExternalLink, BookOpen, Filter, Globe } from "lucide-react";
+import { Search, ExternalLink, BookOpen, Filter, Globe, Loader2 } from "lucide-react";
 import { Link } from "react-router-dom";
+
+const bookCategories = ["All", "Agama", "Sutra", "Commentary", "Grammar", "Research"];
 
 const Books = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All");
+  const { data: books = [], isLoading } = useBooksFromDB();
 
   const filteredBooks = books.filter((book) => {
     const matchesSearch = book.title.toLowerCase().includes(searchQuery.toLowerCase());
@@ -75,78 +78,86 @@ const Books = () => {
       {/* Books Grid */}
       <section className="py-12 lg:py-16 bg-background">
         <div className="container mx-auto px-4">
-          <div className="mb-6 flex items-center justify-between">
-            <p className="text-muted-foreground">
-              Showing {filteredBooks.length} of {books.length} books
-            </p>
-            {selectedCategory !== "All" && (
-              <Badge variant="secondary" className="gap-1">
-                <Filter className="h-3 w-3" />
-                {selectedCategory}
-              </Badge>
-            )}
-          </div>
-
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-6">
-            {filteredBooks.map((book, index) => (
-              <Link
-                key={book.id}
-                to={`/books/${book.id}`}
-                className="group"
-              >
-                <Card 
-                  variant="interactive" 
-                  className="overflow-hidden h-full animate-fade-up"
-                  style={{ animationDelay: `${(index % 12) * 50}ms` }}
-                >
-                  <div className="aspect-square bg-secondary/50 overflow-hidden relative">
-                    <img
-                      src={book.image}
-                      alt={book.title}
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                    />
-                    {book.category && (
-                      <Badge 
-                        variant="secondary" 
-                        className="absolute top-2 left-2 text-[10px] bg-background/90 backdrop-blur-sm"
-                      >
-                        {book.category}
-                      </Badge>
-                    )}
-                  </div>
-                  <CardContent className="p-4">
-                    <h3 className="font-heading font-semibold text-foreground line-clamp-2 group-hover:text-primary transition-colors mb-2">
-                      {book.title}
-                    </h3>
-                    {book.language && (
-                      <div className="flex items-center gap-1 font-body text-muted-foreground mb-2">
-                        <Globe className="h-3 w-3" />
-                        <span>{book.language}</span>
-                      </div>
-                    )}
-                    <div className="flex items-center gap-1 font-body text-primary">
-                      <ExternalLink className="h-3 w-3" />
-                      <span>View Details</span>
-                    </div>
-                  </CardContent>
-                </Card>
-              </Link>
-            ))}
-          </div>
-
-          {filteredBooks.length === 0 && (
-            <div className="text-center py-16">
-              <BookOpen className="h-16 w-16 text-muted-foreground/30 mx-auto mb-4" />
-              <h3 className="font-heading text-xl font-semibold text-foreground mb-2">
-                No books found
-              </h3>
-              <p className="font-body text-muted-foreground mb-4">
-                Try adjusting your search or filter criteria
-              </p>
-              <Button variant="outline" onClick={() => { setSearchQuery(""); setSelectedCategory("All"); }}>
-                Clear Filters
-              </Button>
+          {isLoading ? (
+            <div className="flex items-center justify-center py-16">
+              <Loader2 className="h-8 w-8 animate-spin text-primary" />
             </div>
+          ) : (
+            <>
+              <div className="mb-6 flex items-center justify-between">
+                <p className="text-muted-foreground">
+                  Showing {filteredBooks.length} of {books.length} books
+                </p>
+                {selectedCategory !== "All" && (
+                  <Badge variant="secondary" className="gap-1">
+                    <Filter className="h-3 w-3" />
+                    {selectedCategory}
+                  </Badge>
+                )}
+              </div>
+
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-6">
+                {filteredBooks.map((book, index) => (
+                  <Link
+                    key={book.id}
+                    to={`/books/${book.id}`}
+                    className="group"
+                  >
+                    <Card 
+                      variant="interactive" 
+                      className="overflow-hidden h-full animate-fade-up"
+                      style={{ animationDelay: `${(index % 12) * 50}ms` }}
+                    >
+                      <div className="aspect-square bg-secondary/50 overflow-hidden relative">
+                        <img
+                          src={book.cover_image || "https://via.placeholder.com/300x300?text=No+Cover"}
+                          alt={book.title}
+                          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                        />
+                        {book.category && (
+                          <Badge 
+                            variant="secondary" 
+                            className="absolute top-2 left-2 text-[10px] bg-background/90 backdrop-blur-sm"
+                          >
+                            {book.category}
+                          </Badge>
+                        )}
+                      </div>
+                      <CardContent className="p-4">
+                        <h3 className="font-heading font-semibold text-foreground line-clamp-2 group-hover:text-primary transition-colors mb-2">
+                          {book.title}
+                        </h3>
+                        {book.language && (
+                          <div className="flex items-center gap-1 font-body text-muted-foreground mb-2">
+                            <Globe className="h-3 w-3" />
+                            <span>{book.language}</span>
+                          </div>
+                        )}
+                        <div className="flex items-center gap-1 font-body text-primary">
+                          <ExternalLink className="h-3 w-3" />
+                          <span>View Details</span>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  </Link>
+                ))}
+              </div>
+
+              {filteredBooks.length === 0 && (
+                <div className="text-center py-16">
+                  <BookOpen className="h-16 w-16 text-muted-foreground/30 mx-auto mb-4" />
+                  <h3 className="font-heading text-xl font-semibold text-foreground mb-2">
+                    No books found
+                  </h3>
+                  <p className="font-body text-muted-foreground mb-4">
+                    Try adjusting your search or filter criteria
+                  </p>
+                  <Button variant="outline" onClick={() => { setSearchQuery(""); setSelectedCategory("All"); }}>
+                    Clear Filters
+                  </Button>
+                </div>
+              )}
+            </>
           )}
         </div>
       </section>
