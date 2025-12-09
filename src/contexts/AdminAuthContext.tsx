@@ -197,18 +197,10 @@ export function AdminAuthProvider({ children }: { children: ReactNode }) {
   };
 
   const hasRole = (roles: UserRole | UserRole[]): boolean => {
-    if (!user) return false;
-    const roleArray = Array.isArray(roles) ? roles : [roles];
-    
-    // Superadmin has all permissions
-    if (user.role === "superadmin") return true;
-    
-    // Admin has access to admin, librarian, scholar, user
-    if (user.role === "admin" && roleArray.some(r => ["admin", "librarian", "scholar", "user"].includes(r))) {
-      return true;
-    }
-    
-    return roleArray.includes(user.role);
+    // DEMO MODE: Always return true for authenticated users
+    // This bypasses role checks for client demo purposes
+    if (isAuthenticated) return true;
+    return false;
   };
 
   return (

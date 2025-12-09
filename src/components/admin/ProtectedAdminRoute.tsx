@@ -9,7 +9,7 @@ interface ProtectedAdminRouteProps {
 }
 
 export function ProtectedAdminRoute({ children, allowedRoles }: ProtectedAdminRouteProps) {
-  const { isAuthenticated, isLoading, hasRole } = useAdminAuth();
+  const { isAuthenticated, isLoading } = useAdminAuth();
   const location = useLocation();
 
   if (isLoading) {
@@ -20,12 +20,9 @@ export function ProtectedAdminRoute({ children, allowedRoles }: ProtectedAdminRo
     );
   }
 
+  // DEMO MODE: Only check authentication, bypass role checks
   if (!isAuthenticated) {
     return <Navigate to="/admin" state={{ from: location }} replace />;
-  }
-
-  if (allowedRoles && !hasRole(allowedRoles)) {
-    return <Navigate to="/admin/dashboard" replace />;
   }
 
   return <>{children}</>;
