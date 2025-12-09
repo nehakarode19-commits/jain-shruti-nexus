@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Scroll, ArrowRight, BookOpen, Mic, FileText, Lock } from "lucide-react";
+import { Scroll, ArrowRight, BookOpen, Mic, FileText } from "lucide-react";
 
 const guruvaniItems = [
   {
@@ -76,33 +76,14 @@ export function GuruvaniPreview() {
           ))}
         </div>
 
-        {/* Access Notice */}
-        <div className="max-w-2xl mx-auto">
-          <div className="flex items-start gap-4 p-6 rounded-xl bg-secondary/50 border border-border">
-            <Lock className="h-5 w-5 text-muted-foreground shrink-0 mt-0.5" />
-            <div className="flex-1">
-              <p className="font-body text-base text-foreground font-medium mb-1">
-                Restricted Content Available
-              </p>
-              <p className="font-body text-base text-muted-foreground mb-4">
-                Some Guruvani materials require authentication and approval. 
-                Scholars and registered users can request access to restricted teachings.
-              </p>
-              <div className="flex flex-wrap gap-3">
-                <Button variant="spiritual" size="sm" asChild>
-                  <Link to="/guruvani">
-                    Browse Guruvani
-                    <ArrowRight className="h-4 w-4 ml-2" />
-                  </Link>
-                </Button>
-                <Button variant="outline" size="sm" asChild>
-                  <Link to="/auth">
-                    Sign In / Register
-                  </Link>
-                </Button>
-              </div>
-            </div>
-          </div>
+        {/* Browse CTA */}
+        <div className="text-center">
+          <Button variant="spiritual" size="lg" asChild>
+            <Link to="/guruvani">
+              Browse Guruvani
+              <ArrowRight className="h-4 w-4 ml-2" />
+            </Link>
+          </Button>
         </div>
       </div>
     </section>
