@@ -45,111 +45,118 @@ const latestPosts = [
 
 export function CommunitySection() {
   return (
-    <section className="py-16 lg:py-20 bg-background">
-      <div className="container mx-auto px-4 space-y-16">
-        {/* Events Section */}
-        <div>
-          <div className="text-center mb-10">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-medium mb-4">
-              <Calendar className="h-4 w-4" />
-              Upcoming Events
+    <section className="py-20 lg:py-28 bg-[#2B3A4A]">
+      <div className="container mx-auto px-4">
+        <div className="grid lg:grid-cols-2 gap-12">
+          {/* Events Section */}
+          <div>
+            <div className="mb-8">
+              <p className="text-[#4A6FA5] font-semibold mb-2 uppercase tracking-wider text-sm">Stay Connected</p>
+              <h2 className="font-heading text-2xl md:text-3xl font-bold text-white mb-3">
+                Upcoming Events
+              </h2>
+              <p className="text-white/70">
+                Join us in celebrating Gurudev's legacy through community gatherings.
+              </p>
             </div>
-            <h2 className="font-heading text-2xl md:text-3xl font-bold text-foreground mb-3">
-              Join Our Community Gatherings
-            </h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto">
-              Participate in lectures, workshops, and spiritual events that bring our community together
-            </p>
-          </div>
 
-          <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-            {upcomingEvents.map((event) => (
-              <div 
-                key={event.title}
-                className="flex gap-4 p-5 rounded-2xl bg-card border border-border hover:border-primary/30 hover:shadow-lg transition-all group"
-              >
-                <img 
-                  src={event.image} 
-                  alt={event.title}
-                  className="w-24 h-24 rounded-xl object-cover flex-shrink-0"
-                />
-                <div className="flex-1 min-w-0">
-                  <span className="text-xs px-2 py-1 rounded-full bg-primary/10 text-primary font-medium">
-                    {event.type}
-                  </span>
-                  <h3 className="font-semibold text-foreground mt-2 group-hover:text-primary transition-colors">
-                    {event.title}
-                  </h3>
-                  <p className="text-sm text-muted-foreground mt-1 line-clamp-2">{event.description}</p>
-                  <div className="flex items-center gap-3 mt-2 text-xs text-muted-foreground">
-                    <span className="flex items-center gap-1">
-                      <Calendar className="h-3 w-3" />
-                      {event.date}
-                    </span>
-                    <span className="flex items-center gap-1">
-                      <MapPin className="h-3 w-3" />
-                      {event.location}
-                    </span>
+            <div className="space-y-4 mb-6">
+              {upcomingEvents.map((event, index) => (
+                <Link
+                  key={index}
+                  to="/community/events"
+                  className="group flex gap-4 p-4 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 hover:border-white/20 transition-all"
+                >
+                  <div className="w-20 h-20 rounded-lg overflow-hidden flex-shrink-0">
+                    <img
+                      src={event.image}
+                      alt={event.title}
+                      className="w-full h-full object-cover"
+                    />
                   </div>
-                </div>
-              </div>
-            ))}
-          </div>
+                  <div className="flex-1 min-w-0">
+                    <span className="inline-block px-2 py-0.5 rounded bg-[#4A6FA5]/30 text-[#4A6FA5] text-xs font-medium mb-2">
+                      {event.type}
+                    </span>
+                    <h3 className="font-semibold text-white group-hover:text-[#4A6FA5] transition-colors line-clamp-1">
+                      {event.title}
+                    </h3>
+                    <div className="flex flex-wrap gap-3 mt-2 text-xs text-white/60">
+                      <span className="flex items-center gap-1">
+                        <Calendar className="h-3 w-3" />
+                        {event.date}
+                      </span>
+                      <span className="flex items-center gap-1">
+                        <MapPin className="h-3 w-3" />
+                        {event.location}
+                      </span>
+                    </div>
+                  </div>
+                </Link>
+              ))}
+            </div>
 
-          <div className="text-center mt-8">
-            <Button variant="outline" asChild>
+            <Button 
+              variant="outline" 
+              asChild
+              className="border-white/30 text-white hover:bg-white/10"
+            >
               <Link to="/community/events">
                 View All Events
                 <ArrowRight className="h-4 w-4 ml-2" />
               </Link>
             </Button>
           </div>
-        </div>
 
-        {/* Blog Section */}
-        <div>
-          <div className="text-center mb-10">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-sage/10 text-sage text-sm font-medium mb-4">
-              <BookOpen className="h-4 w-4" />
-              Latest Insights
+          {/* Blog Section */}
+          <div>
+            <div className="mb-8">
+              <p className="text-[#4A6FA5] font-semibold mb-2 uppercase tracking-wider text-sm">From Our Blog</p>
+              <h2 className="font-heading text-2xl md:text-3xl font-bold text-white mb-3">
+                Latest Insights
+              </h2>
+              <p className="text-white/70">
+                Articles and reflections on Gurudev's teachings and Jain philosophy.
+              </p>
             </div>
-            <h2 className="font-heading text-2xl md:text-3xl font-bold text-foreground mb-3">
-              Explore Our Articles & Research
-            </h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto">
-              Dive into articles about Jain philosophy, history, and Gurudev's teachings
-            </p>
-          </div>
 
-          <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-            {latestPosts.map((post) => (
-              <div 
-                key={post.title}
-                className="flex gap-4 p-5 rounded-2xl bg-card border border-border hover:border-sage/30 hover:shadow-lg transition-all group"
-              >
-                <img 
-                  src={post.image} 
-                  alt={post.title}
-                  className="w-24 h-24 rounded-xl object-cover flex-shrink-0"
-                />
-                <div className="flex-1 min-w-0">
-                  <div className="flex items-center gap-2">
-                    <span className="text-xs px-2 py-1 rounded-full bg-sage/10 text-sage font-medium">
-                      {post.category}
-                    </span>
-                    <span className="text-xs text-muted-foreground">{post.date}</span>
+            <div className="space-y-4 mb-6">
+              {latestPosts.map((post, index) => (
+                <Link
+                  key={index}
+                  to="/community/blog"
+                  className="group flex gap-4 p-4 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 hover:border-white/20 transition-all"
+                >
+                  <div className="w-20 h-20 rounded-lg overflow-hidden flex-shrink-0">
+                    <img
+                      src={post.image}
+                      alt={post.title}
+                      className="w-full h-full object-cover"
+                    />
                   </div>
-                  <h3 className="font-semibold text-foreground mt-2 group-hover:text-sage transition-colors">
-                    {post.title}
-                  </h3>
-                  <p className="text-sm text-muted-foreground mt-1 line-clamp-2">{post.excerpt}</p>
-                </div>
-              </div>
-            ))}
-          </div>
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center gap-2 mb-2">
+                      <span className="px-2 py-0.5 rounded bg-[#4A6FA5]/30 text-[#4A6FA5] text-xs font-medium">
+                        {post.category}
+                      </span>
+                      <span className="text-xs text-white/50">{post.date}</span>
+                    </div>
+                    <h3 className="font-semibold text-white group-hover:text-[#4A6FA5] transition-colors line-clamp-1">
+                      {post.title}
+                    </h3>
+                    <p className="text-sm text-white/60 line-clamp-1 mt-1">
+                      {post.excerpt}
+                    </p>
+                  </div>
+                </Link>
+              ))}
+            </div>
 
-          <div className="text-center mt-8">
-            <Button variant="outline" asChild>
+            <Button 
+              variant="outline" 
+              asChild
+              className="border-white/30 text-white hover:bg-white/10"
+            >
               <Link to="/community/blog">
                 Read More Articles
                 <ArrowRight className="h-4 w-4 ml-2" />

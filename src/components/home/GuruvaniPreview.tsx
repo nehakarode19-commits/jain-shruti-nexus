@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Scroll, ArrowRight, BookOpen, Mic, FileText, Calendar } from "lucide-react";
+import { ArrowRight, BookOpen, Mic, FileText, Calendar } from "lucide-react";
 
 // Using project images for guruvani
 import guruvaniImg1 from "@/assets/books/guruvani-1.jpg";
@@ -42,25 +42,18 @@ const guruvaniItems = [
 
 export function GuruvaniPreview() {
   return (
-    <section className="py-16 lg:py-24 bg-background relative">
-      {/* Subtle pattern overlay */}
-      <div className="absolute inset-0 opacity-[0.02] pointer-events-none" style={{
-        backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23000000' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-      }} />
-      
-      <div className="container mx-auto px-4 relative">
+    <section className="py-20 lg:py-28 bg-white">
+      <div className="container mx-auto px-4">
         {/* Section Header */}
-        <div className="text-center mb-12">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 mb-4">
-            <Scroll className="h-4 w-4 text-primary" />
-            <span className="text-sm text-primary font-medium">Sacred Teachings</span>
-          </div>
-          <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground mb-4">
+        <div className="text-center mb-14">
+          <p className="text-[#4A6FA5] font-semibold mb-3 uppercase tracking-wider text-sm">Sacred Teachings</p>
+          <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold text-[#2B3A4A] mb-4">
             Guruvani
           </h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-[#555555] max-w-2xl mx-auto text-lg">
             Explore the profound discourses and spiritual guidance from Gurudev Muni Jambuvijayji.
           </p>
+          <div className="w-20 h-1 bg-[#4A6FA5] mx-auto mt-5 rounded-full" />
         </div>
 
         {/* Preview Cards with Images */}
@@ -69,7 +62,7 @@ export function GuruvaniPreview() {
             <Link 
               key={item.title}
               to="/guruvani"
-              className="group rounded-2xl bg-card border border-border/50 hover:border-primary/30 hover:shadow-elevated transition-all overflow-hidden"
+              className="group rounded-2xl bg-white border border-[#DCE3E7] hover:border-[#4A6FA5] hover:shadow-xl transition-all overflow-hidden"
             >
               {/* Image */}
               <div className="aspect-[4/3] overflow-hidden relative">
@@ -79,7 +72,7 @@ export function GuruvaniPreview() {
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 />
                 <div className="absolute top-3 left-3">
-                  <span className="px-3 py-1 rounded-full bg-card/90 backdrop-blur-sm text-xs font-medium text-primary border border-primary/20">
+                  <span className="px-3 py-1 rounded-full bg-white/90 text-xs font-medium text-[#4A6FA5]">
                     {item.category}
                   </span>
                 </div>
@@ -88,10 +81,10 @@ export function GuruvaniPreview() {
               {/* Content */}
               <div className="p-5">
                 <div className="flex items-center gap-2 mb-3">
-                  <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center">
-                    <item.icon className="h-4 w-4 text-primary" />
+                  <div className="w-8 h-8 rounded-lg bg-[#4A6FA5]/10 flex items-center justify-center">
+                    <item.icon className="h-4 w-4 text-[#4A6FA5]" />
                   </div>
-                  <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                  <div className="flex items-center gap-2 text-xs text-[#555555]">
                     <span>{item.type}</span>
                     <span>•</span>
                     <Calendar className="h-3 w-3" />
@@ -99,17 +92,17 @@ export function GuruvaniPreview() {
                   </div>
                 </div>
                 
-                <h3 className="font-heading font-semibold text-foreground mb-1 text-lg">
+                <h3 className="font-heading font-semibold text-[#2B3A4A] mb-1 text-lg group-hover:text-[#4A6FA5] transition-colors">
                   {item.title}
                 </h3>
-                <p className="text-sm text-muted-foreground mb-3">
+                <p className="text-sm text-[#4A6FA5] mb-3">
                   {item.subtitle}
                 </p>
-                <p className="text-sm text-muted-foreground line-clamp-3 leading-relaxed">
+                <p className="text-sm text-[#555555] line-clamp-3 leading-relaxed">
                   {item.excerpt}
                 </p>
                 
-                <div className="mt-4 flex items-center gap-1 text-primary text-sm font-medium group-hover:gap-2 transition-all">
+                <div className="mt-4 flex items-center gap-1 text-[#4A6FA5] text-sm font-medium group-hover:gap-2 transition-all">
                   <span>Read More</span>
                   <ArrowRight className="h-4 w-4" />
                 </div>
@@ -120,7 +113,11 @@ export function GuruvaniPreview() {
 
         {/* CTA */}
         <div className="text-center">
-          <Button variant="outline" size="lg" asChild className="border-primary/30 text-primary hover:bg-primary/10">
+          <Button 
+            size="lg" 
+            asChild
+            className="bg-[#4A6FA5] hover:bg-[#3A5F95] text-white"
+          >
             <Link to="/guruvani">
               Browse All Guruvani
               <ArrowRight className="h-4 w-4 ml-2" />

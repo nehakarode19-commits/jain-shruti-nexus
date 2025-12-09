@@ -1,86 +1,120 @@
+import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, BookOpen, Globe, FileText, GraduationCap } from "lucide-react";
-import { useEffect, useState } from "react";
+import { BookOpen, Users, ScrollText, Image, ArrowRight } from "lucide-react";
 
-const stats = [
-  { value: 10000, suffix: "+", label: "Research Entries", icon: FileText },
-  { value: 5000, suffix: "+", label: "Manuscripts", icon: BookOpen },
-  { value: 1200, suffix: "+", label: "Scholars", icon: GraduationCap },
-  { value: 50, suffix: "+", label: "Countries", icon: Globe },
-];
-
-function AnimatedCounter({ value, suffix }: { value: number; suffix: string }) {
+// Animated counter component
+const AnimatedCounter = ({ target, suffix = "" }: { target: number; suffix?: string }) => {
   const [count, setCount] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) setIsVisible(true);
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+        }
       },
       { threshold: 0.1 }
     );
-    const element = document.getElementById(`counter-${value}`);
-    if (element) observer.observe(element);
+
+    if (ref.current) {
+      observer.observe(ref.current);
+    }
+
     return () => observer.disconnect();
-  }, [value]);
+  }, []);
 
   useEffect(() => {
-    if (!isVisible) return;
-    let startTime: number;
-    const step = (timestamp: number) => {
-      if (!startTime) startTime = timestamp;
-      const progress = Math.min((timestamp - startTime) / 2000, 1);
-      setCount(Math.floor(progress * value));
-      if (progress < 1) requestAnimationFrame(step);
-    };
-    requestAnimationFrame(step);
-  }, [isVisible, value]);
+    if (isVisible) {
+      const duration = 2000;
+      const steps = 60;
+      const increment = target / steps;
+      let current = 0;
 
-  return <span id={`counter-${value}`}>{count.toLocaleString()}{suffix}</span>;
-}
+      const timer = setInterval(() => {
+        current += increment;
+        if (current >= target) {
+          setCount(target);
+          clearInterval(timer);
+        } else {
+          setCount(Math.floor(current));
+        }
+      }, duration / steps);
+
+      return () => clearInterval(timer);
+    }
+  }, [isVisible, target]);
+
+  return <div ref={ref}>{count.toLocaleString()}{suffix}</div>;
+};
+
+const stats = [
+  { icon: BookOpen, value: 5000, suffix: "+", label: "Digital Texts" },
+  { icon: ScrollText, value: 1200, suffix: "+", label: "Manuscripts" },
+  { icon: Users, value: 10000, suffix: "+", label: "Scholars" },
+  { icon: Image, value: 3000, suffix: "+", label: "Photos" },
+];
 
 export function CTASection() {
   return (
-    <section className="py-16 lg:py-24 bg-primary/5">
+    <section className="py-20 lg:py-28 bg-white">
       <div className="container mx-auto px-4">
-        {/* Stats */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-14">
-          {stats.map((stat) => (
+        {/* Stats Grid */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16">
+          {stats.map((stat, index) => (
             <div 
-              key={stat.label}
-              className="text-center p-6 rounded-2xl bg-card border border-border/50"
+              key={index}
+              className="text-center p-6 rounded-2xl bg-[#E9EEF2] border border-[#DCE3E7]"
             >
-              <div className="w-12 h-12 mx-auto mb-3 rounded-xl bg-primary/10 flex items-center justify-center">
-                <stat.icon className="h-6 w-6 text-primary" />
+              <div className="w-14 h-14 mx-auto rounded-xl bg-[#4A6FA5]/10 flex items-center justify-center mb-4">
+                <stat.icon className="h-7 w-7 text-[#4A6FA5]" />
               </div>
-              <p className="font-heading text-3xl md:text-4xl font-bold text-primary mb-1">
-                <AnimatedCounter value={stat.value} suffix={stat.suffix} />
-              </p>
-              <p className="text-sm text-muted-foreground">{stat.label}</p>
+              <div className="font-heading text-3xl md:text-4xl font-bold text-[#2B3A4A] mb-1">
+                <AnimatedCounter target={stat.value} suffix={stat.suffix} />
+              </div>
+              <p className="text-[#555555] font-medium">{stat.label}</p>
             </div>
           ))}
         </div>
 
         {/* CTA Box */}
-        <div className="text-center max-w-2xl mx-auto p-8 rounded-2xl bg-card border border-border/50">
-          <h2 className="font-heading text-2xl md:text-3xl font-bold text-foreground mb-3">
-            Ready to Begin Your Journey?
-          </h2>
-          <p className="text-muted-foreground mb-6">
-            Explore sacred texts, connect with scholars, and discover the profound wisdom of Jain philosophy.
-          </p>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Button variant="hero" size="lg" asChild>
-              <Link to="/about">
-                Learn About Our Mission
-                <ArrowRight className="h-4 w-4 ml-2" />
-              </Link>
-            </Button>
-            <Button variant="outline" size="lg" asChild>
-              <Link to="/contact">Contact Us</Link>
-            </Button>
+        <div className="rounded-3xl bg-[#2B3A4A] p-8 md:p-12 text-center relative overflow-hidden">
+          {/* Decorative elements */}
+          <div className="absolute top-0 left-0 w-64 h-64 bg-[#4A6FA5]/10 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2" />
+          <div className="absolute bottom-0 right-0 w-48 h-48 bg-[#4A6FA5]/10 rounded-full blur-2xl translate-x-1/2 translate-y-1/2" />
+          
+          <div className="relative">
+            <h2 className="font-heading text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-4">
+              Begin Your Journey of Knowledge
+            </h2>
+            <p className="text-white/70 max-w-2xl mx-auto mb-8 text-lg">
+              Join thousands of scholars, seekers, and community members in preserving 
+              and exploring the profound wisdom of Jain philosophy through Gurudev's teachings.
+            </p>
+            <div className="flex flex-wrap justify-center gap-4">
+              <Button 
+                size="lg" 
+                asChild
+                className="bg-[#4A6FA5] hover:bg-[#5A7FB5] text-white"
+              >
+                <Link to="/about/gurudev">
+                  Learn About Gurudev
+                  <ArrowRight className="h-4 w-4 ml-2" />
+                </Link>
+              </Button>
+              <Button 
+                variant="outline" 
+                size="lg" 
+                asChild
+                className="border-white/30 text-white hover:bg-white/10"
+              >
+                <Link to="/contact">
+                  Contact Us
+                </Link>
+              </Button>
+            </div>
           </div>
         </div>
       </div>

@@ -1,8 +1,7 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { BookOpen, Search, GraduationCap, Scroll, Sparkles, ArrowRight, Image, ChevronDown } from "lucide-react";
-import { gurudevBio } from "@/data/gurudevData";
-import { FloatingElement, GlowOrb } from "@/components/ui/floating-elements";
+import { BookOpen, Search, GraduationCap, Scroll, ArrowRight, Image, ChevronDown } from "lucide-react";
+import { gurudevBio, galleryImages } from "@/data/gurudevData";
 
 export function HeroSection() {
   const scrollToFeatures = () => {
@@ -10,86 +9,73 @@ export function HeroSection() {
     featuresSection?.scrollIntoView({ behavior: 'smooth' });
   };
 
+  // Using actual Gurudev images for hero backdrop
+  const leftBackdropImage = "https://siddhijambuparivar.com/wp-content/uploads/2022/11/96-min.jpg";
+  const rightBackdropImage = "https://siddhijambuparivar.com/wp-content/uploads/2022/11/43-min.jpg";
+
   return (
-    <section className="relative overflow-hidden min-h-[85vh] flex items-center bg-gradient-hero">
-      {/* Animated background elements */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <GlowOrb color="primary" size="lg" className="-top-40 -right-40" />
-        <GlowOrb color="burgundy" size="md" className="-bottom-40 -left-40" />
-        <GlowOrb color="gold" size="xl" className="top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-50" />
+    <section className="relative overflow-hidden min-h-[90vh] flex items-center">
+      {/* Hero Background with Gurudev images on sides - inspired by reference site */}
+      <div className="absolute inset-0">
+        {/* Base gradient - slate blue like reference */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#2B3A4A] via-[#3A4D5E] to-[#4A6070]" />
         
-        {/* Animated gradient mesh */}
-        <div className="absolute inset-0 animated-gradient opacity-30" />
+        {/* Left Gurudev image - faded */}
+        <div 
+          className="absolute left-0 top-0 bottom-0 w-1/3 bg-cover bg-center opacity-30 mix-blend-luminosity"
+          style={{ backgroundImage: `url(${leftBackdropImage})` }}
+        />
         
-        {/* Lotus pattern overlay */}
-        <div className="absolute inset-0 lotus-pattern opacity-50" />
+        {/* Right Gurudev image - faded */}
+        <div 
+          className="absolute right-0 top-0 bottom-0 w-1/3 bg-cover bg-center opacity-30 mix-blend-luminosity"
+          style={{ backgroundImage: `url(${rightBackdropImage})` }}
+        />
         
-        {/* Floating particles */}
-        {Array.from({ length: 15 }).map((_, i) => (
-          <div
-            key={i}
-            className="absolute w-2 h-2 bg-primary/20 rounded-full animate-float"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              animationDelay: `${Math.random() * 5}s`,
-              animationDuration: `${5 + Math.random() * 5}s`,
-            }}
-          />
-        ))}
+        {/* Center gradient overlay for text readability */}
+        <div className="absolute inset-0 bg-gradient-to-r from-[#2B3A4A]/90 via-[#3A4D5E]/70 to-[#2B3A4A]/90" />
       </div>
 
-      <div className="container mx-auto px-3 py-10 lg:py-14 relative">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+      <div className="container mx-auto px-4 py-16 lg:py-20 relative z-10">
+        <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
           {/* Content */}
-          <div className="space-y-8">
-            <div 
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-card text-sm animate-fade-up"
-              style={{ animationDelay: "0ms" }}
-            >
-              <Sparkles className="h-4 w-4 text-primary animate-pulse" />
-              <span className="font-body text-base text-muted-foreground font-medium">Preserving Ancient Wisdom</span>
-            </div>
-
-            <div className="space-y-4">
-              <p 
-                className="text-primary font-heading text-lg animate-fade-up"
-                style={{ animationDelay: "100ms" }}
-              >
+          <div className="space-y-6 text-center lg:text-left">
+            <div className="space-y-3">
+              <h1 className="font-heading text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold text-white leading-tight">
                 {gurudevBio.hindiName}
-              </p>
-              <h1 
-                className="font-heading text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold text-foreground leading-tight animate-fade-up"
-                style={{ animationDelay: "200ms" }}
-              >
-                Jain Knowledge &{" "}
-                <span className="text-gradient-gold relative">
-                  Research Ecosystem
-                  <span className="absolute -bottom-2 left-0 w-full h-1 bg-gradient-to-r from-primary via-gold to-primary opacity-50 rounded-full" />
-                </span>
               </h1>
-              <p 
-                className="font-body text-lg text-muted-foreground max-w-lg animate-fade-up"
-                style={{ animationDelay: "300ms" }}
-              >
-                Explore the profound teachings of Gurudev Muni Jambuvijayji Maharaj Saheb ({gurudevBio.birthYear}–{gurudevBio.deathYear}). 
-                Discover sacred texts, research tools, and a community dedicated 
-                to preserving Jain philosophy.
+              <p className="text-xl sm:text-2xl text-white/90 font-medium">
+                Gurudev Muni Jambuvijayji Maharaj Saheb
+              </p>
+              <p className="text-white/70">
+                {gurudevBio.birthYear} – {gurudevBio.deathYear}
               </p>
             </div>
 
-            <div 
-              className="flex flex-wrap gap-4 animate-fade-up"
-              style={{ animationDelay: "400ms" }}
-            >
-              <Button variant="hero" size="xl" asChild className="group shadow-glow">
+            <p className="font-body text-lg text-white/80 max-w-xl mx-auto lg:mx-0">
+              Explore the profound teachings and scholarly legacy of Gurudev — 
+              a revered Jain monk who dedicated his life to preserving ancient wisdom 
+              and guiding seekers on the path of spiritual knowledge.
+            </p>
+
+            <div className="flex flex-wrap gap-4 justify-center lg:justify-start">
+              <Button 
+                size="xl" 
+                asChild 
+                className="bg-[#4A6FA5] hover:bg-[#5A7FB5] text-white shadow-lg"
+              >
                 <Link to="/guruvani">
-                  <Scroll className="h-5 w-5 group-hover:rotate-12 transition-transform" />
+                  <Scroll className="h-5 w-5" />
                   Explore Guruvani
-                  <ArrowRight className="h-4 w-4 ml-1 group-hover:translate-x-1 transition-transform" />
+                  <ArrowRight className="h-4 w-4 ml-1" />
                 </Link>
               </Button>
-              <Button variant="glass" size="xl" asChild className="group">
+              <Button 
+                variant="outline" 
+                size="xl" 
+                asChild 
+                className="border-white/30 text-white hover:bg-white/10"
+              >
                 <Link to="/research">
                   <Search className="h-5 w-5" />
                   Research Tools
@@ -98,10 +84,7 @@ export function HeroSection() {
             </div>
 
             {/* Quick Links */}
-            <div 
-              className="flex flex-wrap gap-6 pt-4 animate-fade-up"
-              style={{ animationDelay: "500ms" }}
-            >
+            <div className="flex flex-wrap gap-6 pt-4 justify-center lg:justify-start">
               {[
                 { icon: BookOpen, label: "Library", href: "/library" },
                 { icon: GraduationCap, label: "Scholars", href: "/scholars" },
@@ -110,9 +93,9 @@ export function HeroSection() {
                 <Link
                   key={item.label}
                   to={item.href}
-                  className="flex items-center gap-2 font-body text-base text-muted-foreground hover:text-primary transition-all group px-3 py-2 rounded-lg hover:bg-primary/5"
+                  className="flex items-center gap-2 text-white/70 hover:text-white transition-all group"
                 >
-                  <item.icon className="h-4 w-4 group-hover:scale-110 transition-transform" />
+                  <item.icon className="h-4 w-4" />
                   <span className="font-medium">{item.label}</span>
                   <ArrowRight className="h-3 w-3 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
                 </Link>
@@ -121,60 +104,25 @@ export function HeroSection() {
           </div>
 
           {/* Hero Visual - Gurudev's Photo */}
-          <div 
-            className="relative animate-fade-up lg:animate-slide-left"
-            style={{ animationDelay: "300ms" }}
-          >
-            <div className="relative max-w-lg mx-auto">
-              {/* Decorative animated rings */}
-              <div className="absolute -inset-4 rounded-3xl border border-primary/10 animate-pulse" />
-              <div className="absolute -inset-8 rounded-3xl border border-gold/10 animate-pulse" style={{ animationDelay: "0.5s" }} />
-              <div className="absolute -inset-12 rounded-3xl border border-primary/5 animate-pulse" style={{ animationDelay: "1s" }} />
-              
-              {/* Gurudev's Image with glass effect */}
-              <div className="relative rounded-3xl glass-premium overflow-hidden shadow-elevated group">
+          <div className="relative flex justify-center">
+            <div className="relative max-w-md">
+              {/* Main Gurudev Image */}
+              <div className="relative rounded-3xl overflow-hidden shadow-2xl">
                 <img 
                   src={gurudevBio.mainImage}
                   alt="Jambuvijayji Maharaj Saheb in white robes sitting cross-legged"
-                  className="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-105"
+                  className="w-full h-auto object-cover"
                 />
-                
-                {/* Shimmer effect on hover */}
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
-                
-                {/* Overlay with name */}
-                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-background/95 via-background/70 to-transparent p-6">
-                  <h3 className="font-heading text-xl font-semibold text-foreground">
-                    Gurudev Muni Jambuvijayji
-                  </h3>
-                  <p className="font-body text-base text-muted-foreground">
-                    Maharaj Saheb ({gurudevBio.birthYear}–{gurudevBio.deathYear})
-                  </p>
-                </div>
               </div>
 
-              {/* Centenary Logo */}
-              <FloatingElement delay={0} className="absolute -top-6 -right-6">
-                <div className="w-28 h-28 rounded-full glass-premium shadow-elevated overflow-hidden border-2 border-gold/30 hover:scale-110 transition-transform cursor-pointer">
-                  <img 
-                    src={gurudevBio.centenaryLogo}
-                    alt="100th Anniversary Logo"
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-              </FloatingElement>
-
-              {/* Floating elements */}
-              <FloatingElement delay={0.5} className="absolute -bottom-6 -left-6">
-                <div className="w-16 h-16 rounded-2xl glass-glow flex items-center justify-center hover:scale-110 transition-transform cursor-pointer">
-                  <BookOpen className="h-8 w-8 text-primary" />
-                </div>
-              </FloatingElement>
-              <FloatingElement delay={1} className="absolute top-1/2 -right-8">
-                <div className="w-14 h-14 rounded-2xl glass-glow flex items-center justify-center hover:scale-110 transition-transform cursor-pointer">
-                  <GraduationCap className="h-7 w-7 text-burgundy" />
-                </div>
-              </FloatingElement>
+              {/* Centenary Logo - floating */}
+              <div className="absolute -top-4 -right-4 w-24 h-24 rounded-full shadow-xl overflow-hidden border-4 border-white/20 bg-white">
+                <img 
+                  src={gurudevBio.centenaryLogo}
+                  alt="100th Anniversary Logo"
+                  className="w-full h-full object-cover"
+                />
+              </div>
             </div>
           </div>
         </div>
@@ -182,10 +130,10 @@ export function HeroSection() {
         {/* Scroll indicator */}
         <button 
           onClick={scrollToFeatures}
-          className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-muted-foreground hover:text-primary transition-colors animate-bounce-soft cursor-pointer"
+          className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-white/60 hover:text-white transition-colors cursor-pointer"
         >
-          <span className="font-body text-base font-medium">Scroll to explore</span>
-          <ChevronDown className="h-5 w-5" />
+          <span className="font-body text-sm font-medium">Scroll to explore</span>
+          <ChevronDown className="h-5 w-5 animate-bounce" />
         </button>
       </div>
     </section>
