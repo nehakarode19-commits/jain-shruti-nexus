@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -6,40 +6,65 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
 import { Link } from "react-router-dom";
-import { Scroll, Mail, Lock, ArrowRight, Eye, EyeOff, AlertTriangle } from "lucide-react";
-import { useDemoAuth } from "@/contexts/DemoAuthContext";
+import { Scroll, Mail, Lock, ArrowRight, Eye, EyeOff } from "lucide-react";
+import { useAdminAuth } from "@/contexts/AdminAuthContext";
+import { Loader2 } from "lucide-react";
 
 const LMSLogin = () => {
   const { toast } = useToast();
   const navigate = useNavigate();
-  const { login } = useDemoAuth();
+  const { login, isAuthenticated, isLoading: authLoading, hasRole } = useAdminAuth();
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  // Redirect if already authenticated with librarian/admin role
+  useEffect(() => {
+    if (!authLoading && isAuthenticated) {
+      if (hasRole(["librarian", "admin", "superadmin"])) {
+        navigate("/lms/dashboard");
+      } else {
+        toast({
+          title: "Access Denied",
+          description: "You don't have permission to access the Library Management System.",
+          variant: "destructive",
+        });
+        navigate("/");
+      }
+    }
+  }, [isAuthenticated, authLoading, hasRole, navigate, toast]);
+
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
 
-    const success = await login(email, password);
+    const result = await login(email, password);
 
-    if (success) {
+    if (result.success) {
       toast({
         title: "Welcome to LMS",
         description: "You have been logged in successfully.",
       });
-      navigate("/lms/dashboard");
+      // Role-based redirect will happen in useEffect
     } else {
       toast({
-        title: "Invalid Credentials",
-        description: "Please check your email and password.",
+        title: "Login Failed",
+        description: result.error || "Please check your email and password.",
         variant: "destructive",
       });
     }
 
     setIsLoading(false);
   };
+
+  if (authLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-background">
+        <Loader2 className="h-8 w-8 animate-spin text-primary" />
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gradient-hero lotus-pattern flex items-center justify-center p-4">
@@ -56,23 +81,10 @@ const LMSLogin = () => {
           </Link>
         </div>
 
-        {/* Demo Notice */}
-        <div className="mb-6 p-4 rounded-lg bg-amber-500/10 border border-amber-500/30 flex items-start gap-3 animate-fade-up">
-          <AlertTriangle className="h-5 w-5 text-amber-500 flex-shrink-0 mt-0.5" />
-          <div className="text-sm">
-            <p className="font-medium text-amber-600 dark:text-amber-400">Demo Mode</p>
-            <p className="text-muted-foreground mt-1">
-              Use these credentials to login:<br />
-              <strong>Email:</strong> admin@jambushrusti.com<br />
-              <strong>Password:</strong> demo123
-            </p>
-          </div>
-        </div>
-
         <Card variant="elevated" className="animate-fade-up delay-100">
           <CardHeader className="text-center">
             <CardTitle>Library Management System</CardTitle>
-            <CardDescription>Sign in to access the LMS dashboard</CardDescription>
+            <CardDescription>Sign in with your Librarian or Admin account</CardDescription>
           </CardHeader>
           <CardContent>
             <form onSubmit={handleLogin} className="space-y-4">
@@ -85,7 +97,7 @@ const LMSLogin = () => {
                     type="email"
                     required
                     className="pl-10"
-                    placeholder="admin@jambushrusti.com"
+                    placeholder="your@email.com"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                   />
@@ -119,8 +131,17 @@ const LMSLogin = () => {
                 className="w-full"
                 disabled={isLoading}
               >
-                {isLoading ? "Signing in..." : "Sign In to LMS"}
-                <ArrowRight className="h-4 w-4 ml-2" />
+                {isLoading ? (
+                  <>
+                    <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                    Signing in...
+                  </>
+                ) : (
+                  <>
+                    Sign In to LMS
+                    <ArrowRight className="h-4 w-4 ml-2" />
+                  </>
+                )}
               </Button>
             </form>
           </CardContent>
