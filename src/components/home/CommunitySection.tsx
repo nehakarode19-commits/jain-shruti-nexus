@@ -45,49 +45,69 @@ const latestPosts = [
 
 export function CommunitySection() {
   return (
-    <section className="py-20 lg:py-28 bg-[#2B3A4A]">
+    <section className="py-16 lg:py-20 bg-white">
       <div className="container mx-auto px-4">
-        <div className="grid lg:grid-cols-2 gap-12">
-          {/* Events Section */}
-          <div>
-            <div className="mb-8">
-              <p className="text-[#4A6FA5] font-semibold mb-2 uppercase tracking-wider text-sm">Stay Connected</p>
-              <h2 className="font-heading text-2xl md:text-3xl font-bold text-white mb-3">
-                Upcoming Events
-              </h2>
-              <p className="text-white/70">
-                Join us in celebrating Gurudev's legacy through community gatherings.
-              </p>
-            </div>
+        {/* Section Header */}
+        <div className="text-center mb-12">
+          <p className="text-[#4A6FA5] font-semibold mb-3 uppercase tracking-wider text-sm">Stay Connected</p>
+          <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold text-[#2B3A4A] mb-4">
+            Community & Insights
+          </h2>
+          <p className="text-[#555555] max-w-2xl mx-auto text-lg">
+            Stay updated with events and explore articles on Gurudev's teachings.
+          </p>
+          <div className="w-20 h-1 bg-[#4A6FA5] mx-auto mt-5 rounded-full" />
+        </div>
 
-            <div className="space-y-4 mb-6">
+        {/* Vertical Stacked Layout */}
+        <div className="max-w-5xl mx-auto space-y-10">
+          {/* Events Row */}
+          <div>
+            <div className="flex items-center justify-between mb-6">
+              <h3 className="font-heading text-xl font-bold text-[#2B3A4A]">Upcoming Events</h3>
+              <Button 
+                variant="ghost" 
+                size="sm"
+                asChild
+                className="text-[#4A6FA5] hover:text-[#3A5F95]"
+              >
+                <Link to="/community/events">
+                  View All
+                  <ArrowRight className="h-4 w-4 ml-1" />
+                </Link>
+              </Button>
+            </div>
+            <div className="grid md:grid-cols-2 gap-6">
               {upcomingEvents.map((event, index) => (
                 <Link
                   key={index}
                   to="/community/events"
-                  className="group flex gap-4 p-4 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 hover:border-white/20 transition-all"
+                  className="group bg-white border border-[#DCE3E7] rounded-xl overflow-hidden hover:shadow-lg hover:border-[#4A6FA5] transition-all"
                 >
-                  <div className="w-20 h-20 rounded-lg overflow-hidden flex-shrink-0">
+                  <div className="aspect-[16/9] overflow-hidden">
                     <img
                       src={event.image}
                       alt={event.title}
-                      className="w-full h-full object-cover"
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                     />
                   </div>
-                  <div className="flex-1 min-w-0">
-                    <span className="inline-block px-2 py-0.5 rounded bg-[#4A6FA5]/30 text-[#4A6FA5] text-xs font-medium mb-2">
+                  <div className="p-5">
+                    <span className="inline-block px-3 py-1 rounded-full bg-[#4A6FA5]/10 text-[#4A6FA5] text-xs font-medium mb-3">
                       {event.type}
                     </span>
-                    <h3 className="font-semibold text-white group-hover:text-[#4A6FA5] transition-colors line-clamp-1">
+                    <h4 className="font-semibold text-[#2B3A4A] text-lg mb-2 group-hover:text-[#4A6FA5] transition-colors">
                       {event.title}
-                    </h3>
-                    <div className="flex flex-wrap gap-3 mt-2 text-xs text-white/60">
+                    </h4>
+                    <p className="text-sm text-[#555555] mb-3 line-clamp-2">
+                      {event.description}
+                    </p>
+                    <div className="flex flex-wrap gap-4 text-xs text-[#555555]">
                       <span className="flex items-center gap-1">
-                        <Calendar className="h-3 w-3" />
+                        <Calendar className="h-3.5 w-3.5 text-[#4A6FA5]" />
                         {event.date}
                       </span>
                       <span className="flex items-center gap-1">
-                        <MapPin className="h-3 w-3" />
+                        <MapPin className="h-3.5 w-3.5 text-[#4A6FA5]" />
                         {event.location}
                       </span>
                     </div>
@@ -95,73 +115,55 @@ export function CommunitySection() {
                 </Link>
               ))}
             </div>
-
-            <Button 
-              variant="outline" 
-              asChild
-              className="border-white/30 text-white hover:bg-white/10"
-            >
-              <Link to="/community/events">
-                View All Events
-                <ArrowRight className="h-4 w-4 ml-2" />
-              </Link>
-            </Button>
           </div>
 
-          {/* Blog Section */}
+          {/* Insights Row */}
           <div>
-            <div className="mb-8">
-              <p className="text-[#4A6FA5] font-semibold mb-2 uppercase tracking-wider text-sm">From Our Blog</p>
-              <h2 className="font-heading text-2xl md:text-3xl font-bold text-white mb-3">
-                Latest Insights
-              </h2>
-              <p className="text-white/70">
-                Articles and reflections on Gurudev's teachings and Jain philosophy.
-              </p>
+            <div className="flex items-center justify-between mb-6">
+              <h3 className="font-heading text-xl font-bold text-[#2B3A4A]">Latest Insights</h3>
+              <Button 
+                variant="ghost" 
+                size="sm"
+                asChild
+                className="text-[#4A6FA5] hover:text-[#3A5F95]"
+              >
+                <Link to="/community/blog">
+                  Read All
+                  <ArrowRight className="h-4 w-4 ml-1" />
+                </Link>
+              </Button>
             </div>
-
-            <div className="space-y-4 mb-6">
+            <div className="grid md:grid-cols-2 gap-6">
               {latestPosts.map((post, index) => (
                 <Link
                   key={index}
                   to="/community/blog"
-                  className="group flex gap-4 p-4 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 hover:border-white/20 transition-all"
+                  className="group bg-white border border-[#DCE3E7] rounded-xl overflow-hidden hover:shadow-lg hover:border-[#4A6FA5] transition-all"
                 >
-                  <div className="w-20 h-20 rounded-lg overflow-hidden flex-shrink-0">
+                  <div className="aspect-[16/9] overflow-hidden">
                     <img
                       src={post.image}
                       alt={post.title}
-                      className="w-full h-full object-cover"
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                     />
                   </div>
-                  <div className="flex-1 min-w-0">
-                    <div className="flex items-center gap-2 mb-2">
-                      <span className="px-2 py-0.5 rounded bg-[#4A6FA5]/30 text-[#4A6FA5] text-xs font-medium">
+                  <div className="p-5">
+                    <div className="flex items-center gap-2 mb-3">
+                      <span className="px-3 py-1 rounded-full bg-[#4A6FA5]/10 text-[#4A6FA5] text-xs font-medium">
                         {post.category}
                       </span>
-                      <span className="text-xs text-white/50">{post.date}</span>
+                      <span className="text-xs text-[#555555]">{post.date}</span>
                     </div>
-                    <h3 className="font-semibold text-white group-hover:text-[#4A6FA5] transition-colors line-clamp-1">
+                    <h4 className="font-semibold text-[#2B3A4A] text-lg mb-2 group-hover:text-[#4A6FA5] transition-colors">
                       {post.title}
-                    </h3>
-                    <p className="text-sm text-white/60 line-clamp-1 mt-1">
+                    </h4>
+                    <p className="text-sm text-[#555555] line-clamp-2">
                       {post.excerpt}
                     </p>
                   </div>
                 </Link>
               ))}
             </div>
-
-            <Button 
-              variant="outline" 
-              asChild
-              className="border-white/30 text-white hover:bg-white/10"
-            >
-              <Link to="/community/blog">
-                Read More Articles
-                <ArrowRight className="h-4 w-4 ml-2" />
-              </Link>
-            </Button>
           </div>
         </div>
       </div>
