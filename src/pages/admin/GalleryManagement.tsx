@@ -192,8 +192,23 @@ export default function GalleryManagement() {
                   <Input
                     value={formData.image_url}
                     onChange={(e) => setFormData({ ...formData, image_url: e.target.value })}
-                    placeholder="https://..."
+                    placeholder="https://example.com/image.jpg"
                   />
+                  <p className="text-xs text-muted-foreground mt-1">
+                    Use a direct image URL ending in .jpg, .png, .webp, etc. Social media post links won't work.
+                  </p>
+                  {formData.image_url && (
+                    <div className="mt-2 rounded-md border overflow-hidden h-24 w-24">
+                      <img 
+                        src={formData.image_url} 
+                        alt="Preview" 
+                        className="w-full h-full object-cover"
+                        onError={(e) => {
+                          (e.target as HTMLImageElement).src = '/placeholder.svg';
+                        }}
+                      />
+                    </div>
+                  )}
                 </div>
                 <div>
                   <Label>Category</Label>
@@ -261,11 +276,14 @@ export default function GalleryManagement() {
             ) : (
               filteredItems.map((item) => (
                 <Card key={item.id} className="overflow-hidden group">
-                  <div className="aspect-square relative">
+                  <div className="aspect-square relative bg-muted">
                     <img
                       src={item.image_url}
                       alt={item.title}
                       className="w-full h-full object-cover"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).src = '/placeholder.svg';
+                      }}
                     />
                     <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
                       <Button size="sm" variant="secondary" onClick={() => handleEdit(item)}>

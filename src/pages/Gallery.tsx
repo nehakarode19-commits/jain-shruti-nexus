@@ -110,6 +110,9 @@ const Gallery = () => {
                         src={image.thumb}
                         alt={image.alt || `Gurudev Jambuvijayji Maharaj - Photo ${index + 1}`}
                         className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                        onError={(e) => {
+                          (e.target as HTMLImageElement).src = '/placeholder.svg';
+                        }}
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center pb-4">
                         <span className="font-body text-base text-foreground font-medium bg-background/60 backdrop-blur-sm px-3 py-1 rounded-full">
@@ -246,6 +249,9 @@ const Gallery = () => {
                   src={displayImages[selectedImage].url}
                   alt={displayImages[selectedImage].alt || `Gurudev Photo ${selectedImage + 1}`}
                   className="max-w-full max-h-[80vh] object-contain rounded-lg"
+                  onError={(e) => {
+                    (e.target as HTMLImageElement).src = '/placeholder.svg';
+                  }}
                 />
               </div>
             )}
