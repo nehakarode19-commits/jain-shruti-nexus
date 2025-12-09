@@ -13,27 +13,18 @@ import { Loader2 } from "lucide-react";
 const LMSLogin = () => {
   const { toast } = useToast();
   const navigate = useNavigate();
-  const { login, isAuthenticated, isLoading: authLoading, hasRole } = useAdminAuth();
+  const { login, isAuthenticated, isLoading: authLoading } = useAdminAuth();
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  // Redirect if already authenticated with librarian/admin role
+  // DEMO MODE: Redirect if already authenticated (no role check)
   useEffect(() => {
     if (!authLoading && isAuthenticated) {
-      if (hasRole(["librarian", "admin", "superadmin"])) {
-        navigate("/lms/dashboard");
-      } else {
-        toast({
-          title: "Access Denied",
-          description: "You don't have permission to access the Library Management System.",
-          variant: "destructive",
-        });
-        navigate("/");
-      }
+      navigate("/lms/dashboard");
     }
-  }, [isAuthenticated, authLoading, hasRole, navigate, toast]);
+  }, [isAuthenticated, authLoading, navigate]);
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();

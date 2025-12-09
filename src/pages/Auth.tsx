@@ -66,15 +66,16 @@ const Auth = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [agreeTerms, setAgreeTerms] = useState(false);
 
-  // Redirect if already authenticated
+  // DEMO MODE: Redirect based on selected role (no DB role check)
   useEffect(() => {
-    if (!authLoading && isAuthenticated && user) {
-      const redirectPath = getRedirectPath(user.role);
+    if (!authLoading && isAuthenticated) {
+      // Use selected role for redirect, default to home
+      const redirectPath = getRedirectPath(selectedRole as UserRole);
       navigate(redirectPath);
     }
-  }, [isAuthenticated, authLoading, user, navigate]);
+  }, [isAuthenticated, authLoading, navigate, selectedRole]);
 
-  const getRedirectPath = (role: UserRole): string => {
+  const getRedirectPath = (role: UserRole | DisplayRole | ""): string => {
     switch (role) {
       case "superadmin":
       case "admin":
