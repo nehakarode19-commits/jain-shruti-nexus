@@ -42,8 +42,6 @@ const DISPLAY_ROLES: { value: DisplayRole; label: string; description: string; i
   { value: "admin", label: "Admin", description: "CMS control, content management, approvals", icon: <Shield className="h-4 w-4 text-red-500" /> },
   { value: "scholar", label: "Scholar", description: "Research portal, submissions, access requests", icon: <GraduationCap className="h-4 w-4 text-blue-500" /> },
   { value: "librarian", label: "Librarian", description: "Library management system access", icon: <BookOpen className="h-4 w-4 text-gray-600" /> },
-  { value: "user", label: "Registered User", description: "Public site + bookmarks & profile", icon: <UserCheck className="h-4 w-4 text-gray-500" /> },
-  { value: "visitor", label: "Public Visitor", description: "Public website access only", icon: <Globe className="h-4 w-4 text-green-500" /> },
 ];
 
 const Auth = () => {
