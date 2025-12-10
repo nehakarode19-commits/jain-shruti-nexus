@@ -1,6 +1,7 @@
 import { LMSLayout } from "@/components/lms/LMSLayout";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 import {
   BookOpen,
   ScrollText,
@@ -91,17 +92,23 @@ export default function LMSDashboard() {
             </p>
           </div>
           <div className="flex gap-3">
-            <Button variant="outline" className="gap-2">
-              <Plus className="h-4 w-4" />
-              Add Book
+            <Button variant="outline" className="gap-2" asChild>
+              <Link to="/lms/book-entry">
+                <Plus className="h-4 w-4" />
+                Add Book
+              </Link>
             </Button>
-            <Button variant="outline" className="gap-2">
-              <ScrollText className="h-4 w-4" />
-              Add Manuscript
+            <Button variant="outline" className="gap-2" asChild>
+              <Link to="/lms/manuscripts">
+                <ScrollText className="h-4 w-4" />
+                Add Manuscript
+              </Link>
             </Button>
-            <Button variant="hero" className="gap-2">
-              <BookMarked className="h-4 w-4" />
-              Issue Book
+            <Button variant="hero" className="gap-2" asChild>
+              <Link to="/lms/book-issue">
+                <BookMarked className="h-4 w-4" />
+                Issue Book
+              </Link>
             </Button>
           </div>
         </div>
