@@ -42,6 +42,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { useToast } from "@/hooks/use-toast";
 
 const sampleManuscripts = [
   {
@@ -98,7 +99,26 @@ const languages = [
   "Apabhramsha",
 ];
 
+const initialFormState = {
+  hastrapNo: "",
+  granthName: "",
+  mulkarta: "",
+  tikakarta: "",
+  language: "",
+  category: "",
+  folioNo: "",
+  year: "",
+  totalPages: "",
+  availablePages: "",
+  location: "",
+  remarks: "",
+};
+
 export default function Manuscripts() {
+  const { toast } = useToast();
+  const [formData, setFormData] = useState(initialFormState);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  
   const [filters, setFilters] = useState({
     granthName: "",
     mulkarta: "",
@@ -109,6 +129,51 @@ export default function Manuscripts() {
     folioNo: "",
     location: "",
   });
+
+  const handleInputChange = (field: string, value: string) => {
+    setFormData(prev => ({ ...prev, [field]: value }));
+  };
+
+  const handleSubmitForApproval = async () => {
+    if (!formData.hastrapNo || !formData.granthName) {
+      toast({
+        title: "Validation Error",
+        description: "Please fill in required fields (Hastrap No and Granth Name)",
+        variant: "destructive",
+      });
+      return;
+    }
+    
+    setIsSubmitting(true);
+    // Simulate API call
+    await new Promise(resolve => setTimeout(resolve, 1000));
+    setIsSubmitting(false);
+    
+    toast({
+      title: "Submitted for Approval",
+      description: "Manuscript entry has been submitted for admin approval.",
+    });
+    setFormData(initialFormState);
+  };
+
+  const handleSaveAsDraft = async () => {
+    setIsSubmitting(true);
+    await new Promise(resolve => setTimeout(resolve, 500));
+    setIsSubmitting(false);
+    
+    toast({
+      title: "Draft Saved",
+      description: "Manuscript entry has been saved as draft.",
+    });
+  };
+
+  const handleResetForm = () => {
+    setFormData(initialFormState);
+    toast({
+      title: "Form Reset",
+      description: "All fields have been cleared.",
+    });
+  };
 
   return (
     <LMSLayout>
@@ -142,7 +207,12 @@ export default function Manuscripts() {
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                     <div className="space-y-2">
                       <Label htmlFor="hastrapNo">Hastrap No *</Label>
-                      <Input id="hastrapNo" placeholder="e.g., H-001" />
+                      <Input 
+                        id="hastrapNo" 
+                        placeholder="e.g., H-001" 
+                        value={formData.hastrapNo}
+                        onChange={(e) => handleInputChange("hastrapNo", e.target.value)}
+                      />
                     </div>
                     <div className="space-y-2 md:col-span-2">
                       <Label htmlFor="granthName">
@@ -151,6 +221,8 @@ export default function Manuscripts() {
                       <Input
                         id="granthName"
                         placeholder="Enter in Gujarati/Hindi/English"
+                        value={formData.granthName}
+                        onChange={(e) => handleInputChange("granthName", e.target.value)}
                       />
                     </div>
                   </div>
@@ -158,18 +230,28 @@ export default function Manuscripts() {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div className="space-y-2">
                       <Label htmlFor="mulkarta">Mulkarta (Author)</Label>
-                      <Input id="mulkarta" placeholder="Original author" />
+                      <Input 
+                        id="mulkarta" 
+                        placeholder="Original author" 
+                        value={formData.mulkarta}
+                        onChange={(e) => handleInputChange("mulkarta", e.target.value)}
+                      />
                     </div>
                     <div className="space-y-2">
                       <Label htmlFor="tikakarta">Tikakarta (Commentator)</Label>
-                      <Input id="tikakarta" placeholder="Commentator name" />
+                      <Input 
+                        id="tikakarta" 
+                        placeholder="Commentator name" 
+                        value={formData.tikakarta}
+                        onChange={(e) => handleInputChange("tikakarta", e.target.value)}
+                      />
                     </div>
                   </div>
 
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                     <div className="space-y-2">
                       <Label htmlFor="language">Language</Label>
-                      <Select>
+                      <Select value={formData.language} onValueChange={(value) => handleInputChange("language", value)}>
                         <SelectTrigger>
                           <SelectValue placeholder="Select language" />
                         </SelectTrigger>
@@ -184,7 +266,7 @@ export default function Manuscripts() {
                     </div>
                     <div className="space-y-2">
                       <Label htmlFor="category">Category</Label>
-                      <Select>
+                      <Select value={formData.category} onValueChange={(value) => handleInputChange("category", value)}>
                         <SelectTrigger>
                           <SelectValue placeholder="Select category" />
                         </SelectTrigger>
@@ -199,26 +281,52 @@ export default function Manuscripts() {
                     </div>
                     <div className="space-y-2">
                       <Label htmlFor="folioNo">Folio No</Label>
-                      <Input id="folioNo" type="number" placeholder="e.g., 127" />
+                      <Input 
+                        id="folioNo" 
+                        type="number" 
+                        placeholder="e.g., 127" 
+                        value={formData.folioNo}
+                        onChange={(e) => handleInputChange("folioNo", e.target.value)}
+                      />
                     </div>
                   </div>
 
                   <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
                     <div className="space-y-2">
                       <Label htmlFor="year">Year / Century</Label>
-                      <Input id="year" placeholder="e.g., 12th Century" />
+                      <Input 
+                        id="year" 
+                        placeholder="e.g., 12th Century" 
+                        value={formData.year}
+                        onChange={(e) => handleInputChange("year", e.target.value)}
+                      />
                     </div>
                     <div className="space-y-2">
                       <Label htmlFor="totalPages">Total Pages</Label>
-                      <Input id="totalPages" type="number" />
+                      <Input 
+                        id="totalPages" 
+                        type="number" 
+                        value={formData.totalPages}
+                        onChange={(e) => handleInputChange("totalPages", e.target.value)}
+                      />
                     </div>
                     <div className="space-y-2">
                       <Label htmlFor="availablePages">Available Pages</Label>
-                      <Input id="availablePages" type="number" />
+                      <Input 
+                        id="availablePages" 
+                        type="number" 
+                        value={formData.availablePages}
+                        onChange={(e) => handleInputChange("availablePages", e.target.value)}
+                      />
                     </div>
                     <div className="space-y-2">
                       <Label htmlFor="location">Location</Label>
-                      <Input id="location" placeholder="Safe / Rack" />
+                      <Input 
+                        id="location" 
+                        placeholder="Safe / Rack" 
+                        value={formData.location}
+                        onChange={(e) => handleInputChange("location", e.target.value)}
+                      />
                     </div>
                   </div>
 
@@ -228,6 +336,8 @@ export default function Manuscripts() {
                       id="remarks"
                       placeholder="Additional notes about the manuscript..."
                       rows={3}
+                      value={formData.remarks}
+                      onChange={(e) => handleInputChange("remarks", e.target.value)}
                     />
                   </div>
 
@@ -256,15 +366,30 @@ export default function Manuscripts() {
                   <CardTitle className="text-base">Actions</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-3">
-                  <Button className="w-full gap-2" variant="hero">
+                  <Button 
+                    className="w-full gap-2" 
+                    variant="hero"
+                    onClick={handleSubmitForApproval}
+                    disabled={isSubmitting}
+                  >
                     <Save className="h-4 w-4" />
-                    Submit for Approval
+                    {isSubmitting ? "Submitting..." : "Submit for Approval"}
                   </Button>
-                  <Button className="w-full gap-2" variant="outline">
+                  <Button 
+                    className="w-full gap-2" 
+                    variant="outline"
+                    onClick={handleSaveAsDraft}
+                    disabled={isSubmitting}
+                  >
                     <FileText className="h-4 w-4" />
                     Save as Draft
                   </Button>
-                  <Button className="w-full gap-2" variant="ghost">
+                  <Button 
+                    className="w-full gap-2" 
+                    variant="ghost"
+                    onClick={handleResetForm}
+                    disabled={isSubmitting}
+                  >
                     <RotateCcw className="h-4 w-4" />
                     Reset Form
                   </Button>
