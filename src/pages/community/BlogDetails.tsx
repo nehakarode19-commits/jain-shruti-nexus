@@ -1,9 +1,10 @@
-import { useParams, Link, useNavigate } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { Layout } from "@/components/layout/Layout";
 import { PageBreadcrumb } from "@/components/ui/page-breadcrumb";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
+import { useBlogsFromDB } from "@/hooks/useContent";
 import { 
   ArrowLeft, 
   Calendar, 
@@ -14,39 +15,50 @@ import {
   Share2,
   Facebook,
   Twitter,
-  Linkedin
+  Linkedin,
+  Loader2
 } from "lucide-react";
-import { blogPosts } from "@/data/gurudevData";
+import { format } from "date-fns";
 
 const BlogDetails = () => {
   const { id } = useParams();
-  const navigate = useNavigate();
+  const { data: blogPosts = [], isLoading } = useBlogsFromDB();
   
-  const post = blogPosts.find((p) => p.id === Number(id));
+  const post = blogPosts.find((p) => p.id === id);
   
-  // Get related posts (same category, excluding current)
+  // Get related posts (excluding current)
   const relatedPosts = post 
-    ? blogPosts.filter((p) => p.category === post.category && p.id !== post.id).slice(0, 3)
+    ? blogPosts.filter((p) => p.id !== post.id).slice(0, 3)
     : [];
 
-  // If no related posts from same category, get other posts
-  const displayRelated = relatedPosts.length > 0 
-    ? relatedPosts 
-    : blogPosts.filter((p) => p.id !== post?.id).slice(0, 3);
+  if (isLoading) {
+    return (
+      <Layout>
+        <section className="py-20 bg-[#E9EEF2]">
+          <div className="container mx-auto px-4 flex items-center justify-center">
+            <Loader2 className="h-8 w-8 animate-spin text-[#4A6FA5]" />
+          </div>
+        </section>
+      </Layout>
+    );
+  }
 
   if (!post) {
     return (
       <Layout>
-        <section className="py-20 bg-background">
+        <section className="py-20 bg-[#E9EEF2]">
           <div className="container mx-auto px-4 text-center">
-            <BookOpen className="h-16 w-16 text-muted-foreground/30 mx-auto mb-4" />
-            <h1 className="font-display text-2xl font-bold text-foreground mb-4">
+            <BookOpen className="h-16 w-16 text-[#DCE3E7] mx-auto mb-4" />
+            <h1 className="font-heading text-2xl font-bold text-[#2B3A4A] mb-4">
               Article Not Found
             </h1>
-            <p className="text-muted-foreground mb-6">
+            <p className="text-[#555555] mb-6">
               The blog post you're looking for doesn't exist or has been removed.
             </p>
-            <Button variant="hero" asChild>
+            <Button 
+              className="bg-[#4A6FA5] hover:bg-[#3A5F95] text-white"
+              asChild
+            >
               <Link to="/community/blog">
                 <ArrowLeft className="h-4 w-4 mr-2" />
                 Back to Blog
@@ -58,9 +70,14 @@ const BlogDetails = () => {
     );
   }
 
+  // Format date
+  const formattedDate = post.created_at 
+    ? format(new Date(post.created_at), 'MMMM d, yyyy')
+    : 'Unknown date';
+
   // Generate full content based on the post
-  const fullContent = `
-${post.excerpt}
+  const fullContent = post.content || `
+${post.excerpt || ''}
 
 In the rich tapestry of Jain philosophy and tradition, we find countless teachings that remain profoundly relevant today. This exploration delves deep into the subject matter, drawing from the wisdom of Gurudev Muni Jambuvijayji Maharaj Saheb and the timeless principles preserved in ancient texts.
 
@@ -101,55 +118,55 @@ As we continue to study and apply these teachings, we honor the legacy of great 
       <section className="relative">
         <div className="aspect-[21/9] max-h-[400px] overflow-hidden">
           <img 
-            src={post.image}
+            src={post.cover_image || "https://siddhijambuparivar.com/wp-content/uploads/2022/11/96-min.jpg"}
             alt={post.title}
             className="w-full h-full object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/30 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#E9EEF2]/90 via-[#E9EEF2]/30 to-transparent" />
         </div>
       </section>
 
       {/* Article Content */}
-      <section className="py-12 lg:py-16 bg-background">
+      <section className="py-12 lg:py-16 bg-[#E9EEF2]">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto">
             {/* Header */}
             <div className="mb-8 animate-fade-up -mt-24 relative z-10">
-              <Badge variant="default" className="mb-4">
-                {post.category}
+              <Badge className="mb-4 bg-[#4A6FA5] text-white">
+                Blog
               </Badge>
               
-              <h1 className="font-display text-3xl lg:text-4xl xl:text-5xl font-bold text-foreground mb-6">
+              <h1 className="font-heading text-3xl lg:text-4xl xl:text-5xl font-bold text-[#2B3A4A] mb-6">
                 {post.title}
               </h1>
               
-              <div className="flex flex-wrap items-center gap-6 text-sm text-muted-foreground pb-6 border-b border-border">
+              <div className="flex flex-wrap items-center gap-6 text-sm text-[#555555] pb-6 border-b border-[#DCE3E7]">
                 <div className="flex items-center gap-2">
-                  <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
-                    <User className="h-5 w-5 text-primary" />
+                  <div className="w-10 h-10 rounded-full bg-[#4A6FA5]/10 flex items-center justify-center">
+                    <User className="h-5 w-5 text-[#4A6FA5]" />
                   </div>
                   <div>
-                    <p className="font-medium text-foreground">{post.author}</p>
+                    <p className="font-medium text-[#2B3A4A]">{post.author || 'Jambushrusti Team'}</p>
                     <p className="text-xs">Author</p>
                   </div>
                 </div>
                 <div className="flex items-center gap-2">
                   <Calendar className="h-4 w-4" />
-                  <span>{post.date}</span>
+                  <span>{formattedDate}</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <Clock className="h-4 w-4" />
-                  <span>{post.readTime}</span>
+                  <span>5 min read</span>
                 </div>
               </div>
             </div>
 
             {/* Article Body */}
-            <div className="prose prose-lg max-w-none animate-fade-up delay-100">
+            <div className="prose prose-lg max-w-none animate-fade-up delay-100 bg-white p-8 rounded-xl shadow-sm">
               {fullContent.split('\n\n').map((paragraph, index) => {
                 if (paragraph.startsWith('## ')) {
                   return (
-                    <h2 key={index} className="font-display text-2xl font-bold text-foreground mt-8 mb-4">
+                    <h2 key={index} className="font-heading text-2xl font-bold text-[#2B3A4A] mt-8 mb-4">
                       {paragraph.replace('## ', '')}
                     </h2>
                   );
@@ -157,14 +174,14 @@ As we continue to study and apply these teachings, we honor the legacy of great 
                 if (paragraph.startsWith('1. ') || paragraph.startsWith('2. ') || paragraph.startsWith('3. ')) {
                   return (
                     <div key={index} className="my-2">
-                      <p className="text-foreground leading-relaxed" dangerouslySetInnerHTML={{ 
+                      <p className="text-[#333333] leading-relaxed" dangerouslySetInnerHTML={{ 
                         __html: paragraph.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') 
                       }} />
                     </div>
                   );
                 }
                 return (
-                  <p key={index} className="text-muted-foreground leading-relaxed mb-4">
+                  <p key={index} className="text-[#555555] leading-relaxed mb-4">
                     {paragraph}
                   </p>
                 );
@@ -172,43 +189,42 @@ As we continue to study and apply these teachings, we honor the legacy of great 
             </div>
 
             {/* Share Section */}
-            <div className="mt-12 pt-8 border-t border-border animate-fade-up delay-200">
+            <div className="mt-12 pt-8 border-t border-[#DCE3E7] animate-fade-up delay-200">
               <div className="flex flex-wrap items-center justify-between gap-4">
                 <div className="flex items-center gap-2">
-                  <span className="text-sm text-muted-foreground">Share this article:</span>
+                  <span className="text-sm text-[#555555]">Share this article:</span>
                   <div className="flex gap-2">
-                    <Button variant="outline" size="icon" className="h-9 w-9">
+                    <Button variant="outline" size="icon" className="h-9 w-9 border-[#DCE3E7]">
                       <Facebook className="h-4 w-4" />
                     </Button>
-                    <Button variant="outline" size="icon" className="h-9 w-9">
+                    <Button variant="outline" size="icon" className="h-9 w-9 border-[#DCE3E7]">
                       <Twitter className="h-4 w-4" />
                     </Button>
-                    <Button variant="outline" size="icon" className="h-9 w-9">
+                    <Button variant="outline" size="icon" className="h-9 w-9 border-[#DCE3E7]">
                       <Linkedin className="h-4 w-4" />
                     </Button>
-                    <Button variant="outline" size="icon" className="h-9 w-9">
+                    <Button variant="outline" size="icon" className="h-9 w-9 border-[#DCE3E7]">
                       <Share2 className="h-4 w-4" />
                     </Button>
                   </div>
                 </div>
-                <Badge variant="outline">{post.category}</Badge>
               </div>
             </div>
 
             {/* Author Box */}
-            <div className="mt-8 p-6 rounded-2xl bg-secondary/50 border border-border animate-fade-up delay-300">
+            <div className="mt-8 p-6 rounded-2xl bg-white border border-[#DCE3E7] animate-fade-up delay-300">
               <div className="flex items-start gap-4">
-                <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
-                  <User className="h-8 w-8 text-primary" />
+                <div className="w-16 h-16 rounded-full bg-[#4A6FA5]/10 flex items-center justify-center shrink-0">
+                  <User className="h-8 w-8 text-[#4A6FA5]" />
                 </div>
                 <div>
-                  <h3 className="font-display font-bold text-foreground mb-1">
-                    {post.author}
+                  <h3 className="font-heading font-bold text-[#2B3A4A] mb-1">
+                    {post.author || 'Jambushrusti Team'}
                   </h3>
-                  <p className="text-sm text-muted-foreground mb-3">
+                  <p className="text-sm text-[#555555] mb-3">
                     Contributing Author
                   </p>
-                  <p className="text-sm text-muted-foreground">
+                  <p className="text-sm text-[#555555]">
                     A dedicated contributor to Jambushrusti, sharing insights on Jain philosophy, 
                     Gurudev's teachings, and the preservation of ancient wisdom.
                   </p>
@@ -220,48 +236,42 @@ As we continue to study and apply these teachings, we honor the legacy of great 
       </section>
 
       {/* Related Posts */}
-      {displayRelated.length > 0 && (
-        <section className="py-16 bg-gradient-spiritual relative overflow-hidden">
-          <div className="absolute inset-0 lotus-pattern opacity-30" />
-          
-          <div className="container mx-auto px-4 relative z-10">
+      {relatedPosts.length > 0 && (
+        <section className="py-16 bg-white">
+          <div className="container mx-auto px-4">
             <div className="text-center mb-10">
-              <span className="text-xs font-medium tracking-widest text-primary uppercase">
+              <span className="text-xs font-medium tracking-widest text-[#4A6FA5] uppercase">
                 Continue Reading
               </span>
-              <h2 className="font-display text-2xl lg:text-3xl font-bold text-foreground mt-2">
+              <h2 className="font-heading text-2xl lg:text-3xl font-bold text-[#2B3A4A] mt-2">
                 Related Articles
               </h2>
             </div>
 
             <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-              {displayRelated.map((relatedPost, index) => (
+              {relatedPosts.map((relatedPost, index) => (
                 <Link
                   key={relatedPost.id}
                   to={`/community/blog/${relatedPost.id}`}
                   className="group"
                 >
-                  <Card 
-                    variant="interactive" 
-                    className="overflow-hidden h-full animate-fade-up bg-background/80 backdrop-blur-sm"
-                    style={{ animationDelay: `${index * 100}ms` }}
-                  >
+                  <Card className="overflow-hidden h-full border border-[#DCE3E7] hover:shadow-lg hover:border-[#4A6FA5] transition-all duration-300">
                     <div className="aspect-[16/10] overflow-hidden">
                       <img 
-                        src={relatedPost.image}
+                        src={relatedPost.cover_image || "https://siddhijambuparivar.com/wp-content/uploads/2022/11/96-min.jpg"}
                         alt={relatedPost.title}
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                       />
                     </div>
                     <CardContent className="p-4">
-                      <Badge variant="secondary" className="text-xs mb-2">
-                        {relatedPost.category}
-                      </Badge>
-                      <h3 className="font-display font-medium text-foreground group-hover:text-primary transition-colors line-clamp-2">
+                      <h3 className="font-heading font-medium text-[#2B3A4A] group-hover:text-[#4A6FA5] transition-colors line-clamp-2">
                         {relatedPost.title}
                       </h3>
-                      <p className="text-xs text-muted-foreground mt-2">
-                        {relatedPost.readTime}
+                      <p className="text-xs text-[#555555] mt-2">
+                        {relatedPost.created_at 
+                          ? format(new Date(relatedPost.created_at), 'MMM d, yyyy')
+                          : '5 min read'
+                        }
                       </p>
                     </CardContent>
                   </Card>
@@ -273,19 +283,26 @@ As we continue to study and apply these teachings, we honor the legacy of great 
       )}
 
       {/* CTA Section */}
-      <section className="py-12 bg-background border-t border-border">
+      <section className="py-12 bg-[#2B3A4A]">
         <div className="container mx-auto px-4 text-center">
-          <p className="text-muted-foreground mb-4">
+          <p className="text-white/70 mb-4">
             Explore more articles and insights
           </p>
           <div className="flex flex-wrap justify-center gap-4">
-            <Button variant="hero" asChild>
+            <Button 
+              className="bg-[#4A6FA5] hover:bg-[#3A5F95] text-white"
+              asChild
+            >
               <Link to="/community/blog">
                 <BookOpen className="h-4 w-4 mr-2" />
                 Browse All Articles
               </Link>
             </Button>
-            <Button variant="outline" asChild>
+            <Button 
+              variant="outline" 
+              className="border-white/20 text-white hover:bg-white/10"
+              asChild
+            >
               <Link to="/guruvani">
                 Explore Guruvani
                 <ArrowRight className="h-4 w-4 ml-2" />
