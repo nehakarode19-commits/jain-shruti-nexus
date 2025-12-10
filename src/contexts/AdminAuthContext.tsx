@@ -143,9 +143,13 @@ export function AdminAuthProvider({ children }: { children: ReactNode }) {
 
       if (data.user) {
         const userProfile = await fetchUserProfile(data.user.id, data.user.email || "");
+        console.log("Login - User profile fetched:", userProfile);
+        console.log("Login - User role:", userProfile.role);
+        const redirectPath = getRedirectPath(userProfile.role);
+        console.log("Login - Redirect path:", redirectPath);
         setUser(userProfile);
         setIsAuthenticated(true);
-        return { success: true, redirectTo: getRedirectPath(userProfile.role) };
+        return { success: true, redirectTo: redirectPath };
       }
 
       return { success: false, error: "Login failed" };
