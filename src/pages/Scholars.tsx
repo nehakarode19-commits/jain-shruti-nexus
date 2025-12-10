@@ -3,6 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Link } from "react-router-dom";
+import { AnimatedContainer } from "@/components/ui/animated-container";
 import { 
   Select,
   SelectContent,
@@ -24,7 +25,15 @@ import {
   Quote,
   Scroll,
   Search,
-  Building2
+  Building2,
+  BookMarked,
+  Library,
+  Languages,
+  History,
+  Sparkles,
+  Star,
+  TrendingUp,
+  ExternalLink
 } from "lucide-react";
 
 const scholars = [
@@ -40,7 +49,7 @@ const scholars = [
     citations: 156,
     manuscripts: 12,
     badge: "gold",
-    avatar: null,
+    avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face",
   },
   {
     id: 2,
@@ -54,7 +63,7 @@ const scholars = [
     citations: 234,
     manuscripts: 18,
     badge: "gold",
-    avatar: null,
+    avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop&crop=face",
   },
   {
     id: 3,
@@ -68,7 +77,7 @@ const scholars = [
     citations: 87,
     manuscripts: 5,
     badge: "blue",
-    avatar: null,
+    avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face",
   },
   {
     id: 4,
@@ -82,7 +91,7 @@ const scholars = [
     citations: 178,
     manuscripts: 24,
     badge: "gold",
-    avatar: null,
+    avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop&crop=face",
   },
   {
     id: 5,
@@ -96,7 +105,7 @@ const scholars = [
     citations: 62,
     manuscripts: 3,
     badge: "blue",
-    avatar: null,
+    avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop&crop=face",
   },
   {
     id: 6,
@@ -110,7 +119,7 @@ const scholars = [
     citations: 24,
     manuscripts: 6,
     badge: "gray",
-    avatar: null,
+    avatar: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=100&h=100&fit=crop&crop=face",
   },
 ];
 
@@ -156,6 +165,12 @@ const highlights = [
     value: "12",
     description: "Philosophy, Agama, Prakrit, Manuscripts",
   },
+  {
+    icon: Globe,
+    title: "Countries",
+    value: "18",
+    description: "Scholars from around the world",
+  },
 ];
 
 const benefits = [
@@ -173,6 +188,39 @@ const benefits = [
     icon: Award,
     title: "Get Featured & Published",
     description: "Showcase your research and get your work featured in our scholarly publications.",
+  },
+];
+
+const researchDomains = [
+  { icon: BookMarked, name: "Agama Studies", count: 45 },
+  { icon: Sparkles, name: "Jain Philosophy", count: 38 },
+  { icon: Languages, name: "Prakrit & Sanskrit", count: 32 },
+  { icon: Scroll, name: "Manuscriptology", count: 28 },
+  { icon: History, name: "Jain History", count: 24 },
+  { icon: Library, name: "Tattvartha Sutra", count: 19 },
+];
+
+const featuredPublications = [
+  {
+    title: "The Doctrine of Karma in Jain Philosophy",
+    author: "Dr. Prabhakaran Jain",
+    journal: "Journal of Jain Studies",
+    year: 2024,
+    citations: 45,
+  },
+  {
+    title: "Prakrit Manuscripts: A Digital Preservation Study",
+    author: "Prof. Sadhvi M.S.",
+    journal: "Indian Manuscript Studies",
+    year: 2023,
+    citations: 32,
+  },
+  {
+    title: "Comparative Analysis of Jain and Buddhist Ethics",
+    author: "Dr. Robert Zydenbos",
+    journal: "Asian Philosophy Review",
+    year: 2023,
+    citations: 28,
   },
 ];
 
@@ -201,308 +249,468 @@ const getBadgeLabel = (badge: string) => {
 const Scholars = () => {
   return (
     <Layout>
-      {/* Hero */}
-      <section className="py-16 lg:py-20 bg-gradient-hero lotus-pattern">
-        <div className="container mx-auto px-4">
-          <div className="max-w-3xl mx-auto text-center">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-sm mb-6 animate-fade-up">
+      {/* Enhanced Hero */}
+      <section className="py-16 lg:py-24 bg-gradient-hero lotus-pattern relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-background/50" />
+        <div className="container mx-auto px-4 relative">
+          <AnimatedContainer animation="fade-up" className="max-w-4xl mx-auto text-center">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-sm mb-6">
               <GraduationCap className="h-4 w-4 text-primary" />
-              <span className="text-primary">Scholar Portal</span>
+              <span className="text-primary font-medium">Scholar Portal</span>
             </div>
-            <h1 className="font-heading text-4xl sm:text-5xl font-bold text-foreground mb-6 animate-fade-up delay-100">
+            <h1 className="font-heading text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground mb-6">
               Scholars & Researchers
             </h1>
-            <p className="font-body text-muted-foreground animate-fade-up delay-200 max-w-2xl mx-auto">
+            <p className="font-body text-lg text-muted-foreground max-w-2xl mx-auto mb-4">
               Join our global community of scholars dedicated to advancing Jain studies, 
-              manuscript research, and the preservation of ancient wisdom through rigorous research.
+              manuscript research, and the preservation of ancient wisdom.
             </p>
-            <div className="flex flex-wrap justify-center gap-4 mt-8 animate-fade-up delay-300">
-              <Button variant="hero" asChild>
+            <p className="font-body text-muted-foreground max-w-xl mx-auto mb-8">
+              Connect with leading researchers, access rare manuscripts, and contribute to 
+              the scholarly understanding of Jain philosophy and literature.
+            </p>
+            <div className="flex flex-wrap justify-center gap-4">
+              <Button variant="hero" size="lg" asChild className="shadow-elevated">
                 <Link to="/auth">
+                  <GraduationCap className="h-5 w-5 mr-2" />
                   Join as Scholar
-                  <ArrowRight className="h-4 w-4 ml-2" />
                 </Link>
               </Button>
-              <Button variant="outline" asChild>
+              <Button variant="outline" size="lg" asChild>
                 <Link to="/research">
+                  <Search className="h-5 w-5 mr-2" />
                   Explore Research Tools
                 </Link>
               </Button>
             </div>
-          </div>
+          </AnimatedContainer>
         </div>
       </section>
 
       {/* Feature Bar */}
-      <section className="py-10 bg-secondary/30 border-y border-border">
+      <section className="py-8 bg-card border-y border-border shadow-soft">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             {features.map((feature, index) => (
-              <div 
+              <AnimatedContainer 
                 key={feature.title}
-                className="flex items-center gap-3 animate-fade-up"
-                style={{ animationDelay: `${index * 100}ms` }}
+                animation="fade-up"
+                delay={index * 100}
+                className="flex items-center gap-3 p-3 rounded-xl hover:bg-secondary/50 transition-colors cursor-pointer"
               >
-                <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center shrink-0 shadow-sm">
-                  <feature.icon className="h-5 w-5 text-primary" />
+                <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center shrink-0 shadow-sm">
+                  <feature.icon className="h-6 w-6 text-primary" />
                 </div>
                 <div>
-                  <h3 className="font-heading font-semibold text-foreground text-sm">
+                  <h3 className="font-heading font-semibold text-foreground">
                     {feature.title}
                   </h3>
-                  <p className="font-body text-muted-foreground text-xs">
+                  <p className="font-body text-muted-foreground text-sm">
                     {feature.description}
                   </p>
                 </div>
-              </div>
+              </AnimatedContainer>
             ))}
           </div>
         </div>
       </section>
 
       {/* Scholar Directory */}
-      <section className="py-16 lg:py-24 bg-background">
+      <section className="py-16 lg:py-20 bg-background">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-10">
-            <h2 className="font-heading text-3xl font-bold text-foreground mb-4">
+          <AnimatedContainer animation="fade-up" className="text-center mb-10">
+            <h2 className="font-heading text-3xl lg:text-4xl font-bold text-foreground mb-4">
               Featured Scholars
             </h2>
-            <p className="font-body text-muted-foreground">
-              Distinguished members of our research community
+            <p className="font-body text-muted-foreground max-w-xl mx-auto">
+              Distinguished members of our research community making significant contributions to Jain studies
             </p>
-          </div>
+          </AnimatedContainer>
 
-          {/* Filters */}
-          <div className="flex flex-wrap items-center justify-center gap-3 mb-10 p-4 bg-secondary/20 rounded-xl border border-border">
-            <div className="flex items-center gap-2">
-              <Search className="h-4 w-4 text-muted-foreground" />
-              <span className="text-sm font-medium text-muted-foreground">Filter:</span>
-            </div>
-            <Select>
-              <SelectTrigger className="w-[160px] h-9 text-sm">
-                <SelectValue placeholder="Category" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="agama">Agama</SelectItem>
-                <SelectItem value="philosophy">Philosophy</SelectItem>
-                <SelectItem value="manuscriptology">Manuscriptology</SelectItem>
-                <SelectItem value="linguistics">Linguistics</SelectItem>
-                <SelectItem value="history">History</SelectItem>
-              </SelectContent>
-            </Select>
-            <Select>
-              <SelectTrigger className="w-[140px] h-9 text-sm">
-                <SelectValue placeholder="Country" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="india">India</SelectItem>
-                <SelectItem value="germany">Germany</SelectItem>
-                <SelectItem value="uk">UK</SelectItem>
-                <SelectItem value="usa">USA</SelectItem>
-              </SelectContent>
-            </Select>
-            <Select>
-              <SelectTrigger className="w-[160px] h-9 text-sm">
-                <SelectValue placeholder="Affiliation" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="university">University</SelectItem>
-                <SelectItem value="research-institute">Research Institute</SelectItem>
-                <SelectItem value="independent">Independent</SelectItem>
-              </SelectContent>
-            </Select>
-            <Select>
-              <SelectTrigger className="w-[180px] h-9 text-sm">
-                <SelectValue placeholder="Sort By" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="active">Most Active</SelectItem>
-                <SelectItem value="recent">Recently Updated</SelectItem>
-                <SelectItem value="senior">Senior Scholars</SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
+          {/* Smart Filters */}
+          <AnimatedContainer animation="fade-up" delay={100}>
+            <Card variant="flat" className="mb-10">
+              <CardContent className="p-4">
+                <div className="flex flex-wrap items-center justify-center gap-3">
+                  <div className="flex items-center gap-2 text-muted-foreground">
+                    <Search className="h-4 w-4" />
+                    <span className="text-sm font-medium">Filter:</span>
+                  </div>
+                  <Select>
+                    <SelectTrigger className="w-[160px] h-10 bg-background">
+                      <SelectValue placeholder="Category" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="agama">Agama</SelectItem>
+                      <SelectItem value="philosophy">Philosophy</SelectItem>
+                      <SelectItem value="manuscriptology">Manuscriptology</SelectItem>
+                      <SelectItem value="linguistics">Linguistics</SelectItem>
+                      <SelectItem value="history">History</SelectItem>
+                    </SelectContent>
+                  </Select>
+                  <Select>
+                    <SelectTrigger className="w-[140px] h-10 bg-background">
+                      <SelectValue placeholder="Country" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="india">India</SelectItem>
+                      <SelectItem value="germany">Germany</SelectItem>
+                      <SelectItem value="uk">UK</SelectItem>
+                      <SelectItem value="usa">USA</SelectItem>
+                    </SelectContent>
+                  </Select>
+                  <Select>
+                    <SelectTrigger className="w-[160px] h-10 bg-background">
+                      <SelectValue placeholder="Affiliation" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="university">University</SelectItem>
+                      <SelectItem value="research-institute">Research Institute</SelectItem>
+                      <SelectItem value="independent">Independent</SelectItem>
+                    </SelectContent>
+                  </Select>
+                  <Select>
+                    <SelectTrigger className="w-[180px] h-10 bg-background">
+                      <SelectValue placeholder="Sort By" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="active">Most Active</SelectItem>
+                      <SelectItem value="recent">Recently Updated</SelectItem>
+                      <SelectItem value="senior">Senior Scholars</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+              </CardContent>
+            </Card>
+          </AnimatedContainer>
 
-          {/* Scholar Cards */}
+          {/* Scholar Cards with Photos */}
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
             {scholars.map((scholar, index) => (
-              <Card 
+              <AnimatedContainer 
                 key={scholar.id}
-                variant="feature"
-                className="animate-fade-up"
-                style={{ animationDelay: `${index * 100}ms` }}
+                animation="fade-up"
+                delay={index * 100}
               >
-                <CardHeader className="pb-3">
-                  <div className="flex items-start gap-4">
-                    <div className="w-14 h-14 rounded-full bg-gradient-to-br from-primary to-gold flex items-center justify-center text-primary-foreground font-display text-lg font-bold shrink-0">
-                      {scholar.name.split(' ').map(n => n[0]).join('')}
+                <Card 
+                  variant="feature"
+                  className="h-full group hover:shadow-elevated hover:-translate-y-1 transition-all duration-300"
+                >
+                  <CardHeader className="pb-3">
+                    <div className="flex items-start gap-4">
+                      <div className="relative shrink-0">
+                        <img 
+                          src={scholar.avatar} 
+                          alt={scholar.name}
+                          className="w-16 h-16 rounded-full object-cover border-2 border-primary/20 group-hover:border-primary/40 transition-colors"
+                        />
+                        <div className={`absolute -bottom-1 -right-1 w-5 h-5 rounded-full flex items-center justify-center ${
+                          scholar.badge === 'gold' ? 'bg-amber-500' : scholar.badge === 'blue' ? 'bg-blue-500' : 'bg-muted-foreground'
+                        }`}>
+                          <Star className="h-3 w-3 text-white" />
+                        </div>
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-start justify-between gap-2 mb-1">
+                          <CardTitle className="font-heading text-base truncate group-hover:text-primary transition-colors">
+                            {scholar.name}
+                          </CardTitle>
+                        </div>
+                        <p className="font-body text-muted-foreground text-sm truncate">{scholar.affiliation}</p>
+                        <div className="flex items-center gap-1 text-muted-foreground text-xs mt-1">
+                          <MapPin className="h-3 w-3" />
+                          {scholar.country}
+                        </div>
+                      </div>
                     </div>
-                    <div className="flex-1 min-w-0">
-                      <div className="flex items-start justify-between gap-2">
-                        <CardTitle className="font-heading text-base mb-1 truncate">{scholar.name}</CardTitle>
-                        <Badge 
-                          variant="outline" 
-                          className={`text-[10px] shrink-0 ${getBadgeStyle(scholar.badge)}`}
-                        >
-                          {getBadgeLabel(scholar.badge)}
+                    <Badge 
+                      variant="outline" 
+                      className={`text-xs w-fit mt-2 ${getBadgeStyle(scholar.badge)}`}
+                    >
+                      {getBadgeLabel(scholar.badge)}
+                    </Badge>
+                  </CardHeader>
+                  <CardContent className="pt-0">
+                    <div className="flex flex-wrap gap-1.5 mb-4">
+                      {scholar.specialization.map((spec) => (
+                        <Badge key={spec} variant="secondary" className="text-xs">
+                          {spec}
                         </Badge>
+                      ))}
+                    </div>
+                    
+                    {/* Stats Grid */}
+                    <div className="grid grid-cols-3 gap-2 py-3 border-t border-b border-border mb-3">
+                      <div className="text-center">
+                        <p className="font-heading font-bold text-foreground">{scholar.publications}</p>
+                        <p className="text-[11px] text-muted-foreground">Publications</p>
                       </div>
-                      <p className="font-body text-muted-foreground text-sm truncate">{scholar.affiliation}</p>
-                      <div className="flex items-center gap-1 font-body text-muted-foreground text-xs mt-1">
-                        <MapPin className="h-3 w-3" />
-                        {scholar.location}
+                      <div className="text-center border-x border-border">
+                        <p className="font-heading font-bold text-foreground">{scholar.citations}</p>
+                        <p className="text-[11px] text-muted-foreground">Citations</p>
+                      </div>
+                      <div className="text-center">
+                        <p className="font-heading font-bold text-foreground">{scholar.manuscripts}</p>
+                        <p className="text-[11px] text-muted-foreground">Manuscripts</p>
                       </div>
                     </div>
-                  </div>
-                </CardHeader>
-                <CardContent className="pt-0">
-                  <div className="flex flex-wrap gap-1.5 mb-3">
-                    {scholar.specialization.map((spec) => (
-                      <Badge key={spec} variant="secondary" className="text-xs">
-                        {spec}
-                      </Badge>
-                    ))}
+
+                    <div className="flex items-center justify-between">
+                      <span className="font-body text-muted-foreground text-sm">
+                        {scholar.contributions} entries
+                      </span>
+                      <Button variant="ghost" size="sm" className="text-xs group-hover:text-primary">
+                        View Profile
+                        <ArrowRight className="h-3 w-3 ml-1 group-hover:translate-x-0.5 transition-transform" />
+                      </Button>
+                    </div>
+                  </CardContent>
+                </Card>
+              </AnimatedContainer>
+            ))}
+          </div>
+
+          <AnimatedContainer animation="fade-up" delay={600} className="text-center mt-10">
+            <Button variant="outline" size="lg" asChild>
+              <Link to="/scholars/directory">
+                View All Scholars
+                <ArrowRight className="h-4 w-4 ml-2" />
+              </Link>
+            </Button>
+          </AnimatedContainer>
+        </div>
+      </section>
+
+      {/* Scholar Highlights Stats Row */}
+      <section className="py-16 bg-gradient-spiritual border-y border-border">
+        <div className="container mx-auto px-4">
+          <AnimatedContainer animation="fade-up" className="text-center mb-10">
+            <h2 className="font-heading text-2xl lg:text-3xl font-bold text-foreground mb-3">
+              Scholar Highlights
+            </h2>
+            <p className="font-body text-muted-foreground">
+              Impact and reach of our global research community
+            </p>
+          </AnimatedContainer>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-5xl mx-auto">
+            {highlights.map((item, index) => (
+              <AnimatedContainer 
+                key={item.title}
+                animation="scale-in"
+                delay={index * 100}
+              >
+                <Card 
+                  variant="glass" 
+                  className="text-center h-full hover:shadow-elevated hover:-translate-y-1 transition-all duration-300"
+                >
+                  <CardContent className="pt-6 pb-5">
+                    <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto mb-4 shadow-sm">
+                      <item.icon className="h-7 w-7 text-primary" />
+                    </div>
+                    <p className="font-heading text-3xl lg:text-4xl font-bold text-primary mb-1">{item.value}</p>
+                    <h3 className="font-heading font-semibold text-foreground mb-1">{item.title}</h3>
+                    <p className="font-body text-muted-foreground text-sm">{item.description}</p>
+                  </CardContent>
+                </Card>
+              </AnimatedContainer>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Why Become a Scholar - Cards */}
+      <section className="py-16 lg:py-20 bg-background">
+        <div className="container mx-auto px-4">
+          <AnimatedContainer animation="fade-up" className="text-center mb-12">
+            <h2 className="font-heading text-2xl lg:text-3xl font-bold text-foreground mb-3">
+              Why Become a Scholar?
+            </h2>
+            <p className="font-body text-muted-foreground max-w-lg mx-auto">
+              Join our network and unlock exclusive benefits for your research journey
+            </p>
+          </AnimatedContainer>
+          <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+            {benefits.map((benefit, index) => (
+              <AnimatedContainer 
+                key={benefit.title}
+                animation="fade-up"
+                delay={index * 150}
+              >
+                <Card variant="feature" className="h-full text-center hover:shadow-elevated hover:-translate-y-1 transition-all duration-300">
+                  <CardContent className="pt-8 pb-6">
+                    <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto mb-5 shadow-sm">
+                      <benefit.icon className="h-8 w-8 text-primary" />
+                    </div>
+                    <h3 className="font-heading text-lg font-semibold text-foreground mb-3">
+                      {benefit.title}
+                    </h3>
+                    <p className="font-body text-muted-foreground">
+                      {benefit.description}
+                    </p>
+                  </CardContent>
+                </Card>
+              </AnimatedContainer>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Top Research Domains Grid */}
+      <section className="py-16 bg-secondary/30 border-y border-border">
+        <div className="container mx-auto px-4">
+          <AnimatedContainer animation="fade-up" className="text-center mb-10">
+            <h2 className="font-heading text-2xl lg:text-3xl font-bold text-foreground mb-3">
+              Top Research Domains
+            </h2>
+            <p className="font-body text-muted-foreground">
+              Explore the key areas of Jain scholarship and research
+            </p>
+          </AnimatedContainer>
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 max-w-6xl mx-auto">
+            {researchDomains.map((domain, index) => (
+              <AnimatedContainer 
+                key={domain.name}
+                animation="scale-in"
+                delay={index * 75}
+              >
+                <Card 
+                  variant="interactive" 
+                  className="text-center cursor-pointer group"
+                >
+                  <CardContent className="py-5 px-3">
+                    <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mx-auto mb-3 group-hover:bg-primary/20 transition-colors">
+                      <domain.icon className="h-6 w-6 text-primary" />
+                    </div>
+                    <h3 className="font-heading font-medium text-foreground text-sm mb-1 group-hover:text-primary transition-colors">
+                      {domain.name}
+                    </h3>
+                    <p className="text-xs text-muted-foreground">
+                      {domain.count} publications
+                    </p>
+                  </CardContent>
+                </Card>
+              </AnimatedContainer>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Featured Publications Section */}
+      <section className="py-16 lg:py-20 bg-background">
+        <div className="container mx-auto px-4">
+          <AnimatedContainer animation="fade-up" className="text-center mb-10">
+            <h2 className="font-heading text-2xl lg:text-3xl font-bold text-foreground mb-3">
+              Featured Publications
+            </h2>
+            <p className="font-body text-muted-foreground max-w-lg mx-auto">
+              Recent notable research contributions from our scholarly community
+            </p>
+          </AnimatedContainer>
+          <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+            {featuredPublications.map((pub, index) => (
+              <AnimatedContainer 
+                key={pub.title}
+                animation="fade-up"
+                delay={index * 100}
+              >
+                <Card variant="feature" className="h-full group hover:shadow-elevated hover:-translate-y-1 transition-all duration-300">
+                  <CardContent className="pt-6">
+                    <div className="flex items-start gap-3 mb-4">
+                      <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
+                        <FileText className="h-5 w-5 text-primary" />
+                      </div>
+                      <div className="flex-1">
+                        <p className="text-xs text-muted-foreground">{pub.journal}</p>
+                        <p className="text-xs text-muted-foreground">{pub.year}</p>
+                      </div>
+                    </div>
+                    <h3 className="font-heading font-semibold text-foreground mb-2 line-clamp-2 group-hover:text-primary transition-colors">
+                      {pub.title}
+                    </h3>
+                    <p className="text-sm text-muted-foreground mb-3">{pub.author}</p>
+                    <div className="flex items-center justify-between pt-3 border-t border-border">
+                      <div className="flex items-center gap-1 text-sm text-muted-foreground">
+                        <TrendingUp className="h-4 w-4" />
+                        <span>{pub.citations} citations</span>
+                      </div>
+                      <Button variant="ghost" size="sm" className="text-xs">
+                        <ExternalLink className="h-3 w-3 mr-1" />
+                        Read
+                      </Button>
+                    </div>
+                  </CardContent>
+                </Card>
+              </AnimatedContainer>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Upgraded Become a Scholar CTA */}
+      <section className="py-16 lg:py-20 bg-gradient-spiritual border-t border-border">
+        <div className="container mx-auto px-4">
+          <div className="max-w-3xl mx-auto">
+            <AnimatedContainer animation="fade-up">
+              <Card variant="elevated" className="overflow-hidden">
+                <CardContent className="p-8 lg:p-12 text-center relative">
+                  <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary via-gold to-primary" />
+                  
+                  <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto mb-6">
+                    <GraduationCap className="h-8 w-8 text-primary" />
                   </div>
                   
-                  {/* Stats */}
-                  <div className="grid grid-cols-3 gap-2 py-3 border-t border-border">
-                    <div className="text-center">
-                      <p className="font-heading font-bold text-foreground text-sm">{scholar.publications}</p>
-                      <p className="text-[10px] text-muted-foreground">Publications</p>
-                    </div>
-                    <div className="text-center">
-                      <p className="font-heading font-bold text-foreground text-sm">{scholar.citations}</p>
-                      <p className="text-[10px] text-muted-foreground">Citations</p>
-                    </div>
-                    <div className="text-center">
-                      <p className="font-heading font-bold text-foreground text-sm">{scholar.manuscripts}</p>
-                      <p className="text-[10px] text-muted-foreground">Manuscripts</p>
-                    </div>
-                  </div>
+                  <h2 className="font-heading text-2xl lg:text-3xl font-bold text-foreground mb-4">
+                    Become a Contributing Scholar
+                  </h2>
+                  
+                  <p className="font-body text-muted-foreground mb-6 max-w-lg mx-auto">
+                    Apply to join our scholarly network. Get access to research tools, 
+                    contribute your work, and collaborate with fellow researchers worldwide.
+                  </p>
 
-                  <div className="flex items-center justify-between pt-2">
-                    <span className="font-body text-muted-foreground text-sm">
-                      {scholar.contributions} research entries
-                    </span>
-                    <Button variant="ghost" size="sm" className="text-xs">
-                      View Profile
-                      <ArrowRight className="h-3 w-3 ml-1" />
+                  {/* Quote */}
+                  <div className="bg-secondary/50 rounded-xl p-5 mb-8 max-w-md mx-auto">
+                    <Quote className="h-6 w-6 text-primary/40 mx-auto mb-2" />
+                    <p className="font-body text-muted-foreground italic text-sm">
+                      "Knowledge shared is knowledge multiplied."
+                    </p>
+                  </div>
+                  
+                  <div className="flex flex-wrap justify-center gap-4">
+                    <Button variant="hero" size="lg" asChild className="shadow-elevated">
+                      <Link to="/auth">
+                        Apply Now
+                        <ArrowRight className="h-5 w-5 ml-2" />
+                      </Link>
+                    </Button>
+                    <Button variant="outline" size="lg" asChild>
+                      <Link to="/contact">
+                        <Mail className="h-5 w-5 mr-2" />
+                        Contact Us
+                      </Link>
                     </Button>
                   </div>
                 </CardContent>
               </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Scholar Highlights */}
-      <section className="py-16 bg-secondary/30 border-y border-border">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-10">
-            <h2 className="font-heading text-2xl font-bold text-foreground mb-3">
-              Scholar Highlights
-            </h2>
-            <p className="font-body text-muted-foreground">
-              Impact and reach of our research community
-            </p>
-          </div>
-          <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
-            {highlights.map((item, index) => (
-              <Card 
-                key={item.title} 
-                variant="feature" 
-                className="text-center animate-fade-up"
-                style={{ animationDelay: `${index * 100}ms` }}
-              >
-                <CardContent className="pt-6">
-                  <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mx-auto mb-4">
-                    <item.icon className="h-6 w-6 text-primary" />
-                  </div>
-                  <p className="font-heading text-3xl font-bold text-primary mb-1">{item.value}</p>
-                  <h3 className="font-heading font-semibold text-foreground mb-2">{item.title}</h3>
-                  <p className="font-body text-muted-foreground text-sm">{item.description}</p>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Why Become a Scholar */}
-      <section className="py-16 lg:py-20 bg-background">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="font-heading text-2xl font-bold text-foreground mb-3">
-              Why Become a Scholar?
-            </h2>
-            <p className="font-body text-muted-foreground">
-              Join our network and unlock exclusive benefits
-            </p>
-          </div>
-          <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-            {benefits.map((benefit, index) => (
-              <div 
-                key={benefit.title}
-                className="flex items-start gap-4 animate-fade-up"
-                style={{ animationDelay: `${index * 100}ms` }}
-              >
-                <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center shrink-0 shadow-sm">
-                  <benefit.icon className="h-6 w-6 text-primary" />
-                </div>
-                <div>
-                  <h3 className="font-heading font-semibold text-foreground mb-2">
-                    {benefit.title}
-                  </h3>
-                  <p className="font-body text-muted-foreground text-sm">
-                    {benefit.description}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* CTA */}
-      <section className="py-16 bg-gradient-spiritual">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="font-heading text-2xl font-bold text-foreground mb-4">
-            Become a Contributing Scholar
-          </h2>
-          <p className="font-body text-muted-foreground mb-8 max-w-lg mx-auto">
-            Apply to join our scholarly network. Get access to research tools, 
-            contribute your work, and collaborate with fellow researchers.
-          </p>
-          <div className="flex flex-wrap justify-center gap-4">
-            <Button variant="hero" asChild>
-              <Link to="/auth">
-                Apply Now
-                <ArrowRight className="h-4 w-4 ml-2" />
-              </Link>
-            </Button>
-            <Button variant="outline" asChild>
-              <Link to="/contact">
-                <Mail className="h-4 w-4 mr-2" />
-                Contact Us
-              </Link>
-            </Button>
+            </AnimatedContainer>
           </div>
         </div>
       </section>
 
       {/* Quote Section */}
-      <section className="py-12 bg-background border-t border-border">
+      <section className="py-14 bg-background border-t border-border">
         <div className="container mx-auto px-4">
-          <div className="max-w-2xl mx-auto text-center">
-            <Quote className="h-8 w-8 text-primary/30 mx-auto mb-4" />
-            <blockquote className="font-body text-lg text-muted-foreground italic mb-4">
+          <AnimatedContainer animation="fade-in" className="max-w-2xl mx-auto text-center">
+            <div className="h-px w-16 bg-primary/30 mx-auto mb-6" />
+            <Quote className="h-10 w-10 text-primary/20 mx-auto mb-4" />
+            <blockquote className="font-body text-xl text-muted-foreground italic mb-4">
               "The pursuit of knowledge is the path to liberation."
             </blockquote>
-            <p className="font-heading text-sm font-medium text-foreground">
+            <p className="font-heading text-sm font-semibold text-foreground">
               — Gurudev Muni Jambuvijayji
             </p>
-          </div>
+            <div className="h-px w-16 bg-primary/30 mx-auto mt-6" />
+          </AnimatedContainer>
         </div>
       </section>
     </Layout>
