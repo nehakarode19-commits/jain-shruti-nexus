@@ -1,45 +1,27 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, BookOpen, Mic, FileText, Calendar } from "lucide-react";
+import { ArrowRight, BookOpen, Mic, FileText, Loader2 } from "lucide-react";
+import { useGuruvaniFromDB } from "@/hooks/useContent";
 
 import guruvaniImg1 from "@/assets/books/guruvani-1.jpg";
 import guruvaniImg2 from "@/assets/books/guruvani-2.jpg";
 import guruvaniImg3 from "@/assets/books/guruvani-3.jpg";
 
-const guruvaniItems = [
-  {
-    type: "Discourse",
-    icon: Mic,
-    title: "આત્માનો સ્વરૂપ",
-    subtitle: "On the Nature of Soul",
-    excerpt: "The soul is eternal, ever-conscious, and inherently pure.",
-    category: "Sacred Teaching",
-    date: "1985",
-    image: guruvaniImg1,
-  },
-  {
-    type: "Written Work",
-    icon: FileText,
-    title: "તત્ત્વાર્થ સૂત્ર ભાષ્ય",
-    subtitle: "Commentary on Tattvartha Sutra",
-    excerpt: "A comprehensive examination of reality as presented in Jain scripture.",
-    category: "Scholarly Work",
-    date: "1972",
-    image: guruvaniImg2,
-  },
-  {
-    type: "Letter",
-    icon: BookOpen,
-    title: "સાધકોને માર્ગદર્શન",
-    subtitle: "Guidance for Seekers",
-    excerpt: "The path of spiritual progress requires discipline and devotion.",
-    category: "Personal Guidance",
-    date: "1990",
-    image: guruvaniImg3,
-  },
-];
+const typeIcons: Record<string, typeof Mic> = {
+  Discourse: Mic,
+  "Written Work": FileText,
+  Letter: BookOpen,
+  Notes: FileText,
+};
+
+const fallbackImages = [guruvaniImg1, guruvaniImg2, guruvaniImg3];
 
 export function GuruvaniPreview() {
+  const { data: guruvaniItems = [], isLoading } = useGuruvaniFromDB();
+  
+  // Take first 3 items for preview
+  const displayItems = guruvaniItems.slice(0, 3);
+
   return (
     <section className="py-14 lg:py-18 bg-white">
       <div className="container mx-auto px-4">
@@ -55,38 +37,57 @@ export function GuruvaniPreview() {
           <div className="w-16 h-1 bg-[#4A6FA5] mx-auto mt-4 rounded-full" />
         </div>
 
-        {/* Compact Grid */}
-        <div className="grid md:grid-cols-3 gap-5 mb-8 max-w-5xl mx-auto">
-          {guruvaniItems.map((item, index) => (
-            <Link
-              key={index}
-              to="/guruvani"
-              className="group bg-white border border-[#DCE3E7] rounded-xl overflow-hidden hover:shadow-lg hover:border-[#4A6FA5] transition-all"
-            >
-              <div className="aspect-[4/3] overflow-hidden">
-                <img
-                  src={item.image}
-                  alt={item.subtitle}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                />
+        {isLoading ? (
+          <div className="flex items-center justify-center py-12">
+            <Loader2 className="h-8 w-8 animate-spin text-[#4A6FA5]" />
+          </div>
+        ) : (
+          <>
+            {/* Compact Grid */}
+            <div className="grid md:grid-cols-3 gap-5 mb-8 max-w-5xl mx-auto">
+              {displayItems.map((item, index) => {
+                const Icon = typeIcons[item.category || ""] || FileText;
+                return (
+                  <Link
+                    key={item.id}
+                    to={`/guruvani/${item.id}`}
+                    className="group bg-white border border-[#DCE3E7] rounded-xl overflow-hidden hover:shadow-lg hover:border-[#4A6FA5] transition-all"
+                  >
+                    <div className="aspect-[4/3] overflow-hidden">
+                      <img
+                        src={item.image_url || fallbackImages[index % fallbackImages.length]}
+                        alt={item.title}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      />
+                    </div>
+                    <div className="p-4">
+                      <div className="flex items-center gap-2 mb-2">
+                        <span className="px-2 py-0.5 rounded-full bg-[#4A6FA5]/10 text-[#4A6FA5] text-xs font-medium">
+                          {item.category || "Teaching"}
+                        </span>
+                        <span className="text-xs text-[#555555]">
+                          {item.date ? new Date(item.date).getFullYear() : ""}
+                        </span>
+                      </div>
+                      <h3 className="font-semibold text-[#2B3A4A] mb-1 group-hover:text-[#4A6FA5] transition-colors line-clamp-1">
+                        {item.title}
+                      </h3>
+                      <p className="text-sm text-[#555555] line-clamp-2">
+                        {item.content}
+                      </p>
+                    </div>
+                  </Link>
+                );
+              })}
+            </div>
+
+            {displayItems.length === 0 && (
+              <div className="text-center py-8">
+                <p className="text-[#555555]">No Guruvani items available yet.</p>
               </div>
-              <div className="p-4">
-                <div className="flex items-center gap-2 mb-2">
-                  <span className="px-2 py-0.5 rounded-full bg-[#4A6FA5]/10 text-[#4A6FA5] text-xs font-medium">
-                    {item.category}
-                  </span>
-                  <span className="text-xs text-[#555555]">{item.date}</span>
-                </div>
-                <h3 className="font-semibold text-[#2B3A4A] mb-1 group-hover:text-[#4A6FA5] transition-colors line-clamp-1">
-                  {item.title}
-                </h3>
-                <p className="text-sm text-[#555555] line-clamp-2">
-                  {item.excerpt}
-                </p>
-              </div>
-            </Link>
-          ))}
-        </div>
+            )}
+          </>
+        )}
 
         {/* CTA */}
         <div className="text-center">

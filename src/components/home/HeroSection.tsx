@@ -1,9 +1,12 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { BookOpen, Search, GraduationCap, Scroll, ArrowRight, Image, ChevronDown } from "lucide-react";
-import { gurudevBio, galleryImages } from "@/data/gurudevData";
+import { gurudevBio } from "@/data/gurudevData";
+import { useCMSContent } from "@/hooks/useCMSContent";
 
 export function HeroSection() {
+  const cmsContent = useCMSContent();
+  
   const scrollToFeatures = () => {
     const featuresSection = document.querySelector('section:nth-of-type(2)');
     featuresSection?.scrollIntoView({ behavior: 'smooth' });
@@ -53,9 +56,7 @@ export function HeroSection() {
             </div>
 
             <p className="font-body text-lg text-white/80 max-w-xl mx-auto lg:mx-0">
-              Explore the profound teachings and scholarly legacy of Gurudev — 
-              a revered Jain monk who dedicated his life to preserving ancient wisdom 
-              and guiding seekers on the path of spiritual knowledge.
+              {cmsContent.heroDescription}
             </p>
 
             <div className="flex flex-wrap gap-4 justify-center lg:justify-start">
