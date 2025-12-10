@@ -13,18 +13,33 @@ import { Loader2 } from "lucide-react";
 const LMSLogin = () => {
   const { toast } = useToast();
   const navigate = useNavigate();
-  const { login, isAuthenticated, isLoading: authLoading } = useAdminAuth();
+  const { login, isAuthenticated, isLoading: authLoading, user, hasRole } = useAdminAuth();
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  // DEMO MODE: Redirect if already authenticated (no role check)
-  useEffect(() => {
-    if (!authLoading && isAuthenticated) {
-      navigate("/lms/dashboard");
+  const getRedirectPath = (role: string): string => {
+    switch (role) {
+      case "superadmin":
+      case "admin":
+        return "/admin/dashboard";
+      case "librarian":
+        return "/lms/dashboard";
+      case "scholar":
+        return "/research";
+      default:
+        return "/";
     }
-  }, [isAuthenticated, authLoading, navigate]);
+  };
+
+  // Redirect if already authenticated based on role
+  useEffect(() => {
+    if (!authLoading && isAuthenticated && user) {
+      const redirectPath = getRedirectPath(user.role);
+      navigate(redirectPath, { replace: true });
+    }
+  }, [isAuthenticated, authLoading, navigate, user]);
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
