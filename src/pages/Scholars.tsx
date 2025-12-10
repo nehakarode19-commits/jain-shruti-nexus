@@ -36,6 +36,14 @@ import {
   ExternalLink
 } from "lucide-react";
 
+// Import scholar profile images
+import scholarMale1 from "@/assets/scholars/scholar-male-1.jpg";
+import scholarFemale1 from "@/assets/scholars/scholar-female-1.jpg";
+import scholarMale2 from "@/assets/scholars/scholar-male-2.jpg";
+import scholarMale3 from "@/assets/scholars/scholar-male-3.jpg";
+import scholarFemale2 from "@/assets/scholars/scholar-female-2.jpg";
+import scholarMale4 from "@/assets/scholars/scholar-male-4.jpg";
+
 const scholars = [
   {
     id: 1,
@@ -49,7 +57,7 @@ const scholars = [
     citations: 156,
     manuscripts: 12,
     badge: "gold",
-    avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face",
+    avatar: scholarMale1,
   },
   {
     id: 2,
@@ -63,7 +71,7 @@ const scholars = [
     citations: 234,
     manuscripts: 18,
     badge: "gold",
-    avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop&crop=face",
+    avatar: scholarFemale1,
   },
   {
     id: 3,
@@ -77,7 +85,7 @@ const scholars = [
     citations: 87,
     manuscripts: 5,
     badge: "blue",
-    avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face",
+    avatar: scholarMale2,
   },
   {
     id: 4,
@@ -91,7 +99,7 @@ const scholars = [
     citations: 178,
     manuscripts: 24,
     badge: "gold",
-    avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop&crop=face",
+    avatar: scholarMale3,
   },
   {
     id: 5,
@@ -105,7 +113,7 @@ const scholars = [
     citations: 62,
     manuscripts: 3,
     badge: "blue",
-    avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop&crop=face",
+    avatar: scholarFemale2,
   },
   {
     id: 6,
@@ -119,7 +127,7 @@ const scholars = [
     citations: 24,
     manuscripts: 6,
     badge: "gray",
-    avatar: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=100&h=100&fit=crop&crop=face",
+    avatar: scholarMale4,
   },
 ];
 
