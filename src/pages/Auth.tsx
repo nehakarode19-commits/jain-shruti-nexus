@@ -89,13 +89,9 @@ const Auth = () => {
 
   const handleRoleSelect = (role: DisplayRole) => {
     setSelectedRole(role);
-    if (role === "visitor") {
-      // Public visitor - just go to home
-      navigate("/");
-    } else {
-      // Move to login tab for other roles
-      setActiveTab("login");
-    }
+    // DEMO MODE: Direct navigation to dashboard based on role
+    const redirectPath = getRedirectPath(role);
+    navigate(redirectPath, { replace: true });
   };
 
   const handleCredentialsLogin = async (e: React.FormEvent) => {
