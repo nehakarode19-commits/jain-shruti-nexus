@@ -91,6 +91,8 @@ export default function CMSManagement() {
     setIsSaving(true);
     try {
       localStorage.setItem("cms_content", JSON.stringify(content));
+      // Dispatch event to notify other components
+      window.dispatchEvent(new Event("cms-content-updated"));
       toast({ title: "Settings saved successfully!" });
     } catch (error) {
       toast({ title: "Error saving settings", variant: "destructive" });
