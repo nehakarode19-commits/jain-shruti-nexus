@@ -197,10 +197,9 @@ export function AdminAuthProvider({ children }: { children: ReactNode }) {
   };
 
   const hasRole = (roles: UserRole | UserRole[]): boolean => {
-    // DEMO MODE: Always return true for authenticated users
-    // This bypasses role checks for client demo purposes
-    if (isAuthenticated) return true;
-    return false;
+    if (!user) return false;
+    const roleArray = Array.isArray(roles) ? roles : [roles];
+    return roleArray.includes(user.role);
   };
 
   return (

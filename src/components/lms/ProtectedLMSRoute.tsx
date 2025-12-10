@@ -1,14 +1,16 @@
 import { ReactNode } from "react";
 import { Navigate, useLocation } from "react-router-dom";
-import { useAdminAuth } from "@/contexts/AdminAuthContext";
+import { useAdminAuth, UserRole } from "@/contexts/AdminAuthContext";
 import { Loader2 } from "lucide-react";
 
 interface ProtectedLMSRouteProps {
   children: ReactNode;
 }
 
+const LMS_ALLOWED_ROLES: UserRole[] = ["superadmin", "admin", "librarian"];
+
 export function ProtectedLMSRoute({ children }: ProtectedLMSRouteProps) {
-  const { isAuthenticated, isLoading } = useAdminAuth();
+  const { isAuthenticated, isLoading, user, hasRole } = useAdminAuth();
   const location = useLocation();
 
   if (isLoading) {
@@ -19,9 +21,18 @@ export function ProtectedLMSRoute({ children }: ProtectedLMSRouteProps) {
     );
   }
 
-  // DEMO MODE: Only check authentication, bypass role checks
   if (!isAuthenticated) {
     return <Navigate to="/lms" state={{ from: location }} replace />;
+  }
+
+  // Check if user has required role for LMS
+  if (!hasRole(LMS_ALLOWED_ROLES)) {
+    // Redirect to appropriate dashboard based on actual role
+    if (user?.role === "scholar") {
+      return <Navigate to="/research" replace />;
+    } else {
+      return <Navigate to="/" replace />;
+    }
   }
 
   return <>{children}</>;

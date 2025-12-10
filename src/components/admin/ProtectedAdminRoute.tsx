@@ -8,8 +8,10 @@ interface ProtectedAdminRouteProps {
   allowedRoles?: UserRole[];
 }
 
-export function ProtectedAdminRoute({ children, allowedRoles }: ProtectedAdminRouteProps) {
-  const { isAuthenticated, isLoading } = useAdminAuth();
+const ADMIN_ALLOWED_ROLES: UserRole[] = ["superadmin", "admin"];
+
+export function ProtectedAdminRoute({ children, allowedRoles = ADMIN_ALLOWED_ROLES }: ProtectedAdminRouteProps) {
+  const { isAuthenticated, isLoading, user, hasRole } = useAdminAuth();
   const location = useLocation();
 
   if (isLoading) {
@@ -20,9 +22,20 @@ export function ProtectedAdminRoute({ children, allowedRoles }: ProtectedAdminRo
     );
   }
 
-  // DEMO MODE: Only check authentication, bypass role checks
   if (!isAuthenticated) {
     return <Navigate to="/admin" state={{ from: location }} replace />;
+  }
+
+  // Check if user has required role
+  if (!hasRole(allowedRoles)) {
+    // Redirect to appropriate dashboard based on actual role
+    if (user?.role === "librarian") {
+      return <Navigate to="/lms/dashboard" replace />;
+    } else if (user?.role === "scholar") {
+      return <Navigate to="/research" replace />;
+    } else {
+      return <Navigate to="/" replace />;
+    }
   }
 
   return <>{children}</>;
