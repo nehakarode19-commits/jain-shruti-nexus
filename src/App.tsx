@@ -63,7 +63,8 @@ import AdminLogin from "./pages/admin/AdminLogin";
 import AdminDashboard from "./pages/admin/AdminDashboard";
 import UsersManagement from "./pages/admin/UsersManagement";
 import GuruvaniManagement from "./pages/admin/GuruvaniManagement";
-import { CMSPage, ScholarsPage, ResearchPage, LMSPage, MuseumPage, AIPage, AccessRequestsPage, LogsPage, SettingsPage } from "./pages/admin/AdminModules";
+import { ScholarsPage, ResearchPage, LMSPage, MuseumPage, AIPage, AccessRequestsPage, LogsPage, SettingsPage } from "./pages/admin/AdminModules";
+import CMSManagement from "./pages/admin/CMSManagement";
 import BooksManagement from "./pages/admin/BooksManagement";
 import ArticlesManagement from "./pages/admin/ArticlesManagement";
 import BlogManagement from "./pages/admin/BlogManagement";
@@ -151,7 +152,7 @@ function AppContent() {
       <Route path="/admin/dashboard" element={<ProtectedAdminRoute><AdminDashboard /></ProtectedAdminRoute>} />
       <Route path="/admin/users" element={<ProtectedAdminRoute><UsersManagement /></ProtectedAdminRoute>} />
       <Route path="/admin/guruvani" element={<ProtectedAdminRoute><GuruvaniManagement /></ProtectedAdminRoute>} />
-      <Route path="/admin/cms" element={<ProtectedAdminRoute><CMSPage /></ProtectedAdminRoute>} />
+      <Route path="/admin/cms" element={<ProtectedAdminRoute><CMSManagement /></ProtectedAdminRoute>} />
       <Route path="/admin/gallery" element={<ProtectedAdminRoute><GalleryManagement /></ProtectedAdminRoute>} />
       <Route path="/admin/books" element={<ProtectedAdminRoute><BooksManagement /></ProtectedAdminRoute>} />
       <Route path="/admin/articles" element={<ProtectedAdminRoute><ArticlesManagement /></ProtectedAdminRoute>} />
