@@ -2,6 +2,7 @@ import { Layout } from "@/components/layout/Layout";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
+import { useCMSContent } from "@/hooks/useCMSContent";
 import { 
   ArrowRight, 
   BookOpen, 
@@ -53,6 +54,8 @@ const sections = [
 ];
 
 const About = () => {
+  const cmsContent = useCMSContent();
+
   return (
     <Layout>
       {/* Hero */}
@@ -60,12 +63,10 @@ const About = () => {
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto text-center">
             <h1 className="font-heading text-4xl sm:text-5xl font-bold text-foreground mb-6 animate-fade-up">
-              About Jambushrusti
+              {cmsContent.aboutTitle}
             </h1>
             <p className="font-body text-muted-foreground animate-fade-up delay-100">
-              A comprehensive digital ecosystem dedicated to preserving, researching, 
-              and sharing the timeless wisdom of Jain philosophy through the teachings 
-              of Gurudev Muni Jambuvijayji Maharaj.
+              {cmsContent.aboutDescription}
             </p>
           </div>
         </div>
