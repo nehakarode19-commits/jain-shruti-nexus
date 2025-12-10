@@ -65,7 +65,7 @@ export function HeroSection() {
             </div>
 
             <div className="space-y-4 animate-fade-up" style={{ animationDelay: '100ms' }}>
-              <h1 className="font-heading text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold text-white leading-tight">
+              <h1 className="font-heading text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold text-white" style={{ lineHeight: '1.28' }}>
                 {gurudevBio.hindiName}
               </h1>
               <p className="text-xl sm:text-2xl text-white/90 font-medium">
