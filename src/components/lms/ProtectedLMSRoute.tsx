@@ -10,30 +10,6 @@ interface ProtectedLMSRouteProps {
 const LMS_ALLOWED_ROLES: UserRole[] = ["superadmin", "admin", "librarian"];
 
 export function ProtectedLMSRoute({ children }: ProtectedLMSRouteProps) {
-  const { isAuthenticated, isLoading, user, hasRole } = useAdminAuth();
-  const location = useLocation();
-
-  if (isLoading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-background">
-        <Loader2 className="h-8 w-8 animate-spin text-primary" />
-      </div>
-    );
-  }
-
-  if (!isAuthenticated) {
-    return <Navigate to="/lms" state={{ from: location }} replace />;
-  }
-
-  // Check if user has required role for LMS
-  if (!hasRole(LMS_ALLOWED_ROLES)) {
-    // Redirect to appropriate dashboard based on actual role
-    if (user?.role === "scholar") {
-      return <Navigate to="/research" replace />;
-    } else {
-      return <Navigate to="/" replace />;
-    }
-  }
-
+  // DEMO MODE: Allow direct access without authentication
   return <>{children}</>;
 }
