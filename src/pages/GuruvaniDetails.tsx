@@ -4,6 +4,8 @@ import { PageBreadcrumb } from "@/components/ui/page-breadcrumb";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
+import { useGuruvaniById } from "@/hooks/useGuruvani";
+import { useGuruvaniFromDB } from "@/hooks/useContent";
 import { 
   ArrowLeft, 
   BookOpen, 
@@ -12,145 +14,12 @@ import {
   Lock,
   Calendar,
   Globe,
-  Tag,
   Hash,
   Quote,
   ArrowRight,
-  Share2
+  Share2,
+  Loader2
 } from "lucide-react";
-
-const guruvaniItems = [
-  {
-    id: 1,
-    title: "On the Nature of Soul (Jiva)",
-    type: "Discourse",
-    language: "Gujarati",
-    date: "1985",
-    excerpt: "The soul is eternal, ever-conscious, and inherently pure. Through right knowledge and conduct, one realizes the true nature of the self...",
-    fullContent: `The soul is eternal, ever-conscious, and inherently pure. Through right knowledge and conduct, one realizes the true nature of the self.
-
-In the Jain tradition, the Jiva (soul) is understood as a living, conscious entity that is distinct from the body it inhabits. Every living being, from the smallest microorganism to the most evolved human, possesses a soul with infinite potential.
-
-The soul in its pure state possesses four infinite qualities:
-1. Ananta Jnana (Infinite Knowledge)
-2. Ananta Darshana (Infinite Perception)
-3. Ananta Sukha (Infinite Bliss)
-4. Ananta Virya (Infinite Energy)
-
-However, due to the accumulation of karmic particles, these qualities become obscured. The path to liberation involves purifying the soul through right faith, right knowledge, and right conduct.
-
-As seekers, we must understand that the soul is neither created nor destroyed. It is beginningless and endless. Our current state of bondage is not our true nature but a temporary condition that can be overcome through spiritual practice and self-realization.`,
-    tags: ["Philosophy", "Jiva", "Moksha"],
-    restricted: false,
-  },
-  {
-    id: 2,
-    title: "Commentary on Tattvartha Sutra",
-    type: "Written Work",
-    language: "Sanskrit",
-    date: "1978",
-    excerpt: "A comprehensive examination of reality as presented in the foundational Jain scripture by Umaswati...",
-    fullContent: `A comprehensive examination of reality as presented in the foundational Jain scripture by Umaswati.
-
-The Tattvartha Sutra, composed by Acharya Umaswati around the 2nd century CE, stands as the most authoritative and systematic exposition of Jain philosophy. This commentary aims to make its profound teachings accessible to modern seekers.
-
-The text begins with the famous aphorism: "Samyag-darśana-jñāna-cāritrāṇi mokṣamārgaḥ" - Right faith, right knowledge, and right conduct together constitute the path to liberation.
-
-The seven realities (tattvas) form the foundation of Jain metaphysics:
-1. Jiva (Soul)
-2. Ajiva (Non-soul)
-3. Asrava (Influx of karma)
-4. Bandha (Bondage)
-5. Samvara (Stoppage)
-6. Nirjara (Shedding)
-7. Moksha (Liberation)
-
-Understanding these seven categories provides a complete framework for comprehending the nature of existence and the path to spiritual freedom. Each category is interrelated, forming a coherent system that explains both the bondage of the soul and its potential for liberation.`,
-    tags: ["Agama", "Tattvartha", "Commentary"],
-    restricted: false,
-  },
-  {
-    id: 3,
-    title: "Guidance for Young Monks",
-    type: "Letter",
-    language: "Hindi",
-    date: "1990",
-    excerpt: "The path of a monk requires unwavering dedication to ahimsa, truthfulness, and self-discipline...",
-    fullContent: `The path of a monk requires unwavering dedication to ahimsa, truthfulness, and self-discipline.
-
-[This content is restricted and requires authentication to access. Scholars may request access through the Scholar Portal.]`,
-    tags: ["Monkhood", "Guidance", "Discipline"],
-    restricted: true,
-  },
-  {
-    id: 4,
-    title: "Pravachan on Anekantavada",
-    type: "Discourse",
-    language: "Gujarati",
-    date: "1995",
-    excerpt: "The doctrine of many-sidedness teaches us that truth can be perceived from multiple perspectives...",
-    fullContent: `The doctrine of many-sidedness teaches us that truth can be perceived from multiple perspectives.
-
-Anekantavada, often translated as "non-absolutism" or "many-sidedness," is one of the most significant contributions of Jain philosophy to human thought. It teaches us that reality is complex and multifaceted, and no single perspective can capture the complete truth.
-
-This doctrine has three aspects:
-1. Anekanta - The nature of reality as having multiple aspects
-2. Syadvada - The doctrine of conditional predication
-3. Nayavada - The doctrine of standpoints
-
-Consider a simple example: When we look at an elephant, a blind person touching its trunk might describe it as a pipe, another touching its leg might describe it as a pillar, and yet another touching its ear might describe it as a fan. Each perspective is partially true, but none captures the complete reality.
-
-In our daily lives, Anekantavada teaches us:
-- To be humble in our assertions
-- To respect differing viewpoints
-- To seek comprehensive understanding
-- To avoid dogmatism and extremism
-
-This philosophical framework promotes tolerance, intellectual humility, and a spirit of open inquiry that remains profoundly relevant in our diverse world.`,
-    tags: ["Philosophy", "Anekanta", "Logic"],
-    restricted: false,
-  },
-  {
-    id: 5,
-    title: "Notes on Manuscript Preservation",
-    type: "Notes",
-    language: "English",
-    date: "2000",
-    excerpt: "The preservation of ancient Jain manuscripts requires careful attention to material, environment, and documentation...",
-    fullContent: `The preservation of ancient Jain manuscripts requires careful attention to material, environment, and documentation.
-
-[This content is restricted and requires authentication to access. Scholars may request access through the Scholar Portal.]`,
-    tags: ["Manuscripts", "Preservation", "Research"],
-    restricted: true,
-  },
-  {
-    id: 6,
-    title: "On Samyak Darshan",
-    type: "Discourse",
-    language: "Gujarati",
-    date: "1988",
-    excerpt: "Right faith is the foundation of spiritual progress. Without samyak darshan, neither knowledge nor conduct can lead to liberation...",
-    fullContent: `Right faith is the foundation of spiritual progress. Without samyak darshan, neither knowledge nor conduct can lead to liberation.
-
-Samyak Darshan, or right faith, is the first and most essential component of the path to liberation. It is the unwavering belief in the true nature of reality as expounded by the Tirthankaras.
-
-The characteristics of right faith include:
-1. Nishkankita - Freedom from doubt
-2. Nihshankita - Freedom from worldly desires
-3. Nirvichikitsa - Freedom from disgust
-4. Amudha-dristi - Freedom from confusion
-5. Upabrimhana - Strengthening others' faith
-6. Sthitikarana - Steadiness in faith
-7. Vatsalya - Affection for fellow seekers
-8. Prabhavana - Glorification of the path
-
-Without right faith, our knowledge remains mere information, and our conduct becomes empty ritual. Right faith transforms our entire approach to spiritual practice, infusing it with conviction and purpose.
-
-The development of right faith often begins with spiritual inquiry, exposure to true teachings, and association with enlightened beings. It deepens through reflection, meditation, and the gradual dissolution of karmas that obscure our innate wisdom.`,
-    tags: ["Philosophy", "Samyak", "Faith"],
-    restricted: false,
-  },
-];
 
 const typeIcons: Record<string, typeof Mic> = {
   Discourse: Mic,
@@ -163,16 +32,30 @@ const GuruvaniDetails = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   
-  const item = guruvaniItems.find((i) => i.id === Number(id));
+  const { data: item, isLoading } = useGuruvaniById(id || "");
+  const { data: allItems = [] } = useGuruvaniFromDB();
   
-  // Get related items (same type or tag, excluding current)
+  // Get related items (same category, excluding current)
   const relatedItems = item 
-    ? guruvaniItems.filter((i) => 
-        (i.type === item.type || i.tags.some(tag => item.tags.includes(tag))) && 
+    ? allItems.filter((i) => 
+        i.category === item.category && 
         i.id !== item.id && 
-        !i.restricted
+        !i.is_restricted
       ).slice(0, 3)
     : [];
+
+  if (isLoading) {
+    return (
+      <Layout>
+        <section className="py-20 bg-background">
+          <div className="container mx-auto px-4 text-center">
+            <Loader2 className="h-12 w-12 animate-spin text-primary mx-auto" />
+            <p className="text-muted-foreground mt-4">Loading content...</p>
+          </div>
+        </section>
+      </Layout>
+    );
+  }
 
   if (!item) {
     return (
@@ -180,7 +63,7 @@ const GuruvaniDetails = () => {
         <section className="py-20 bg-background">
           <div className="container mx-auto px-4 text-center">
             <Mic className="h-16 w-16 text-muted-foreground/30 mx-auto mb-4" />
-            <h1 className="font-display text-2xl font-bold text-foreground mb-4">
+            <h1 className="font-heading text-2xl font-bold text-foreground mb-4">
               Content Not Found
             </h1>
             <p className="text-muted-foreground mb-6">
@@ -198,7 +81,7 @@ const GuruvaniDetails = () => {
     );
   }
 
-  const Icon = typeIcons[item.type] || FileText;
+  const Icon = typeIcons[item.category || ""] || FileText;
 
   return (
     <Layout>
@@ -215,7 +98,7 @@ const GuruvaniDetails = () => {
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto text-center">
             <Quote className="h-8 w-8 text-burgundy/30 mx-auto mb-3" />
-            <blockquote className="font-display text-lg italic text-foreground">
+            <blockquote className="font-heading text-lg italic text-foreground">
               "The lamp of knowledge dispels the darkness of ignorance."
             </blockquote>
           </div>
@@ -232,9 +115,9 @@ const GuruvaniDetails = () => {
                 <div className="w-12 h-12 rounded-xl bg-burgundy/10 flex items-center justify-center">
                   <Icon className="h-6 w-6 text-burgundy" />
                 </div>
-                <Badge variant="secondary">{item.type}</Badge>
-                <Badge variant="outline">{item.language}</Badge>
-                {item.restricted && (
+                <Badge variant="secondary">{item.category || "Teaching"}</Badge>
+                <Badge variant="outline">{item.source || "Gujarati"}</Badge>
+                {item.is_restricted && (
                   <Badge variant="destructive" className="gap-1">
                     <Lock className="h-3 w-3" />
                     Restricted
@@ -242,42 +125,41 @@ const GuruvaniDetails = () => {
                 )}
               </div>
               
-              <h1 className="font-display text-3xl lg:text-4xl font-bold text-foreground mb-4">
+              <h1 className="font-heading text-3xl lg:text-4xl font-bold text-foreground mb-4">
                 {item.title}
               </h1>
               
               <div className="flex flex-wrap items-center gap-4 text-sm text-muted-foreground">
-                <div className="flex items-center gap-2">
-                  <Calendar className="h-4 w-4" />
-                  <span>{item.date}</span>
-                </div>
+                {item.date && (
+                  <div className="flex items-center gap-2">
+                    <Calendar className="h-4 w-4" />
+                    <span>{new Date(item.date).getFullYear()}</span>
+                  </div>
+                )}
                 <div className="flex items-center gap-2">
                   <Globe className="h-4 w-4" />
-                  <span>{item.language}</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Hash className="h-4 w-4" />
-                  <span>ID: {item.id}</span>
+                  <span>{item.source || "Gujarati"}</span>
                 </div>
               </div>
             </div>
 
-            {/* Tags */}
-            <div className="flex flex-wrap gap-2 mb-8 animate-fade-up delay-100">
-              {item.tags.map((tag) => (
-                <Badge key={tag} variant="outline" className="text-sm">
-                  <Tag className="h-3 w-3 mr-1" />
-                  {tag}
-                </Badge>
-              ))}
-            </div>
+            {/* Image if available */}
+            {item.image_url && (
+              <div className="mb-8 rounded-2xl overflow-hidden animate-fade-up delay-100">
+                <img 
+                  src={item.image_url} 
+                  alt={item.title}
+                  className="w-full h-auto max-h-[400px] object-cover"
+                />
+              </div>
+            )}
 
             {/* Content */}
             <div className="animate-fade-up delay-200">
-              {item.restricted ? (
+              {item.is_restricted ? (
                 <div className="p-8 rounded-2xl bg-secondary/50 border border-border text-center">
                   <Lock className="h-12 w-12 text-muted-foreground/30 mx-auto mb-4" />
-                  <h3 className="font-display text-xl font-bold text-foreground mb-2">
+                  <h3 className="font-heading text-xl font-bold text-foreground mb-2">
                     Restricted Content
                   </h3>
                   <p className="text-muted-foreground mb-6 max-w-md mx-auto">
@@ -299,18 +181,43 @@ const GuruvaniDetails = () => {
               ) : (
                 <div className="prose prose-lg max-w-none">
                   <div className="p-8 rounded-2xl bg-secondary/30 border border-border">
-                    {item.fullContent.split('\n\n').map((paragraph, index) => (
-                      <p key={index} className="text-foreground leading-relaxed mb-4 last:mb-0">
+                    {(item.content || "").split('\n\n').map((paragraph, index) => (
+                      <p key={index} className="text-foreground leading-relaxed mb-4 last:mb-0 font-body text-base">
                         {paragraph}
                       </p>
                     ))}
+                    {!item.content && (
+                      <p className="text-muted-foreground italic">No content available for this item.</p>
+                    )}
                   </div>
                 </div>
               )}
             </div>
 
+            {/* Audio/Video if available */}
+            {(item.audio_url || item.video_url) && !item.is_restricted && (
+              <div className="mt-8 animate-fade-up delay-300">
+                {item.video_url && (
+                  <div className="rounded-2xl overflow-hidden">
+                    <video 
+                      controls 
+                      className="w-full"
+                      poster={item.image_url || undefined}
+                    >
+                      <source src={item.video_url} />
+                    </video>
+                  </div>
+                )}
+                {item.audio_url && !item.video_url && (
+                  <audio controls className="w-full">
+                    <source src={item.audio_url} />
+                  </audio>
+                )}
+              </div>
+            )}
+
             {/* Share Button */}
-            {!item.restricted && (
+            {!item.is_restricted && (
               <div className="mt-8 flex justify-end animate-fade-up delay-300">
                 <Button variant="outline" size="sm">
                   <Share2 className="h-4 w-4 mr-2" />
@@ -332,14 +239,14 @@ const GuruvaniDetails = () => {
               <span className="text-xs font-medium tracking-widest text-burgundy uppercase">
                 Continue Reading
               </span>
-              <h2 className="font-display text-2xl lg:text-3xl font-bold text-foreground mt-2">
+              <h2 className="font-heading text-2xl lg:text-3xl font-bold text-foreground mt-2">
                 Related Teachings
               </h2>
             </div>
 
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-4xl mx-auto">
               {relatedItems.map((relatedItem, index) => {
-                const RelatedIcon = typeIcons[relatedItem.type] || FileText;
+                const RelatedIcon = typeIcons[relatedItem.category || ""] || FileText;
                 return (
                   <Link
                     key={relatedItem.id}
@@ -357,14 +264,14 @@ const GuruvaniDetails = () => {
                             <RelatedIcon className="h-5 w-5 text-burgundy" />
                           </div>
                           <Badge variant="secondary" className="text-xs">
-                            {relatedItem.language}
+                            {relatedItem.source || "Gujarati"}
                           </Badge>
                         </div>
-                        <h3 className="font-display font-medium text-foreground group-hover:text-primary transition-colors line-clamp-2 mb-2">
+                        <h3 className="font-heading font-medium text-foreground group-hover:text-primary transition-colors line-clamp-2 mb-2">
                           {relatedItem.title}
                         </h3>
                         <p className="text-xs text-muted-foreground">
-                          {relatedItem.type} • {relatedItem.date}
+                          {relatedItem.category || "Teaching"} • {relatedItem.date ? new Date(relatedItem.date).getFullYear() : ""}
                         </p>
                       </CardContent>
                     </Card>

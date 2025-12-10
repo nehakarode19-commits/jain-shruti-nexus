@@ -50,7 +50,7 @@ export function GuruvaniPreview() {
                 return (
                   <Link
                     key={item.id}
-                    to={`/guruvani/${item.id}`}
+                    to={item.is_restricted ? "/auth" : `/guruvani/${item.id}`}
                     className="group bg-white border border-[#DCE3E7] rounded-xl overflow-hidden hover:shadow-lg hover:border-[#4A6FA5] transition-all"
                   >
                     <div className="aspect-[4/3] overflow-hidden">
