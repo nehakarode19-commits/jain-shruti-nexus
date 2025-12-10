@@ -22,27 +22,14 @@ export default function AdminLogin() {
   const { toast } = useToast();
   const { login, signup, isAuthenticated, isLoading: authLoading, user } = useAdminAuth();
 
-  useEffect(() => {
-    if (!authLoading && isAuthenticated && user) {
-      // Redirect based on actual user role
-      const redirectPath = getRedirectPath(user.role);
-      navigate(redirectPath, { replace: true });
-    }
-  }, [isAuthenticated, authLoading, navigate, user]);
+  const [redirectTo, setRedirectTo] = useState<string | null>(null);
 
-  const getRedirectPath = (role: string): string => {
-    switch (role) {
-      case "superadmin":
-      case "admin":
-        return "/admin/dashboard";
-      case "librarian":
-        return "/lms/dashboard";
-      case "scholar":
-        return "/research";
-      default:
-        return "/";
+  // Only redirect after login completes with a valid redirect path
+  useEffect(() => {
+    if (redirectTo) {
+      navigate(redirectTo, { replace: true });
     }
-  };
+  }, [redirectTo, navigate]);
 
   if (authLoading) {
     return (
