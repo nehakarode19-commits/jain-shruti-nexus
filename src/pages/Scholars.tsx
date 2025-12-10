@@ -135,22 +135,30 @@ const features = [
   {
     icon: BookOpen,
     title: "Research Access",
-    description: "Access tools & databases",
+    description: "Access comprehensive databases, rare manuscripts, and advanced research tools designed for Jain scholarship.",
+    href: "/research",
+    cta: "Explore →",
   },
   {
     icon: Users,
     title: "Collaboration",
-    description: "Work with fellow scholars",
+    description: "Connect with fellow scholars worldwide, share insights, and collaborate on groundbreaking research projects.",
+    href: "/scholars",
+    cta: "Connect →",
   },
   {
     icon: FileText,
     title: "Publications",
-    description: "Share your work",
+    description: "Submit and publish your research papers, articles, and findings to reach a global academic audience.",
+    href: "/articles",
+    cta: "Publish →",
   },
   {
     icon: UserCheck,
     title: "Scholar Profile",
-    description: "Verified researcher identity",
+    description: "Build your verified researcher identity, showcase your work, and establish credibility in Jain studies.",
+    href: "/auth",
+    cta: "Get Verified →",
   },
 ];
 
@@ -295,28 +303,43 @@ const Scholars = () => {
         </div>
       </section>
 
-      {/* Feature Bar */}
-      <section className="py-8 bg-card border-y border-border shadow-soft">
+      {/* Core Scholar Tools */}
+      <section className="py-14 lg:py-16 bg-secondary/30">
         <div className="container mx-auto px-4">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+          <AnimatedContainer animation="fade-up" className="text-center mb-10">
+            <h2 className="font-heading text-2xl lg:text-3xl font-bold text-foreground mb-2">
+              Core Scholar Tools
+            </h2>
+            <p className="font-body text-muted-foreground max-w-lg mx-auto">
+              Everything you need to advance your research in Jain studies
+            </p>
+          </AnimatedContainer>
+          
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {features.map((feature, index) => (
               <AnimatedContainer 
                 key={feature.title}
                 animation="fade-up"
                 delay={index * 100}
-                className="flex items-center gap-3 p-3 rounded-xl hover:bg-secondary/50 transition-colors cursor-pointer"
               >
-                <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center shrink-0 shadow-sm">
-                  <feature.icon className="h-6 w-6 text-primary" />
-                </div>
-                <div>
-                  <h3 className="font-heading font-semibold text-foreground">
-                    {feature.title}
-                  </h3>
-                  <p className="font-body text-muted-foreground text-sm">
-                    {feature.description}
-                  </p>
-                </div>
+                <Link to={feature.href}>
+                  <Card className="h-full bg-card border border-border/50 shadow-md hover:shadow-lg hover:-translate-y-1 transition-all duration-300 rounded-2xl overflow-hidden group cursor-pointer">
+                    <CardContent className="p-6 flex flex-col items-center text-center">
+                      <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center mb-5 group-hover:bg-primary/20 transition-colors">
+                        <feature.icon className="h-8 w-8 text-primary" />
+                      </div>
+                      <h3 className="font-heading font-semibold text-lg text-foreground mb-2">
+                        {feature.title}
+                      </h3>
+                      <p className="font-body text-muted-foreground text-sm leading-relaxed mb-4 line-clamp-3">
+                        {feature.description}
+                      </p>
+                      <span className="inline-flex items-center text-primary font-medium text-sm group-hover:gap-2 transition-all">
+                        {feature.cta}
+                      </span>
+                    </CardContent>
+                  </Card>
+                </Link>
               </AnimatedContainer>
             ))}
           </div>
