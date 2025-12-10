@@ -56,12 +56,12 @@ export default function AdminLogin() {
     try {
       const result = await login(email, password);
       
-      if (result.success) {
+      if (result.success && result.redirectTo) {
         toast({
           title: "Welcome back!",
           description: "You have successfully logged in",
         });
-        navigate(result.redirectTo || "/admin/dashboard", { replace: true });
+        setRedirectTo(result.redirectTo);
       } else {
         toast({
           title: "Login failed",
