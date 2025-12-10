@@ -64,13 +64,14 @@ const Auth = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [agreeTerms, setAgreeTerms] = useState(false);
 
-  // Redirect based on actual user role from database
+  const [redirectTo, setRedirectTo] = useState<string | null>(null);
+
+  // Only redirect after login completes with a valid redirect path
   useEffect(() => {
-    if (!authLoading && isAuthenticated && user) {
-      const redirectPath = getRedirectPath(user.role);
-      navigate(redirectPath, { replace: true });
+    if (redirectTo) {
+      navigate(redirectTo, { replace: true });
     }
-  }, [isAuthenticated, authLoading, navigate, user]);
+  }, [redirectTo, navigate]);
 
   const getRedirectPath = (role: UserRole | DisplayRole | ""): string => {
     switch (role) {
@@ -113,12 +114,12 @@ const Auth = () => {
     
     const result = await login(loginEmail, loginPassword);
     
-    if (result.success) {
+    if (result.success && result.redirectTo) {
       toast({
         title: "Welcome back!",
         description: "You have been logged in successfully.",
       });
-      navigate(result.redirectTo || "/", { replace: true });
+      setRedirectTo(result.redirectTo);
     } else {
       toast({
         title: "Invalid Credentials",

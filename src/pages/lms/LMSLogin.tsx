@@ -13,33 +13,20 @@ import { Loader2 } from "lucide-react";
 const LMSLogin = () => {
   const { toast } = useToast();
   const navigate = useNavigate();
-  const { login, isAuthenticated, isLoading: authLoading, user, hasRole } = useAdminAuth();
+  const { login, isLoading: authLoading } = useAdminAuth();
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const getRedirectPath = (role: string): string => {
-    switch (role) {
-      case "superadmin":
-      case "admin":
-        return "/admin/dashboard";
-      case "librarian":
-        return "/lms/dashboard";
-      case "scholar":
-        return "/research";
-      default:
-        return "/";
-    }
-  };
+  const [redirectTo, setRedirectTo] = useState<string | null>(null);
 
-  // Redirect if already authenticated based on role
+  // Only redirect after login completes with a valid redirect path
   useEffect(() => {
-    if (!authLoading && isAuthenticated && user) {
-      const redirectPath = getRedirectPath(user.role);
-      navigate(redirectPath, { replace: true });
+    if (redirectTo) {
+      navigate(redirectTo, { replace: true });
     }
-  }, [isAuthenticated, authLoading, navigate, user]);
+  }, [redirectTo, navigate]);
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -47,12 +34,12 @@ const LMSLogin = () => {
 
     const result = await login(email, password);
 
-    if (result.success) {
+    if (result.success && result.redirectTo) {
       toast({
         title: "Welcome to LMS",
         description: "You have been logged in successfully.",
       });
-      // Role-based redirect will happen in useEffect
+      setRedirectTo(result.redirectTo);
     } else {
       toast({
         title: "Login Failed",
