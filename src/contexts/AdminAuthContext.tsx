@@ -51,26 +51,16 @@ export function AdminAuthProvider({ children }: { children: ReactNode }) {
   const [session, setSession] = useState<Session | null>(null);
 
   const fetchUserRole = async (userId: string): Promise<UserRole> => {
-    console.log("fetchUserRole - Fetching role for userId:", userId);
     const { data, error } = await supabase
       .from("user_roles")
       .select("role")
       .eq("user_id", userId)
       .maybeSingle();
     
-    console.log("fetchUserRole - Query result:", { data, error });
-    
-    if (error) {
-      console.error("fetchUserRole - Error fetching role:", error);
+    if (error || !data) {
       return "user";
     }
     
-    if (!data) {
-      console.log("fetchUserRole - No role found, defaulting to 'user'");
-      return "user";
-    }
-    
-    console.log("fetchUserRole - Role found:", data.role);
     return data.role as UserRole;
   };
 
@@ -154,10 +144,7 @@ export function AdminAuthProvider({ children }: { children: ReactNode }) {
 
       if (data.user) {
         const userProfile = await fetchUserProfile(data.user.id, data.user.email || "");
-        console.log("Login - User profile fetched:", userProfile);
-        console.log("Login - User role:", userProfile.role);
         const redirectPath = getRedirectPath(userProfile.role);
-        console.log("Login - Redirect path:", redirectPath);
         setUser(userProfile);
         setIsAuthenticated(true);
         return { success: true, redirectTo: redirectPath };
