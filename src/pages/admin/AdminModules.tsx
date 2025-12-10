@@ -46,7 +46,7 @@ export function AdminPlaceholder({ title }: { title: string }) {
 }
 
 // Export individual page components
-export const CMSPage = () => <AdminPlaceholder title="Website CMS" />;
+// CMSPage is now in CMSManagement.tsx
 export const GalleryPage = () => <AdminPlaceholder title="Gallery" />;
 export const BooksPage = () => <AdminPlaceholder title="Books (PDFs)" />;
 export const ArticlesPage = () => <AdminPlaceholder title="Articles/Tributes" />;
