@@ -118,17 +118,17 @@ export function AboutPreview() {
               <img
                 src="https://siddhijambuparivar.com/wp-content/uploads/2022/11/96-min.jpg"
                 alt="Gurudev Muni Jambuvijayji Maharaj Saheb"
-                className="w-full h-44 object-cover rounded-xl"
+                className="w-full h-52 object-cover object-top rounded-xl"
               />
               <img
-                src="https://siddhijambuparivar.com/wp-content/uploads/2022/11/87-min.jpg"
+                src="https://siddhijambuparivar.com/wp-content/uploads/2022/11/3-min.jpg"
                 alt="Gurudev teaching"
-                className="w-full h-44 object-cover rounded-xl"
+                className="w-full h-52 object-cover object-center rounded-xl"
               />
               <img
-                src="https://siddhijambuparivar.com/wp-content/uploads/2022/11/85-min.jpg"
+                src="https://siddhijambuparivar.com/wp-content/uploads/2022/11/38-min.jpg"
                 alt="Gurudev with disciples"
-                className="w-full h-44 object-cover rounded-xl"
+                className="w-full h-52 object-cover object-top rounded-xl"
               />
             </div>
 
