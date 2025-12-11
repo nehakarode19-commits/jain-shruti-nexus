@@ -31,7 +31,7 @@ const teachings = [
 
 export function AboutPreview() {
   return (
-    <section className="py-16 lg:py-20 bg-card">
+    <section className="py-16 lg:py-20 bg-background">
       <div className="container mx-auto px-6">
         <div className="grid lg:grid-cols-5 gap-10 lg:gap-14 items-start">
           {/* Content Section */}
@@ -59,7 +59,7 @@ export function AboutPreview() {
                 <Link
                   key={link.label}
                   to={link.href}
-                  className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-background border border-border text-muted-foreground hover:border-primary hover:text-primary transition-colors text-sm font-medium font-body"
+                  className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-card border border-border text-muted-foreground hover:border-primary hover:text-primary transition-colors text-sm font-medium font-body"
                 >
                   <link.icon className="h-4 w-4" />
                   {link.label}
@@ -69,7 +69,7 @@ export function AboutPreview() {
             </div>
 
             {/* Quote */}
-            <div className="bg-background rounded-xl p-5 border-l-4 border-orange relative">
+            <div className="bg-card rounded-xl p-5 border-l-4 border-orange relative">
               <Quote className="absolute top-4 right-4 h-7 w-7 text-orange/20" />
               <blockquote className="text-primary italic text-[15px] leading-relaxed font-body">
                 "The pursuit of knowledge is the path to liberation. Through study 
@@ -88,7 +88,7 @@ export function AboutPreview() {
                 asChild
               >
                 <Link to="/about/gurudev">
-                  Read More
+                  Read Biography
                   <ArrowRight className="h-4 w-4 ml-2" />
                 </Link>
               </Button>
@@ -98,8 +98,8 @@ export function AboutPreview() {
                 className="border-border text-primary hover:bg-primary/5 h-10 px-5 text-sm font-body"
                 asChild
               >
-                <Link to="/about/gurudev#timeline">
-                  View Timeline
+                <Link to="/gallery">
+                  Photo Gallery
                 </Link>
               </Button>
             </div>
@@ -122,10 +122,10 @@ export function AboutPreview() {
                 <Link
                   key={item.title}
                   to={item.href}
-                  className="group flex items-center gap-3.5 bg-background rounded-lg p-3.5 hover:shadow-md border border-transparent hover:border-border transition-all duration-300"
+                  className="group flex items-center gap-3.5 bg-card rounded-lg p-3.5 hover:shadow-md border border-border hover:border-orange/30 transition-all duration-300"
                 >
-                  <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center group-hover:bg-primary transition-colors">
-                    <item.icon className="h-5 w-5 text-primary group-hover:text-white transition-colors" />
+                  <div className="w-10 h-10 rounded-lg bg-orange/10 flex items-center justify-center group-hover:bg-orange transition-colors">
+                    <item.icon className="h-5 w-5 text-orange group-hover:text-white transition-colors" />
                   </div>
                   <div className="flex-1">
                     <h3 className="font-heading text-sm font-semibold text-primary group-hover:text-primary/80 transition-colors">
@@ -135,7 +135,7 @@ export function AboutPreview() {
                       {item.description}
                     </p>
                   </div>
-                  <ArrowRight className="h-4 w-4 text-muted-foreground group-hover:text-primary group-hover:translate-x-1 transition-all" />
+                  <ArrowRight className="h-4 w-4 text-muted-foreground group-hover:text-orange group-hover:translate-x-1 transition-all" />
                 </Link>
               ))}
             </div>

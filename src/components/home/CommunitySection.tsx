@@ -20,7 +20,7 @@ export function CommunitySection() {
   const displayBlogs = blogs.slice(0, 2);
 
   return (
-    <section className="py-16 lg:py-20 bg-card">
+    <section className="py-16 lg:py-20 bg-background">
       <div className="container mx-auto px-6">
         <div className="grid lg:grid-cols-2 gap-10 lg:gap-14">
           {/* Events Column */}
@@ -57,7 +57,7 @@ export function CommunitySection() {
                   <Link
                     key={event.id}
                     to="/community/events"
-                    className="group flex gap-3.5 bg-background rounded-lg p-3.5 border border-transparent hover:border-border hover:shadow-md transition-all duration-300"
+                    className="group flex gap-3.5 bg-card rounded-lg p-3.5 border border-border hover:border-orange/30 hover:shadow-md transition-all duration-300"
                   >
                     <div className="flex-shrink-0 w-14 h-14 rounded-lg overflow-hidden">
                       <img
@@ -92,7 +92,7 @@ export function CommunitySection() {
                 ))}
                 
                 {displayEvents.length === 0 && (
-                  <div className="text-center py-6 text-muted-foreground bg-background rounded-lg text-sm font-body">
+                  <div className="text-center py-6 text-muted-foreground bg-card rounded-lg text-sm font-body border border-border">
                     No upcoming events scheduled.
                   </div>
                 )}
@@ -134,7 +134,7 @@ export function CommunitySection() {
                   <Link
                     key={post.id}
                     to={`/community/blog/${post.id}`}
-                    className="group block bg-background rounded-lg overflow-hidden border border-transparent hover:border-border hover:shadow-md transition-all duration-300"
+                    className="group block bg-card rounded-lg overflow-hidden border border-border hover:border-orange/30 hover:shadow-md transition-all duration-300"
                   >
                     <div className="flex gap-3.5 p-3.5">
                       <div className="flex-shrink-0 w-20 h-16 rounded-lg overflow-hidden">
@@ -162,7 +162,7 @@ export function CommunitySection() {
                 ))}
                 
                 {displayBlogs.length === 0 && (
-                  <div className="text-center py-6 text-muted-foreground bg-background rounded-lg text-sm font-body">
+                  <div className="text-center py-6 text-muted-foreground bg-card rounded-lg text-sm font-body border border-border">
                     No blog posts available yet.
                   </div>
                 )}
