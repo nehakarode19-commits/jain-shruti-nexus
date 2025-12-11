@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Calendar, ArrowRight, MapPin, Loader2, Clock, Sparkles } from "lucide-react";
+import { Calendar, ArrowRight, MapPin, Loader2 } from "lucide-react";
 import { useEventsFromDB, useBlogsFromDB } from "@/hooks/useContent";
 import { format } from "date-fns";
 
@@ -20,17 +20,16 @@ export function CommunitySection() {
   const displayBlogs = blogs.slice(0, 2);
 
   return (
-    <section className="py-16 lg:py-20 bg-card relative overflow-hidden">
-      <div className="container mx-auto px-6 relative">
+    <section className="py-16 lg:py-20 bg-card">
+      <div className="container mx-auto px-6">
         <div className="grid lg:grid-cols-2 gap-10 lg:gap-14">
           {/* Events Column */}
           <div>
             <div className="flex items-center justify-between mb-6">
               <div>
-                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-background border border-border mb-2.5">
-                  <Sparkles className="h-3 w-3 text-orange" />
-                  <span className="text-xs text-muted-foreground font-medium font-body">Events</span>
-                </div>
+                <p className="text-orange font-semibold uppercase tracking-wider text-xs mb-2 font-body">
+                  Events
+                </p>
                 <h3 className="font-heading text-2xl md:text-3xl font-bold text-primary">
                   Upcoming Events
                 </h3>
@@ -105,10 +104,9 @@ export function CommunitySection() {
           <div>
             <div className="flex items-center justify-between mb-6">
               <div>
-                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-background border border-border mb-2.5">
-                  <Sparkles className="h-3 w-3 text-orange" />
-                  <span className="text-xs text-muted-foreground font-medium font-body">Insights</span>
-                </div>
+                <p className="text-orange font-semibold uppercase tracking-wider text-xs mb-2 font-body">
+                  Insights
+                </p>
                 <h3 className="font-heading text-2xl md:text-3xl font-bold text-primary">
                   Latest Insights
                 </h3>

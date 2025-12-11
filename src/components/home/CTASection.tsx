@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
-import { Button } from "@/components/ui/button";
-import { BookOpen, Users, ScrollText, Image, ArrowRight, GraduationCap, Search, Globe } from "lucide-react";
+import { BookOpen, Users, Search, ArrowRight, GraduationCap } from "lucide-react";
 
 // Animated counter component
 const AnimatedCounter = ({ target, suffix = "" }: { target: number; suffix?: string }) => {
@@ -91,8 +90,8 @@ const ctaCards = [
 
 export function CTASection() {
   return (
-    <section className="py-16 lg:py-20 bg-background relative overflow-hidden">
-      <div className="container mx-auto px-6 relative">
+    <section className="py-16 lg:py-20 bg-background">
+      <div className="container mx-auto px-6">
         {/* Stats Section */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
           {stats.map((stat, index) => (
@@ -110,7 +109,7 @@ export function CTASection() {
 
         {/* CTA Cards */}
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          {ctaCards.map((card, index) => (
+          {ctaCards.map((card) => (
             <Link
               key={card.title}
               to={card.href}
