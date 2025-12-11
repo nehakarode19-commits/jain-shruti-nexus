@@ -6,7 +6,8 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
-import { GraduationCap, Eye, EyeOff, ArrowLeft } from "lucide-react";
+import { GraduationCap, Eye, EyeOff, ArrowLeft, Loader2 } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
 
 export default function ScholarLogin() {
   const [email, setEmail] = useState("");
@@ -15,15 +16,41 @@ export default function ScholarLogin() {
   const [isLoading, setIsLoading] = useState(false);
   const [isSignUp, setIsSignUp] = useState(false);
   const [fullName, setFullName] = useState("");
-  const { login, signup, isAuthenticated, hasRole } = useAdminAuth();
+  const { login, signup, isAuthenticated, hasRole, user } = useAdminAuth();
   const navigate = useNavigate();
   const { toast } = useToast();
 
   useEffect(() => {
-    if (isAuthenticated && hasRole(["scholar", "admin", "superadmin"])) {
-      navigate("/scholar/dashboard");
+    // Wait for user data to be fully loaded before redirecting
+    if (isAuthenticated && user && hasRole(["scholar", "admin", "superadmin"])) {
+      navigate("/scholar/dashboard", { replace: true });
     }
-  }, [isAuthenticated, hasRole, navigate]);
+  }, [isAuthenticated, hasRole, user, navigate]);
+
+  const assignScholarRole = async (userId: string) => {
+    // Check if user already has a role
+    const { data: existingRole } = await supabase
+      .from("user_roles")
+      .select("role")
+      .eq("user_id", userId)
+      .maybeSingle();
+
+    if (existingRole) {
+      // Update to scholar if not already admin/superadmin
+      if (!["admin", "superadmin"].includes(existingRole.role)) {
+        await supabase
+          .from("user_roles")
+          .update({ role: "scholar" })
+          .eq("user_id", userId);
+      }
+    } else {
+      // Insert scholar role
+      await supabase.from("user_roles").insert({
+        user_id: userId,
+        role: "scholar",
+      });
+    }
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -35,7 +62,7 @@ export default function ScholarLogin() {
         if (result.success) {
           toast({
             title: "Account created!",
-            description: "Please check your email to verify your account. Contact admin for scholar role assignment.",
+            description: "Your scholar account has been created. You can now sign in.",
           });
           setIsSignUp(false);
         } else {
@@ -49,10 +76,10 @@ export default function ScholarLogin() {
         const result = await login(email, password);
         if (result.success) {
           toast({
-            title: "Welcome back!",
-            description: "Successfully logged in to Scholar Portal",
+            title: "Welcome to Scholar Portal!",
+            description: "Successfully logged in",
           });
-          navigate("/scholar/dashboard");
+          // Redirect will happen via useEffect when user data is loaded
         } else {
           toast({
             title: "Login failed",
@@ -72,11 +99,79 @@ export default function ScholarLogin() {
     }
   };
 
+  const handleDemoLogin = async () => {
+    setIsLoading(true);
+    const demoEmail = "scholar@demo.com";
+    const demoPassword = "scholar123";
+    
+    try {
+      // Try to login first
+      const loginResult = await login(demoEmail, demoPassword);
+      
+      if (loginResult.success) {
+        // Get current user and ensure scholar role
+        const { data: { user: currentUser } } = await supabase.auth.getUser();
+        if (currentUser) {
+          await assignScholarRole(currentUser.id);
+        }
+        toast({ title: "Welcome!", description: "Logged in as Demo Scholar" });
+        navigate("/scholar/dashboard", { replace: true });
+      } else {
+        // Account doesn't exist, create it
+        const { data: signupData, error: signupError } = await supabase.auth.signUp({
+          email: demoEmail,
+          password: demoPassword,
+          options: {
+            emailRedirectTo: `${window.location.origin}/`,
+            data: { full_name: "Demo Scholar" },
+          },
+        });
+        
+        if (signupError) {
+          toast({
+            title: "Error",
+            description: signupError.message,
+            variant: "destructive",
+          });
+          setIsLoading(false);
+          return;
+        }
+
+        if (signupData.user) {
+          // Assign scholar role
+          await assignScholarRole(signupData.user.id);
+          
+          // Create profile
+          await supabase.from("profiles").upsert({
+            user_id: signupData.user.id,
+            email: demoEmail,
+            full_name: "Demo Scholar",
+          });
+          
+          // Try login again
+          const retryLogin = await login(demoEmail, demoPassword);
+          if (retryLogin.success) {
+            toast({ title: "Demo account created!", description: "Welcome to Scholar Portal" });
+            navigate("/scholar/dashboard", { replace: true });
+          }
+        }
+      }
+    } catch (error: any) {
+      toast({
+        title: "Error",
+        description: error.message || "Failed to login with demo account",
+        variant: "destructive",
+      });
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background via-muted to-background flex items-center justify-center p-4">
+    <div className="min-h-screen bg-background flex items-center justify-center p-4">
       {/* Background decoration */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-gold/5 rounded-full blur-3xl" />
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-orange/5 rounded-full blur-3xl" />
         <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
       </div>
 
@@ -84,18 +179,18 @@ export default function ScholarLogin() {
         {/* Back Link */}
         <Link 
           to="/" 
-          className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground mb-6 transition-colors"
+          className="inline-flex items-center gap-2 text-muted-foreground hover:text-primary mb-6 transition-colors"
         >
           <ArrowLeft className="h-4 w-4" />
           Back to Home
         </Link>
 
-        <Card className="shadow-2xl border-border/50">
+        <Card className="shadow-2xl border-border">
           <CardHeader className="text-center pb-2">
-            <div className="mx-auto w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center mb-4">
-              <GraduationCap className="h-8 w-8 text-primary" />
+            <div className="mx-auto w-16 h-16 rounded-2xl bg-orange/10 flex items-center justify-center mb-4">
+              <GraduationCap className="h-8 w-8 text-orange" />
             </div>
-            <CardTitle className="text-2xl font-heading">Scholar Portal</CardTitle>
+            <CardTitle className="text-2xl font-heading text-primary">Scholar Portal</CardTitle>
             <CardDescription>
               {isSignUp 
                 ? "Create your scholar account" 
@@ -161,7 +256,7 @@ export default function ScholarLogin() {
               >
                 {isLoading ? (
                   <span className="flex items-center gap-2">
-                    <span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                    <Loader2 className="h-4 w-4 animate-spin" />
                     {isSignUp ? "Creating Account..." : "Signing In..."}
                   </span>
                 ) : (
@@ -173,7 +268,7 @@ export default function ScholarLogin() {
             <div className="mt-6 text-center">
               <Button
                 variant="link"
-                className="text-muted-foreground hover:text-foreground"
+                className="text-muted-foreground hover:text-primary"
                 onClick={() => setIsSignUp(!isSignUp)}
               >
                 {isSignUp 
@@ -183,16 +278,10 @@ export default function ScholarLogin() {
               </Button>
             </div>
 
-            <div className="mt-4 p-4 bg-muted/50 rounded-lg">
-              <p className="text-xs text-muted-foreground text-center">
-                Note: After signup, contact admin to get Scholar role assigned for full portal access.
-              </p>
-            </div>
-
             {/* Demo Login Section */}
-            <div className="mt-4 p-4 bg-primary/5 border border-primary/20 rounded-lg">
-              <p className="text-sm font-medium text-primary mb-2 text-center">Scholar Portal Demo Login</p>
-              <div className="space-y-1 text-xs text-muted-foreground">
+            <div className="mt-4 p-4 bg-orange/5 border border-orange/20 rounded-xl">
+              <p className="text-sm font-medium text-orange mb-2 text-center">Demo Scholar Login</p>
+              <div className="space-y-1 text-xs text-muted-foreground mb-3">
                 <p><span className="font-medium">Email:</span> scholar@demo.com</p>
                 <p><span className="font-medium">Password:</span> scholar123</p>
               </div>
@@ -200,31 +289,18 @@ export default function ScholarLogin() {
                 type="button"
                 variant="outline"
                 size="sm"
-                className="w-full mt-3 text-xs"
-                onClick={async () => {
-                  setIsLoading(true);
-                  // Try to login first, if fails, create account then login
-                  const loginResult = await login("scholar@demo.com", "scholar123");
-                  if (!loginResult.success) {
-                    // Account doesn't exist, create it
-                    const signupResult = await signup("scholar@demo.com", "scholar123", "Demo Scholar");
-                    if (signupResult.success) {
-                      // Try login again after signup
-                      const retryLogin = await login("scholar@demo.com", "scholar123");
-                      if (retryLogin.success) {
-                        toast({ title: "Demo account created!", description: "Welcome to Scholar Portal" });
-                        navigate("/scholar/dashboard");
-                      }
-                    }
-                  } else {
-                    toast({ title: "Welcome!", description: "Logged in as Demo Scholar" });
-                    navigate("/scholar/dashboard");
-                  }
-                  setIsLoading(false);
-                }}
+                className="w-full text-sm border-orange/30 text-orange hover:bg-orange/10"
+                onClick={handleDemoLogin}
                 disabled={isLoading}
               >
-                {isLoading ? "Logging in..." : "Use Demo Login"}
+                {isLoading ? (
+                  <span className="flex items-center gap-2">
+                    <Loader2 className="h-4 w-4 animate-spin" />
+                    Logging in...
+                  </span>
+                ) : (
+                  "Use Demo Login"
+                )}
               </Button>
             </div>
           </CardContent>
