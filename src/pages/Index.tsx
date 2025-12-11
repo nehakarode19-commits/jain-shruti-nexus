@@ -8,19 +8,26 @@ import { CommunitySection } from "@/components/home/CommunitySection";
 import { GalleryPreview } from "@/components/home/GalleryPreview";
 import { AdaniFoundation } from "@/components/home/AdaniFoundation";
 import { CTASection } from "@/components/home/CTASection";
+import { SectionDivider } from "@/components/home/SectionDivider";
 
 const Index = () => {
   return (
     <Layout>
       <div className="bg-background">
         <HeroSection />
-        <AboutPreview />
-        <WhoWeServeSection />
+        <SectionDivider variant="dots" />
         <ResearchToolsSection />
+        <SectionDivider />
+        <AboutPreview />
+        <SectionDivider variant="dots" />
         <GuruvaniPreview />
-        <CommunitySection />
-        <GalleryPreview />
+        <SectionDivider />
         <AdaniFoundation />
+        <SectionDivider variant="dots" />
+        <CommunitySection />
+        <SectionDivider />
+        <GalleryPreview />
+        <SectionDivider variant="dots" />
         <CTASection />
       </div>
     </Layout>

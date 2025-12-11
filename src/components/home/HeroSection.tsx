@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { BookOpen, Search, GraduationCap, Scroll, ArrowRight, Image, ChevronDown, Star, Shield, Sparkles } from "lucide-react";
+import { BookOpen, Search, ArrowRight, Sparkles, ChevronDown } from "lucide-react";
 import { gurudevBio } from "@/data/gurudevData";
 import { useCMSContent } from "@/hooks/useCMSContent";
 
@@ -12,127 +12,79 @@ export function HeroSection() {
     featuresSection?.scrollIntoView({ behavior: 'smooth' });
   };
 
-  const leftBackdropImage = "https://siddhijambuparivar.com/wp-content/uploads/2022/11/96-min.jpg";
-  const rightBackdropImage = "https://siddhijambuparivar.com/wp-content/uploads/2022/11/43-min.jpg";
-
-  const keyBenefits = [
-    { icon: Scroll, text: "Sacred Guruvani" },
-    { icon: BookOpen, text: "5000+ Digital Texts" },
-    { icon: Shield, text: "Authentic Sources" },
-  ];
-
   return (
-    <section className="relative overflow-hidden min-h-[95vh] flex items-center">
-      {/* Multi-layer Background for Depth */}
-      <div className="absolute inset-0">
-        {/* Base gradient - Deep Navy #1E3557 */}
-        <div className="absolute inset-0 bg-gradient-to-br from-[hsl(213,50%,18%)] via-[hsl(213,50%,23%)] to-[hsl(213,45%,28%)]" />
-        
-        {/* Radial glow overlay - Golden Yellow accent */}
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_hsl(45,100%,48%,0.12)_0%,_transparent_50%)]" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,_hsl(45,100%,48%,0.08)_0%,_transparent_50%)]" />
-        
-        {/* Left Gurudev image - with blur for depth */}
-        <div 
-          className="absolute left-0 top-0 bottom-0 w-2/5 bg-cover bg-center opacity-20 mix-blend-luminosity blur-[1px]"
-          style={{ backgroundImage: `url(${leftBackdropImage})` }}
-        />
-        
-        {/* Right Gurudev image - with blur for depth */}
-        <div 
-          className="absolute right-0 top-0 bottom-0 w-2/5 bg-cover bg-center opacity-20 mix-blend-luminosity blur-[1px]"
-          style={{ backgroundImage: `url(${rightBackdropImage})` }}
-        />
-        
-        {/* Center gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-r from-[hsl(213,50%,18%)]/95 via-[hsl(213,50%,23%)]/80 to-[hsl(213,50%,18%)]/95" />
-        
-        {/* Floating decorative elements */}
-        <div className="absolute top-20 left-20 w-64 h-64 border border-white/5 rounded-full animate-pulse" style={{ animationDuration: '4s' }} />
-        <div className="absolute bottom-40 right-20 w-48 h-48 border border-white/5 rounded-full animate-pulse" style={{ animationDuration: '6s' }} />
-        <div className="absolute top-1/2 left-10 w-32 h-32 bg-gold/5 rounded-full blur-2xl" />
-        <div className="absolute top-1/3 right-1/4 w-40 h-40 bg-gold/5 rounded-full blur-3xl" />
-      </div>
+    <section className="relative min-h-[100vh] flex items-center bg-gradient-to-br from-[#F8F5EF] via-[#FDF9F3] to-[#F5F0E8]">
+      {/* Soft gradient overlay for depth */}
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(244,180,0,0.08)_0%,_transparent_50%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,_rgba(74,111,165,0.05)_0%,_transparent_50%)]" />
+      
+      {/* Subtle decorative circles */}
+      <div className="absolute top-20 left-10 w-64 h-64 border border-[#4A6FA5]/5 rounded-full" />
+      <div className="absolute bottom-20 right-10 w-48 h-48 border border-[#F4B400]/10 rounded-full" />
 
-      <div className="container mx-auto px-4 py-16 lg:py-20 relative z-10">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+      <div className="container mx-auto px-6 py-24 lg:py-32 relative z-10">
+        <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
           {/* Content */}
-          <div className="space-y-8 text-center lg:text-left">
+          <div className="space-y-8 text-center lg:text-left order-2 lg:order-1">
             {/* Trust badge */}
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/10 animate-fade-up">
-              <Sparkles className="h-4 w-4 text-gold" />
-              <span className="text-sm text-white/80">Preserving 2500+ Years of Jain Wisdom</span>
+            <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/80 backdrop-blur-sm border border-[#DCE3E7] shadow-sm animate-fade-up">
+              <Sparkles className="h-4 w-4 text-[#F4B400]" />
+              <span className="text-sm text-[#555555] font-medium">Preserving Jain Heritage & Knowledge</span>
             </div>
 
-            <div className="space-y-4 animate-fade-up" style={{ animationDelay: '100ms' }}>
-              <h1 className="font-heading text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold text-white" style={{ lineHeight: '1.28' }}>
-                {gurudevBio.hindiName}
+            <div className="space-y-3 animate-fade-up" style={{ animationDelay: '100ms' }}>
+              <p className="text-[#F4B400] font-semibold uppercase tracking-wider text-sm">
+                Jain Knowledge & Research Ecosystem
+              </p>
+              <h1 className="font-heading text-4xl sm:text-5xl lg:text-6xl font-bold text-[#1E3557] leading-tight">
+                Jain Knowledge &<br />
+                <span className="text-[#4A6FA5]">Research Ecosystem</span>
               </h1>
-              <p className="text-xl sm:text-2xl text-white/90 font-medium">
-                Gurudev Muni Jambuvijayji Maharaj Saheb
-              </p>
-              <p className="text-white/60">
-                {gurudevBio.birthYear} – {gurudevBio.deathYear}
+              <p className="text-lg text-[#555555] max-w-lg">
+                Explore the profound teachings of Gurudev Muni Jambuvijayji Maharaj Saheb (1923–2009). Discover sacred texts, research tools, and timeless wisdom of Jain philosophy.
               </p>
             </div>
 
-            <p className="font-body text-lg text-white/75 max-w-xl mx-auto lg:mx-0 animate-fade-up" style={{ animationDelay: '200ms' }}>
+            <p className="font-body text-[#555555] max-w-xl mx-auto lg:mx-0 animate-fade-up leading-relaxed" style={{ animationDelay: '200ms' }}>
               {cmsContent.heroDescription}
             </p>
 
-            {/* Key Benefits Pills */}
-            <div className="flex flex-wrap gap-3 justify-center lg:justify-start animate-fade-up" style={{ animationDelay: '300ms' }}>
-              {keyBenefits.map((benefit, index) => (
-                <div 
-                  key={benefit.text}
-                  className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 backdrop-blur-sm border border-white/10"
-                >
-                  <benefit.icon className="h-4 w-4 text-gold" />
-                  <span className="text-sm text-white/80">{benefit.text}</span>
-                </div>
-              ))}
-            </div>
-
-            <div className="flex flex-wrap gap-4 justify-center lg:justify-start animate-fade-up" style={{ animationDelay: '400ms' }}>
+            <div className="flex flex-wrap gap-4 justify-center lg:justify-start animate-fade-up" style={{ animationDelay: '300ms' }}>
               <Button 
                 size="xl" 
                 asChild 
-                className="bg-primary hover:bg-primary/90 text-white shadow-lg shadow-primary/20 group"
+                className="bg-[#F4B400] hover:bg-[#E5A800] text-[#1E3557] shadow-lg shadow-[#F4B400]/20 group font-semibold"
               >
                 <Link to="/guruvani">
-                  <Scroll className="h-5 w-5" />
                   Explore Guruvani
-                  <ArrowRight className="h-4 w-4 ml-1 group-hover:translate-x-1 transition-transform" />
+                  <ArrowRight className="h-4 w-4 ml-2 group-hover:translate-x-1 transition-transform" />
                 </Link>
               </Button>
               <Button 
                 variant="outline" 
                 size="xl" 
                 asChild 
-                className="border-white/20 text-white hover:bg-white/10 backdrop-blur-sm"
+                className="border-[#1E3557] text-[#1E3557] hover:bg-[#1E3557] hover:text-white"
               >
                 <Link to="/research">
-                  <Search className="h-5 w-5" />
+                  <Search className="h-5 w-5 mr-2" />
                   Research Tools
                 </Link>
               </Button>
             </div>
 
             {/* Quick Links */}
-            <div className="flex flex-wrap gap-8 pt-4 justify-center lg:justify-start animate-fade-up" style={{ animationDelay: '500ms' }}>
+            <div className="flex flex-wrap gap-8 pt-6 justify-center lg:justify-start animate-fade-up" style={{ animationDelay: '400ms' }}>
               {[
                 { icon: BookOpen, label: "Library", href: "/library" },
-                { icon: GraduationCap, label: "Scholars", href: "/scholars" },
-                { icon: Image, label: "Gallery", href: "/gallery" },
+                { label: "Scholars", href: "/scholars" },
+                { label: "Gallery", href: "/gallery" },
               ].map((item) => (
                 <Link
                   key={item.label}
                   to={item.href}
-                  className="flex items-center gap-2 text-white/60 hover:text-white transition-all group"
+                  className="flex items-center gap-2 text-[#555555] hover:text-[#1E3557] transition-all group text-sm"
                 >
-                  <div className="w-8 h-8 rounded-lg bg-white/5 flex items-center justify-center group-hover:bg-white/10 transition-colors">
-                    <item.icon className="h-4 w-4" />
-                  </div>
                   <span className="font-medium">{item.label}</span>
                   <ArrowRight className="h-3 w-3 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
                 </Link>
@@ -140,43 +92,34 @@ export function HeroSection() {
             </div>
           </div>
 
-          {/* Hero Visual - Enhanced with depth */}
-          <div className="relative flex justify-center animate-fade-up" style={{ animationDelay: '300ms' }}>
-            <div className="relative max-w-md">
-              {/* Glow effect behind image - Golden accent */}
-              <div className="absolute -inset-8 bg-gold/15 rounded-[3rem] blur-3xl" />
+          {/* Hero Visual */}
+          <div className="relative flex justify-center order-1 lg:order-2 animate-fade-up" style={{ animationDelay: '200ms' }}>
+            <div className="relative">
+              {/* Soft glow behind image */}
+              <div className="absolute -inset-8 bg-[#F4B400]/10 rounded-full blur-3xl" />
               
               {/* Main Gurudev Image */}
-              <div className="relative rounded-3xl overflow-hidden shadow-2xl shadow-black/30 ring-1 ring-white/10">
+              <div className="relative">
                 <img 
                   src={gurudevBio.mainImage}
-                  alt="Jambuvijayji Maharaj Saheb in white robes sitting cross-legged"
-                  className="w-full h-auto object-cover"
+                  alt="Gurudev Muni Jambuvijayji Maharaj Saheb"
+                  className="w-full max-w-md h-auto object-contain drop-shadow-2xl"
                 />
-                {/* Subtle gradient overlay on image */}
-                <div className="absolute inset-0 bg-gradient-to-t from-primary/30 to-transparent" />
               </div>
 
-              {/* Centenary Logo - with enhanced styling */}
-              <div className="absolute -top-4 -right-4 w-28 h-28 rounded-full shadow-xl overflow-hidden border-4 border-white/20 bg-white ring-4 ring-white/10">
+              {/* Centenary Logo Badge */}
+              <div className="absolute -top-2 -right-2 w-20 h-20 md:w-24 md:h-24 rounded-full shadow-xl overflow-hidden border-4 border-white bg-white">
                 <img 
                   src={gurudevBio.centenaryLogo}
-                  alt="100th Anniversary Logo"
+                  alt="100th Anniversary"
                   className="w-full h-full object-cover"
                 />
               </div>
 
-              {/* Floating stat badge */}
-              <div className="absolute -bottom-4 -left-4 px-5 py-3 rounded-2xl bg-white shadow-xl border border-border">
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-xl bg-gold/10 flex items-center justify-center">
-                    <Star className="h-5 w-5 text-gold" />
-                  </div>
-                  <div>
-                    <p className="text-xl font-bold text-primary">50+</p>
-                    <p className="text-xs text-muted-foreground">Years of Research</p>
-                  </div>
-                </div>
+              {/* Name Badge */}
+              <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 bg-white px-6 py-3 rounded-xl shadow-lg border border-[#DCE3E7] text-center">
+                <p className="text-[#1E3557] font-semibold text-sm">Gurudev Muni Jambuvijayji</p>
+                <p className="text-xs text-[#555555]">Centenary Celebrations</p>
               </div>
             </div>
           </div>
@@ -185,12 +128,10 @@ export function HeroSection() {
         {/* Scroll indicator */}
         <button 
           onClick={scrollToFeatures}
-          className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-white/50 hover:text-white transition-colors cursor-pointer group"
+          className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-[#555555] hover:text-[#1E3557] transition-colors cursor-pointer group"
         >
           <span className="font-body text-sm font-medium">Scroll to explore</span>
-          <div className="w-6 h-10 rounded-full border-2 border-current flex items-start justify-center p-1">
-            <div className="w-1.5 h-3 bg-current rounded-full animate-bounce" />
-          </div>
+          <ChevronDown className="h-5 w-5 animate-bounce" />
         </button>
       </div>
     </section>
