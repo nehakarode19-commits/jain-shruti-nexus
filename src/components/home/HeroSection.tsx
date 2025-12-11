@@ -15,24 +15,7 @@ const LotusIcon = ({ className }: { className?: string }) => (
 
 export function HeroSection() {
   return (
-    <section className="relative min-h-[90vh] flex items-center overflow-hidden" style={{ backgroundColor: '#FAF7F2' }}>
-      {/* Lotus pattern background */}
-      <div 
-        className="absolute inset-0 opacity-[0.04]"
-        style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M40 10C40 10 35 20 35 30C35 35 37 40 40 40C43 40 45 35 45 30C45 20 40 10 40 10Z' fill='%23C9A227'/%3E%3Cpath d='M25 20C25 20 15 25 15 35C15 40 20 45 25 45C30 45 35 40 35 35C35 25 25 20 25 20Z' fill='%23C9A227' opacity='0.6'/%3E%3Cpath d='M55 20C55 20 65 25 65 35C65 40 60 45 55 45C50 45 45 40 45 35C45 25 55 20 55 20Z' fill='%23C9A227' opacity='0.6'/%3E%3Cpath d='M40 40C40 40 30 50 30 60C30 65 35 70 40 70C45 70 50 65 50 60C50 50 40 40 40 40Z' fill='%23C9A227' opacity='0.4'/%3E%3C/svg%3E")`,
-          backgroundSize: '80px 80px'
-        }}
-      />
-      
-      {/* Soft gradient overlay */}
-      <div 
-        className="absolute inset-0"
-        style={{
-          background: 'linear-gradient(135deg, rgba(250,247,242,0.9) 0%, rgba(245,239,230,0.95) 50%, rgba(250,247,242,0.9) 100%)'
-        }}
-      />
-      
+    <section className="relative min-h-[90vh] flex items-center overflow-hidden bg-gradient-hero lotus-pattern">
       <div className="container mx-auto px-6 lg:px-12 py-12 lg:py-16 relative z-10">
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-10 items-center">
           {/* Content */}
