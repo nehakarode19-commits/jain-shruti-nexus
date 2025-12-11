@@ -70,7 +70,7 @@ export function ResearchToolsSection() {
             className="text-3xl md:text-4xl lg:text-5xl font-bold mb-5"
             style={{ fontFamily: 'Playfair Display, serif', color: '#2D2A26' }}
           >
-            Four Powerful{" "}
+            Powerful{" "}
             <span style={{ 
               background: 'linear-gradient(135deg, #C6933A 0%, #E3C075 50%, #C6933A 100%)',
               WebkitBackgroundClip: 'text',
