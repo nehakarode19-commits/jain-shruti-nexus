@@ -29,77 +29,77 @@ html {
 
 @layer base {
   :root {
-    /* Warm Cream Color Palette - Based on Jain Knowledge Reference */
-    /* Warm cream/beige background */
-    --background: 40 33% 96%;
-    /* Deep navy text */
-    --foreground: 213 50% 22%;
+    /* Soft Cream & Navy Color Palette - Warm & Elegant */
+    /* Soft cream background #F8F5EF */
+    --background: 40 33% 95%;
+    /* Deep navy text #1E3557 */
+    --foreground: 213 50% 23%;
 
     /* Pure white cards */
     --card: 0 0% 100%;
-    --card-foreground: 213 50% 22%;
+    --card-foreground: 213 50% 23%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 213 50% 22%;
+    --popover-foreground: 213 50% 23%;
 
-    /* Deep Navy Primary (buttons/links) */
-    --primary: 213 50% 25%;
+    /* Deep Navy Primary #1E3557 (headings/buttons) */
+    --primary: 213 50% 23%;
     --primary-foreground: 0 0% 100%;
 
     /* Light cream secondary */
-    --secondary: 40 25% 94%;
-    --secondary-foreground: 213 50% 22%;
+    --secondary: 40 25% 92%;
+    --secondary-foreground: 213 50% 23%;
 
     /* Muted - warm gray */
-    --muted: 40 20% 92%;
-    /* Muted text */
-    --muted-foreground: 213 25% 45%;
+    --muted: 40 20% 90%;
+    /* Muted text - dark grey */
+    --muted-foreground: 0 0% 45%;
 
-    /* Orange/Gold Accent */
-    --accent: 28 85% 55%;
-    --accent-foreground: 0 0% 100%;
+    /* Golden Yellow Accent #F4B400 */
+    --accent: 45 100% 48%;
+    --accent-foreground: 213 50% 15%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    /* Warm gray dividers */
-    --border: 40 15% 88%;
-    --input: 40 15% 88%;
-    --ring: 213 50% 25%;
+    /* Warm cream dividers */
+    --border: 40 20% 88%;
+    --input: 40 20% 88%;
+    --ring: 213 50% 23%;
 
     --radius: 0.75rem;
 
     /* Extended Color Palette */
-    --gold: 28 85% 55%;
-    --gold-light: 35 80% 65%;
+    --gold: 45 100% 48%;
+    --gold-light: 45 90% 60%;
     --burgundy: 345 50% 38%;
     --burgundy-light: 345 40% 50%;
     --sage: 155 25% 42%;
     --sage-light: 155 20% 85%;
-    /* Warm cream */
-    --ivory: 40 33% 96%;
-    --cream: 40 25% 94%;
-    --terracotta: 28 85% 55%;
+    /* Soft cream */
+    --ivory: 40 33% 95%;
+    --cream: 40 25% 92%;
+    --terracotta: 45 100% 48%;
     /* Deep Navy */
-    --deep-brown: 213 50% 22%;
+    --deep-brown: 213 50% 23%;
     /* Header/Footer Dark Navy */
-    --slate: 213 50% 22%;
-    /* Orange accent */
-    --slate-light: 28 85% 55%;
+    --slate: 213 50% 23%;
+    /* Golden accent */
+    --slate-light: 45 100% 48%;
 
-    /* Premium Gradients - Warm Cream to Navy */
-    --gradient-hero: linear-gradient(165deg, hsl(213 50% 22%) 0%, hsl(213 45% 28%) 50%, hsl(40 33% 96%) 100%);
-    --gradient-gold: linear-gradient(135deg, hsl(213 50% 25%) 0%, hsl(28 85% 55%) 100%);
-    --gradient-warm: linear-gradient(180deg, hsl(40 33% 96%) 0%, hsl(40 25% 94%) 100%);
-    --gradient-spiritual: linear-gradient(145deg, hsl(0 0% 100%) 0%, hsl(40 25% 94%) 40%, hsl(40 33% 96%) 100%);
+    /* Premium Gradients - Cream to Navy */
+    --gradient-hero: linear-gradient(165deg, hsl(213 50% 20%) 0%, hsl(213 50% 23%) 50%, hsl(40 33% 95%) 100%);
+    --gradient-gold: linear-gradient(135deg, hsl(213 50% 23%) 0%, hsl(45 100% 48%) 100%);
+    --gradient-warm: linear-gradient(180deg, hsl(40 33% 95%) 0%, hsl(40 25% 92%) 100%);
+    --gradient-spiritual: linear-gradient(145deg, hsl(0 0% 100%) 0%, hsl(40 25% 92%) 40%, hsl(40 33% 95%) 100%);
     --gradient-card: linear-gradient(145deg, hsl(0 0% 100%) 0%, hsl(40 20% 98%) 100%);
-    --gradient-shimmer: linear-gradient(90deg, transparent 0%, hsl(28 85% 55% / 0.08) 50%, transparent 100%);
+    --gradient-shimmer: linear-gradient(90deg, transparent 0%, hsl(45 100% 48% / 0.08) 50%, transparent 100%);
 
     /* Refined Shadows */
     --shadow-xs: 0 1px 2px hsl(213 30% 20% / 0.04);
     --shadow-soft: 0 4px 16px -2px hsl(213 30% 20% / 0.08), 0 2px 6px -1px hsl(213 30% 20% / 0.04);
     --shadow-elevated: 0 12px 40px -8px hsl(213 30% 20% / 0.12), 0 4px 12px -2px hsl(213 30% 20% / 0.06);
-    --shadow-glow: 0 0 50px hsl(28 85% 55% / 0.15), 0 0 20px hsl(28 85% 55% / 0.1);
+    --shadow-glow: 0 0 50px hsl(45 100% 48% / 0.15), 0 0 20px hsl(45 100% 48% / 0.1);
     --shadow-card: 0 2px 8px hsl(213 30% 20% / 0.06), 0 4px 16px -6px hsl(213 30% 20% / 0.08);
 
     /* Typography - Poppins for headings, Inter for body */
@@ -108,18 +108,18 @@ html {
     --font-body: 'Inter', system-ui, sans-serif;
 
     /* Sidebar - Dark Navy */
-    --sidebar-background: 213 50% 22%;
+    --sidebar-background: 213 50% 20%;
     --sidebar-foreground: 0 0% 100%;
-    --sidebar-primary: 28 85% 55%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 213 45% 18%;
+    --sidebar-primary: 45 100% 48%;
+    --sidebar-primary-foreground: 213 50% 15%;
+    --sidebar-accent: 213 45% 15%;
     --sidebar-accent-foreground: 0 0% 100%;
-    --sidebar-border: 213 40% 30%;
-    --sidebar-ring: 28 85% 55%;
+    --sidebar-border: 213 40% 28%;
+    --sidebar-ring: 45 100% 48%;
   }
 
   .dark {
-    /* Dark mode - Deep Navy with orange accents */
+    /* Dark mode - Deep Navy with golden accents */
     --background: 213 45% 12%;
     --foreground: 0 0% 95%;
 
@@ -129,8 +129,8 @@ html {
     --popover: 213 40% 18%;
     --popover-foreground: 0 0% 95%;
 
-    --primary: 28 80% 55%;
-    --primary-foreground: 0 0% 100%;
+    --primary: 45 100% 50%;
+    --primary-foreground: 213 50% 15%;
 
     --secondary: 213 35% 22%;
     --secondary-foreground: 0 0% 90%;
@@ -138,50 +138,50 @@ html {
     --muted: 213 30% 20%;
     --muted-foreground: 0 0% 65%;
 
-    --accent: 28 80% 55%;
-    --accent-foreground: 0 0% 100%;
+    --accent: 45 100% 50%;
+    --accent-foreground: 213 50% 15%;
 
     --destructive: 0 65% 50%;
     --destructive-foreground: 0 0% 95%;
 
     --border: 213 30% 25%;
     --input: 213 30% 25%;
-    --ring: 28 80% 55%;
+    --ring: 45 100% 50%;
 
-    --gold: 28 80% 55%;
-    --gold-light: 35 70% 45%;
+    --gold: 45 100% 50%;
+    --gold-light: 45 80% 45%;
     --burgundy: 345 45% 45%;
     --burgundy-light: 345 38% 52%;
     --sage: 155 22% 35%;
     --sage-light: 155 15% 22%;
     --ivory: 213 40% 18%;
     --cream: 213 35% 22%;
-    --terracotta: 28 80% 55%;
+    --terracotta: 45 100% 50%;
     --deep-brown: 213 45% 12%;
-    --slate: 28 80% 55%;
-    --slate-light: 28 75% 60%;
+    --slate: 45 100% 50%;
+    --slate-light: 45 90% 55%;
 
-    --gradient-hero: linear-gradient(165deg, hsl(213 45% 12%) 0%, hsl(213 40% 18%) 50%, hsl(28 80% 55% / 0.08) 100%);
-    --gradient-gold: linear-gradient(135deg, hsl(213 50% 25%) 0%, hsl(28 80% 55%) 100%);
+    --gradient-hero: linear-gradient(165deg, hsl(213 45% 12%) 0%, hsl(213 40% 18%) 50%, hsl(45 100% 50% / 0.08) 100%);
+    --gradient-gold: linear-gradient(135deg, hsl(213 50% 23%) 0%, hsl(45 100% 50%) 100%);
     --gradient-warm: linear-gradient(180deg, hsl(213 45% 12%) 0%, hsl(213 40% 18%) 100%);
-    --gradient-spiritual: linear-gradient(145deg, hsl(213 40% 18%) 0%, hsl(213 35% 22%) 40%, hsl(28 80% 55% / 0.08) 100%);
+    --gradient-spiritual: linear-gradient(145deg, hsl(213 40% 18%) 0%, hsl(213 35% 22%) 40%, hsl(45 100% 50% / 0.08) 100%);
     --gradient-card: linear-gradient(145deg, hsl(213 40% 20%) 0%, hsl(213 35% 15%) 100%);
-    --gradient-shimmer: linear-gradient(90deg, transparent 0%, hsl(28 80% 55% / 0.08) 50%, transparent 100%);
+    --gradient-shimmer: linear-gradient(90deg, transparent 0%, hsl(45 100% 50% / 0.08) 50%, transparent 100%);
 
     --shadow-xs: 0 1px 2px hsl(0 0% 0% / 0.15);
     --shadow-soft: 0 4px 16px -2px hsl(0 0% 0% / 0.25);
     --shadow-elevated: 0 12px 40px -8px hsl(0 0% 0% / 0.4);
-    --shadow-glow: 0 0 50px hsl(28 80% 55% / 0.15), 0 0 20px hsl(28 80% 55% / 0.1);
+    --shadow-glow: 0 0 50px hsl(45 100% 50% / 0.15), 0 0 20px hsl(45 100% 50% / 0.1);
     --shadow-card: 0 1px 3px hsl(0 0% 0% / 0.15), 0 4px 16px -6px hsl(0 0% 0% / 0.2);
 
     --sidebar-background: 213 45% 10%;
     --sidebar-foreground: 0 0% 90%;
-    --sidebar-primary: 28 80% 55%;
-    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-primary: 45 100% 50%;
+    --sidebar-primary-foreground: 213 50% 15%;
     --sidebar-accent: 213 35% 22%;
     --sidebar-accent-foreground: 0 0% 90%;
     --sidebar-border: 213 30% 18%;
-    --sidebar-ring: 28 80% 55%;
+    --sidebar-ring: 45 100% 50%;
   }
 }
 

@@ -25,12 +25,12 @@ export function HeroSection() {
     <section className="relative overflow-hidden min-h-[95vh] flex items-center">
       {/* Multi-layer Background for Depth */}
       <div className="absolute inset-0">
-        {/* Base gradient - Deep Navy */}
-        <div className="absolute inset-0 bg-gradient-to-br from-[hsl(213,50%,18%)] via-[hsl(213,50%,22%)] to-[hsl(213,45%,28%)]" />
+        {/* Base gradient - Deep Navy #1E3557 */}
+        <div className="absolute inset-0 bg-gradient-to-br from-[hsl(213,50%,18%)] via-[hsl(213,50%,23%)] to-[hsl(213,45%,28%)]" />
         
-        {/* Radial glow overlay - Orange accent */}
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_hsl(28,85%,55%,0.15)_0%,_transparent_50%)]" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,_hsl(28,85%,55%,0.1)_0%,_transparent_50%)]" />
+        {/* Radial glow overlay - Golden Yellow accent */}
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_hsl(45,100%,48%,0.12)_0%,_transparent_50%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,_hsl(45,100%,48%,0.08)_0%,_transparent_50%)]" />
         
         {/* Left Gurudev image - with blur for depth */}
         <div 
@@ -45,13 +45,13 @@ export function HeroSection() {
         />
         
         {/* Center gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-r from-[hsl(213,50%,18%)]/95 via-[hsl(213,50%,22%)]/80 to-[hsl(213,50%,18%)]/95" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[hsl(213,50%,18%)]/95 via-[hsl(213,50%,23%)]/80 to-[hsl(213,50%,18%)]/95" />
         
         {/* Floating decorative elements */}
         <div className="absolute top-20 left-20 w-64 h-64 border border-white/5 rounded-full animate-pulse" style={{ animationDuration: '4s' }} />
         <div className="absolute bottom-40 right-20 w-48 h-48 border border-white/5 rounded-full animate-pulse" style={{ animationDuration: '6s' }} />
-        <div className="absolute top-1/2 left-10 w-32 h-32 bg-accent/5 rounded-full blur-2xl" />
-        <div className="absolute top-1/3 right-1/4 w-40 h-40 bg-accent/5 rounded-full blur-3xl" />
+        <div className="absolute top-1/2 left-10 w-32 h-32 bg-gold/5 rounded-full blur-2xl" />
+        <div className="absolute top-1/3 right-1/4 w-40 h-40 bg-gold/5 rounded-full blur-3xl" />
       </div>
 
       <div className="container mx-auto px-4 py-16 lg:py-20 relative z-10">
@@ -60,7 +60,7 @@ export function HeroSection() {
           <div className="space-y-8 text-center lg:text-left">
             {/* Trust badge */}
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/10 animate-fade-up">
-              <Sparkles className="h-4 w-4 text-amber-400" />
+              <Sparkles className="h-4 w-4 text-gold" />
               <span className="text-sm text-white/80">Preserving 2500+ Years of Jain Wisdom</span>
             </div>
 
@@ -87,7 +87,7 @@ export function HeroSection() {
                   key={benefit.text}
                   className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 backdrop-blur-sm border border-white/10"
                 >
-                  <benefit.icon className="h-4 w-4 text-accent" />
+                  <benefit.icon className="h-4 w-4 text-gold" />
                   <span className="text-sm text-white/80">{benefit.text}</span>
                 </div>
               ))}
@@ -97,7 +97,7 @@ export function HeroSection() {
               <Button 
                 size="xl" 
                 asChild 
-                className="bg-accent hover:bg-accent/90 text-white shadow-lg shadow-accent/20 group"
+                className="bg-primary hover:bg-primary/90 text-white shadow-lg shadow-primary/20 group"
               >
                 <Link to="/guruvani">
                   <Scroll className="h-5 w-5" />
@@ -143,8 +143,8 @@ export function HeroSection() {
           {/* Hero Visual - Enhanced with depth */}
           <div className="relative flex justify-center animate-fade-up" style={{ animationDelay: '300ms' }}>
             <div className="relative max-w-md">
-              {/* Glow effect behind image - Orange accent */}
-              <div className="absolute -inset-8 bg-accent/20 rounded-[3rem] blur-3xl" />
+              {/* Glow effect behind image - Golden accent */}
+              <div className="absolute -inset-8 bg-gold/15 rounded-[3rem] blur-3xl" />
               
               {/* Main Gurudev Image */}
               <div className="relative rounded-3xl overflow-hidden shadow-2xl shadow-black/30 ring-1 ring-white/10">
@@ -169,8 +169,8 @@ export function HeroSection() {
               {/* Floating stat badge */}
               <div className="absolute -bottom-4 -left-4 px-5 py-3 rounded-2xl bg-white shadow-xl border border-border">
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-xl bg-accent/10 flex items-center justify-center">
-                    <Star className="h-5 w-5 text-accent" />
+                  <div className="w-10 h-10 rounded-xl bg-gold/10 flex items-center justify-center">
+                    <Star className="h-5 w-5 text-gold" />
                   </div>
                   <div>
                     <p className="text-xl font-bold text-primary">50+</p>

@@ -90,10 +90,10 @@ export default {
           DEFAULT: "hsl(var(--sage))",
           light: "hsl(var(--sage-light))",
         },
-        /* Deep Navy header/footer, Orange accent */
+        /* Deep Navy #1E3557 header/footer, Golden Yellow #F4B400 accent */
         slate: {
-          DEFAULT: "hsl(213 50% 22%)",
-          light: "hsl(28 85% 55%)",
+          DEFAULT: "hsl(213 50% 23%)",
+          light: "hsl(45 100% 48%)",
           dark: "hsl(213 50% 15%)",
         },
         ivory: "hsl(var(--ivory))",
