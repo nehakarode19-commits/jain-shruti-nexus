@@ -29,96 +29,98 @@ html {
 
 @layer base {
   :root {
-    /* Warm Jain Heritage Theme - #FDF8F3 cream, #1E3A5F navy, #F4B400 gold, #E88A1A orange */
-    /* Warm cream background #FDF8F3 */
-    --background: 38 60% 97%;
-    /* Deep navy text #1E3A5F */
-    --foreground: 213 52% 24%;
+    /* Design System Colors */
+    /* Background: #FAF7F2 */
+    --background: 40 33% 96%;
+    /* Foreground: #111111 */
+    --foreground: 0 0% 7%;
 
-    /* White cards with warm tint */
+    /* Card: #FFFFFF */
     --card: 0 0% 100%;
-    --card-foreground: 213 52% 24%;
+    --card-foreground: 0 0% 7%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 213 52% 24%;
+    --popover-foreground: 0 0% 7%;
 
-    /* Deep Navy Primary #1E3A5F */
-    --primary: 213 52% 24%;
+    /* Primary: #C6933A (gold/amber) */
+    --primary: 38 55% 50%;
     --primary-foreground: 0 0% 100%;
 
-    /* Light cream secondary */
-    --secondary: 38 40% 94%;
-    --secondary-foreground: 213 52% 24%;
+    /* Secondary: rgba(255,255,255,0.6) */
+    --secondary: 0 0% 100%;
+    --secondary-foreground: 0 0% 7%;
 
-    /* Muted warm gray */
-    --muted: 38 30% 92%;
-    /* Muted text #666666 */
+    /* Muted */
+    --muted: 40 20% 92%;
+    /* Muted foreground: #666666 */
     --muted-foreground: 0 0% 40%;
 
-    /* Golden Yellow Accent #F4B400 */
-    --accent: 43 100% 48%;
-    --accent-foreground: 213 52% 15%;
+    /* Accent (gold light): #E3C075 */
+    --accent: 43 65% 67%;
+    --accent-foreground: 0 0% 7%;
 
-    /* Orange accent #E88A1A */
+    /* Orange accent */
     --orange: 30 84% 51%;
     --orange-foreground: 0 0% 100%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    /* Warm cream borders #E5E0D5 */
-    --border: 38 25% 86%;
-    --input: 38 25% 86%;
-    --ring: 213 52% 24%;
+    /* Border: rgba(0,0,0,0.1) */
+    --border: 0 0% 90%;
+    --input: 0 0% 90%;
+    --ring: 38 55% 50%;
 
     --radius: 0.75rem;
 
-    /* Extended Heritage Palette */
-    --gold: 43 100% 48%;
-    --gold-light: 43 90% 60%;
-    --burgundy: 345 50% 38%;
-    --burgundy-light: 345 40% 50%;
+    /* Extended Palette */
+    /* Gold: #C6933A */
+    --gold: 38 55% 50%;
+    /* Gold light: #E3C075 */
+    --gold-light: 43 65% 67%;
+    /* Burgundy: #7A1E2E */
+    --burgundy: 350 60% 30%;
+    --burgundy-light: 350 50% 40%;
     --sage: 155 25% 42%;
     --sage-light: 155 20% 85%;
-    /* Heritage cream colors */
-    --ivory: 38 60% 97%;
-    --cream: 38 40% 94%;
-    --cream-light: 38 50% 96%;
+    /* Cream: #F4EDE2 */
+    --ivory: 40 33% 96%;
+    --cream: 35 35% 92%;
+    --cream-light: 35 40% 95%;
     --terracotta: 30 84% 51%;
-    /* Deep Navy */
-    --deep-brown: 213 52% 24%;
-    --slate: 213 52% 24%;
-    --slate-light: 43 100% 48%;
+    --deep-brown: 0 0% 7%;
+    --slate: 0 0% 7%;
+    --slate-light: 38 55% 50%;
 
     /* Heritage Gradients */
-    --gradient-hero: linear-gradient(165deg, hsl(38 60% 97%) 0%, hsl(38 50% 95%) 100%);
-    --gradient-gold: linear-gradient(135deg, hsl(213 52% 24%) 0%, hsl(43 100% 48%) 100%);
-    --gradient-warm: linear-gradient(180deg, hsl(38 60% 97%) 0%, hsl(38 40% 94%) 100%);
-    --gradient-spiritual: linear-gradient(145deg, hsl(0 0% 100%) 0%, hsl(38 40% 94%) 40%, hsl(38 60% 97%) 100%);
-    --gradient-card: linear-gradient(145deg, hsl(0 0% 100%) 0%, hsl(38 50% 98%) 100%);
-    --gradient-shimmer: linear-gradient(90deg, transparent 0%, hsl(43 100% 48% / 0.08) 50%, transparent 100%);
+    --gradient-hero: linear-gradient(135deg, #FDF8F3 0%, #F7EFE4 40%, #ECE3D4 80%);
+    --gradient-gold: linear-gradient(90deg, #C6933A, #E3C075);
+    --gradient-warm: linear-gradient(180deg, #FAF7F2 0%, #F4EDE2 100%);
+    --gradient-spiritual: linear-gradient(145deg, #FFFFFF 0%, #F4EDE2 40%, #FAF7F2 100%);
+    --gradient-card: linear-gradient(145deg, #FFFFFF 0%, #FDFBF8 100%);
+    --gradient-shimmer: linear-gradient(90deg, transparent 0%, rgba(198,147,58,0.08) 50%, transparent 100%);
 
     /* Heritage Shadows */
-    --shadow-xs: 0 1px 2px hsl(213 30% 20% / 0.04);
-    --shadow-soft: 0 4px 16px -2px hsl(213 30% 20% / 0.08), 0 2px 6px -1px hsl(213 30% 20% / 0.04);
-    --shadow-elevated: 0 12px 40px -8px hsl(213 30% 20% / 0.12), 0 4px 12px -2px hsl(213 30% 20% / 0.06);
-    --shadow-glow: 0 0 50px hsl(43 100% 48% / 0.15), 0 0 20px hsl(43 100% 48% / 0.1);
-    --shadow-card: 0 2px 8px hsl(213 30% 20% / 0.06), 0 4px 16px -6px hsl(213 30% 20% / 0.08);
+    --shadow-xs: 0 1px 2px rgba(0,0,0,0.04);
+    --shadow-soft: 0 4px 16px -2px rgba(0,0,0,0.08), 0 2px 6px -1px rgba(0,0,0,0.04);
+    --shadow-elevated: 0 12px 40px -8px rgba(0,0,0,0.12), 0 4px 12px -2px rgba(0,0,0,0.06);
+    --shadow-glow: 0 0 50px rgba(198,147,58,0.15), 0 0 20px rgba(198,147,58,0.1);
+    --shadow-card: 0 2px 8px rgba(0,0,0,0.06), 0 4px 16px -6px rgba(0,0,0,0.08);
 
     /* Typography */
     --font-display: 'Playfair Display', Georgia, serif;
     --font-heading: 'Playfair Display', Georgia, serif;
     --font-body: 'Inter', system-ui, sans-serif;
 
-    /* Sidebar - Dark Navy */
-    --sidebar-background: 213 52% 20%;
+    /* Sidebar */
+    --sidebar-background: 0 0% 7%;
     --sidebar-foreground: 0 0% 100%;
-    --sidebar-primary: 43 100% 48%;
-    --sidebar-primary-foreground: 213 52% 15%;
-    --sidebar-accent: 213 45% 15%;
+    --sidebar-primary: 38 55% 50%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 0 0% 15%;
     --sidebar-accent-foreground: 0 0% 100%;
-    --sidebar-border: 213 40% 28%;
-    --sidebar-ring: 43 100% 48%;
+    --sidebar-border: 0 0% 20%;
+    --sidebar-ring: 38 55% 50%;
   }
 
   .dark {
