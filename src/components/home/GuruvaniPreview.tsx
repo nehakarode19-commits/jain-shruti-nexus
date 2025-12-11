@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Mic, FileText, BookOpen, Loader2, Sparkles, Lock } from "lucide-react";
+import { ArrowRight, Mic, FileText, BookOpen, Loader2, Sparkles, Lock, Mail, Send } from "lucide-react";
 import { useGuruvaniFromDB } from "@/hooks/useContent";
+import { Input } from "@/components/ui/input";
 
 import guruvaniImg1 from "@/assets/books/guruvani-1.jpg";
 import guruvaniImg2 from "@/assets/books/guruvani-2.jpg";
@@ -22,15 +23,15 @@ export function GuruvaniPreview() {
   const displayItems = guruvaniItems.slice(0, 3);
 
   return (
-    <section className="py-24 lg:py-32 bg-card relative overflow-hidden">
+    <section className="py-20 lg:py-28 bg-card relative overflow-hidden">
       {/* Subtle background */}
       <div className="absolute top-0 left-0 w-96 h-96 bg-gradient-to-br from-background to-transparent rounded-full blur-3xl opacity-50" />
 
       <div className="container mx-auto px-6 relative">
         {/* Section Header */}
-        <div className="text-center mb-16 max-w-3xl mx-auto">
+        <div className="text-center mb-14 max-w-3xl mx-auto">
           <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-background border border-border mb-6">
-            <Sparkles className="h-4 w-4 text-accent" />
+            <Sparkles className="h-4 w-4 text-orange" />
             <span className="text-sm text-muted-foreground font-medium">Sacred Teachings</span>
           </div>
           
@@ -98,26 +99,32 @@ export function GuruvaniPreview() {
           </>
         )}
 
-        {/* Access Notice */}
+        {/* Newsletter Signup */}
         <div className="max-w-2xl mx-auto mb-10">
           <div className="bg-background rounded-2xl p-6 border border-border flex flex-col sm:flex-row items-center gap-4">
-            <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center">
-              <Lock className="h-6 w-6 text-accent" />
+            <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-orange/10 flex items-center justify-center">
+              <Mail className="h-6 w-6 text-orange" />
             </div>
             <div className="text-center sm:text-left flex-1">
               <p className="text-primary font-semibold mb-1">
-                Some Guruvani content is restricted
+                Subscribe to receive our updates
               </p>
               <p className="text-sm text-muted-foreground">
-                Sign in or register as a Scholar to request access to Gurudev's teachings
+                Get notified when new Guruvani teachings are published or Scholars portal is updated
               </p>
             </div>
-            <Link 
-              to="/auth"
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-accent text-accent-foreground font-medium text-sm hover:bg-accent/90 transition-colors"
-            >
-              Sign In / Register
-            </Link>
+            <div className="flex gap-2 w-full sm:w-auto">
+              <Input 
+                type="email" 
+                placeholder="Enter your email" 
+                className="h-10 min-w-[200px]"
+              />
+              <Button 
+                className="bg-orange hover:bg-orange/90 text-white h-10 px-4"
+              >
+                <Send className="h-4 w-4" />
+              </Button>
+            </div>
           </div>
         </div>
 
@@ -126,6 +133,7 @@ export function GuruvaniPreview() {
           <Button 
             variant="outline"
             size="lg"
+            className="border-primary/30 text-primary hover:bg-primary/5"
             asChild
           >
             <Link to="/guruvani">

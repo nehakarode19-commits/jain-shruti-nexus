@@ -1,67 +1,103 @@
-import { Heart, ExternalLink, Award, Building2, Users } from "lucide-react";
+import { Heart, ExternalLink, Award, Building2, Users, BookOpen, Quote, Sparkles } from "lucide-react";
 
 const supporters = [
-  { icon: Award, label: "Official Partner" },
-  { icon: Building2, label: "Heritage Preservation" },
-  { icon: Users, label: "Community Support" },
+  { icon: Award, label: "CSR Partner", description: "Strategic partnership for heritage preservation" },
+  { icon: Building2, label: "Infrastructure Support", description: "Building research facilities" },
+  { icon: BookOpen, label: "Knowledge Preservation", description: "Digitizing sacred manuscripts" },
+  { icon: Users, label: "Community Development", description: "Supporting scholars and researchers" },
 ];
 
 export function AdaniFoundation() {
   return (
-    <section className="py-20 lg:py-24 bg-gradient-to-br from-[#E9EEF2] to-white relative overflow-hidden">
+    <section className="py-20 lg:py-28 bg-background relative overflow-hidden">
       {/* Decorative elements */}
       <div className="absolute inset-0 opacity-30">
-        <div className="absolute top-10 right-20 w-40 h-40 border border-[#4A6FA5]/10 rounded-full" />
-        <div className="absolute bottom-10 left-20 w-32 h-32 border border-[#4A6FA5]/10 rounded-full" />
+        <div className="absolute top-10 right-20 w-40 h-40 border border-primary/10 rounded-full" />
+        <div className="absolute bottom-10 left-20 w-32 h-32 border border-primary/10 rounded-full" />
       </div>
 
-      <div className="container mx-auto px-4 relative">
-        <div className="max-w-4xl mx-auto">
-          <div className="bg-white rounded-3xl p-8 md:p-12 shadow-xl border border-[#DCE3E7] relative overflow-hidden">
+      <div className="container mx-auto px-6 relative">
+        {/* Section Header */}
+        <div className="text-center mb-12">
+          <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-card border border-border mb-6">
+            <Sparkles className="h-4 w-4 text-orange" />
+            <span className="text-sm text-muted-foreground font-medium">Our Supporters</span>
+          </div>
+          
+          <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold text-primary mb-4">
+            Supported by <span className="text-orange">Adani Foundation</span>
+          </h2>
+          
+          <p className="text-muted-foreground text-lg leading-relaxed max-w-2xl mx-auto">
+            We are grateful for the Adani Foundation's generous support in preserving and promoting 
+            Jain heritage, literature, and sacred knowledge for future generations.
+          </p>
+        </div>
+
+        {/* Main Card */}
+        <div className="max-w-5xl mx-auto">
+          <div className="bg-card rounded-3xl p-8 md:p-10 shadow-xl border border-border relative overflow-hidden">
             {/* Background accent */}
-            <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-[#4A6FA5]/5 to-transparent rounded-full -translate-y-1/2 translate-x-1/2" />
+            <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-orange/5 to-transparent rounded-full -translate-y-1/2 translate-x-1/2" />
             
-            <div className="relative flex flex-col lg:flex-row items-center gap-8">
-              {/* Icon with glow */}
-              <div className="relative flex-shrink-0">
-                <div className="absolute inset-0 bg-[#4A6FA5]/20 rounded-full blur-xl scale-150" />
-                <div className="relative w-24 h-24 rounded-full bg-gradient-to-br from-[#4A6FA5] to-[#3A5F95] flex items-center justify-center shadow-lg">
-                  <Heart className="h-12 w-12 text-white" />
+            <div className="relative">
+              {/* Logo and Description */}
+              <div className="flex flex-col md:flex-row items-start gap-8 mb-8">
+                <div className="flex-shrink-0">
+                  <div className="w-20 h-20 rounded-2xl bg-background border border-border flex items-center justify-center">
+                    <span className="font-heading text-xl font-bold text-primary">ADANI</span>
+                  </div>
+                  <p className="text-xs text-muted-foreground mt-2 text-center">Foundation</p>
+                </div>
+                
+                <div className="flex-1">
+                  <p className="text-muted-foreground text-base leading-relaxed">
+                    The Adani Foundation has been instrumental in supporting our mission to digitize, 
+                    preserve, and share the rich heritage of Jain literature. Their commitment to 
+                    knowledge preservation aligns perfectly with Gurudev's vision.
+                  </p>
+                  <a 
+                    href="https://www.adanifoundation.org/" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 text-orange hover:text-orange/80 font-medium text-sm mt-4 transition-colors"
+                  >
+                    Visit Adani Foundation
+                    <ExternalLink className="h-4 w-4" />
+                  </a>
                 </div>
               </div>
               
-              <div className="flex-1 text-center lg:text-left">
-                <p className="text-[#4A6FA5] font-semibold mb-2 uppercase tracking-wider text-sm">Proudly Supported By</p>
-                <h3 className="font-heading text-2xl md:text-3xl font-bold text-[#2B3A4A] mb-4">
-                  Adani Foundation
-                </h3>
-                <p className="text-[#555555] text-lg mb-6 max-w-xl">
-                  We are deeply grateful for the generous support from Adani Foundation 
-                  in preserving and promoting Jain heritage, literature, and sacred knowledge.
-                </p>
-                
-                {/* Support categories */}
-                <div className="flex flex-wrap justify-center lg:justify-start gap-3 mb-6">
-                  {supporters.map((item) => (
-                    <div 
-                      key={item.label}
-                      className="flex items-center gap-2 px-4 py-2 rounded-full bg-[#E9EEF2] border border-[#DCE3E7]"
-                    >
-                      <item.icon className="h-4 w-4 text-[#4A6FA5]" />
-                      <span className="text-sm text-[#2B3A4A] font-medium">{item.label}</span>
+              {/* Support categories */}
+              <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+                {supporters.map((item) => (
+                  <div 
+                    key={item.label}
+                    className="flex flex-col p-4 rounded-xl bg-background border border-border"
+                  >
+                    <div className="w-10 h-10 rounded-lg bg-orange/10 flex items-center justify-center mb-3">
+                      <item.icon className="h-5 w-5 text-orange" />
                     </div>
-                  ))}
+                    <h4 className="text-sm font-semibold text-primary mb-1">{item.label}</h4>
+                    <p className="text-xs text-muted-foreground">{item.description}</p>
+                  </div>
+                ))}
+              </div>
+
+              {/* Quote */}
+              <div className="bg-background rounded-xl p-5 border-l-4 border-orange">
+                <div className="flex gap-4">
+                  <Quote className="h-6 w-6 text-orange/40 flex-shrink-0" />
+                  <div>
+                    <p className="text-primary italic leading-relaxed">
+                      "Preserving cultural heritage is preserving our identity. We are honored to support the mission of Jambu-
+                      Shruti in safeguarding the wisdom of Jain philosophy for future generations."
+                    </p>
+                    <p className="text-sm text-muted-foreground mt-3 font-medium">
+                      — Adani Foundation
+                    </p>
+                  </div>
                 </div>
-                
-                <a 
-                  href="https://www.adanifoundation.org/" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#4A6FA5] text-white font-medium hover:bg-[#3A5F95] transition-all shadow-lg shadow-[#4A6FA5]/20 group"
-                >
-                  Visit Adani Foundation
-                  <ExternalLink className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
-                </a>
               </div>
             </div>
           </div>
