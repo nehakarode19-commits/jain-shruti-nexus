@@ -50,10 +50,10 @@ const AnimatedCounter = ({ target, suffix = "" }: { target: number; suffix?: str
 };
 
 const stats = [
-  { value: 10000, suffix: "+", label: "Research Works" },
-  { value: 5000, suffix: "+", label: "Rare Manuscripts" },
-  { value: 1200, suffix: "+", label: "Published Books" },
-  { value: 50, suffix: "+", label: "Scholar Network" },
+  { value: 10000, suffix: "+", label: "For Scholars", description: "Join our scholarly community with full access to research tools" },
+  { value: 5000, suffix: "+", label: "Library Access", description: "Explore thousands of digitized texts and ancient manuscripts" },
+  { value: 1200, suffix: "+", label: "AI Search", description: "Use our AI-powered search across Jain literature worldwide" },
+  { value: 50, suffix: "+", label: "Join Community", description: "Connect with scholars, researchers, and seekers globally" },
 ];
 
 const ctaCards = [
@@ -62,7 +62,7 @@ const ctaCards = [
     title: "For Scholars",
     description: "Join our scholarly community with full access to research tools and rare manuscripts",
     href: "/scholars",
-    cta: "Join the Hub",
+    cta: "Join Now",
     primary: true,
   },
   {
@@ -90,19 +90,20 @@ const ctaCards = [
 
 export function CTASection() {
   return (
-    <section className="py-16 lg:py-20 bg-background">
+    <section className="py-16 lg:py-20 bg-card">
       <div className="container mx-auto px-6">
         {/* Stats Section */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
           {stats.map((stat, index) => (
             <div 
               key={index}
-              className="text-center p-5 md:p-6 rounded-xl bg-card border border-border"
+              className="text-center p-5 md:p-6 rounded-xl bg-background border border-border"
             >
               <div className="font-heading text-3xl md:text-4xl font-bold text-orange mb-1.5">
                 <AnimatedCounter target={stat.value} suffix={stat.suffix} />
               </div>
-              <p className="text-muted-foreground text-sm font-medium font-body">{stat.label}</p>
+              <p className="text-primary text-sm font-semibold mb-1 font-body">{stat.label}</p>
+              <p className="text-muted-foreground text-xs font-body hidden md:block">{stat.description}</p>
             </div>
           ))}
         </div>
@@ -115,19 +116,19 @@ export function CTASection() {
               to={card.href}
               className={`group rounded-xl p-5 transition-all duration-300 ${
                 card.primary
-                  ? "bg-primary text-white hover:bg-primary/90"
-                  : "bg-card border border-border hover:border-orange/30 hover:shadow-md"
+                  ? "bg-orange text-white hover:bg-orange/90"
+                  : "bg-background border border-border hover:border-orange/30 hover:shadow-md"
               }`}
             >
               <div className={`w-10 h-10 rounded-lg flex items-center justify-center mb-3.5 ${
                 card.primary
-                  ? "bg-white/10"
-                  : "bg-primary/10 group-hover:bg-primary transition-colors"
+                  ? "bg-white/20"
+                  : "bg-orange/10 group-hover:bg-orange transition-colors"
               }`}>
                 <card.icon className={`h-5 w-5 ${
                   card.primary
                     ? "text-white"
-                    : "text-primary group-hover:text-white transition-colors"
+                    : "text-orange group-hover:text-white transition-colors"
                 }`} />
               </div>
               
@@ -144,7 +145,7 @@ export function CTASection() {
               </p>
               
               <span className={`inline-flex items-center gap-1 text-sm font-medium font-body ${
-                card.primary ? "text-orange" : "text-primary"
+                card.primary ? "text-white" : "text-orange"
               }`}>
                 {card.cta}
                 <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />

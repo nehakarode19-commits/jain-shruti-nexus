@@ -55,7 +55,7 @@ export function GuruvaniPreview() {
                   <Link
                     key={item.id}
                     to={item.is_restricted ? "/auth" : `/guruvani/${item.id}`}
-                    className="group bg-card border border-border rounded-xl overflow-hidden hover:shadow-lg hover:border-orange/30 transition-all duration-300"
+                    className="group bg-background border border-border rounded-xl overflow-hidden hover:shadow-lg hover:border-orange/30 transition-all duration-300"
                   >
                     <div className="aspect-[4/3] overflow-hidden relative">
                       <img
@@ -71,7 +71,7 @@ export function GuruvaniPreview() {
                     </div>
                     <div className="p-4">
                       <div className="flex items-center gap-2 mb-2.5">
-                        <span className="px-2.5 py-1 rounded-full bg-primary/10 text-primary text-xs font-medium font-body">
+                        <span className="px-2.5 py-1 rounded-full bg-orange/10 text-orange text-xs font-medium font-body">
                           {item.category || "Teaching"}
                         </span>
                       </div>
@@ -103,10 +103,10 @@ export function GuruvaniPreview() {
             </div>
             <div className="text-center sm:text-left flex-1">
               <p className="text-primary font-semibold text-sm mb-0.5 font-body">
-                Subscribe to receive our updates
+                Subscribe to receive updates
               </p>
               <p className="text-xs text-muted-foreground font-body">
-                Get notified when new Guruvani teachings are published or Scholars portal is updated
+                Get notified when new teachings are published
               </p>
             </div>
             <div className="flex gap-2 w-full sm:w-auto">
@@ -133,7 +133,7 @@ export function GuruvaniPreview() {
             asChild
           >
             <Link to="/guruvani">
-              Browse All Guruvani
+              Type to Explore
               <ArrowRight className="h-4 w-4 ml-2" />
             </Link>
           </Button>

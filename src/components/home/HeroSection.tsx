@@ -1,11 +1,20 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { BookOpen, Search, Sparkles, GraduationCap, Image, BookMarked, Quote, ArrowRight } from "lucide-react";
+import { BookOpen, Search, Sparkles, GraduationCap, Image, BookMarked, Quote, ArrowRight, ChevronDown } from "lucide-react";
 import { gurudevBio } from "@/data/gurudevData";
 
 export function HeroSection() {
   return (
     <section className="relative min-h-[90vh] flex items-center bg-background overflow-hidden">
+      {/* Decorative curved shape */}
+      <div 
+        className="absolute right-0 top-0 bottom-0 w-[55%] hidden lg:block"
+        style={{
+          background: 'linear-gradient(135deg, hsl(30 70% 95%) 0%, hsl(35 60% 92%) 50%, hsl(38 50% 90%) 100%)',
+          borderRadius: '0 0 0 60% / 0 0 0 40%',
+        }}
+      />
+      
       <div className="container mx-auto px-6 lg:px-8 py-12 lg:py-16 relative z-10">
         <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
           {/* Content */}
@@ -131,6 +140,11 @@ export function HeroSection() {
               </div>
             </div>
           </div>
+        </div>
+
+        {/* Scroll indicator */}
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 hidden lg:flex flex-col items-center gap-2 text-muted-foreground/60">
+          <ChevronDown className="h-5 w-5 animate-bounce" />
         </div>
       </div>
     </section>

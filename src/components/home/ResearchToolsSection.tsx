@@ -5,16 +5,16 @@ import { Database, Search, FileText, Globe, ArrowRight } from "lucide-react";
 const researchTools = [
   {
     title: "SodhSanchay",
-    subtitle: "Research Storage",
-    description: "Store and organize your research notes, metadata, and scholarly references in a centralized cloud-based repository.",
+    subtitle: "Research Metadata",
+    description: "Store and organize your research notes, metadata, and scholarly references in a centralized and searchable repository.",
     icon: Database,
     href: "/research/sodhsanchay",
     iconBg: "bg-primary",
   },
   {
     title: "SodhSandarbh",
-    subtitle: "Advanced Search",
-    description: "Powerful search and export capabilities for research entries across multiple languages with transliteration support.",
+    subtitle: "Search & Export",
+    description: "Powerful search and export features across research entries with advanced filters and cross-referencing.",
     icon: Search,
     href: "/research/sodhsandarbh",
     iconBg: "bg-sage",
@@ -22,15 +22,15 @@ const researchTools = [
   {
     title: "Śabdasaṅgraha",
     subtitle: "PDF Search",
-    description: "Deep-search AI that lets you explore Jain literature pages matching your query with AI-powered extraction.",
+    description: "Search inside Jain PDFs and manusripts using our AI-powered text extraction and discovery tools.",
     icon: FileText,
     href: "/research/shabdasangraha",
     iconBg: "bg-orange",
   },
   {
     title: "Shastrasandarbha",
-    subtitle: "Global Library",
-    description: "AI-powered search across Archive.org, HathiTrust, JSTOR, and more to find Jain books worldwide.",
+    subtitle: "External Sources",
+    description: "AI-assisted search across Archive.org, HathiTrust, JSTOR, and more to find Jain books worldwide.",
     icon: Globe,
     href: "/research/shastrasandarbha",
     iconBg: "bg-burgundy",
@@ -39,7 +39,7 @@ const researchTools = [
 
 export function ResearchToolsSection() {
   return (
-    <section className="py-16 lg:py-20 bg-background">
+    <section className="py-16 lg:py-20 bg-card">
       <div className="container mx-auto px-6">
         {/* Section Header */}
         <div className="text-center mb-12 max-w-2xl mx-auto">
@@ -62,7 +62,7 @@ export function ResearchToolsSection() {
             <Link 
               key={tool.title}
               to={tool.href}
-              className="group bg-card rounded-xl p-5 border border-border hover:border-orange/30 hover:shadow-lg transition-all duration-300"
+              className="group bg-background rounded-xl p-5 border border-border hover:border-orange/30 hover:shadow-lg transition-all duration-300"
             >
               <div className={`w-12 h-12 rounded-lg ${tool.iconBg} flex items-center justify-center mb-4 group-hover:scale-105 transition-transform shadow-md`}>
                 <tool.icon className="h-6 w-6 text-white" />
