@@ -5,10 +5,10 @@ import { gurudevBio } from "@/data/gurudevData";
 
 export function HeroSection() {
   return (
-    <section className="relative min-h-[85vh] flex items-center bg-gradient-to-br from-[#1E3557] via-[#1E3A5F] to-[#152744]">
+    <section className="relative min-h-[85vh] flex items-center bg-gradient-to-br from-[#2D1810] via-[#3D2315] to-[#1A0F08]">
       {/* Subtle pattern overlay */}
       <div className="absolute inset-0 opacity-10" style={{
-        backgroundImage: `radial-gradient(circle at 2px 2px, rgba(255,255,255,0.15) 1px, transparent 0)`,
+        backgroundImage: `radial-gradient(circle at 2px 2px, rgba(232,138,26,0.2) 1px, transparent 0)`,
         backgroundSize: '32px 32px'
       }} />
 
