@@ -31,11 +31,11 @@ export function HeroSection() {
             </p>
 
             {/* Main Title */}
-            <div className="space-y-0">
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-[1.1] tracking-tight text-[#2D2A26]" style={{ fontFamily: 'Playfair Display, serif' }}>
+            <div className="space-y-1">
+              <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold leading-[1.05] tracking-tight text-[#2D2A26]" style={{ fontFamily: 'Playfair Display, serif' }}>
                 Jain Knowledge &
               </h1>
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-[1.1] tracking-tight text-[#E5A832]" style={{ fontFamily: 'Playfair Display, serif' }}>
+              <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold leading-[1.05] tracking-tight text-[#D4A03C]" style={{ fontFamily: 'Playfair Display, serif' }}>
                 Research Ecosystem
               </h1>
             </div>
