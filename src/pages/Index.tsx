@@ -5,7 +5,7 @@ import { WhoWeServeSection } from "@/components/home/WhoWeServeSection";
 import { ResearchToolsSection } from "@/components/home/ResearchToolsSection";
 import { GuruvaniPreview } from "@/components/home/GuruvaniPreview";
 import { CommunitySection } from "@/components/home/CommunitySection";
-import { GalleryPreview } from "@/components/home/GalleryPreview";
+
 import { AdaniFoundation } from "@/components/home/AdaniFoundation";
 import { CTASection } from "@/components/home/CTASection";
 import { SectionDivider } from "@/components/home/SectionDivider";
@@ -25,9 +25,6 @@ const Index = () => {
         <AdaniFoundation />
         <SectionDivider variant="dots" />
         <CommunitySection />
-        <SectionDivider />
-        <GalleryPreview />
-        <SectionDivider variant="dots" />
         <CTASection />
       </div>
     </Layout>
