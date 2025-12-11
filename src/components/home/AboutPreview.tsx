@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Quote, Scroll, BookOpen, FileText, Image, Users, Building2 } from "lucide-react";
-import { gurudevBio } from "@/data/gurudevData";
 
 const quickLinks = [
   { icon: BookOpen, label: "Books", href: "/books" },
@@ -32,24 +31,21 @@ const teachings = [
 
 export function AboutPreview() {
   return (
-    <section className="py-20 lg:py-28 bg-card relative overflow-hidden">
-      {/* Subtle decorative elements */}
-      <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-background to-transparent rounded-full blur-3xl opacity-50" />
-
+    <section className="py-16 lg:py-20 bg-card relative overflow-hidden">
       <div className="container mx-auto px-6 relative">
-        <div className="grid lg:grid-cols-5 gap-12 lg:gap-16 items-start">
-          {/* Content Section - Takes 3 columns */}
-          <div className="lg:col-span-3 space-y-6">
+        <div className="grid lg:grid-cols-5 gap-10 lg:gap-14 items-start">
+          {/* Content Section */}
+          <div className="lg:col-span-3 space-y-5">
             <div>
-              <p className="text-orange font-semibold uppercase tracking-wider text-sm mb-4">
+              <p className="text-orange font-semibold uppercase tracking-wider text-xs mb-3 font-body">
                 About Gurudev
               </p>
-              <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold text-primary mb-6">
+              <h2 className="font-heading text-3xl md:text-4xl font-bold text-primary mb-5">
                 Muni Jambuvijayji Maharaj Saheb
               </h2>
             </div>
 
-            <p className="text-muted-foreground text-lg leading-relaxed">
+            <p className="text-muted-foreground text-[15px] leading-relaxed font-body">
               Jambuvijayji Maharaj Saheb (1923–2009), also known as Muni Jambuvijayji 
               Maharaj Saheb, was a Jain ascetic belonging to the Tapa Gaccha order of 
               Shvetambara sect of Jainism. Jambuvijayji dedicated his life to Prakrit 
@@ -58,12 +54,12 @@ export function AboutPreview() {
             </p>
 
             {/* Quick Links */}
-            <div className="flex flex-wrap gap-3">
+            <div className="flex flex-wrap gap-2.5">
               {quickLinks.map((link) => (
                 <Link
                   key={link.label}
                   to={link.href}
-                  className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-background border border-border text-muted-foreground hover:border-primary hover:text-primary transition-colors text-sm font-medium"
+                  className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-background border border-border text-muted-foreground hover:border-primary hover:text-primary transition-colors text-sm font-medium font-body"
                 >
                   <link.icon className="h-4 w-4" />
                   {link.label}
@@ -73,22 +69,22 @@ export function AboutPreview() {
             </div>
 
             {/* Quote */}
-            <div className="bg-background rounded-2xl p-6 border-l-4 border-orange relative">
-              <Quote className="absolute top-4 right-4 h-8 w-8 text-orange/20" />
-              <blockquote className="text-primary italic text-lg leading-relaxed">
+            <div className="bg-background rounded-xl p-5 border-l-4 border-orange relative">
+              <Quote className="absolute top-4 right-4 h-7 w-7 text-orange/20" />
+              <blockquote className="text-primary italic text-[15px] leading-relaxed font-body">
                 "The pursuit of knowledge is the path to liberation. Through study 
                 and contemplation, we illuminate the darkness of ignorance."
               </blockquote>
-              <p className="mt-3 text-sm text-muted-foreground font-medium">
+              <p className="mt-2.5 text-xs text-muted-foreground font-medium font-body">
                 — Gurudev Muni Jambuvijayji
               </p>
             </div>
 
             {/* CTA Buttons */}
-            <div className="flex flex-wrap gap-4 pt-4">
+            <div className="flex flex-wrap gap-3 pt-2">
               <Button 
                 size="lg" 
-                className="bg-primary hover:bg-primary/90 text-white"
+                className="bg-primary hover:bg-primary/90 text-white h-10 px-5 text-sm font-body"
                 asChild
               >
                 <Link to="/about/gurudev">
@@ -99,7 +95,7 @@ export function AboutPreview() {
               <Button 
                 variant="outline"
                 size="lg" 
-                className="border-primary/30 text-primary hover:bg-primary/5"
+                className="border-border text-primary hover:bg-primary/5 h-10 px-5 text-sm font-body"
                 asChild
               >
                 <Link to="/about/gurudev#timeline">
@@ -109,35 +105,34 @@ export function AboutPreview() {
             </div>
           </div>
 
-          {/* Image and Teachings Section - Takes 2 columns */}
-          <div className="lg:col-span-2 space-y-6">
+          {/* Image and Teachings Section */}
+          <div className="lg:col-span-2 space-y-5">
             {/* Image */}
-            <div className="relative rounded-2xl overflow-hidden shadow-xl">
+            <div className="relative rounded-xl overflow-hidden shadow-lg">
               <img
                 src="https://siddhijambuparivar.com/wp-content/uploads/2022/11/96-min.jpg"
                 alt="Gurudev Muni Jambuvijayji Maharaj Saheb"
                 className="w-full h-auto object-cover"
               />
-              {/* Soft overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-primary/20 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-primary/10 to-transparent" />
             </div>
 
             {/* Teaching Cards */}
-            <div className="space-y-3">
+            <div className="space-y-2.5">
               {teachings.map((item) => (
                 <Link
                   key={item.title}
                   to={item.href}
-                  className="group flex items-center gap-4 bg-background rounded-xl p-4 hover:shadow-lg border border-transparent hover:border-border transition-all duration-300"
+                  className="group flex items-center gap-3.5 bg-background rounded-lg p-3.5 hover:shadow-md border border-transparent hover:border-border transition-all duration-300"
                 >
-                  <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center group-hover:bg-primary transition-colors">
-                    <item.icon className="h-6 w-6 text-primary group-hover:text-white transition-colors" />
+                  <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center group-hover:bg-primary transition-colors">
+                    <item.icon className="h-5 w-5 text-primary group-hover:text-white transition-colors" />
                   </div>
                   <div className="flex-1">
-                    <h3 className="font-heading text-base font-semibold text-primary group-hover:text-primary/80 transition-colors">
+                    <h3 className="font-heading text-sm font-semibold text-primary group-hover:text-primary/80 transition-colors">
                       {item.title}
                     </h3>
-                    <p className="text-sm text-muted-foreground">
+                    <p className="text-xs text-muted-foreground font-body">
                       {item.description}
                     </p>
                   </div>

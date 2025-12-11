@@ -91,64 +91,60 @@ const ctaCards = [
 
 export function CTASection() {
   return (
-    <section className="py-20 lg:py-28 bg-background relative overflow-hidden">
-      {/* Subtle decorative elements */}
-      <div className="absolute top-20 right-20 w-64 h-64 border border-primary/5 rounded-full" />
-      <div className="absolute bottom-40 left-40 w-48 h-48 border border-orange/10 rounded-full" />
-
+    <section className="py-16 lg:py-20 bg-background relative overflow-hidden">
       <div className="container mx-auto px-6 relative">
         {/* Stats Section */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
           {stats.map((stat, index) => (
             <div 
               key={index}
-              className="text-center p-6 md:p-8 rounded-2xl bg-card border border-border"
+              className="text-center p-5 md:p-6 rounded-xl bg-card border border-border"
             >
-              <div className="font-heading text-4xl md:text-5xl font-bold text-orange mb-2">
+              <div className="font-heading text-3xl md:text-4xl font-bold text-orange mb-1.5">
                 <AnimatedCounter target={stat.value} suffix={stat.suffix} />
               </div>
-              <p className="text-muted-foreground font-medium">{stat.label}</p>
+              <p className="text-muted-foreground text-sm font-medium font-body">{stat.label}</p>
             </div>
           ))}
         </div>
 
         {/* CTA Cards */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {ctaCards.map((card, index) => (
             <Link
               key={card.title}
               to={card.href}
-              className={`group rounded-2xl p-6 transition-all duration-300 ${
+              className={`group rounded-xl p-5 transition-all duration-300 ${
                 card.primary
                   ? "bg-primary text-white hover:bg-primary/90"
-                  : "bg-card border border-border hover:border-primary/30 hover:shadow-lg"
+                  : "bg-card border border-border hover:border-orange/30 hover:shadow-md"
               }`}
             >
-              <div className={`w-12 h-12 rounded-xl flex items-center justify-center mb-4 ${
+              <div className={`w-10 h-10 rounded-lg flex items-center justify-center mb-3.5 ${
                 card.primary
                   ? "bg-white/10"
                   : "bg-primary/10 group-hover:bg-primary transition-colors"
               }`}>
-                <card.icon className={`h-6 w-6 ${
+                <card.icon className={`h-5 w-5 ${
                   card.primary
                     ? "text-white"
                     : "text-primary group-hover:text-white transition-colors"
                 }`} />
               </div>
               
-              <h3 className={`font-heading text-lg font-bold mb-2 ${
+              <h3 className={`font-heading text-base font-semibold mb-1.5 ${
                 card.primary ? "text-white" : "text-primary"
               }`}>
                 {card.title}
               </h3>
               
-              <p className={`text-sm mb-4 leading-relaxed ${
+              <p className={`text-sm mb-3 leading-relaxed font-body ${
                 card.primary ? "text-white/80" : "text-muted-foreground"
               }`}>
                 {card.description}
               </p>
               
-              <span className={`inline-flex items-center gap-1 text-sm font-medium ${
+              <span className={`inline-flex items-center gap-1 text-sm font-medium font-body ${
                 card.primary ? "text-orange" : "text-primary"
               }`}>
                 {card.cta}

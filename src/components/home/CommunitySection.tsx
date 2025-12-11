@@ -20,19 +20,16 @@ export function CommunitySection() {
   const displayBlogs = blogs.slice(0, 2);
 
   return (
-    <section className="py-20 lg:py-28 bg-card relative overflow-hidden">
-      {/* Subtle background */}
-      <div className="absolute bottom-0 right-0 w-96 h-96 bg-gradient-to-tl from-background to-transparent rounded-full blur-3xl opacity-50" />
-
+    <section className="py-16 lg:py-20 bg-card relative overflow-hidden">
       <div className="container mx-auto px-6 relative">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16">
+        <div className="grid lg:grid-cols-2 gap-10 lg:gap-14">
           {/* Events Column */}
           <div>
-            <div className="flex items-center justify-between mb-8">
+            <div className="flex items-center justify-between mb-6">
               <div>
-                <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-background border border-border mb-3">
+                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-background border border-border mb-2.5">
                   <Sparkles className="h-3 w-3 text-orange" />
-                  <span className="text-xs text-muted-foreground font-medium">Events</span>
+                  <span className="text-xs text-muted-foreground font-medium font-body">Events</span>
                 </div>
                 <h3 className="font-heading text-2xl md:text-3xl font-bold text-primary">
                   Upcoming Events
@@ -42,7 +39,7 @@ export function CommunitySection() {
                 variant="ghost" 
                 size="sm"
                 asChild
-                className="text-primary hover:text-primary/80"
+                className="text-primary hover:text-primary/80 text-sm font-body"
               >
                 <Link to="/community/events">
                   View All
@@ -52,18 +49,18 @@ export function CommunitySection() {
             </div>
             
             {eventsLoading ? (
-              <div className="flex items-center justify-center py-12">
+              <div className="flex items-center justify-center py-10">
                 <Loader2 className="h-6 w-6 animate-spin text-primary" />
               </div>
             ) : (
-              <div className="space-y-4">
+              <div className="space-y-3">
                 {displayEvents.map((event, index) => (
                   <Link
                     key={event.id}
                     to="/community/events"
-                    className="group flex gap-4 bg-background rounded-xl p-4 border border-transparent hover:border-border hover:shadow-lg transition-all duration-300"
+                    className="group flex gap-3.5 bg-background rounded-lg p-3.5 border border-transparent hover:border-border hover:shadow-md transition-all duration-300"
                   >
-                    <div className="flex-shrink-0 w-16 h-16 rounded-xl overflow-hidden">
+                    <div className="flex-shrink-0 w-14 h-14 rounded-lg overflow-hidden">
                       <img
                         src={event.image_url || fallbackEventImages[index % fallbackEventImages.length]}
                         alt={event.title}
@@ -71,13 +68,13 @@ export function CommunitySection() {
                       />
                     </div>
                     <div className="flex-1 min-w-0">
-                      <span className="inline-block px-2 py-0.5 rounded-full bg-orange/10 text-orange text-xs font-medium mb-2">
+                      <span className="inline-block px-2 py-0.5 rounded-full bg-orange/10 text-orange text-xs font-medium mb-1.5 font-body">
                         Event
                       </span>
-                      <h4 className="font-semibold text-primary mb-1 group-hover:text-primary/80 transition-colors line-clamp-1">
+                      <h4 className="font-semibold text-sm text-primary mb-1 group-hover:text-primary/80 transition-colors line-clamp-1 font-body">
                         {event.title}
                       </h4>
-                      <div className="flex flex-wrap gap-3 text-xs text-muted-foreground">
+                      <div className="flex flex-wrap gap-3 text-xs text-muted-foreground font-body">
                         {event.event_date && (
                           <span className="flex items-center gap-1">
                             <Calendar className="h-3 w-3 text-orange" />
@@ -96,7 +93,7 @@ export function CommunitySection() {
                 ))}
                 
                 {displayEvents.length === 0 && (
-                  <div className="text-center py-8 text-muted-foreground bg-background rounded-xl">
+                  <div className="text-center py-6 text-muted-foreground bg-background rounded-lg text-sm font-body">
                     No upcoming events scheduled.
                   </div>
                 )}
@@ -106,11 +103,11 @@ export function CommunitySection() {
 
           {/* Insights Column */}
           <div>
-            <div className="flex items-center justify-between mb-8">
+            <div className="flex items-center justify-between mb-6">
               <div>
-                <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-background border border-border mb-3">
+                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-background border border-border mb-2.5">
                   <Sparkles className="h-3 w-3 text-orange" />
-                  <span className="text-xs text-muted-foreground font-medium">Insights</span>
+                  <span className="text-xs text-muted-foreground font-medium font-body">Insights</span>
                 </div>
                 <h3 className="font-heading text-2xl md:text-3xl font-bold text-primary">
                   Latest Insights
@@ -120,7 +117,7 @@ export function CommunitySection() {
                 variant="ghost" 
                 size="sm"
                 asChild
-                className="text-primary hover:text-primary/80"
+                className="text-primary hover:text-primary/80 text-sm font-body"
               >
                 <Link to="/community/blog">
                   Read All
@@ -130,19 +127,19 @@ export function CommunitySection() {
             </div>
             
             {blogsLoading ? (
-              <div className="flex items-center justify-center py-12">
+              <div className="flex items-center justify-center py-10">
                 <Loader2 className="h-6 w-6 animate-spin text-primary" />
               </div>
             ) : (
-              <div className="space-y-4">
+              <div className="space-y-3">
                 {displayBlogs.map((post, index) => (
                   <Link
                     key={post.id}
                     to={`/community/blog/${post.id}`}
-                    className="group block bg-background rounded-xl overflow-hidden border border-transparent hover:border-border hover:shadow-lg transition-all duration-300"
+                    className="group block bg-background rounded-lg overflow-hidden border border-transparent hover:border-border hover:shadow-md transition-all duration-300"
                   >
-                    <div className="flex gap-4 p-4">
-                      <div className="flex-shrink-0 w-24 h-20 rounded-lg overflow-hidden">
+                    <div className="flex gap-3.5 p-3.5">
+                      <div className="flex-shrink-0 w-20 h-16 rounded-lg overflow-hidden">
                         <img
                           src={post.cover_image || fallbackBlogImages[index % fallbackBlogImages.length]}
                           alt={post.title}
@@ -150,15 +147,15 @@ export function CommunitySection() {
                         />
                       </div>
                       <div className="flex-1 min-w-0">
-                        <div className="flex items-center gap-2 mb-2">
-                          <span className="px-2 py-0.5 rounded-full bg-primary/10 text-primary text-xs font-medium">
+                        <div className="flex items-center gap-2 mb-1.5">
+                          <span className="px-2 py-0.5 rounded-full bg-primary/10 text-primary text-xs font-medium font-body">
                             Blog
                           </span>
-                          <span className="text-xs text-muted-foreground">
+                          <span className="text-xs text-muted-foreground font-body">
                             {format(new Date(post.created_at), "MMM d")}
                           </span>
                         </div>
-                        <h4 className="font-semibold text-primary mb-1 group-hover:text-primary/80 transition-colors line-clamp-2">
+                        <h4 className="font-semibold text-sm text-primary mb-1 group-hover:text-primary/80 transition-colors line-clamp-2 font-body">
                           {post.title}
                         </h4>
                       </div>
@@ -167,7 +164,7 @@ export function CommunitySection() {
                 ))}
                 
                 {displayBlogs.length === 0 && (
-                  <div className="text-center py-8 text-muted-foreground bg-background rounded-xl">
+                  <div className="text-center py-6 text-muted-foreground bg-background rounded-lg text-sm font-body">
                     No blog posts available yet.
                   </div>
                 )}

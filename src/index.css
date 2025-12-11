@@ -106,8 +106,8 @@ html {
     --shadow-card: 0 2px 8px hsl(213 30% 20% / 0.06), 0 4px 16px -6px hsl(213 30% 20% / 0.08);
 
     /* Typography */
-    --font-display: 'Poppins', system-ui, sans-serif;
-    --font-heading: 'Poppins', system-ui, sans-serif;
+    --font-display: 'Playfair Display', Georgia, serif;
+    --font-heading: 'Playfair Display', Georgia, serif;
     --font-body: 'Inter', system-ui, sans-serif;
 
     /* Sidebar - Dark Navy */
