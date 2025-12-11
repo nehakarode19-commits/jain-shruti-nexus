@@ -29,93 +29,96 @@ html {
 
 @layer base {
   :root {
-    /* Soft Cream & Navy Color Palette - Warm & Elegant */
-    /* Soft cream background #F8F5EF */
-    --background: 40 33% 95%;
-    /* Deep navy text #1E3557 */
-    --foreground: 213 50% 23%;
+    /* Warm Jain Heritage Theme - #FDF8F3 cream, #1E3A5F navy, #F4B400 gold, #E88A1A orange */
+    /* Warm cream background #FDF8F3 */
+    --background: 38 60% 97%;
+    /* Deep navy text #1E3A5F */
+    --foreground: 213 52% 24%;
 
-    /* Pure white cards */
+    /* White cards with warm tint */
     --card: 0 0% 100%;
-    --card-foreground: 213 50% 23%;
+    --card-foreground: 213 52% 24%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 213 50% 23%;
+    --popover-foreground: 213 52% 24%;
 
-    /* Deep Navy Primary #1E3557 (headings/buttons) */
-    --primary: 213 50% 23%;
+    /* Deep Navy Primary #1E3A5F */
+    --primary: 213 52% 24%;
     --primary-foreground: 0 0% 100%;
 
     /* Light cream secondary */
-    --secondary: 40 25% 92%;
-    --secondary-foreground: 213 50% 23%;
+    --secondary: 38 40% 94%;
+    --secondary-foreground: 213 52% 24%;
 
-    /* Muted - warm gray */
-    --muted: 40 20% 90%;
-    /* Muted text - dark grey */
-    --muted-foreground: 0 0% 45%;
+    /* Muted warm gray */
+    --muted: 38 30% 92%;
+    /* Muted text #666666 */
+    --muted-foreground: 0 0% 40%;
 
     /* Golden Yellow Accent #F4B400 */
-    --accent: 45 100% 48%;
-    --accent-foreground: 213 50% 15%;
+    --accent: 43 100% 48%;
+    --accent-foreground: 213 52% 15%;
+
+    /* Orange accent #E88A1A */
+    --orange: 30 84% 51%;
+    --orange-foreground: 0 0% 100%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    /* Warm cream dividers */
-    --border: 40 20% 88%;
-    --input: 40 20% 88%;
-    --ring: 213 50% 23%;
+    /* Warm cream borders #E5E0D5 */
+    --border: 38 25% 86%;
+    --input: 38 25% 86%;
+    --ring: 213 52% 24%;
 
     --radius: 0.75rem;
 
-    /* Extended Color Palette */
-    --gold: 45 100% 48%;
-    --gold-light: 45 90% 60%;
+    /* Extended Heritage Palette */
+    --gold: 43 100% 48%;
+    --gold-light: 43 90% 60%;
     --burgundy: 345 50% 38%;
     --burgundy-light: 345 40% 50%;
     --sage: 155 25% 42%;
     --sage-light: 155 20% 85%;
-    /* Soft cream */
-    --ivory: 40 33% 95%;
-    --cream: 40 25% 92%;
-    --terracotta: 45 100% 48%;
+    /* Heritage cream colors */
+    --ivory: 38 60% 97%;
+    --cream: 38 40% 94%;
+    --cream-light: 38 50% 96%;
+    --terracotta: 30 84% 51%;
     /* Deep Navy */
-    --deep-brown: 213 50% 23%;
-    /* Header/Footer Dark Navy */
-    --slate: 213 50% 23%;
-    /* Golden accent */
-    --slate-light: 45 100% 48%;
+    --deep-brown: 213 52% 24%;
+    --slate: 213 52% 24%;
+    --slate-light: 43 100% 48%;
 
-    /* Premium Gradients - Cream to Navy */
-    --gradient-hero: linear-gradient(165deg, hsl(213 50% 20%) 0%, hsl(213 50% 23%) 50%, hsl(40 33% 95%) 100%);
-    --gradient-gold: linear-gradient(135deg, hsl(213 50% 23%) 0%, hsl(45 100% 48%) 100%);
-    --gradient-warm: linear-gradient(180deg, hsl(40 33% 95%) 0%, hsl(40 25% 92%) 100%);
-    --gradient-spiritual: linear-gradient(145deg, hsl(0 0% 100%) 0%, hsl(40 25% 92%) 40%, hsl(40 33% 95%) 100%);
-    --gradient-card: linear-gradient(145deg, hsl(0 0% 100%) 0%, hsl(40 20% 98%) 100%);
-    --gradient-shimmer: linear-gradient(90deg, transparent 0%, hsl(45 100% 48% / 0.08) 50%, transparent 100%);
+    /* Heritage Gradients */
+    --gradient-hero: linear-gradient(165deg, hsl(38 60% 97%) 0%, hsl(38 50% 95%) 100%);
+    --gradient-gold: linear-gradient(135deg, hsl(213 52% 24%) 0%, hsl(43 100% 48%) 100%);
+    --gradient-warm: linear-gradient(180deg, hsl(38 60% 97%) 0%, hsl(38 40% 94%) 100%);
+    --gradient-spiritual: linear-gradient(145deg, hsl(0 0% 100%) 0%, hsl(38 40% 94%) 40%, hsl(38 60% 97%) 100%);
+    --gradient-card: linear-gradient(145deg, hsl(0 0% 100%) 0%, hsl(38 50% 98%) 100%);
+    --gradient-shimmer: linear-gradient(90deg, transparent 0%, hsl(43 100% 48% / 0.08) 50%, transparent 100%);
 
-    /* Refined Shadows */
+    /* Heritage Shadows */
     --shadow-xs: 0 1px 2px hsl(213 30% 20% / 0.04);
     --shadow-soft: 0 4px 16px -2px hsl(213 30% 20% / 0.08), 0 2px 6px -1px hsl(213 30% 20% / 0.04);
     --shadow-elevated: 0 12px 40px -8px hsl(213 30% 20% / 0.12), 0 4px 12px -2px hsl(213 30% 20% / 0.06);
-    --shadow-glow: 0 0 50px hsl(45 100% 48% / 0.15), 0 0 20px hsl(45 100% 48% / 0.1);
+    --shadow-glow: 0 0 50px hsl(43 100% 48% / 0.15), 0 0 20px hsl(43 100% 48% / 0.1);
     --shadow-card: 0 2px 8px hsl(213 30% 20% / 0.06), 0 4px 16px -6px hsl(213 30% 20% / 0.08);
 
-    /* Typography - Poppins for headings, Inter for body */
+    /* Typography */
     --font-display: 'Poppins', system-ui, sans-serif;
     --font-heading: 'Poppins', system-ui, sans-serif;
     --font-body: 'Inter', system-ui, sans-serif;
 
     /* Sidebar - Dark Navy */
-    --sidebar-background: 213 50% 20%;
+    --sidebar-background: 213 52% 20%;
     --sidebar-foreground: 0 0% 100%;
-    --sidebar-primary: 45 100% 48%;
-    --sidebar-primary-foreground: 213 50% 15%;
+    --sidebar-primary: 43 100% 48%;
+    --sidebar-primary-foreground: 213 52% 15%;
     --sidebar-accent: 213 45% 15%;
     --sidebar-accent-foreground: 0 0% 100%;
     --sidebar-border: 213 40% 28%;
-    --sidebar-ring: 45 100% 48%;
+    --sidebar-ring: 43 100% 48%;
   }
 
   .dark {

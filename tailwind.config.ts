@@ -82,6 +82,10 @@ export default {
           DEFAULT: "hsl(var(--gold))",
           light: "hsl(var(--gold-light))",
         },
+        orange: {
+          DEFAULT: "hsl(var(--orange))",
+          foreground: "hsl(var(--orange-foreground))",
+        },
         burgundy: {
           DEFAULT: "hsl(var(--burgundy))",
           light: "hsl(var(--burgundy-light))",
@@ -90,14 +94,11 @@ export default {
           DEFAULT: "hsl(var(--sage))",
           light: "hsl(var(--sage-light))",
         },
-        /* Deep Navy #1E3557 header/footer, Golden Yellow #F4B400 accent */
-        slate: {
-          DEFAULT: "hsl(213 50% 23%)",
-          light: "hsl(45 100% 48%)",
-          dark: "hsl(213 50% 15%)",
-        },
         ivory: "hsl(var(--ivory))",
-        cream: "hsl(var(--cream))",
+        cream: {
+          DEFAULT: "hsl(var(--cream))",
+          light: "hsl(var(--cream-light))",
+        },
         terracotta: "hsl(var(--terracotta))",
         "deep-brown": "hsl(var(--deep-brown))",
       },
