@@ -31,8 +31,8 @@ const teachings = [
 
 export function AboutPreview() {
   return (
-    <section className="py-16 lg:py-20 bg-card relative overflow-hidden">
-      <div className="container mx-auto px-6 relative">
+    <section className="py-16 lg:py-20 bg-card">
+      <div className="container mx-auto px-6">
         <div className="grid lg:grid-cols-5 gap-10 lg:gap-14 items-start">
           {/* Content Section */}
           <div className="lg:col-span-3 space-y-5">
@@ -114,7 +114,6 @@ export function AboutPreview() {
                 alt="Gurudev Muni Jambuvijayji Maharaj Saheb"
                 className="w-full h-auto object-cover"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-primary/10 to-transparent" />
             </div>
 
             {/* Teaching Cards */}

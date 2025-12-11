@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Mic, FileText, BookOpen, Loader2, Sparkles, Lock, Mail, Send } from "lucide-react";
+import { ArrowRight, Mic, FileText, BookOpen, Loader2, Lock, Mail, Send } from "lucide-react";
 import { useGuruvaniFromDB } from "@/hooks/useContent";
 import { Input } from "@/components/ui/input";
 
@@ -23,14 +23,13 @@ export function GuruvaniPreview() {
   const displayItems = guruvaniItems.slice(0, 3);
 
   return (
-    <section className="py-16 lg:py-20 bg-card relative overflow-hidden">
-      <div className="container mx-auto px-6 relative">
+    <section className="py-16 lg:py-20 bg-card">
+      <div className="container mx-auto px-6">
         {/* Section Header */}
         <div className="text-center mb-10 max-w-2xl mx-auto">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-background border border-border mb-5">
-            <Sparkles className="h-4 w-4 text-orange" />
-            <span className="text-sm text-muted-foreground font-medium font-body">Sacred Teachings</span>
-          </div>
+          <p className="text-orange font-semibold uppercase tracking-wider text-xs mb-3 font-body">
+            Sacred Teachings
+          </p>
           
           <h2 className="font-heading text-3xl md:text-4xl font-bold text-primary mb-4">
             Guruvani

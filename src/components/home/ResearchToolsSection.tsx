@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Database, Search, FileText, Globe, ArrowRight, Sparkles } from "lucide-react";
+import { Database, Search, FileText, Globe, ArrowRight } from "lucide-react";
 
 const researchTools = [
   {
@@ -39,14 +39,13 @@ const researchTools = [
 
 export function ResearchToolsSection() {
   return (
-    <section className="py-16 lg:py-20 bg-background relative overflow-hidden">
-      <div className="container mx-auto px-6 relative">
+    <section className="py-16 lg:py-20 bg-background">
+      <div className="container mx-auto px-6">
         {/* Section Header */}
         <div className="text-center mb-12 max-w-2xl mx-auto">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-card border border-border shadow-sm mb-5">
-            <Sparkles className="h-4 w-4 text-orange" />
-            <span className="text-sm text-muted-foreground font-medium font-body">AI-Powered Research Ecosystem</span>
-          </div>
+          <p className="text-orange font-semibold uppercase tracking-wider text-xs mb-3 font-body">
+            AI-Powered Research Ecosystem
+          </p>
           
           <h2 className="font-heading text-3xl md:text-4xl font-bold text-primary mb-4">
             Four Powerful Research Tools
