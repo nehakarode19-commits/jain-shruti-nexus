@@ -39,54 +39,50 @@ const researchTools = [
 
 export function ResearchToolsSection() {
   return (
-    <section className="py-20 lg:py-28 bg-background relative overflow-hidden">
-      {/* Subtle decorative elements */}
-      <div className="absolute top-20 left-10 w-64 h-64 border border-primary/5 rounded-full" />
-      <div className="absolute bottom-20 right-10 w-48 h-48 border border-orange/10 rounded-full" />
-      
+    <section className="py-16 lg:py-20 bg-background relative overflow-hidden">
       <div className="container mx-auto px-6 relative">
         {/* Section Header */}
-        <div className="text-center mb-14 max-w-3xl mx-auto">
-          <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-card border border-border shadow-sm mb-6">
+        <div className="text-center mb-12 max-w-2xl mx-auto">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-card border border-border shadow-sm mb-5">
             <Sparkles className="h-4 w-4 text-orange" />
-            <span className="text-sm text-muted-foreground font-medium">AI-Powered Research Ecosystem</span>
+            <span className="text-sm text-muted-foreground font-medium font-body">AI-Powered Research Ecosystem</span>
           </div>
           
-          <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold text-primary mb-6">
+          <h2 className="font-heading text-3xl md:text-4xl font-bold text-primary mb-4">
             Four Powerful Research Tools
           </h2>
           
-          <p className="text-muted-foreground text-lg leading-relaxed">
+          <p className="text-muted-foreground text-[15px] leading-relaxed font-body">
             An integrated ecosystem designed for scholars, researchers, and seekers to explore centuries of Jain knowledge with modern AI-powered assistance.
           </p>
         </div>
 
-        {/* Tools Grid - 2x2 on larger screens */}
-        <div className="grid sm:grid-cols-2 gap-6 max-w-4xl mx-auto mb-12">
+        {/* Tools Grid */}
+        <div className="grid sm:grid-cols-2 gap-5 max-w-4xl mx-auto mb-10">
           {researchTools.map((tool) => (
             <Link 
               key={tool.title}
               to={tool.href}
-              className="group bg-card rounded-2xl p-6 border border-border hover:border-primary/30 hover:shadow-xl transition-all duration-300"
+              className="group bg-card rounded-xl p-5 border border-border hover:border-orange/30 hover:shadow-lg transition-all duration-300"
             >
-              <div className={`w-14 h-14 rounded-xl ${tool.iconBg} flex items-center justify-center mb-5 group-hover:scale-110 transition-transform shadow-lg`}>
-                <tool.icon className="h-7 w-7 text-white" />
+              <div className={`w-12 h-12 rounded-lg ${tool.iconBg} flex items-center justify-center mb-4 group-hover:scale-105 transition-transform shadow-md`}>
+                <tool.icon className="h-6 w-6 text-white" />
               </div>
               
-              <div className="mb-4">
-                <h3 className="font-heading text-xl font-bold text-primary mb-1 group-hover:text-primary/80 transition-colors">
+              <div className="mb-3">
+                <h3 className="font-heading text-lg font-semibold text-primary mb-0.5 group-hover:text-primary/80 transition-colors">
                   {tool.title}
                 </h3>
-                <p className="text-sm text-orange font-medium">{tool.subtitle}</p>
+                <p className="text-xs text-orange font-medium font-body">{tool.subtitle}</p>
               </div>
               
-              <p className="text-sm text-muted-foreground leading-relaxed mb-5">
+              <p className="text-sm text-muted-foreground leading-relaxed mb-4 font-body">
                 {tool.description}
               </p>
               
-              <div className="flex items-center gap-1 text-primary font-medium text-sm">
+              <div className="flex items-center gap-1 text-primary font-medium text-sm font-body">
                 <span>Learn More</span>
-                <ArrowRight className="h-4 w-4 group-hover:translate-x-2 transition-transform" />
+                <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
               </div>
             </Link>
           ))}
@@ -96,7 +92,7 @@ export function ResearchToolsSection() {
         <div className="text-center">
           <Button 
             size="lg" 
-            className="bg-orange hover:bg-orange/90 text-white px-8 py-3 text-base font-medium rounded-lg"
+            className="bg-orange hover:bg-orange/90 text-white px-7 h-11 text-sm font-medium rounded-lg shadow-md font-body"
             asChild
           >
             <Link to="/research">
