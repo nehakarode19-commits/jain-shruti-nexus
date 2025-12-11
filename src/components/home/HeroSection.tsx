@@ -34,7 +34,7 @@ export function HeroSection() {
       />
       
       <div className="container mx-auto px-6 lg:px-12 py-12 lg:py-16 relative z-10">
-        <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-10 items-center">
           {/* Content */}
           <div className="space-y-5 order-2 lg:order-1">
             {/* Badge */}
