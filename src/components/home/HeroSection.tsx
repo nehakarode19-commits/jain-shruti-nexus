@@ -6,12 +6,6 @@ import { gurudevBio } from "@/data/gurudevData";
 export function HeroSection() {
   return (
     <section className="relative min-h-[90vh] flex items-center bg-background overflow-hidden">
-      {/* Subtle dot pattern */}
-      <div className="absolute inset-0 opacity-30" style={{
-        backgroundImage: `radial-gradient(circle at 2px 2px, hsl(var(--primary) / 0.04) 1px, transparent 0)`,
-        backgroundSize: '24px 24px'
-      }} />
-
       <div className="container mx-auto px-6 lg:px-8 py-12 lg:py-16 relative z-10">
         <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
           {/* Content */}
@@ -122,7 +116,7 @@ export function HeroSection() {
               </div>
 
               {/* Main Image Container */}
-              <div className="relative bg-gradient-to-b from-orange/5 to-orange/15 rounded-2xl overflow-hidden p-4">
+              <div className="relative rounded-2xl overflow-hidden p-4">
                 <img 
                   src={gurudevBio.mainImage}
                   alt="Gurudev Muni Jambuvijayji Maharaj Saheb"
