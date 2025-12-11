@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { BookOpen, Search, ArrowRight, Sparkles, ChevronDown } from "lucide-react";
+import { BookOpen, Search, Sparkles, ChevronDown, GraduationCap, Image, BookMarked, Mail } from "lucide-react";
 import { gurudevBio } from "@/data/gurudevData";
 import { useCMSContent } from "@/hooks/useCMSContent";
 
@@ -13,102 +13,126 @@ export function HeroSection() {
   };
 
   return (
-    <section className="relative min-h-[100vh] flex items-center bg-gradient-to-br from-[#F8F5EF] via-[#FDF9F3] to-[#F5F0E8]">
-      {/* Soft gradient overlay for depth */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(244,180,0,0.08)_0%,_transparent_50%)]" />
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,_rgba(74,111,165,0.05)_0%,_transparent_50%)]" />
+    <section className="relative min-h-[90vh] flex items-center bg-[#F8F5EF]">
+      {/* Subtle pattern overlay */}
+      <div className="absolute inset-0 opacity-30" style={{
+        backgroundImage: `radial-gradient(circle at 2px 2px, rgba(30,53,87,0.03) 1px, transparent 0)`,
+        backgroundSize: '40px 40px'
+      }} />
       
-      {/* Subtle decorative circles */}
-      <div className="absolute top-20 left-10 w-64 h-64 border border-[#4A6FA5]/5 rounded-full" />
-      <div className="absolute bottom-20 right-10 w-48 h-48 border border-[#F4B400]/10 rounded-full" />
+      {/* Soft gradient overlays */}
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(244,180,0,0.06)_0%,_transparent_50%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,_rgba(74,111,165,0.04)_0%,_transparent_50%)]" />
 
-      <div className="container mx-auto px-6 py-24 lg:py-32 relative z-10">
-        <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
+      <div className="container mx-auto px-6 py-16 lg:py-20 relative z-10">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           {/* Content */}
-          <div className="space-y-8 text-center lg:text-left order-2 lg:order-1">
+          <div className="space-y-6 text-center lg:text-left order-2 lg:order-1">
             {/* Trust badge */}
-            <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/80 backdrop-blur-sm border border-[#DCE3E7] shadow-sm animate-fade-up">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-[#E5E0D8] shadow-sm animate-fade-up">
               <Sparkles className="h-4 w-4 text-[#F4B400]" />
-              <span className="text-sm text-[#555555] font-medium">Preserving Jain Heritage & Knowledge</span>
+              <span className="text-sm text-[#555555] font-medium">Preserving Ancient Wisdom</span>
             </div>
 
-            <div className="space-y-3 animate-fade-up" style={{ animationDelay: '100ms' }}>
-              <p className="text-[#F4B400] font-semibold uppercase tracking-wider text-sm">
-                Jain Knowledge & Research Ecosystem
-              </p>
-              <h1 className="font-heading text-4xl sm:text-5xl lg:text-6xl font-bold text-[#1E3557] leading-tight">
-                Jain Knowledge &<br />
-                <span className="text-[#4A6FA5]">Research Ecosystem</span>
-              </h1>
-              <p className="text-lg text-[#555555] max-w-lg">
-                Explore the profound teachings of Gurudev Muni Jambuvijayji Maharaj Saheb (1923–2009). Discover sacred texts, research tools, and timeless wisdom of Jain philosophy.
-              </p>
-            </div>
-
-            <p className="font-body text-[#555555] max-w-xl mx-auto lg:mx-0 animate-fade-up leading-relaxed" style={{ animationDelay: '200ms' }}>
-              {cmsContent.heroDescription}
+            {/* Hindi subtitle */}
+            <p className="text-[#1E3557]/70 text-base lg:text-lg font-medium animate-fade-up" style={{ animationDelay: '50ms' }}>
+              आगमप्रज्ञ पू. मुनिराज श्री जम्बू विजयजी महाराज साहेब
             </p>
 
-            <div className="flex flex-wrap gap-4 justify-center lg:justify-start animate-fade-up" style={{ animationDelay: '300ms' }}>
+            <div className="space-y-4 animate-fade-up" style={{ animationDelay: '100ms' }}>
+              <h1 className="font-heading text-4xl sm:text-5xl lg:text-[3.5rem] font-bold leading-tight">
+                <span className="text-[#1E3557]">Jain Knowledge &</span>
+                <br />
+                <span className="text-[#F4B400]">Research Ecosystem</span>
+              </h1>
+              <p className="text-base lg:text-lg text-[#555555] max-w-xl leading-relaxed">
+                Explore the profound teachings of Gurudev Muni Jambuvijayji Maharaj Saheb (1923–2009). Discover sacred texts, research tools, and a community dedicated to preserving Jain philosophy.
+              </p>
+            </div>
+
+            <div className="flex flex-wrap gap-4 justify-center lg:justify-start animate-fade-up" style={{ animationDelay: '200ms' }}>
               <Button 
-                size="xl" 
+                size="lg" 
                 asChild 
-                className="bg-[#F4B400] hover:bg-[#E5A800] text-[#1E3557] shadow-lg shadow-[#F4B400]/20 group font-semibold"
+                className="bg-[#F4B400] hover:bg-[#E5A800] text-[#1E3557] shadow-lg shadow-[#F4B400]/20 font-semibold px-8"
               >
                 <Link to="/guruvani">
+                  <BookMarked className="h-4 w-4 mr-2" />
                   Explore Guruvani
-                  <ArrowRight className="h-4 w-4 ml-2 group-hover:translate-x-1 transition-transform" />
                 </Link>
               </Button>
               <Button 
                 variant="outline" 
-                size="xl" 
+                size="lg" 
                 asChild 
-                className="border-[#1E3557] text-[#1E3557] hover:bg-[#1E3557] hover:text-white"
+                className="border-[#1E3557] text-[#1E3557] hover:bg-[#1E3557] hover:text-white bg-white px-8"
               >
                 <Link to="/research">
-                  <Search className="h-5 w-5 mr-2" />
+                  <Search className="h-4 w-4 mr-2" />
                   Research Tools
                 </Link>
               </Button>
             </div>
 
             {/* Quick Links */}
-            <div className="flex flex-wrap gap-8 pt-6 justify-center lg:justify-start animate-fade-up" style={{ animationDelay: '400ms' }}>
-              {[
-                { icon: BookOpen, label: "Library", href: "/library" },
-                { label: "Scholars", href: "/scholars" },
-                { label: "Gallery", href: "/gallery" },
-              ].map((item) => (
-                <Link
-                  key={item.label}
-                  to={item.href}
-                  className="flex items-center gap-2 text-[#555555] hover:text-[#1E3557] transition-all group text-sm"
-                >
-                  <span className="font-medium">{item.label}</span>
-                  <ArrowRight className="h-3 w-3 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
-                </Link>
-              ))}
+            <div className="flex flex-wrap gap-6 lg:gap-8 pt-4 justify-center lg:justify-start animate-fade-up" style={{ animationDelay: '300ms' }}>
+              <Link
+                to="/library"
+                className="flex items-center gap-2 text-[#555555] hover:text-[#1E3557] transition-colors text-sm"
+              >
+                <BookOpen className="h-4 w-4" />
+                <span className="font-medium">Library</span>
+              </Link>
+              <Link
+                to="/scholars"
+                className="flex items-center gap-2 text-[#555555] hover:text-[#1E3557] transition-colors text-sm"
+              >
+                <GraduationCap className="h-4 w-4" />
+                <span className="font-medium">Scholars</span>
+              </Link>
+              <Link
+                to="/gallery"
+                className="flex items-center gap-2 text-[#555555] hover:text-[#1E3557] transition-colors text-sm"
+              >
+                <Image className="h-4 w-4" />
+                <span className="font-medium">Photo Gallery</span>
+              </Link>
             </div>
           </div>
 
           {/* Hero Visual */}
-          <div className="relative flex justify-center order-1 lg:order-2 animate-fade-up" style={{ animationDelay: '200ms' }}>
+          <div className="relative flex justify-center order-1 lg:order-2 animate-fade-up" style={{ animationDelay: '150ms' }}>
             <div className="relative">
-              {/* Soft glow behind image */}
-              <div className="absolute -inset-8 bg-[#F4B400]/10 rounded-full blur-3xl" />
-              
-              {/* Main Gurudev Image */}
-              <div className="relative">
-                <img 
-                  src={gurudevBio.mainImage}
-                  alt="Gurudev Muni Jambuvijayji Maharaj Saheb"
-                  className="w-full max-w-md h-auto object-contain drop-shadow-2xl"
-                />
+              {/* Card frame with Gurudev image */}
+              <div className="relative bg-white rounded-3xl p-4 shadow-xl border border-[#E5E0D8]">
+                {/* Small floating icon - top left */}
+                <div className="absolute -top-3 -left-3 w-10 h-10 bg-white rounded-full shadow-md flex items-center justify-center border border-[#E5E0D8]">
+                  <BookMarked className="h-4 w-4 text-[#1E3557]" />
+                </div>
+                
+                {/* Small floating icon - right side */}
+                <div className="absolute top-1/3 -right-4 w-10 h-10 bg-[#F4B400]/10 rounded-full shadow-md flex items-center justify-center border border-[#F4B400]/20">
+                  <Mail className="h-4 w-4 text-[#F4B400]" />
+                </div>
+
+                {/* Main Gurudev Image */}
+                <div className="relative rounded-2xl overflow-hidden bg-gradient-to-b from-[#F8F5EF] to-white">
+                  <img 
+                    src={gurudevBio.mainImage}
+                    alt="Gurudev Muni Jambuvijayji Maharaj Saheb"
+                    className="w-full max-w-sm h-auto object-contain"
+                  />
+                </div>
+
+                {/* Name Badge inside card */}
+                <div className="text-center pt-4 pb-2">
+                  <p className="text-[#1E3557] font-semibold text-lg">Gurudev Muni Jambuvijayji</p>
+                  <p className="text-sm text-[#555555]">Maharaj Saheb (1923–2009)</p>
+                </div>
               </div>
 
               {/* Centenary Logo Badge */}
-              <div className="absolute -top-2 -right-2 w-20 h-20 md:w-24 md:h-24 rounded-full shadow-xl overflow-hidden border-4 border-white bg-white">
+              <div className="absolute -top-4 -right-4 w-20 h-20 md:w-24 md:h-24 rounded-full shadow-xl overflow-hidden border-4 border-white bg-white">
                 <img 
                   src={gurudevBio.centenaryLogo}
                   alt="100th Anniversary"
@@ -116,10 +140,9 @@ export function HeroSection() {
                 />
               </div>
 
-              {/* Name Badge */}
-              <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 bg-white px-6 py-3 rounded-xl shadow-lg border border-[#DCE3E7] text-center">
-                <p className="text-[#1E3557] font-semibold text-sm">Gurudev Muni Jambuvijayji</p>
-                <p className="text-xs text-[#555555]">Centenary Celebrations</p>
+              {/* Floating book icon - bottom left */}
+              <div className="absolute -bottom-2 -left-6 w-12 h-12 bg-[#F4B400] rounded-xl shadow-lg flex items-center justify-center">
+                <BookOpen className="h-5 w-5 text-white" />
               </div>
             </div>
           </div>
@@ -128,10 +151,10 @@ export function HeroSection() {
         {/* Scroll indicator */}
         <button 
           onClick={scrollToFeatures}
-          className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-[#555555] hover:text-[#1E3557] transition-colors cursor-pointer group"
+          className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1.5 text-[#555555] hover:text-[#1E3557] transition-colors cursor-pointer group"
         >
-          <span className="font-body text-sm font-medium">Scroll to explore</span>
-          <ChevronDown className="h-5 w-5 animate-bounce" />
+          <span className="text-xs font-medium">Scroll to explore</span>
+          <ChevronDown className="h-4 w-4 animate-bounce" />
         </button>
       </div>
     </section>
