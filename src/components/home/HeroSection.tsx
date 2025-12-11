@@ -32,10 +32,11 @@ export function HeroSection() {
 
             {/* Main Title */}
             <div className="space-y-0">
-              <h1 className="font-heading text-4xl sm:text-5xl lg:text-[3.5rem] font-bold leading-[1.1] tracking-tight">
-                <span style={{ color: '#2D2D2D' }}>Jain Knowledge &</span>
-                <br />
-                <span style={{ color: '#D4A03C' }}>Research Ecosystem</span>
+              <h1 className="font-heading text-[2.75rem] sm:text-[3.5rem] lg:text-[4.5rem] font-bold leading-[1] tracking-tight" style={{ color: '#2D2D2D' }}>
+                Jain Knowledge &
+              </h1>
+              <h1 className="font-heading text-[2.75rem] sm:text-[3.5rem] lg:text-[4.5rem] font-bold leading-[1] tracking-tight" style={{ color: '#D4A03C' }}>
+                Research Ecosystem
               </h1>
             </div>
 
