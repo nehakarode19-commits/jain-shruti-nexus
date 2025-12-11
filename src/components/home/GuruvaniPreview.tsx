@@ -23,19 +23,19 @@ export function GuruvaniPreview() {
   const displayItems = guruvaniItems.slice(0, 3);
 
   return (
-    <section className="py-16 lg:py-20" style={{ backgroundColor: '#FFFFFF' }}>
+    <section className="py-16 lg:py-20 bg-white">
       <div className="container mx-auto px-6">
         {/* Section Header */}
         <div className="text-center mb-10 max-w-2xl mx-auto">
-          <p className="font-semibold uppercase tracking-wider text-xs mb-3 font-body" style={{ color: '#E88A1A' }}>
+          <p className="font-semibold uppercase tracking-wider text-xs mb-3" style={{ fontFamily: 'Inter, sans-serif', color: '#C9A227' }}>
             Sacred Teachings
           </p>
           
-          <h2 className="font-heading text-3xl md:text-4xl font-bold mb-4" style={{ color: '#1E3A5F' }}>
+          <h2 className="text-3xl md:text-4xl font-bold mb-4" style={{ fontFamily: 'Playfair Display, serif', color: '#2D2A26' }}>
             Guruvani
           </h2>
           
-          <p className="text-[15px] leading-relaxed font-body" style={{ color: '#666666' }}>
+          <p className="text-[15px] leading-relaxed" style={{ fontFamily: 'Inter, sans-serif', color: '#5A5650' }}>
             Explore the profound discourses, teachings, and spiritual guidance from Gurudev Muni 
             Jambuvijayji Maharaj's lifetime of devotion.
           </p>
@@ -43,7 +43,7 @@ export function GuruvaniPreview() {
 
         {isLoading ? (
           <div className="flex items-center justify-center py-12">
-            <Loader2 className="h-8 w-8 animate-spin" style={{ color: '#1E3A5F' }} />
+            <Loader2 className="h-8 w-8 animate-spin text-[#2D2A26]" />
           </div>
         ) : (
           <>
@@ -55,8 +55,7 @@ export function GuruvaniPreview() {
                   <Link
                     key={item.id}
                     to={item.is_restricted ? "/auth" : `/guruvani/${item.id}`}
-                    className="group rounded-xl overflow-hidden transition-all duration-300 hover:shadow-lg"
-                    style={{ backgroundColor: '#FDF8F3', border: '1px solid #E5E0D5' }}
+                    className="group rounded-xl overflow-hidden transition-all duration-300 hover:shadow-lg bg-[#FAF7F2] border border-[#E5E0D5]"
                   >
                     <div className="aspect-[4/3] overflow-hidden relative">
                       <img
@@ -65,21 +64,21 @@ export function GuruvaniPreview() {
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                       />
                       {item.is_restricted && (
-                        <div className="absolute top-3 right-3 w-7 h-7 rounded-full flex items-center justify-center" style={{ backgroundColor: 'rgba(255,255,255,0.9)' }}>
-                          <Lock className="h-3.5 w-3.5" style={{ color: '#666666' }} />
+                        <div className="absolute top-3 right-3 w-7 h-7 rounded-full flex items-center justify-center bg-white/90">
+                          <Lock className="h-3.5 w-3.5 text-[#5A5650]" />
                         </div>
                       )}
                     </div>
                     <div className="p-4">
                       <div className="flex items-center gap-2 mb-2.5">
-                        <span className="px-2.5 py-1 rounded-full text-xs font-medium font-body" style={{ backgroundColor: 'rgba(232, 138, 26, 0.1)', color: '#E88A1A' }}>
+                        <span className="px-2.5 py-1 rounded-full text-xs font-medium bg-[#C9A227]/10 text-[#C9A227]" style={{ fontFamily: 'Inter, sans-serif' }}>
                           {item.category || "Teaching"}
                         </span>
                       </div>
-                      <h3 className="font-heading text-base font-semibold mb-2 group-hover:opacity-80 transition-opacity line-clamp-2" style={{ color: '#1E3A5F' }}>
+                      <h3 className="text-base font-semibold mb-2 group-hover:opacity-80 transition-opacity line-clamp-2" style={{ fontFamily: 'Playfair Display, serif', color: '#2D2A26' }}>
                         {item.title}
                       </h3>
-                      <p className="text-sm line-clamp-2 leading-relaxed font-body" style={{ color: '#666666' }}>
+                      <p className="text-sm line-clamp-2 leading-relaxed" style={{ fontFamily: 'Inter, sans-serif', color: '#5A5650' }}>
                         {item.content || "Explore this sacred teaching from Gurudev's collection of wisdom and spiritual guidance."}
                       </p>
                     </div>
@@ -90,7 +89,7 @@ export function GuruvaniPreview() {
 
             {displayItems.length === 0 && (
               <div className="text-center py-10">
-                <p className="font-body" style={{ color: '#666666' }}>No Guruvani items available yet.</p>
+                <p style={{ fontFamily: 'Inter, sans-serif', color: '#5A5650' }}>No Guruvani items available yet.</p>
               </div>
             )}
           </>
@@ -98,15 +97,15 @@ export function GuruvaniPreview() {
 
         {/* Newsletter Signup */}
         <div className="max-w-2xl mx-auto mb-8">
-          <div className="rounded-xl p-5 flex flex-col sm:flex-row items-center gap-4" style={{ backgroundColor: '#FDF8F3', border: '1px solid #E5E0D5' }}>
-            <div className="flex-shrink-0 w-10 h-10 rounded-lg flex items-center justify-center" style={{ backgroundColor: 'rgba(232, 138, 26, 0.1)' }}>
-              <Mail className="h-5 w-5" style={{ color: '#E88A1A' }} />
+          <div className="rounded-xl p-5 flex flex-col sm:flex-row items-center gap-4 bg-[#FAF7F2] border border-[#E5E0D5]">
+            <div className="flex-shrink-0 w-10 h-10 rounded-lg flex items-center justify-center bg-[#C9A227]/10">
+              <Mail className="h-5 w-5 text-[#C9A227]" />
             </div>
             <div className="text-center sm:text-left flex-1">
-              <p className="font-semibold text-sm mb-0.5 font-body" style={{ color: '#1E3A5F' }}>
+              <p className="font-semibold text-sm mb-0.5" style={{ fontFamily: 'Inter, sans-serif', color: '#2D2A26' }}>
                 Subscribe to receive updates
               </p>
-              <p className="text-xs font-body" style={{ color: '#666666' }}>
+              <p className="text-xs" style={{ fontFamily: 'Inter, sans-serif', color: '#5A5650' }}>
                 Get notified when new teachings are published
               </p>
             </div>
@@ -114,12 +113,10 @@ export function GuruvaniPreview() {
               <Input 
                 type="email" 
                 placeholder="Enter your email" 
-                className="h-9 min-w-[180px] text-sm font-body"
+                className="h-9 min-w-[180px] text-sm"
+                style={{ fontFamily: 'Inter, sans-serif' }}
               />
-              <Button 
-                className="text-white h-9 px-4"
-                style={{ backgroundColor: '#E88A1A' }}
-              >
+              <Button className="text-white h-9 px-4 bg-[#D4A03C] hover:bg-[#C49030]">
                 <Send className="h-4 w-4" />
               </Button>
             </div>
@@ -131,12 +128,12 @@ export function GuruvaniPreview() {
           <Button 
             variant="outline"
             size="lg"
-            className="h-10 px-6 text-sm font-body"
-            style={{ borderColor: '#E5E0D5', color: '#1E3A5F' }}
+            className="h-10 px-6 text-sm border-[#E5E0D5] text-[#2D2A26] bg-white hover:bg-gray-50"
+            style={{ fontFamily: 'Inter, sans-serif' }}
             asChild
           >
             <Link to="/guruvani">
-              Type to Explore
+              Explore All Teachings
               <ArrowRight className="h-4 w-4 ml-2" />
             </Link>
           </Button>

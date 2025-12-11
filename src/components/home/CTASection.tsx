@@ -90,21 +90,20 @@ const ctaCards = [
 
 export function CTASection() {
   return (
-    <section className="py-16 lg:py-20" style={{ backgroundColor: '#FDF8F3' }}>
+    <section className="py-16 lg:py-20 bg-[#FAF7F2]">
       <div className="container mx-auto px-6">
         {/* Stats Section */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
           {stats.map((stat, index) => (
             <div 
               key={index}
-              className="text-center p-5 md:p-6 rounded-xl"
-              style={{ backgroundColor: '#FFFFFF', border: '1px solid #E5E0D5' }}
+              className="text-center p-5 md:p-6 rounded-xl bg-white border border-[#E5E0D5]"
             >
-              <div className="font-heading text-3xl md:text-4xl font-bold mb-1.5" style={{ color: '#E88A1A' }}>
+              <div className="text-3xl md:text-4xl font-bold mb-1.5 text-[#C9A227]" style={{ fontFamily: 'Playfair Display, serif' }}>
                 <AnimatedCounter target={stat.value} suffix={stat.suffix} />
               </div>
-              <p className="text-sm font-semibold mb-1 font-body" style={{ color: '#1E3A5F' }}>{stat.label}</p>
-              <p className="text-xs font-body hidden md:block" style={{ color: '#666666' }}>{stat.description}</p>
+              <p className="text-sm font-semibold mb-1 text-[#2D2A26]" style={{ fontFamily: 'Inter, sans-serif' }}>{stat.label}</p>
+              <p className="text-xs hidden md:block text-[#5A5650]" style={{ fontFamily: 'Inter, sans-serif' }}>{stat.description}</p>
             </div>
           ))}
         </div>
@@ -115,31 +114,40 @@ export function CTASection() {
             <Link
               key={card.title}
               to={card.href}
-              className="group rounded-xl p-5 transition-all duration-300 hover:shadow-lg"
-              style={card.primary 
-                ? { backgroundColor: '#E88A1A' } 
-                : { backgroundColor: '#FFFFFF', border: '1px solid #E5E0D5' }
-              }
+              className={`group rounded-xl p-5 transition-all duration-300 hover:shadow-lg ${
+                card.primary 
+                  ? 'bg-[#D4A03C]' 
+                  : 'bg-white border border-[#E5E0D5]'
+              }`}
             >
               <div 
-                className="w-10 h-10 rounded-lg flex items-center justify-center mb-3.5"
-                style={card.primary 
-                  ? { backgroundColor: 'rgba(255,255,255,0.2)' } 
-                  : { backgroundColor: 'rgba(232, 138, 26, 0.1)' }
-                }
+                className={`w-10 h-10 rounded-lg flex items-center justify-center mb-3.5 ${
+                  card.primary 
+                    ? 'bg-white/20' 
+                    : 'bg-[#C9A227]/10'
+                }`}
               >
-                <card.icon className="h-5 w-5" style={{ color: card.primary ? '#FFFFFF' : '#E88A1A' }} />
+                <card.icon className={`h-5 w-5 ${card.primary ? 'text-white' : 'text-[#C9A227]'}`} />
               </div>
               
-              <h3 className="font-heading text-base font-semibold mb-1.5" style={{ color: card.primary ? '#FFFFFF' : '#1E3A5F' }}>
+              <h3 
+                className={`text-base font-semibold mb-1.5 ${card.primary ? 'text-white' : 'text-[#2D2A26]'}`}
+                style={{ fontFamily: 'Playfair Display, serif' }}
+              >
                 {card.title}
               </h3>
               
-              <p className="text-sm mb-3 leading-relaxed font-body" style={{ color: card.primary ? 'rgba(255,255,255,0.8)' : '#666666' }}>
+              <p 
+                className={`text-sm mb-3 leading-relaxed ${card.primary ? 'text-white/80' : 'text-[#5A5650]'}`}
+                style={{ fontFamily: 'Inter, sans-serif' }}
+              >
                 {card.description}
               </p>
               
-              <span className="inline-flex items-center gap-1 text-sm font-medium font-body" style={{ color: card.primary ? '#FFFFFF' : '#E88A1A' }}>
+              <span 
+                className={`inline-flex items-center gap-1 text-sm font-medium ${card.primary ? 'text-white' : 'text-[#C9A227]'}`}
+                style={{ fontFamily: 'Inter, sans-serif' }}
+              >
                 {card.cta}
                 <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
               </span>

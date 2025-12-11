@@ -31,21 +31,21 @@ const teachings = [
 
 export function AboutPreview() {
   return (
-    <section className="py-16 lg:py-20" style={{ backgroundColor: '#FDF8F3' }}>
+    <section className="py-16 lg:py-20 bg-[#FAF7F2]">
       <div className="container mx-auto px-6">
         <div className="grid lg:grid-cols-5 gap-10 lg:gap-14 items-start">
           {/* Content Section */}
           <div className="lg:col-span-3 space-y-5">
             <div>
-              <p className="font-semibold uppercase tracking-wider text-xs mb-3 font-body" style={{ color: '#E88A1A' }}>
+              <p className="font-semibold uppercase tracking-wider text-xs mb-3" style={{ fontFamily: 'Inter, sans-serif', color: '#C9A227' }}>
                 About Gurudev
               </p>
-              <h2 className="font-heading text-3xl md:text-4xl font-bold mb-5" style={{ color: '#1E3A5F' }}>
+              <h2 className="text-3xl md:text-4xl font-bold mb-5" style={{ fontFamily: 'Playfair Display, serif', color: '#2D2A26' }}>
                 Muni Jambuvijayji Maharaj Saheb
               </h2>
             </div>
 
-            <p className="text-[15px] leading-relaxed font-body" style={{ color: '#666666' }}>
+            <p className="text-[15px] leading-relaxed" style={{ fontFamily: 'Inter, sans-serif', color: '#5A5650' }}>
               Jambuvijayji Maharaj Saheb (1923–2009), also known as Muni Jambuvijayji 
               Maharaj Saheb, was a Jain ascetic belonging to the Tapa Gaccha order of 
               Shvetambara sect of Jainism. Jambuvijayji dedicated his life to Prakrit 
@@ -59,8 +59,8 @@ export function AboutPreview() {
                 <Link
                   key={link.label}
                   to={link.href}
-                  className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium font-body transition-colors hover:opacity-70"
-                  style={{ backgroundColor: '#FFFFFF', border: '1px solid #E5E0D5', color: '#666666' }}
+                  className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium transition-colors hover:opacity-70 bg-white border border-[#D4C5B0]"
+                  style={{ fontFamily: 'Inter, sans-serif', color: '#5A5650' }}
                 >
                   <link.icon className="h-4 w-4" />
                   {link.label}
@@ -70,13 +70,13 @@ export function AboutPreview() {
             </div>
 
             {/* Quote */}
-            <div className="rounded-xl p-5 relative" style={{ backgroundColor: '#FFFFFF', borderLeft: '4px solid #E88A1A' }}>
-              <Quote className="absolute top-4 right-4 h-7 w-7" style={{ color: 'rgba(232, 138, 26, 0.2)' }} />
-              <blockquote className="italic text-[15px] leading-relaxed font-body" style={{ color: '#1E3A5F' }}>
+            <div className="rounded-xl p-5 relative bg-white border-l-4 border-[#C9A227]">
+              <Quote className="absolute top-4 right-4 h-7 w-7 text-[#C9A227]/20" />
+              <blockquote className="italic text-[15px] leading-relaxed" style={{ fontFamily: 'Inter, sans-serif', color: '#2D2A26' }}>
                 "The pursuit of knowledge is the path to liberation. Through study 
                 and contemplation, we illuminate the darkness of ignorance."
               </blockquote>
-              <p className="mt-2.5 text-xs font-medium font-body" style={{ color: '#999999' }}>
+              <p className="mt-2.5 text-xs font-medium" style={{ fontFamily: 'Inter, sans-serif', color: '#8B8B8B' }}>
                 — Gurudev Muni Jambuvijayji
               </p>
             </div>
@@ -85,8 +85,8 @@ export function AboutPreview() {
             <div className="flex flex-wrap gap-3 pt-2">
               <Button 
                 size="lg" 
-                className="text-white h-10 px-5 text-sm font-body"
-                style={{ backgroundColor: '#1E3A5F' }}
+                className="text-white h-10 px-5 text-sm bg-[#D4A03C] hover:bg-[#C49030]"
+                style={{ fontFamily: 'Inter, sans-serif' }}
                 asChild
               >
                 <Link to="/about/gurudev">
@@ -97,8 +97,8 @@ export function AboutPreview() {
               <Button 
                 variant="outline"
                 size="lg" 
-                className="h-10 px-5 text-sm font-body"
-                style={{ borderColor: '#E5E0D5', color: '#1E3A5F' }}
+                className="h-10 px-5 text-sm border-[#E5E0D5] text-[#2D2A26] bg-white hover:bg-gray-50"
+                style={{ fontFamily: 'Inter, sans-serif' }}
                 asChild
               >
                 <Link to="/gallery">
@@ -125,24 +125,20 @@ export function AboutPreview() {
                 <Link
                   key={item.title}
                   to={item.href}
-                  className="group flex items-center gap-3.5 rounded-lg p-3.5 transition-all duration-300 hover:shadow-md"
-                  style={{ backgroundColor: '#FFFFFF', border: '1px solid #E5E0D5' }}
+                  className="group flex items-center gap-3.5 rounded-lg p-3.5 transition-all duration-300 hover:shadow-md bg-white border border-[#E5E0D5]"
                 >
-                  <div 
-                    className="w-10 h-10 rounded-lg flex items-center justify-center group-hover:opacity-80 transition-opacity"
-                    style={{ backgroundColor: 'rgba(232, 138, 26, 0.1)' }}
-                  >
-                    <item.icon className="h-5 w-5" style={{ color: '#E88A1A' }} />
+                  <div className="w-10 h-10 rounded-lg flex items-center justify-center group-hover:opacity-80 transition-opacity bg-[#C9A227]/10">
+                    <item.icon className="h-5 w-5 text-[#C9A227]" />
                   </div>
                   <div className="flex-1">
-                    <h3 className="font-heading text-sm font-semibold transition-colors" style={{ color: '#1E3A5F' }}>
+                    <h3 className="text-sm font-semibold transition-colors" style={{ fontFamily: 'Playfair Display, serif', color: '#2D2A26' }}>
                       {item.title}
                     </h3>
-                    <p className="text-xs font-body" style={{ color: '#666666' }}>
+                    <p className="text-xs" style={{ fontFamily: 'Inter, sans-serif', color: '#5A5650' }}>
                       {item.description}
                     </p>
                   </div>
-                  <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-all" style={{ color: '#999999' }} />
+                  <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-all text-[#8B8B8B]" />
                 </Link>
               ))}
             </div>
