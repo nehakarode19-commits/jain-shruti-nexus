@@ -6,24 +6,14 @@ import { gurudevBio } from "@/data/gurudevData";
 export function HeroSection() {
   return (
     <section className="relative min-h-[90vh] flex items-center overflow-hidden bg-[#FAF7F2]">
-      {/* Subtle cross/star pattern background */}
+      {/* Subtle cross/star pattern background - OLD pattern */}
       <div 
         className="absolute inset-0 opacity-[0.15]"
         style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0L32 28L60 30L32 32L30 60L28 32L0 30L28 28L30 0Z' fill='%23B8A88A' fill-opacity='0.6'/%3E%3C/svg%3E")`,
+          backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0L32 28L60 30L32 32L30 60L28 32L0 30L28 28L30 0Z' fill='%23c9a86c' fill-opacity='0.08'/%3E%3C/svg%3E")`,
           backgroundSize: '60px 60px'
         }}
       />
-
-      {/* Floating animated particles */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-[20%] left-[10%] w-2 h-2 bg-[#D4A03C]/30 rounded-full animate-float" style={{ animationDelay: '0s', animationDuration: '6s' }} />
-        <div className="absolute top-[40%] left-[5%] w-1.5 h-1.5 bg-[#D4A03C]/20 rounded-full animate-float" style={{ animationDelay: '1s', animationDuration: '8s' }} />
-        <div className="absolute top-[60%] left-[15%] w-1 h-1 bg-[#B8A88A]/30 rounded-full animate-float" style={{ animationDelay: '2s', animationDuration: '7s' }} />
-        <div className="absolute top-[30%] right-[8%] w-2 h-2 bg-[#D4A03C]/25 rounded-full animate-float" style={{ animationDelay: '0.5s', animationDuration: '5s' }} />
-        <div className="absolute top-[70%] right-[12%] w-1.5 h-1.5 bg-[#B8A88A]/20 rounded-full animate-float" style={{ animationDelay: '1.5s', animationDuration: '9s' }} />
-        <div className="absolute bottom-[20%] left-[20%] w-1 h-1 bg-[#D4A03C]/30 rounded-full animate-float" style={{ animationDelay: '3s', animationDuration: '6s' }} />
-      </div>
       
       <div className="container mx-auto px-6 lg:px-12 py-12 lg:py-16 relative z-10">
         <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
@@ -114,22 +104,8 @@ export function HeroSection() {
           {/* Hero Visual */}
           <div className="relative flex justify-center order-1 lg:order-2">
             <div className="relative">
-              {/* Floating particles around image */}
-              <div className="absolute -top-4 -left-4 w-3 h-3 bg-[#D4A03C]/40 rounded-full animate-float" style={{ animationDelay: '0s', animationDuration: '4s' }} />
-              <div className="absolute top-1/4 -left-8 w-2 h-2 bg-[#B8A88A]/30 rounded-full animate-float" style={{ animationDelay: '1s', animationDuration: '5s' }} />
-              <div className="absolute bottom-1/3 -left-6 w-1.5 h-1.5 bg-[#D4A03C]/25 rounded-full animate-float" style={{ animationDelay: '2s', animationDuration: '6s' }} />
-              
               {/* Main Image Card */}
               <div className="relative rounded-2xl overflow-hidden shadow-xl p-5 bg-white">
-                {/* Centenary Logo Badge */}
-                <div className="absolute top-3 right-3 w-20 h-20 lg:w-24 lg:h-24 rounded-full shadow-lg overflow-hidden z-10 bg-[#0D9488] border-4 border-white">
-                  <img 
-                    src={gurudevBio.centenaryLogo}
-                    alt="100th Anniversary"
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-
                 {/* Main Image */}
                 <img 
                   src={gurudevBio.mainImage}
@@ -149,10 +125,31 @@ export function HeroSection() {
                 </div>
               </div>
 
-              {/* More floating particles on right side */}
-              <div className="absolute -top-2 -right-6 w-2 h-2 bg-[#D4A03C]/35 rounded-full animate-float" style={{ animationDelay: '0.5s', animationDuration: '5s' }} />
-              <div className="absolute top-1/2 -right-8 w-2.5 h-2.5 bg-[#B8A88A]/25 rounded-full animate-float" style={{ animationDelay: '1.5s', animationDuration: '4s' }} />
-              <div className="absolute bottom-1/4 -right-4 w-1.5 h-1.5 bg-[#D4A03C]/30 rounded-full animate-float" style={{ animationDelay: '2.5s', animationDuration: '6s' }} />
+              {/* Floating Animated Icons */}
+              {/* 100th Anniversary Logo - Top Right - No delay */}
+              <div className="absolute -top-4 -right-4 animate-float">
+                <div className="w-20 h-20 lg:w-24 lg:h-24 rounded-xl bg-card shadow-soft overflow-hidden border border-primary/20">
+                  <img 
+                    src="https://siddhijambuparivar.com/wp-content/uploads/2019/07/MicrosoftTeams-image-26-370x400.png" 
+                    alt="100th Anniversary Logo" 
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+              </div>
+
+              {/* GraduationCap Icon - Middle Right - delay-300 */}
+              <div className="absolute top-1/2 -right-6 -translate-y-1/2 animate-float delay-300">
+                <div className="w-14 h-14 rounded-xl bg-card shadow-soft flex items-center justify-center border border-primary/20">
+                  <GraduationCap className="h-6 w-6 text-[#8B1A1A]" />
+                </div>
+              </div>
+
+              {/* BookOpen Icon - Bottom Left - delay-500 */}
+              <div className="absolute -bottom-4 -left-4 animate-float delay-500">
+                <div className="w-14 h-14 rounded-xl bg-card shadow-soft flex items-center justify-center border border-primary/20">
+                  <BookOpen className="h-7 w-7 text-primary" />
+                </div>
+              </div>
             </div>
           </div>
         </div>
