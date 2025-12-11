@@ -51,9 +51,9 @@ const AnimatedCounter = ({ target, suffix = "" }: { target: number; suffix?: str
 
 const stats = [
   { value: 10000, suffix: "+", label: "For Scholars", description: "Join our scholarly community with full access to research tools" },
-  { value: 5000, suffix: "+", label: "Library Access", description: "Explore thousands of digitized texts and ancient manuscripts" },
-  { value: 1200, suffix: "+", label: "AI Search", description: "Use our AI-powered search across Jain literature worldwide" },
-  { value: 50, suffix: "+", label: "Join Community", description: "Connect with scholars, researchers, and seekers globally" },
+  { value: 5000, suffix: "+", label: "Library Access", description: "Explore thousands of digitized texts and manuscripts" },
+  { value: 1200, suffix: "+", label: "AI Search", description: "AI-powered search across Jain literature worldwide" },
+  { value: 50, suffix: "+", label: "Join Community", description: "Connect with scholars and seekers globally" },
 ];
 
 const ctaCards = [
@@ -90,20 +90,21 @@ const ctaCards = [
 
 export function CTASection() {
   return (
-    <section className="py-16 lg:py-20 bg-card">
+    <section className="py-16 lg:py-20" style={{ backgroundColor: '#FDF8F3' }}>
       <div className="container mx-auto px-6">
         {/* Stats Section */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
           {stats.map((stat, index) => (
             <div 
               key={index}
-              className="text-center p-5 md:p-6 rounded-xl bg-background border border-border"
+              className="text-center p-5 md:p-6 rounded-xl"
+              style={{ backgroundColor: '#FFFFFF', border: '1px solid #E5E0D5' }}
             >
-              <div className="font-heading text-3xl md:text-4xl font-bold text-orange mb-1.5">
+              <div className="font-heading text-3xl md:text-4xl font-bold mb-1.5" style={{ color: '#E88A1A' }}>
                 <AnimatedCounter target={stat.value} suffix={stat.suffix} />
               </div>
-              <p className="text-primary text-sm font-semibold mb-1 font-body">{stat.label}</p>
-              <p className="text-muted-foreground text-xs font-body hidden md:block">{stat.description}</p>
+              <p className="text-sm font-semibold mb-1 font-body" style={{ color: '#1E3A5F' }}>{stat.label}</p>
+              <p className="text-xs font-body hidden md:block" style={{ color: '#666666' }}>{stat.description}</p>
             </div>
           ))}
         </div>
@@ -114,39 +115,31 @@ export function CTASection() {
             <Link
               key={card.title}
               to={card.href}
-              className={`group rounded-xl p-5 transition-all duration-300 ${
-                card.primary
-                  ? "bg-orange text-white hover:bg-orange/90"
-                  : "bg-background border border-border hover:border-orange/30 hover:shadow-md"
-              }`}
+              className="group rounded-xl p-5 transition-all duration-300 hover:shadow-lg"
+              style={card.primary 
+                ? { backgroundColor: '#E88A1A' } 
+                : { backgroundColor: '#FFFFFF', border: '1px solid #E5E0D5' }
+              }
             >
-              <div className={`w-10 h-10 rounded-lg flex items-center justify-center mb-3.5 ${
-                card.primary
-                  ? "bg-white/20"
-                  : "bg-orange/10 group-hover:bg-orange transition-colors"
-              }`}>
-                <card.icon className={`h-5 w-5 ${
-                  card.primary
-                    ? "text-white"
-                    : "text-orange group-hover:text-white transition-colors"
-                }`} />
+              <div 
+                className="w-10 h-10 rounded-lg flex items-center justify-center mb-3.5"
+                style={card.primary 
+                  ? { backgroundColor: 'rgba(255,255,255,0.2)' } 
+                  : { backgroundColor: 'rgba(232, 138, 26, 0.1)' }
+                }
+              >
+                <card.icon className="h-5 w-5" style={{ color: card.primary ? '#FFFFFF' : '#E88A1A' }} />
               </div>
               
-              <h3 className={`font-heading text-base font-semibold mb-1.5 ${
-                card.primary ? "text-white" : "text-primary"
-              }`}>
+              <h3 className="font-heading text-base font-semibold mb-1.5" style={{ color: card.primary ? '#FFFFFF' : '#1E3A5F' }}>
                 {card.title}
               </h3>
               
-              <p className={`text-sm mb-3 leading-relaxed font-body ${
-                card.primary ? "text-white/80" : "text-muted-foreground"
-              }`}>
+              <p className="text-sm mb-3 leading-relaxed font-body" style={{ color: card.primary ? 'rgba(255,255,255,0.8)' : '#666666' }}>
                 {card.description}
               </p>
               
-              <span className={`inline-flex items-center gap-1 text-sm font-medium font-body ${
-                card.primary ? "text-white" : "text-orange"
-              }`}>
+              <span className="inline-flex items-center gap-1 text-sm font-medium font-body" style={{ color: card.primary ? '#FFFFFF' : '#E88A1A' }}>
                 {card.cta}
                 <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
               </span>

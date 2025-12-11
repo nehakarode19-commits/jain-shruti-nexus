@@ -20,17 +20,17 @@ export function CommunitySection() {
   const displayBlogs = blogs.slice(0, 2);
 
   return (
-    <section className="py-16 lg:py-20 bg-background">
+    <section className="py-16 lg:py-20" style={{ backgroundColor: '#FFFFFF' }}>
       <div className="container mx-auto px-6">
         <div className="grid lg:grid-cols-2 gap-10 lg:gap-14">
           {/* Events Column */}
           <div>
             <div className="flex items-center justify-between mb-6">
               <div>
-                <p className="text-orange font-semibold uppercase tracking-wider text-xs mb-2 font-body">
+                <p className="font-semibold uppercase tracking-wider text-xs mb-2 font-body" style={{ color: '#E88A1A' }}>
                   Events
                 </p>
-                <h3 className="font-heading text-2xl md:text-3xl font-bold text-primary">
+                <h3 className="font-heading text-2xl md:text-3xl font-bold" style={{ color: '#1E3A5F' }}>
                   Upcoming Events
                 </h3>
               </div>
@@ -38,7 +38,8 @@ export function CommunitySection() {
                 variant="ghost" 
                 size="sm"
                 asChild
-                className="text-primary hover:text-primary/80 text-sm font-body"
+                className="text-sm font-body hover:opacity-70"
+                style={{ color: '#1E3A5F' }}
               >
                 <Link to="/community/events">
                   View All
@@ -49,7 +50,7 @@ export function CommunitySection() {
             
             {eventsLoading ? (
               <div className="flex items-center justify-center py-10">
-                <Loader2 className="h-6 w-6 animate-spin text-primary" />
+                <Loader2 className="h-6 w-6 animate-spin" style={{ color: '#1E3A5F' }} />
               </div>
             ) : (
               <div className="space-y-3">
@@ -57,7 +58,8 @@ export function CommunitySection() {
                   <Link
                     key={event.id}
                     to="/community/events"
-                    className="group flex gap-3.5 bg-card rounded-lg p-3.5 border border-border hover:border-orange/30 hover:shadow-md transition-all duration-300"
+                    className="group flex gap-3.5 rounded-lg p-3.5 transition-all duration-300 hover:shadow-md"
+                    style={{ backgroundColor: '#FDF8F3', border: '1px solid #E5E0D5' }}
                   >
                     <div className="flex-shrink-0 w-14 h-14 rounded-lg overflow-hidden">
                       <img
@@ -67,22 +69,22 @@ export function CommunitySection() {
                       />
                     </div>
                     <div className="flex-1 min-w-0">
-                      <span className="inline-block px-2 py-0.5 rounded-full bg-orange/10 text-orange text-xs font-medium mb-1.5 font-body">
+                      <span className="inline-block px-2 py-0.5 rounded-full text-xs font-medium mb-1.5 font-body" style={{ backgroundColor: 'rgba(232, 138, 26, 0.1)', color: '#E88A1A' }}>
                         Event
                       </span>
-                      <h4 className="font-semibold text-sm text-primary mb-1 group-hover:text-primary/80 transition-colors line-clamp-1 font-body">
+                      <h4 className="font-semibold text-sm mb-1 group-hover:opacity-80 transition-opacity line-clamp-1 font-body" style={{ color: '#1E3A5F' }}>
                         {event.title}
                       </h4>
-                      <div className="flex flex-wrap gap-3 text-xs text-muted-foreground font-body">
+                      <div className="flex flex-wrap gap-3 text-xs font-body" style={{ color: '#666666' }}>
                         {event.event_date && (
                           <span className="flex items-center gap-1">
-                            <Calendar className="h-3 w-3 text-orange" />
+                            <Calendar className="h-3 w-3" style={{ color: '#E88A1A' }} />
                             {format(new Date(event.event_date), "MMM d, yyyy")}
                           </span>
                         )}
                         {event.location && (
                           <span className="flex items-center gap-1">
-                            <MapPin className="h-3 w-3 text-orange" />
+                            <MapPin className="h-3 w-3" style={{ color: '#E88A1A' }} />
                             {event.location}
                           </span>
                         )}
@@ -92,7 +94,7 @@ export function CommunitySection() {
                 ))}
                 
                 {displayEvents.length === 0 && (
-                  <div className="text-center py-6 text-muted-foreground bg-card rounded-lg text-sm font-body border border-border">
+                  <div className="text-center py-6 rounded-lg text-sm font-body" style={{ backgroundColor: '#FDF8F3', color: '#666666', border: '1px solid #E5E0D5' }}>
                     No upcoming events scheduled.
                   </div>
                 )}
@@ -104,10 +106,10 @@ export function CommunitySection() {
           <div>
             <div className="flex items-center justify-between mb-6">
               <div>
-                <p className="text-orange font-semibold uppercase tracking-wider text-xs mb-2 font-body">
+                <p className="font-semibold uppercase tracking-wider text-xs mb-2 font-body" style={{ color: '#E88A1A' }}>
                   Insights
                 </p>
-                <h3 className="font-heading text-2xl md:text-3xl font-bold text-primary">
+                <h3 className="font-heading text-2xl md:text-3xl font-bold" style={{ color: '#1E3A5F' }}>
                   Latest Insights
                 </h3>
               </div>
@@ -115,7 +117,8 @@ export function CommunitySection() {
                 variant="ghost" 
                 size="sm"
                 asChild
-                className="text-primary hover:text-primary/80 text-sm font-body"
+                className="text-sm font-body hover:opacity-70"
+                style={{ color: '#1E3A5F' }}
               >
                 <Link to="/community/blog">
                   Read All
@@ -126,7 +129,7 @@ export function CommunitySection() {
             
             {blogsLoading ? (
               <div className="flex items-center justify-center py-10">
-                <Loader2 className="h-6 w-6 animate-spin text-primary" />
+                <Loader2 className="h-6 w-6 animate-spin" style={{ color: '#1E3A5F' }} />
               </div>
             ) : (
               <div className="space-y-3">
@@ -134,7 +137,8 @@ export function CommunitySection() {
                   <Link
                     key={post.id}
                     to={`/community/blog/${post.id}`}
-                    className="group block bg-card rounded-lg overflow-hidden border border-border hover:border-orange/30 hover:shadow-md transition-all duration-300"
+                    className="group block rounded-lg overflow-hidden transition-all duration-300 hover:shadow-md"
+                    style={{ backgroundColor: '#FDF8F3', border: '1px solid #E5E0D5' }}
                   >
                     <div className="flex gap-3.5 p-3.5">
                       <div className="flex-shrink-0 w-20 h-16 rounded-lg overflow-hidden">
@@ -146,14 +150,14 @@ export function CommunitySection() {
                       </div>
                       <div className="flex-1 min-w-0">
                         <div className="flex items-center gap-2 mb-1.5">
-                          <span className="px-2 py-0.5 rounded-full bg-primary/10 text-primary text-xs font-medium font-body">
+                          <span className="px-2 py-0.5 rounded-full text-xs font-medium font-body" style={{ backgroundColor: 'rgba(30, 58, 95, 0.1)', color: '#1E3A5F' }}>
                             Blog
                           </span>
-                          <span className="text-xs text-muted-foreground font-body">
+                          <span className="text-xs font-body" style={{ color: '#999999' }}>
                             {format(new Date(post.created_at), "MMM d")}
                           </span>
                         </div>
-                        <h4 className="font-semibold text-sm text-primary mb-1 group-hover:text-primary/80 transition-colors line-clamp-2 font-body">
+                        <h4 className="font-semibold text-sm mb-1 group-hover:opacity-80 transition-opacity line-clamp-2 font-body" style={{ color: '#1E3A5F' }}>
                           {post.title}
                         </h4>
                       </div>
@@ -162,7 +166,7 @@ export function CommunitySection() {
                 ))}
                 
                 {displayBlogs.length === 0 && (
-                  <div className="text-center py-6 text-muted-foreground bg-card rounded-lg text-sm font-body border border-border">
+                  <div className="text-center py-6 rounded-lg text-sm font-body" style={{ backgroundColor: '#FDF8F3', color: '#666666', border: '1px solid #E5E0D5' }}>
                     No blog posts available yet.
                   </div>
                 )}
