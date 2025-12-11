@@ -6,8 +6,19 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AdminAuthProvider } from "@/contexts/AdminAuthContext";
 import { ProtectedLMSRoute } from "@/components/lms/ProtectedLMSRoute";
 import { ProtectedAdminRoute } from "@/components/admin/ProtectedAdminRoute";
+import { ProtectedScholarRoute } from "@/components/scholar/ProtectedScholarRoute";
 import { useGlobalScrollToTop } from "@/hooks/useGlobalScrollToTop";
-// Pages
+
+// Scholar Portal Pages
+import ScholarLogin from "./pages/scholar/ScholarLogin";
+import ScholarDashboard from "./pages/scholar/ScholarDashboard";
+import ScholarDirectory from "./pages/scholar/ScholarDirectory";
+import ScholarChat from "./pages/scholar/ScholarChat";
+import ScholarFeed from "./pages/scholar/ScholarFeed";
+import ScholarEvents from "./pages/scholar/ScholarEvents";
+import ScholarAITools from "./pages/scholar/ScholarAITools";
+import ScholarSettings from "./pages/scholar/ScholarSettings";
+
 import Index from "./pages/Index";
 import About from "./pages/About";
 import AboutGurudev from "./pages/AboutGurudev";
@@ -145,6 +156,18 @@ function AppContent() {
       <Route path="/lms/reports" element={<ProtectedLMSRoute><Reports /></ProtectedLMSRoute>} />
       <Route path="/lms/tickets" element={<ProtectedLMSRoute><TicketManagement /></ProtectedLMSRoute>} />
       <Route path="/lms/settings" element={<ProtectedLMSRoute><LMSSettings /></ProtectedLMSRoute>} />
+      
+      {/* Scholar Portal Routes */}
+      <Route path="/scholar" element={<ScholarLogin />} />
+      <Route path="/scholar/login" element={<ScholarLogin />} />
+      <Route path="/scholar/dashboard" element={<ProtectedScholarRoute><ScholarDashboard /></ProtectedScholarRoute>} />
+      <Route path="/scholar/directory" element={<ProtectedScholarRoute><ScholarDirectory /></ProtectedScholarRoute>} />
+      <Route path="/scholar/chat" element={<ProtectedScholarRoute><ScholarChat /></ProtectedScholarRoute>} />
+      <Route path="/scholar/feed" element={<ProtectedScholarRoute><ScholarFeed /></ProtectedScholarRoute>} />
+      <Route path="/scholar/events" element={<ProtectedScholarRoute><ScholarEvents /></ProtectedScholarRoute>} />
+      <Route path="/scholar/ai-tools" element={<ProtectedScholarRoute><ScholarAITools /></ProtectedScholarRoute>} />
+      <Route path="/scholar/settings" element={<ProtectedScholarRoute><ScholarSettings /></ProtectedScholarRoute>} />
+      
       
       {/* Admin Routes */}
       <Route path="/admin" element={<AdminLogin />} />
