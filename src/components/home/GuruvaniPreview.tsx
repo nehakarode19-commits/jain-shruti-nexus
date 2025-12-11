@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Mic, FileText, BookOpen, Loader2, Lock } from "lucide-react";
+import { ArrowRight, Mic, FileText, BookOpen, Loader2, Lock, Mail, Send } from "lucide-react";
 import { useGuruvaniFromDB } from "@/hooks/useContent";
+import { Input } from "@/components/ui/input";
 
 import guruvaniImg1 from "@/assets/books/guruvani-1.jpg";
 import guruvaniImg2 from "@/assets/books/guruvani-2.jpg";
@@ -93,6 +94,34 @@ export function GuruvaniPreview() {
             )}
           </>
         )}
+
+        {/* Newsletter Signup */}
+        <div className="max-w-2xl mx-auto mb-8">
+          <div className="rounded-xl p-5 flex flex-col sm:flex-row items-center gap-4 bg-[#FAF7F2] border border-[#E5E0D5]">
+            <div className="flex-shrink-0 w-10 h-10 rounded-lg flex items-center justify-center bg-[#C9A227]/10">
+              <Mail className="h-5 w-5 text-[#C9A227]" />
+            </div>
+            <div className="text-center sm:text-left flex-1">
+              <p className="font-semibold text-sm mb-0.5" style={{ fontFamily: 'Inter, sans-serif', color: '#2D2A26' }}>
+                Subscribe to receive updates
+              </p>
+              <p className="text-xs" style={{ fontFamily: 'Inter, sans-serif', color: '#5A5650' }}>
+                Get notified when new teachings are published
+              </p>
+            </div>
+            <div className="flex gap-2 w-full sm:w-auto">
+              <Input 
+                type="email" 
+                placeholder="Enter your email" 
+                className="h-9 min-w-[180px] text-sm"
+                style={{ fontFamily: 'Inter, sans-serif' }}
+              />
+              <Button className="text-white h-9 px-4 bg-[#D4A03C] hover:bg-[#C49030]">
+                <Send className="h-4 w-4" />
+              </Button>
+            </div>
+          </div>
+        </div>
 
         {/* CTA */}
         <div className="text-center">
