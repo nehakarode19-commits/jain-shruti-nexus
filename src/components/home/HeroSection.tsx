@@ -1,60 +1,52 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { BookOpen, Search, Sparkles, ChevronDown, GraduationCap, Image, BookMarked, Mail } from "lucide-react";
+import { BookOpen, Search, Sparkles, GraduationCap, Image, BookMarked, Quote } from "lucide-react";
 import { gurudevBio } from "@/data/gurudevData";
-import { useCMSContent } from "@/hooks/useCMSContent";
 
 export function HeroSection() {
-  const cmsContent = useCMSContent();
-  
-  const scrollToFeatures = () => {
-    const featuresSection = document.querySelector('section:nth-of-type(2)');
-    featuresSection?.scrollIntoView({ behavior: 'smooth' });
-  };
-
   return (
-    <section className="relative min-h-[90vh] flex items-center bg-[#F8F5EF]">
+    <section className="relative min-h-[85vh] flex items-center bg-[#FDF8F3]">
       {/* Subtle pattern overlay */}
-      <div className="absolute inset-0 opacity-30" style={{
-        backgroundImage: `radial-gradient(circle at 2px 2px, rgba(30,53,87,0.03) 1px, transparent 0)`,
-        backgroundSize: '40px 40px'
+      <div className="absolute inset-0 opacity-20" style={{
+        backgroundImage: `radial-gradient(circle at 2px 2px, rgba(30,53,87,0.04) 1px, transparent 0)`,
+        backgroundSize: '32px 32px'
       }} />
-      
-      {/* Soft gradient overlays */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(244,180,0,0.06)_0%,_transparent_50%)]" />
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,_rgba(74,111,165,0.04)_0%,_transparent_50%)]" />
 
-      <div className="container mx-auto px-6 py-16 lg:py-20 relative z-10">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+      <div className="container mx-auto px-6 lg:px-8 py-12 lg:py-16 relative z-10">
+        <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
           {/* Content */}
-          <div className="space-y-6 text-center lg:text-left order-2 lg:order-1">
-            {/* Trust badge */}
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-[#E5E0D8] shadow-sm animate-fade-up">
-              <Sparkles className="h-4 w-4 text-[#F4B400]" />
-              <span className="text-sm text-[#555555] font-medium">Preserving Ancient Wisdom</span>
+          <div className="space-y-5 order-2 lg:order-1">
+            {/* Trust badge - orange background */}
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#F4B400]/15 border border-[#F4B400]/30">
+              <Sparkles className="h-3.5 w-3.5 text-[#F4B400]" />
+              <span className="text-xs text-[#B8860B] font-medium">Preserving Ancient Wisdom</span>
             </div>
 
             {/* Hindi subtitle */}
-            <p className="text-[#1E3557]/70 text-base lg:text-lg font-medium animate-fade-up" style={{ animationDelay: '50ms' }}>
+            <p className="text-[#666666] text-sm font-medium">
               आगमप्रज्ञ पू. मुनिराज श्री जम्बू विजयजी महाराज साहेब
             </p>
 
-            <div className="space-y-4 animate-fade-up" style={{ animationDelay: '100ms' }}>
-              <h1 className="font-heading text-4xl sm:text-5xl lg:text-[3.5rem] font-bold leading-tight">
-                <span className="text-[#1E3557]">Jain Knowledge &</span>
+            {/* Main Title */}
+            <div className="space-y-1">
+              <h1 className="font-heading text-3xl sm:text-4xl lg:text-[2.75rem] font-bold leading-[1.15]">
+                <span className="text-[#1E3A5F]">Jain Knowledge &</span>
                 <br />
-                <span className="text-[#F4B400]">Research Ecosystem</span>
+                <span className="text-[#E88A1A]">Research Ecosystem</span>
               </h1>
-              <p className="text-base lg:text-lg text-[#555555] max-w-xl leading-relaxed">
-                Explore the profound teachings of Gurudev Muni Jambuvijayji Maharaj Saheb (1923–2009). Discover sacred texts, research tools, and a community dedicated to preserving Jain philosophy.
-              </p>
             </div>
 
-            <div className="flex flex-wrap gap-4 justify-center lg:justify-start animate-fade-up" style={{ animationDelay: '200ms' }}>
+            {/* Description */}
+            <p className="text-sm text-[#666666] max-w-md leading-relaxed">
+              Explore the profound teachings of Gurudev Muni Jambuvijayji Maharaj Saheb (1923–2009). Discover sacred texts, research tools, and a community dedicated to preserving Jain philosophy.
+            </p>
+
+            {/* CTA Buttons */}
+            <div className="flex flex-wrap gap-3 pt-1">
               <Button 
-                size="lg" 
+                size="default" 
                 asChild 
-                className="bg-[#F4B400] hover:bg-[#E5A800] text-[#1E3557] shadow-lg shadow-[#F4B400]/20 font-semibold px-8"
+                className="bg-[#E88A1A] hover:bg-[#D47A10] text-white font-medium px-5 h-10 text-sm rounded-lg"
               >
                 <Link to="/guruvani">
                   <BookMarked className="h-4 w-4 mr-2" />
@@ -63,9 +55,9 @@ export function HeroSection() {
               </Button>
               <Button 
                 variant="outline" 
-                size="lg" 
+                size="default" 
                 asChild 
-                className="border-[#1E3557] text-[#1E3557] hover:bg-[#1E3557] hover:text-white bg-white px-8"
+                className="border-[#1E3A5F] text-[#1E3A5F] hover:bg-[#1E3A5F] hover:text-white bg-white font-medium px-5 h-10 text-sm rounded-lg"
               >
                 <Link to="/research">
                   <Search className="h-4 w-4 mr-2" />
@@ -75,64 +67,51 @@ export function HeroSection() {
             </div>
 
             {/* Quick Links */}
-            <div className="flex flex-wrap gap-6 lg:gap-8 pt-4 justify-center lg:justify-start animate-fade-up" style={{ animationDelay: '300ms' }}>
+            <div className="flex flex-wrap gap-5 pt-3">
               <Link
                 to="/library"
-                className="flex items-center gap-2 text-[#555555] hover:text-[#1E3557] transition-colors text-sm"
+                className="flex items-center gap-1.5 text-[#666666] hover:text-[#1E3A5F] transition-colors text-xs"
               >
-                <BookOpen className="h-4 w-4" />
+                <BookOpen className="h-3.5 w-3.5" />
                 <span className="font-medium">Library</span>
               </Link>
               <Link
                 to="/scholars"
-                className="flex items-center gap-2 text-[#555555] hover:text-[#1E3557] transition-colors text-sm"
+                className="flex items-center gap-1.5 text-[#666666] hover:text-[#1E3A5F] transition-colors text-xs"
               >
-                <GraduationCap className="h-4 w-4" />
+                <GraduationCap className="h-3.5 w-3.5" />
                 <span className="font-medium">Scholars</span>
               </Link>
               <Link
                 to="/gallery"
-                className="flex items-center gap-2 text-[#555555] hover:text-[#1E3557] transition-colors text-sm"
+                className="flex items-center gap-1.5 text-[#666666] hover:text-[#1E3A5F] transition-colors text-xs"
               >
-                <Image className="h-4 w-4" />
+                <Image className="h-3.5 w-3.5" />
                 <span className="font-medium">Photo Gallery</span>
               </Link>
+            </div>
+
+            {/* Quote section */}
+            <div className="pt-4 max-w-md">
+              <div className="flex gap-3 p-3 bg-white/60 rounded-xl border border-[#E5E0D5]">
+                <div className="flex-shrink-0 w-8 h-8 bg-[#F4B400]/10 rounded-full flex items-center justify-center">
+                  <Quote className="h-3.5 w-3.5 text-[#E88A1A]" />
+                </div>
+                <div>
+                  <p className="text-xs text-[#555555] leading-relaxed italic">
+                    "The pursuit of knowledge is the path to liberation. Through study and contemplation, we understand the essence of existence."
+                  </p>
+                  <p className="text-[10px] text-[#888888] mt-1">— Gurudev Muni Jambuvijayji</p>
+                </div>
+              </div>
             </div>
           </div>
 
           {/* Hero Visual */}
-          <div className="relative flex justify-center order-1 lg:order-2 animate-fade-up" style={{ animationDelay: '150ms' }}>
+          <div className="relative flex justify-center order-1 lg:order-2">
             <div className="relative">
-              {/* Card frame with Gurudev image */}
-              <div className="relative bg-white rounded-3xl p-4 shadow-xl border border-[#E5E0D8]">
-                {/* Small floating icon - top left */}
-                <div className="absolute -top-3 -left-3 w-10 h-10 bg-white rounded-full shadow-md flex items-center justify-center border border-[#E5E0D8]">
-                  <BookMarked className="h-4 w-4 text-[#1E3557]" />
-                </div>
-                
-                {/* Small floating icon - right side */}
-                <div className="absolute top-1/3 -right-4 w-10 h-10 bg-[#F4B400]/10 rounded-full shadow-md flex items-center justify-center border border-[#F4B400]/20">
-                  <Mail className="h-4 w-4 text-[#F4B400]" />
-                </div>
-
-                {/* Main Gurudev Image */}
-                <div className="relative rounded-2xl overflow-hidden bg-gradient-to-b from-[#F8F5EF] to-white">
-                  <img 
-                    src={gurudevBio.mainImage}
-                    alt="Gurudev Muni Jambuvijayji Maharaj Saheb"
-                    className="w-full max-w-sm h-auto object-contain"
-                  />
-                </div>
-
-                {/* Name Badge inside card */}
-                <div className="text-center pt-4 pb-2">
-                  <p className="text-[#1E3557] font-semibold text-lg">Gurudev Muni Jambuvijayji</p>
-                  <p className="text-sm text-[#555555]">Maharaj Saheb (1923–2009)</p>
-                </div>
-              </div>
-
-              {/* Centenary Logo Badge */}
-              <div className="absolute -top-4 -right-4 w-20 h-20 md:w-24 md:h-24 rounded-full shadow-xl overflow-hidden border-4 border-white bg-white">
+              {/* Centenary Logo Badge - top right */}
+              <div className="absolute -top-2 right-4 lg:right-8 w-14 h-14 lg:w-16 lg:h-16 rounded-full shadow-lg overflow-hidden border-2 border-white bg-white z-10">
                 <img 
                   src={gurudevBio.centenaryLogo}
                   alt="100th Anniversary"
@@ -140,22 +119,23 @@ export function HeroSection() {
                 />
               </div>
 
-              {/* Floating book icon - bottom left */}
-              <div className="absolute -bottom-2 -left-6 w-12 h-12 bg-[#F4B400] rounded-xl shadow-lg flex items-center justify-center">
-                <BookOpen className="h-5 w-5 text-white" />
+              {/* Main Image Container */}
+              <div className="relative bg-gradient-to-b from-[#FDF8F3] to-[#F5EDE3] rounded-2xl overflow-hidden">
+                <img 
+                  src={gurudevBio.mainImage}
+                  alt="Gurudev Muni Jambuvijayji Maharaj Saheb"
+                  className="w-full max-w-xs lg:max-w-sm h-auto object-contain"
+                />
+              </div>
+
+              {/* Name Badge */}
+              <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 bg-white px-4 py-2 rounded-lg shadow-md border border-[#E5E0D5] text-center min-w-[200px]">
+                <p className="text-[#1E3A5F] font-semibold text-sm">Gurudev Muni Jambuvijayji</p>
+                <p className="text-[10px] text-[#888888]">Maharaj Saheb (1923–2009)</p>
               </div>
             </div>
           </div>
         </div>
-
-        {/* Scroll indicator */}
-        <button 
-          onClick={scrollToFeatures}
-          className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1.5 text-[#555555] hover:text-[#1E3557] transition-colors cursor-pointer group"
-        >
-          <span className="text-xs font-medium">Scroll to explore</span>
-          <ChevronDown className="h-4 w-4 animate-bounce" />
-        </button>
       </div>
     </section>
   );
