@@ -74,7 +74,7 @@ const GyanKendra = () => {
               <span className="text-muted-foreground">Digital Museum</span>
             </div>
             <h1 className="font-display text-4xl sm:text-5xl font-bold text-foreground mb-6">
-              Jambuji <span className="text-gradient-gold">Gyan Kendra</span>
+              Jambuji Gyan Kendra
             </h1>
             <p className="text-lg text-muted-foreground">
               A dedicated center preserving Gurudev Muni Jambuvijayji Maharaj Saheb's scholarly works, 
