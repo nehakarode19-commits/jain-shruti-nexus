@@ -31,9 +31,9 @@ const teachings = [
 
 export function AboutPreview() {
   return (
-    <section className="py-24 lg:py-32 bg-white relative overflow-hidden">
+    <section className="py-24 lg:py-32 bg-card relative overflow-hidden">
       {/* Subtle decorative elements */}
-      <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-[#F8F5EF] to-transparent rounded-full blur-3xl opacity-50" />
+      <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-background to-transparent rounded-full blur-3xl opacity-50" />
 
       <div className="container mx-auto px-6 relative">
         <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
@@ -46,11 +46,11 @@ export function AboutPreview() {
                 className="w-full h-auto object-cover"
               />
               {/* Soft overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-[#1E3557]/30 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-primary/30 to-transparent" />
             </div>
             
             {/* Centenary badge */}
-            <div className="absolute -bottom-6 -right-6 w-28 h-28 rounded-full bg-white shadow-xl overflow-hidden border-4 border-[#F8F5EF]">
+            <div className="absolute -bottom-6 -right-6 w-28 h-28 rounded-full bg-card shadow-xl overflow-hidden border-4 border-background">
               <img 
                 src={gurudevBio.centenaryLogo}
                 alt="Centenary"
@@ -62,21 +62,21 @@ export function AboutPreview() {
           {/* Content Section */}
           <div className="space-y-8">
             <div>
-              <p className="text-[#F4B400] font-semibold uppercase tracking-wider text-sm mb-3">
+              <p className="text-accent font-semibold uppercase tracking-wider text-sm mb-3">
                 About Gurudev
               </p>
-              <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold text-[#1E3557] mb-2">
+              <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold text-primary mb-2">
                 Muni Jambuvijayji Maharaj Saheb
               </h2>
-              <p className="text-[#4A6FA5] text-lg">
+              <p className="text-primary/70 text-lg">
                 {gurudevBio.hindiName}
               </p>
-              <p className="text-[#555555] mt-2">
+              <p className="text-muted-foreground mt-2">
                 {gurudevBio.birthYear} – {gurudevBio.deathYear} • {gurudevBio.birthPlace}
               </p>
             </div>
 
-            <p className="text-[#555555] text-lg leading-relaxed">
+            <p className="text-muted-foreground text-lg leading-relaxed">
               Jambuvijayji Maharaj Saheb (1923–2009), also known as Muni Jambuvijayji 
               Maharaj Saheb, was a Jain ascetic belonging to the Tapa Gaccha order of 
               Shvetambara sect of Jainism. Jambuvijayji dedicated his life to Prakrit 
@@ -85,13 +85,13 @@ export function AboutPreview() {
             </p>
 
             {/* Quote */}
-            <div className="bg-[#F8F5EF] rounded-2xl p-6 border-l-4 border-[#F4B400] relative">
-              <Quote className="absolute top-4 right-4 h-8 w-8 text-[#F4B400]/20" />
-              <blockquote className="text-[#1E3557] italic text-lg leading-relaxed">
+            <div className="bg-background rounded-2xl p-6 border-l-4 border-accent relative">
+              <Quote className="absolute top-4 right-4 h-8 w-8 text-accent/20" />
+              <blockquote className="text-primary italic text-lg leading-relaxed">
                 "The pursuit of knowledge is the path to liberation. Through study 
                 and contemplation, we illuminate the darkness of ignorance."
               </blockquote>
-              <p className="mt-3 text-sm text-[#555555] font-medium">
+              <p className="mt-3 text-sm text-muted-foreground font-medium">
                 — Gurudev Muni Jambuvijayji
               </p>
             </div>
@@ -102,7 +102,7 @@ export function AboutPreview() {
                 <Link
                   key={link.label}
                   to={link.href}
-                  className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-[#DCE3E7] text-[#555555] hover:border-[#4A6FA5] hover:text-[#4A6FA5] transition-colors text-sm font-medium"
+                  className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-card border border-border text-muted-foreground hover:border-primary hover:text-primary transition-colors text-sm font-medium"
                 >
                   <link.icon className="h-4 w-4" />
                   {link.label}
@@ -119,18 +119,18 @@ export function AboutPreview() {
             <Link
               key={item.title}
               to={item.href}
-              className="group bg-[#F8F5EF] rounded-2xl p-6 hover:shadow-lg hover:bg-white border border-transparent hover:border-[#E5E0D8] transition-all duration-300"
+              className="group bg-background rounded-2xl p-6 hover:shadow-lg hover:bg-card border border-transparent hover:border-border transition-all duration-300"
             >
-              <div className="w-12 h-12 rounded-xl bg-[#4A6FA5]/10 flex items-center justify-center mb-4 group-hover:bg-[#4A6FA5] transition-colors">
-                <item.icon className="h-6 w-6 text-[#4A6FA5] group-hover:text-white transition-colors" />
+              <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary transition-colors">
+                <item.icon className="h-6 w-6 text-primary group-hover:text-primary-foreground transition-colors" />
               </div>
-              <h3 className="font-heading text-lg font-bold text-[#1E3557] mb-2 group-hover:text-[#4A6FA5] transition-colors">
+              <h3 className="font-heading text-lg font-bold text-primary mb-2 group-hover:text-primary/80 transition-colors">
                 {item.title}
               </h3>
-              <p className="text-sm text-[#555555] mb-3">
+              <p className="text-sm text-muted-foreground mb-3">
                 {item.description}
               </p>
-              <span className="text-sm text-[#4A6FA5] font-medium inline-flex items-center gap-1">
+              <span className="text-sm text-primary font-medium inline-flex items-center gap-1">
                 Learn More
                 <ArrowRight className="h-3 w-3 group-hover:translate-x-1 transition-transform" />
               </span>
@@ -143,7 +143,6 @@ export function AboutPreview() {
           <Button 
             size="lg" 
             asChild
-            className="bg-[#1E3557] hover:bg-[#2B4A6B] text-white"
           >
             <Link to="/about/gurudev">
               Read Full Biography
