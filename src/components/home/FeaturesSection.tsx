@@ -74,7 +74,7 @@ export function FeaturesSection() {
             <span className="text-muted-foreground font-medium">Jain Knowledge Research Ecosystem</span>
           </div>
           <h2 className="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-4">
-            Powerful{" "}
+            AI-Powered{" "}
             <span className="text-gradient-gold">Research Tools</span>
           </h2>
           <p className="font-body text-lg text-muted-foreground">
