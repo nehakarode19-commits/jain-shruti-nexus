@@ -33,7 +33,8 @@ import {
   Sparkles,
   Star,
   TrendingUp,
-  ExternalLink
+  ExternalLink,
+  LogIn
 } from "lucide-react";
 
 // Import scholar profile images
@@ -287,6 +288,12 @@ const Scholars = () => {
             </p>
             <div className="flex flex-wrap justify-center gap-4">
               <Button variant="hero" size="lg" asChild className="shadow-elevated">
+                <Link to="/scholar/login">
+                  <LogIn className="h-5 w-5 mr-2" />
+                  Scholar Portal
+                </Link>
+              </Button>
+              <Button variant="outline" size="lg" asChild>
                 <Link to="/auth">
                   <GraduationCap className="h-5 w-5 mr-2" />
                   Join as Scholar
