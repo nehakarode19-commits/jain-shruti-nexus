@@ -39,7 +39,7 @@ const Articles = () => {
               <span className="text-muted-foreground">{articles.length} Articles</span>
             </div>
             <h1 className="font-heading text-4xl sm:text-5xl font-bold text-foreground mb-6">
-              Articles & <span className="text-gradient-gold">Tributes</span>
+              Articles & Tributes
             </h1>
             <p className="font-body text-lg text-muted-foreground">
               Scholarly articles, heartfelt tributes, and important documents 

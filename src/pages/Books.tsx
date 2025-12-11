@@ -34,7 +34,7 @@ const Books = () => {
               <span className="text-muted-foreground">{books.length} Sacred Texts</span>
             </div>
             <h1 className="font-heading text-4xl sm:text-5xl font-bold text-foreground mb-6">
-              Books & <span className="text-gradient-gold">Publications</span>
+              Books & Publications
             </h1>
             <p className="font-body text-muted-foreground">
               Explore the scholarly works edited and published by Gurudev Muni Jambuvijayji Maharaj Saheb, 
