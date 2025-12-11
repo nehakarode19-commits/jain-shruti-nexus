@@ -192,16 +192,6 @@ export function HeroSection() {
                 </div>
               </div>
 
-              {/* Floating Heart Icon - Middle Right */}
-              <div className="absolute top-1/2 -right-5 -translate-y-1/2 animate-float delay-300">
-                <div 
-                  className="w-12 h-12 rounded-full shadow-lg flex items-center justify-center"
-                  style={{ backgroundColor: '#FEF2F2', border: '2px solid #FECACA' }}
-                >
-                  <Heart className="h-5 w-5 text-[#EF4444]" fill="#EF4444" />
-                </div>
-              </div>
-
               {/* Floating Book Icon - Bottom Left */}
               <div className="absolute -bottom-2 -left-3 animate-float delay-500">
                 <div 
