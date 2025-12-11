@@ -5,10 +5,10 @@ import { gurudevBio } from "@/data/gurudevData";
 
 export function HeroSection() {
   return (
-    <section className="relative min-h-[85vh] flex items-center bg-[#FDF8F3]">
+    <section className="relative min-h-[85vh] flex items-center bg-gradient-to-br from-[#1E3557] via-[#1E3A5F] to-[#152744]">
       {/* Subtle pattern overlay */}
-      <div className="absolute inset-0 opacity-20" style={{
-        backgroundImage: `radial-gradient(circle at 2px 2px, rgba(30,53,87,0.04) 1px, transparent 0)`,
+      <div className="absolute inset-0 opacity-10" style={{
+        backgroundImage: `radial-gradient(circle at 2px 2px, rgba(255,255,255,0.15) 1px, transparent 0)`,
         backgroundSize: '32px 32px'
       }} />
 
@@ -17,27 +17,27 @@ export function HeroSection() {
           {/* Content */}
           <div className="space-y-5 order-2 lg:order-1">
             {/* Trust badge - orange background */}
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#F4B400]/15 border border-[#F4B400]/30">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#E88A1A]/20 border border-[#E88A1A]/40">
               <Sparkles className="h-3.5 w-3.5 text-[#F4B400]" />
-              <span className="text-xs text-[#B8860B] font-medium">Preserving Ancient Wisdom</span>
+              <span className="text-xs text-[#F4B400] font-medium">Preserving Ancient Wisdom</span>
             </div>
 
             {/* Hindi subtitle */}
-            <p className="text-[#666666] text-sm font-medium">
+            <p className="text-white/80 text-sm font-medium">
               आगमप्रज्ञ पू. मुनिराज श्री जम्बू विजयजी महाराज साहेब
             </p>
 
             {/* Main Title */}
             <div className="space-y-1">
               <h1 className="font-heading text-3xl sm:text-4xl lg:text-[2.75rem] font-bold leading-[1.15]">
-                <span className="text-[#1E3A5F]">Jain Knowledge &</span>
+                <span className="text-white">Jain Knowledge &</span>
                 <br />
                 <span className="text-[#E88A1A]">Research Ecosystem</span>
               </h1>
             </div>
 
             {/* Description */}
-            <p className="text-sm text-[#666666] max-w-md leading-relaxed">
+            <p className="text-sm text-white/70 max-w-md leading-relaxed">
               Explore the profound teachings of Gurudev Muni Jambuvijayji Maharaj Saheb (1923–2009). Discover sacred texts, research tools, and a community dedicated to preserving Jain philosophy.
             </p>
 
@@ -57,7 +57,7 @@ export function HeroSection() {
                 variant="outline" 
                 size="default" 
                 asChild 
-                className="border-[#1E3A5F] text-[#1E3A5F] hover:bg-[#1E3A5F] hover:text-white bg-white font-medium px-5 h-10 text-sm rounded-lg"
+                className="border-white/40 text-white hover:bg-white/10 bg-transparent font-medium px-5 h-10 text-sm rounded-lg"
               >
                 <Link to="/research">
                   <Search className="h-4 w-4 mr-2" />
@@ -70,21 +70,21 @@ export function HeroSection() {
             <div className="flex flex-wrap gap-5 pt-3">
               <Link
                 to="/library"
-                className="flex items-center gap-1.5 text-[#666666] hover:text-[#1E3A5F] transition-colors text-xs"
+                className="flex items-center gap-1.5 text-white/60 hover:text-white transition-colors text-xs"
               >
                 <BookOpen className="h-3.5 w-3.5" />
                 <span className="font-medium">Library</span>
               </Link>
               <Link
                 to="/scholars"
-                className="flex items-center gap-1.5 text-[#666666] hover:text-[#1E3A5F] transition-colors text-xs"
+                className="flex items-center gap-1.5 text-white/60 hover:text-white transition-colors text-xs"
               >
                 <GraduationCap className="h-3.5 w-3.5" />
                 <span className="font-medium">Scholars</span>
               </Link>
               <Link
                 to="/gallery"
-                className="flex items-center gap-1.5 text-[#666666] hover:text-[#1E3A5F] transition-colors text-xs"
+                className="flex items-center gap-1.5 text-white/60 hover:text-white transition-colors text-xs"
               >
                 <Image className="h-3.5 w-3.5" />
                 <span className="font-medium">Photo Gallery</span>
@@ -93,15 +93,15 @@ export function HeroSection() {
 
             {/* Quote section */}
             <div className="pt-4 max-w-md">
-              <div className="flex gap-3 p-3 bg-white/60 rounded-xl border border-[#E5E0D5]">
-                <div className="flex-shrink-0 w-8 h-8 bg-[#F4B400]/10 rounded-full flex items-center justify-center">
+              <div className="flex gap-3 p-3 bg-white/10 rounded-xl border border-white/20">
+                <div className="flex-shrink-0 w-8 h-8 bg-[#E88A1A]/20 rounded-full flex items-center justify-center">
                   <Quote className="h-3.5 w-3.5 text-[#E88A1A]" />
                 </div>
                 <div>
-                  <p className="text-xs text-[#555555] leading-relaxed italic">
+                  <p className="text-xs text-white/80 leading-relaxed italic">
                     "The pursuit of knowledge is the path to liberation. Through study and contemplation, we understand the essence of existence."
                   </p>
-                  <p className="text-[10px] text-[#888888] mt-1">— Gurudev Muni Jambuvijayji</p>
+                  <p className="text-[10px] text-white/50 mt-1">— Gurudev Muni Jambuvijayji</p>
                 </div>
               </div>
             </div>
@@ -111,7 +111,7 @@ export function HeroSection() {
           <div className="relative flex justify-center order-1 lg:order-2">
             <div className="relative">
               {/* Centenary Logo Badge - top right */}
-              <div className="absolute -top-2 right-4 lg:right-8 w-14 h-14 lg:w-16 lg:h-16 rounded-full shadow-lg overflow-hidden border-2 border-white bg-white z-10">
+              <div className="absolute -top-2 right-4 lg:right-8 w-14 h-14 lg:w-16 lg:h-16 rounded-full shadow-lg overflow-hidden border-2 border-[#E88A1A] bg-white z-10">
                 <img 
                   src={gurudevBio.centenaryLogo}
                   alt="100th Anniversary"
@@ -120,7 +120,7 @@ export function HeroSection() {
               </div>
 
               {/* Main Image Container */}
-              <div className="relative bg-gradient-to-b from-[#FDF8F3] to-[#F5EDE3] rounded-2xl overflow-hidden">
+              <div className="relative bg-gradient-to-b from-[#F8F5EF] to-[#EDE8DE] rounded-2xl overflow-hidden">
                 <img 
                   src={gurudevBio.mainImage}
                   alt="Gurudev Muni Jambuvijayji Maharaj Saheb"
@@ -129,9 +129,9 @@ export function HeroSection() {
               </div>
 
               {/* Name Badge */}
-              <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 bg-white px-4 py-2 rounded-lg shadow-md border border-[#E5E0D5] text-center min-w-[200px]">
+              <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 bg-white px-4 py-2 rounded-lg shadow-md text-center min-w-[200px]">
                 <p className="text-[#1E3A5F] font-semibold text-sm">Gurudev Muni Jambuvijayji</p>
-                <p className="text-[10px] text-[#888888]">Maharaj Saheb (1923–2009)</p>
+                <p className="text-[10px] text-[#666666]">Maharaj Saheb (1923–2009)</p>
               </div>
             </div>
           </div>
