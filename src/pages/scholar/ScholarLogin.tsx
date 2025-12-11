@@ -188,6 +188,27 @@ export default function ScholarLogin() {
                 Note: After signup, contact admin to get Scholar role assigned for full portal access.
               </p>
             </div>
+
+            {/* Demo Login Section */}
+            <div className="mt-4 p-4 bg-primary/5 border border-primary/20 rounded-lg">
+              <p className="text-sm font-medium text-primary mb-2 text-center">Scholar Portal Demo Login</p>
+              <div className="space-y-1 text-xs text-muted-foreground">
+                <p><span className="font-medium">Email:</span> scholar@demo.com</p>
+                <p><span className="font-medium">Password:</span> scholar123</p>
+              </div>
+              <Button
+                type="button"
+                variant="outline"
+                size="sm"
+                className="w-full mt-3 text-xs"
+                onClick={() => {
+                  setEmail("scholar@demo.com");
+                  setPassword("scholar123");
+                }}
+              >
+                Use Demo Credentials
+              </Button>
+            </div>
           </CardContent>
         </Card>
       </div>
