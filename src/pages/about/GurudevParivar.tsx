@@ -68,7 +68,7 @@ const GurudevParivar = () => {
               <span className="text-muted-foreground">Spiritual Lineage</span>
             </div>
             <h1 className="font-display text-4xl sm:text-5xl font-bold text-foreground mb-6">
-              Gurudev <span className="text-gradient-gold">Parivar</span>
+              Gurudev Parivar
             </h1>
             <p className="text-lg text-muted-foreground">
               The disciples and spiritual successors of Gurudev Muni Jambuvijayji Maharaj Saheb, 
