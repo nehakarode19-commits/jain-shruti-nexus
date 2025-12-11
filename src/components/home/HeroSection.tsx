@@ -5,7 +5,7 @@ import { gurudevBio } from "@/data/gurudevData";
 
 export function HeroSection() {
   return (
-    <section className="relative min-h-[85vh] flex items-center bg-background overflow-hidden">
+    <section className="relative min-h-[90vh] flex items-center bg-background overflow-hidden">
       {/* Subtle dot pattern */}
       <div className="absolute inset-0 opacity-30" style={{
         backgroundImage: `radial-gradient(circle at 2px 2px, hsl(var(--primary) / 0.04) 1px, transparent 0)`,
@@ -67,7 +67,7 @@ export function HeroSection() {
             </div>
 
             {/* Quick Links */}
-            <div className="flex flex-wrap gap-5 pt-3">
+            <div className="flex flex-wrap gap-5 pt-2">
               <Link
                 to="/library"
                 className="flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors text-sm font-body"
@@ -92,6 +92,21 @@ export function HeroSection() {
                 <span className="font-medium">Photo Gallery</span>
               </Link>
             </div>
+
+            {/* Quote section */}
+            <div className="pt-4 max-w-md">
+              <div className="flex gap-4 p-4 bg-card rounded-xl border border-border shadow-sm">
+                <div className="flex-shrink-0 w-10 h-10 bg-orange/10 rounded-full flex items-center justify-center">
+                  <Quote className="h-4 w-4 text-orange" />
+                </div>
+                <div>
+                  <p className="text-sm text-muted-foreground leading-relaxed italic font-body">
+                    "The pursuit of knowledge is the path to liberation. Through study and contemplation, we understand the essence of existence."
+                  </p>
+                  <p className="text-xs text-muted-foreground/70 mt-2 font-medium font-body">— Gurudev Muni Jambuvijayji</p>
+                </div>
+              </div>
+            </div>
           </div>
 
           {/* Hero Visual */}
@@ -107,7 +122,7 @@ export function HeroSection() {
               </div>
 
               {/* Main Image Container */}
-              <div className="relative bg-gradient-to-b from-orange/5 to-orange/10 rounded-2xl overflow-hidden p-3">
+              <div className="relative bg-gradient-to-b from-orange/5 to-orange/15 rounded-2xl overflow-hidden p-4">
                 <img 
                   src={gurudevBio.mainImage}
                   alt="Gurudev Muni Jambuvijayji Maharaj Saheb"
