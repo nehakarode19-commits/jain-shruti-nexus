@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Calendar, ArrowRight, MapPin, BookOpen, Loader2 } from "lucide-react";
+import { Calendar, ArrowRight, MapPin, Loader2 } from "lucide-react";
 import { useEventsFromDB, useBlogsFromDB } from "@/hooks/useContent";
 import { format } from "date-fns";
 
@@ -16,36 +16,30 @@ export function CommunitySection() {
   const { data: events = [], isLoading: eventsLoading } = useEventsFromDB();
   const { data: blogs = [], isLoading: blogsLoading } = useBlogsFromDB();
   
-  // Take first 2 items for preview
-  const displayEvents = events.slice(0, 2);
+  const displayEvents = events.slice(0, 3);
   const displayBlogs = blogs.slice(0, 2);
 
   return (
-    <section className="py-16 lg:py-20 bg-white">
-      <div className="container mx-auto px-4">
-        {/* Section Header */}
-        <div className="text-center mb-12">
-          <p className="text-[#4A6FA5] font-semibold mb-3 uppercase tracking-wider text-sm">Stay Connected</p>
-          <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold text-[#2B3A4A] mb-4">
-            Community & Insights
-          </h2>
-          <p className="text-[#555555] max-w-2xl mx-auto text-lg">
-            Stay updated with events and explore articles on Gurudev's teachings.
-          </p>
-          <div className="w-20 h-1 bg-[#4A6FA5] mx-auto mt-5 rounded-full" />
-        </div>
+    <section className="py-24 lg:py-32 bg-white relative overflow-hidden">
+      {/* Subtle background */}
+      <div className="absolute bottom-0 right-0 w-96 h-96 bg-gradient-to-tl from-[#F8F5EF] to-transparent rounded-full blur-3xl opacity-50" />
 
-        {/* Vertical Stacked Layout */}
-        <div className="max-w-5xl mx-auto space-y-10">
-          {/* Events Row */}
+      <div className="container mx-auto px-6 relative">
+        <div className="grid lg:grid-cols-2 gap-16">
+          {/* Events Column */}
           <div>
-            <div className="flex items-center justify-between mb-6">
-              <h3 className="font-heading text-xl font-bold text-[#2B3A4A]">Upcoming Events</h3>
+            <div className="flex items-center justify-between mb-8">
+              <div>
+                <p className="text-[#F4B400] font-semibold uppercase tracking-wider text-sm mb-2">Events</p>
+                <h3 className="font-heading text-2xl md:text-3xl font-bold text-[#1E3557]">
+                  Upcoming Events
+                </h3>
+              </div>
               <Button 
                 variant="ghost" 
                 size="sm"
                 asChild
-                className="text-[#4A6FA5] hover:text-[#3A5F95]"
+                className="text-[#4A6FA5] hover:text-[#1E3557]"
               >
                 <Link to="/community/events">
                   View All
@@ -55,44 +49,41 @@ export function CommunitySection() {
             </div>
             
             {eventsLoading ? (
-              <div className="flex items-center justify-center py-8">
+              <div className="flex items-center justify-center py-12">
                 <Loader2 className="h-6 w-6 animate-spin text-[#4A6FA5]" />
               </div>
             ) : (
-              <div className="grid md:grid-cols-2 gap-6">
+              <div className="space-y-4">
                 {displayEvents.map((event, index) => (
                   <Link
                     key={event.id}
                     to="/community/events"
-                    className="group bg-white border border-[#DCE3E7] rounded-xl overflow-hidden hover:shadow-lg hover:border-[#4A6FA5] transition-all"
+                    className="group flex gap-4 bg-[#F8F5EF] rounded-xl p-4 border border-transparent hover:border-[#E5E0D8] hover:bg-white hover:shadow-lg transition-all duration-300"
                   >
-                    <div className="aspect-[16/9] overflow-hidden">
+                    <div className="flex-shrink-0 w-16 h-16 rounded-xl overflow-hidden">
                       <img
                         src={event.image_url || fallbackEventImages[index % fallbackEventImages.length]}
                         alt={event.title}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        className="w-full h-full object-cover"
                       />
                     </div>
-                    <div className="p-5">
-                      <span className="inline-block px-3 py-1 rounded-full bg-[#4A6FA5]/10 text-[#4A6FA5] text-xs font-medium mb-3">
+                    <div className="flex-1 min-w-0">
+                      <span className="inline-block px-2 py-0.5 rounded-full bg-[#4A6FA5]/10 text-[#4A6FA5] text-xs font-medium mb-2">
                         Event
                       </span>
-                      <h4 className="font-semibold text-[#2B3A4A] text-lg mb-2 group-hover:text-[#4A6FA5] transition-colors">
+                      <h4 className="font-semibold text-[#1E3557] mb-1 group-hover:text-[#4A6FA5] transition-colors line-clamp-1">
                         {event.title}
                       </h4>
-                      <p className="text-sm text-[#555555] mb-3 line-clamp-2">
-                        {event.description}
-                      </p>
-                      <div className="flex flex-wrap gap-4 text-xs text-[#555555]">
+                      <div className="flex flex-wrap gap-3 text-xs text-[#555555]">
                         {event.event_date && (
                           <span className="flex items-center gap-1">
-                            <Calendar className="h-3.5 w-3.5 text-[#4A6FA5]" />
+                            <Calendar className="h-3 w-3 text-[#4A6FA5]" />
                             {format(new Date(event.event_date), "MMM d, yyyy")}
                           </span>
                         )}
                         {event.location && (
                           <span className="flex items-center gap-1">
-                            <MapPin className="h-3.5 w-3.5 text-[#4A6FA5]" />
+                            <MapPin className="h-3 w-3 text-[#4A6FA5]" />
                             {event.location}
                           </span>
                         )}
@@ -102,7 +93,7 @@ export function CommunitySection() {
                 ))}
                 
                 {displayEvents.length === 0 && (
-                  <div className="col-span-2 text-center py-8 text-[#555555]">
+                  <div className="text-center py-8 text-[#555555] bg-[#F8F5EF] rounded-xl">
                     No upcoming events scheduled.
                   </div>
                 )}
@@ -110,15 +101,20 @@ export function CommunitySection() {
             )}
           </div>
 
-          {/* Insights Row */}
+          {/* Insights Column */}
           <div>
-            <div className="flex items-center justify-between mb-6">
-              <h3 className="font-heading text-xl font-bold text-[#2B3A4A]">Latest Insights</h3>
+            <div className="flex items-center justify-between mb-8">
+              <div>
+                <p className="text-[#F4B400] font-semibold uppercase tracking-wider text-sm mb-2">Insights</p>
+                <h3 className="font-heading text-2xl md:text-3xl font-bold text-[#1E3557]">
+                  Latest Insights
+                </h3>
+              </div>
               <Button 
                 variant="ghost" 
                 size="sm"
                 asChild
-                className="text-[#4A6FA5] hover:text-[#3A5F95]"
+                className="text-[#4A6FA5] hover:text-[#1E3557]"
               >
                 <Link to="/community/blog">
                   Read All
@@ -128,45 +124,44 @@ export function CommunitySection() {
             </div>
             
             {blogsLoading ? (
-              <div className="flex items-center justify-center py-8">
+              <div className="flex items-center justify-center py-12">
                 <Loader2 className="h-6 w-6 animate-spin text-[#4A6FA5]" />
               </div>
             ) : (
-              <div className="grid md:grid-cols-2 gap-6">
+              <div className="space-y-4">
                 {displayBlogs.map((post, index) => (
                   <Link
                     key={post.id}
                     to={`/community/blog/${post.id}`}
-                    className="group bg-white border border-[#DCE3E7] rounded-xl overflow-hidden hover:shadow-lg hover:border-[#4A6FA5] transition-all"
+                    className="group block bg-[#F8F5EF] rounded-xl overflow-hidden border border-transparent hover:border-[#E5E0D8] hover:bg-white hover:shadow-lg transition-all duration-300"
                   >
-                    <div className="aspect-[16/9] overflow-hidden">
-                      <img
-                        src={post.cover_image || fallbackBlogImages[index % fallbackBlogImages.length]}
-                        alt={post.title}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                      />
-                    </div>
-                    <div className="p-5">
-                      <div className="flex items-center gap-2 mb-3">
-                        <span className="px-3 py-1 rounded-full bg-[#4A6FA5]/10 text-[#4A6FA5] text-xs font-medium">
-                          Blog
-                        </span>
-                        <span className="text-xs text-[#555555]">
-                          {format(new Date(post.created_at), "MMM d, yyyy")}
-                        </span>
+                    <div className="flex gap-4 p-4">
+                      <div className="flex-shrink-0 w-24 h-20 rounded-lg overflow-hidden">
+                        <img
+                          src={post.cover_image || fallbackBlogImages[index % fallbackBlogImages.length]}
+                          alt={post.title}
+                          className="w-full h-full object-cover"
+                        />
                       </div>
-                      <h4 className="font-semibold text-[#2B3A4A] text-lg mb-2 group-hover:text-[#4A6FA5] transition-colors">
-                        {post.title}
-                      </h4>
-                      <p className="text-sm text-[#555555] line-clamp-2">
-                        {post.excerpt}
-                      </p>
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center gap-2 mb-2">
+                          <span className="px-2 py-0.5 rounded-full bg-[#4A6FA5]/10 text-[#4A6FA5] text-xs font-medium">
+                            Blog
+                          </span>
+                          <span className="text-xs text-[#555555]">
+                            {format(new Date(post.created_at), "MMM d")}
+                          </span>
+                        </div>
+                        <h4 className="font-semibold text-[#1E3557] mb-1 group-hover:text-[#4A6FA5] transition-colors line-clamp-2">
+                          {post.title}
+                        </h4>
+                      </div>
                     </div>
                   </Link>
                 ))}
                 
                 {displayBlogs.length === 0 && (
-                  <div className="col-span-2 text-center py-8 text-[#555555]">
+                  <div className="text-center py-8 text-[#555555] bg-[#F8F5EF] rounded-xl">
                     No blog posts available yet.
                   </div>
                 )}
