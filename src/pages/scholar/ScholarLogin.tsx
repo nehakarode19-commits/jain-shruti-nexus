@@ -201,12 +201,30 @@ export default function ScholarLogin() {
                 variant="outline"
                 size="sm"
                 className="w-full mt-3 text-xs"
-                onClick={() => {
-                  setEmail("scholar@demo.com");
-                  setPassword("scholar123");
+                onClick={async () => {
+                  setIsLoading(true);
+                  // Try to login first, if fails, create account then login
+                  const loginResult = await login("scholar@demo.com", "scholar123");
+                  if (!loginResult.success) {
+                    // Account doesn't exist, create it
+                    const signupResult = await signup("scholar@demo.com", "scholar123", "Demo Scholar");
+                    if (signupResult.success) {
+                      // Try login again after signup
+                      const retryLogin = await login("scholar@demo.com", "scholar123");
+                      if (retryLogin.success) {
+                        toast({ title: "Demo account created!", description: "Welcome to Scholar Portal" });
+                        navigate("/scholar/dashboard");
+                      }
+                    }
+                  } else {
+                    toast({ title: "Welcome!", description: "Logged in as Demo Scholar" });
+                    navigate("/scholar/dashboard");
+                  }
+                  setIsLoading(false);
                 }}
+                disabled={isLoading}
               >
-                Use Demo Credentials
+                {isLoading ? "Logging in..." : "Use Demo Login"}
               </Button>
             </div>
           </CardContent>
