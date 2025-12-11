@@ -1,175 +1,224 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Calendar, ArrowRight, MapPin, Loader2 } from "lucide-react";
+import { Calendar, ArrowRight, MapPin, Clock, BookOpen, Newspaper } from "lucide-react";
 import { useEventsFromDB, useBlogsFromDB } from "@/hooks/useContent";
 import { format } from "date-fns";
 
-import eventImage1 from "@/assets/books/guruvani-1.jpg";
-import eventImage2 from "@/assets/books/guruvani-2.jpg";
-import blogImage1 from "@/assets/books/agam-02-sutrakrutang.png";
-import blogImage2 from "@/assets/books/agam-06-gnatadharma.png";
+const staticEvents = [
+  {
+    id: "1",
+    title: "Saturday Pravachan",
+    category: "Regular",
+    event_date: null,
+    time: "10:00 AM - 12:00 PM",
+    location: "Online & In-Person",
+    recurring: "Every Saturday"
+  },
+  {
+    id: "2", 
+    title: "Paryushan Mahaparva",
+    category: "Festival",
+    event_date: "2024-09-12",
+    time: "Various Sessions",
+    location: "Shantigram",
+    dateRange: "September 12-19, 2024"
+  },
+  {
+    id: "3",
+    title: "Research Workshop",
+    category: "Workshop",
+    event_date: "2024-10-05",
+    time: "2:00 PM - 5:00 PM",
+    location: "Online"
+  }
+];
 
-const fallbackEventImages = [eventImage1, eventImage2];
-const fallbackBlogImages = [blogImage1, blogImage2];
+const staticInsights = [
+  {
+    id: "1",
+    title: "Understanding Anekantavada in Modern Context",
+    category: "Philosophy",
+    date: "March 15, 2024",
+    excerpt: "Exploring the Jain philosophy of multiple perspectives and its relevance today..."
+  },
+  {
+    id: "2",
+    title: "Preservation of Ancient Manuscripts",
+    category: "Research",
+    date: "March 10, 2024",
+    excerpt: "Our ongoing efforts to digitize and preserve rare Jain texts..."
+  }
+];
+
+const getCategoryColor = (category: string) => {
+  switch (category?.toLowerCase()) {
+    case 'regular':
+      return 'bg-orange-100 text-orange-600';
+    case 'festival':
+      return 'bg-orange-100 text-orange-600';
+    case 'workshop':
+      return 'bg-green-100 text-green-600';
+    case 'philosophy':
+      return 'bg-orange-100 text-orange-600';
+    case 'research':
+      return 'bg-blue-100 text-blue-600';
+    default:
+      return 'bg-gray-100 text-gray-600';
+  }
+};
 
 export function CommunitySection() {
-  const { data: events = [], isLoading: eventsLoading } = useEventsFromDB();
-  const { data: blogs = [], isLoading: blogsLoading } = useBlogsFromDB();
+  const { data: dbEvents = [] } = useEventsFromDB();
+  const { data: dbBlogs = [] } = useBlogsFromDB();
   
-  const displayEvents = events.slice(0, 3);
-  const displayBlogs = blogs.slice(0, 2);
+  const displayEvents = dbEvents.length > 0 ? dbEvents.slice(0, 3).map(e => ({
+    ...e,
+    category: 'Event',
+    time: '',
+    recurring: undefined,
+    dateRange: undefined
+  })) : staticEvents;
+  
+  const displayInsights = dbBlogs.length > 0 ? dbBlogs.slice(0, 2).map(b => ({
+    id: b.id,
+    title: b.title,
+    category: 'Blog',
+    date: format(new Date(b.created_at), "MMMM d, yyyy"),
+    excerpt: b.excerpt || ''
+  })) : staticInsights;
 
   return (
-    <section className="py-16 lg:py-20 bg-white">
+    <section className="py-16 lg:py-20" style={{ backgroundColor: '#FAF7F2' }}>
       <div className="container mx-auto px-6">
-        <div className="grid lg:grid-cols-2 gap-10 lg:gap-14">
-          {/* Events Column */}
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16">
+          {/* Upcoming Events Column */}
           <div>
-            <div className="flex items-center justify-between mb-6">
+            <div className="flex items-start gap-3 mb-6">
+              <div className="w-10 h-10 rounded-lg flex items-center justify-center" style={{ backgroundColor: '#F5EFE6' }}>
+                <Calendar className="w-5 h-5" style={{ color: '#C9A227' }} />
+              </div>
               <div>
-                <p className="font-semibold uppercase tracking-wider text-xs mb-2" style={{ fontFamily: 'Inter, sans-serif', color: '#C9A227' }}>
-                  Events
-                </p>
-                <h3 className="text-2xl md:text-3xl font-bold" style={{ fontFamily: 'Playfair Display, serif', color: '#2D2A26' }}>
+                <h3 className="text-2xl font-bold mb-1" style={{ fontFamily: 'Playfair Display, serif', color: '#2D2A26' }}>
                   Upcoming Events
                 </h3>
+                <p className="text-sm" style={{ fontFamily: 'Inter, sans-serif', color: '#8B8680' }}>
+                  Lectures, workshops, and gatherings
+                </p>
               </div>
+            </div>
+            
+            <div className="space-y-3">
+              {displayEvents.map((event: any) => (
+                <Link
+                  key={event.id}
+                  to="/community/events"
+                  className="group block rounded-xl p-4 transition-all duration-300 hover:shadow-md bg-white border border-[#E8E4DD]"
+                >
+                  <span className={`inline-block px-2.5 py-1 rounded text-xs font-medium mb-2 ${getCategoryColor(event.category)}`} style={{ fontFamily: 'Inter, sans-serif' }}>
+                    {event.category}
+                  </span>
+                  <h4 className="font-semibold text-base mb-3 group-hover:opacity-80 transition-opacity" style={{ fontFamily: 'Inter, sans-serif', color: '#2D2A26' }}>
+                    {event.title}
+                  </h4>
+                  <div className="space-y-1.5">
+                    <div className="flex items-center gap-2 text-sm" style={{ fontFamily: 'Inter, sans-serif', color: '#8B8680' }}>
+                      <Calendar className="h-4 w-4" style={{ color: '#A9A49C' }} />
+                      <span>{event.recurring || event.dateRange || (event.event_date ? format(new Date(event.event_date), "MMMM d, yyyy") : 'TBA')}</span>
+                    </div>
+                    {event.time && (
+                      <div className="flex items-center gap-2 text-sm" style={{ fontFamily: 'Inter, sans-serif', color: '#8B8680' }}>
+                        <Clock className="h-4 w-4" style={{ color: '#A9A49C' }} />
+                        <span>{event.time}</span>
+                      </div>
+                    )}
+                    {event.location && (
+                      <div className="flex items-center gap-2 text-sm" style={{ fontFamily: 'Inter, sans-serif', color: '#8B8680' }}>
+                        <MapPin className="h-4 w-4" style={{ color: '#A9A49C' }} />
+                        <span>{event.location}</span>
+                      </div>
+                    )}
+                  </div>
+                </Link>
+              ))}
+            </div>
+
+            <div className="mt-5">
               <Button 
-                variant="ghost" 
-                size="sm"
+                variant="outline"
                 asChild
-                className="text-sm hover:opacity-70 text-[#2D2A26]"
-                style={{ fontFamily: 'Inter, sans-serif' }}
+                className="rounded-lg px-5 py-2.5 text-sm font-medium border-[#E8E4DD] hover:bg-[#F5EFE6]"
+                style={{ fontFamily: 'Inter, sans-serif', color: '#2D2A26' }}
               >
-                <Link to="/community/events">
-                  View All
-                  <ArrowRight className="h-4 w-4 ml-1" />
+                <Link to="/community/events" className="flex items-center gap-2">
+                  View All Events
+                  <ArrowRight className="h-4 w-4" />
                 </Link>
               </Button>
             </div>
-            
-            {eventsLoading ? (
-              <div className="flex items-center justify-center py-10">
-                <Loader2 className="h-6 w-6 animate-spin text-[#2D2A26]" />
-              </div>
-            ) : (
-              <div className="space-y-3">
-                {displayEvents.map((event, index) => (
-                  <Link
-                    key={event.id}
-                    to="/community/events"
-                    className="group flex gap-3.5 rounded-lg p-3.5 transition-all duration-300 hover:shadow-md bg-[#FAF7F2] border border-[#E5E0D5]"
-                  >
-                    <div className="flex-shrink-0 w-14 h-14 rounded-lg overflow-hidden">
-                      <img
-                        src={event.image_url || fallbackEventImages[index % fallbackEventImages.length]}
-                        alt={event.title}
-                        className="w-full h-full object-cover"
-                      />
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <span className="inline-block px-2 py-0.5 rounded-full text-xs font-medium mb-1.5 bg-[#C9A227]/10 text-[#C9A227]" style={{ fontFamily: 'Inter, sans-serif' }}>
-                        Event
-                      </span>
-                      <h4 className="font-semibold text-sm mb-1 group-hover:opacity-80 transition-opacity line-clamp-1" style={{ fontFamily: 'Inter, sans-serif', color: '#2D2A26' }}>
-                        {event.title}
-                      </h4>
-                      <div className="flex flex-wrap gap-3 text-xs" style={{ fontFamily: 'Inter, sans-serif', color: '#5A5650' }}>
-                        {event.event_date && (
-                          <span className="flex items-center gap-1">
-                            <Calendar className="h-3 w-3 text-[#C9A227]" />
-                            {format(new Date(event.event_date), "MMM d, yyyy")}
-                          </span>
-                        )}
-                        {event.location && (
-                          <span className="flex items-center gap-1">
-                            <MapPin className="h-3 w-3 text-[#C9A227]" />
-                            {event.location}
-                          </span>
-                        )}
-                      </div>
-                    </div>
-                  </Link>
-                ))}
-                
-                {displayEvents.length === 0 && (
-                  <div className="text-center py-6 rounded-lg text-sm bg-[#FAF7F2] border border-[#E5E0D5]" style={{ fontFamily: 'Inter, sans-serif', color: '#5A5650' }}>
-                    No upcoming events scheduled.
-                  </div>
-                )}
-              </div>
-            )}
           </div>
 
-          {/* Insights Column */}
+          {/* Latest Insights Column */}
           <div>
-            <div className="flex items-center justify-between mb-6">
+            <div className="flex items-start gap-3 mb-6">
+              <div className="w-10 h-10 rounded-lg flex items-center justify-center" style={{ backgroundColor: '#F5EFE6' }}>
+                <BookOpen className="w-5 h-5" style={{ color: '#C9A227' }} />
+              </div>
               <div>
-                <p className="font-semibold uppercase tracking-wider text-xs mb-2" style={{ fontFamily: 'Inter, sans-serif', color: '#C9A227' }}>
-                  Insights
-                </p>
-                <h3 className="text-2xl md:text-3xl font-bold" style={{ fontFamily: 'Playfair Display, serif', color: '#2D2A26' }}>
+                <h3 className="text-2xl font-bold mb-1" style={{ fontFamily: 'Playfair Display, serif', color: '#2D2A26' }}>
                   Latest Insights
                 </h3>
+                <p className="text-sm" style={{ fontFamily: 'Inter, sans-serif', color: '#8B8680' }}>
+                  Articles, research updates, and news
+                </p>
               </div>
-              <Button 
-                variant="ghost" 
-                size="sm"
-                asChild
-                className="text-sm hover:opacity-70 text-[#2D2A26]"
-                style={{ fontFamily: 'Inter, sans-serif' }}
-              >
-                <Link to="/community/blog">
-                  Read All
-                  <ArrowRight className="h-4 w-4 ml-1" />
-                </Link>
-              </Button>
             </div>
             
-            {blogsLoading ? (
-              <div className="flex items-center justify-center py-10">
-                <Loader2 className="h-6 w-6 animate-spin text-[#2D2A26]" />
-              </div>
-            ) : (
-              <div className="space-y-3">
-                {displayBlogs.map((post, index) => (
-                  <Link
-                    key={post.id}
-                    to={`/community/blog/${post.id}`}
-                    className="group block rounded-lg overflow-hidden transition-all duration-300 hover:shadow-md bg-[#FAF7F2] border border-[#E5E0D5]"
-                  >
-                    <div className="flex gap-3.5 p-3.5">
-                      <div className="flex-shrink-0 w-20 h-16 rounded-lg overflow-hidden">
-                        <img
-                          src={post.cover_image || fallbackBlogImages[index % fallbackBlogImages.length]}
-                          alt={post.title}
-                          className="w-full h-full object-cover"
-                        />
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <div className="flex items-center gap-2 mb-1.5">
-                          <span className="px-2 py-0.5 rounded-full text-xs font-medium bg-[#2D2A26]/10 text-[#2D2A26]" style={{ fontFamily: 'Inter, sans-serif' }}>
-                            Blog
-                          </span>
-                          <span className="text-xs text-[#8B8B8B]" style={{ fontFamily: 'Inter, sans-serif' }}>
-                            {format(new Date(post.created_at), "MMM d")}
-                          </span>
-                        </div>
-                        <h4 className="font-semibold text-sm mb-1 group-hover:opacity-80 transition-opacity line-clamp-2" style={{ fontFamily: 'Inter, sans-serif', color: '#2D2A26' }}>
-                          {post.title}
-                        </h4>
-                      </div>
-                    </div>
-                  </Link>
-                ))}
-                
-                {displayBlogs.length === 0 && (
-                  <div className="text-center py-6 rounded-lg text-sm bg-[#FAF7F2] border border-[#E5E0D5]" style={{ fontFamily: 'Inter, sans-serif', color: '#5A5650' }}>
-                    No blog posts available yet.
+            <div className="space-y-3">
+              {displayInsights.map((insight: any) => (
+                <Link
+                  key={insight.id}
+                  to={`/community/blog/${insight.id}`}
+                  className="group block rounded-xl p-4 transition-all duration-300 hover:shadow-md bg-white border border-[#E8E4DD]"
+                >
+                  <div className="flex items-center gap-3 mb-2">
+                    <span className={`inline-block px-2.5 py-1 rounded text-xs font-medium ${getCategoryColor(insight.category)}`} style={{ fontFamily: 'Inter, sans-serif' }}>
+                      {insight.category}
+                    </span>
+                    <span className="text-sm" style={{ fontFamily: 'Inter, sans-serif', color: '#A9A49C' }}>
+                      {insight.date}
+                    </span>
                   </div>
-                )}
-              </div>
-            )}
+                  <h4 className="font-semibold text-base mb-2 group-hover:opacity-80 transition-opacity" style={{ fontFamily: 'Inter, sans-serif', color: '#2D2A26' }}>
+                    {insight.title}
+                  </h4>
+                  <p className="text-sm line-clamp-2" style={{ fontFamily: 'Inter, sans-serif', color: '#8B8680' }}>
+                    {insight.excerpt}
+                  </p>
+                </Link>
+              ))}
+            </div>
+
+            <div className="mt-5 flex items-center gap-4">
+              <Button 
+                variant="outline"
+                asChild
+                className="rounded-lg px-5 py-2.5 text-sm font-medium border-[#E8E4DD] hover:bg-[#F5EFE6]"
+                style={{ fontFamily: 'Inter, sans-serif', color: '#2D2A26' }}
+              >
+                <Link to="/community/blog" className="flex items-center gap-2">
+                  Read Blog
+                  <ArrowRight className="h-4 w-4" />
+                </Link>
+              </Button>
+              <Link 
+                to="/community/news" 
+                className="flex items-center gap-2 text-sm font-medium hover:opacity-70 transition-opacity"
+                style={{ fontFamily: 'Inter, sans-serif', color: '#8B8680' }}
+              >
+                <Newspaper className="h-4 w-4" />
+                News
+              </Link>
+            </div>
           </div>
         </div>
       </div>
