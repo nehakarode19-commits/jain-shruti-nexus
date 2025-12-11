@@ -123,7 +123,7 @@ export function AdminAuthProvider({ children }: { children: ReactNode }) {
       case "librarian":
         return "/lms/dashboard";
       case "scholar":
-        return "/research";
+        return "/scholar/dashboard";
       case "user":
         return "/";
       default:
