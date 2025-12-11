@@ -53,16 +53,13 @@ export function HeroSection() {
               आगमप्रज्ञ पू. मुनिराज श्री जम्बू विजयजी महाराज साहेब
             </p>
 
-            {/* Main Title with Gold Gradient */}
+            {/* Main Title */}
             <div className="space-y-0">
               <h1 
                 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-[1.1] tracking-tight"
                 style={{ 
                   fontFamily: 'Playfair Display, serif',
-                  background: 'linear-gradient(135deg, #C6933A 0%, #E3C075 50%, #C6933A 100%)',
-                  WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent',
-                  backgroundClip: 'text'
+                  color: '#2D2A26'
                 }}
               >
                 Jain Knowledge &
