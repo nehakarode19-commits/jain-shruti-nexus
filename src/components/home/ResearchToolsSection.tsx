@@ -9,7 +9,7 @@ const researchTools = [
     description: "Store and organize your research notes, metadata, and scholarly references in a centralized cloud-based repository.",
     icon: Database,
     href: "/research/sodhsanchay",
-    colorClass: "bg-primary",
+    iconBg: "bg-primary",
   },
   {
     title: "SodhSandarbh",
@@ -17,7 +17,7 @@ const researchTools = [
     description: "Powerful search and export capabilities for research entries across multiple languages with transliteration support.",
     icon: Search,
     href: "/research/sodhsandarbh",
-    colorClass: "bg-sage",
+    iconBg: "bg-sage",
   },
   {
     title: "Śabdasaṅgraha",
@@ -25,7 +25,7 @@ const researchTools = [
     description: "Deep-search AI that lets you explore Jain literature pages matching your query with AI-powered extraction.",
     icon: FileText,
     href: "/research/shabdasangraha",
-    colorClass: "bg-accent",
+    iconBg: "bg-orange",
   },
   {
     title: "Shastrasandarbha",
@@ -33,22 +33,22 @@ const researchTools = [
     description: "AI-powered search across Archive.org, HathiTrust, JSTOR, and more to find Jain books worldwide.",
     icon: Globe,
     href: "/research/shastrasandarbha",
-    colorClass: "bg-burgundy",
+    iconBg: "bg-burgundy",
   },
 ];
 
 export function ResearchToolsSection() {
   return (
-    <section className="py-24 lg:py-32 bg-background relative overflow-hidden">
+    <section className="py-20 lg:py-28 bg-background relative overflow-hidden">
       {/* Subtle decorative elements */}
       <div className="absolute top-20 left-10 w-64 h-64 border border-primary/5 rounded-full" />
-      <div className="absolute bottom-20 right-10 w-48 h-48 border border-accent/10 rounded-full" />
+      <div className="absolute bottom-20 right-10 w-48 h-48 border border-orange/10 rounded-full" />
       
       <div className="container mx-auto px-6 relative">
         {/* Section Header */}
-        <div className="text-center mb-16 max-w-3xl mx-auto">
+        <div className="text-center mb-14 max-w-3xl mx-auto">
           <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-card border border-border shadow-sm mb-6">
-            <Sparkles className="h-4 w-4 text-accent" />
+            <Sparkles className="h-4 w-4 text-orange" />
             <span className="text-sm text-muted-foreground font-medium">AI-Powered Research Ecosystem</span>
           </div>
           
@@ -59,27 +59,25 @@ export function ResearchToolsSection() {
           <p className="text-muted-foreground text-lg leading-relaxed">
             An integrated ecosystem designed for scholars, researchers, and seekers to explore centuries of Jain knowledge with modern AI-powered assistance.
           </p>
-          
-          <div className="w-24 h-1 bg-gradient-to-r from-transparent via-primary to-transparent mx-auto mt-8 rounded-full" />
         </div>
 
-        {/* Tools Grid */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+        {/* Tools Grid - 2x2 on larger screens */}
+        <div className="grid sm:grid-cols-2 gap-6 max-w-4xl mx-auto mb-12">
           {researchTools.map((tool) => (
             <Link 
               key={tool.title}
               to={tool.href}
               className="group bg-card rounded-2xl p-6 border border-border hover:border-primary/30 hover:shadow-xl transition-all duration-300"
             >
-              <div className={`w-14 h-14 rounded-xl ${tool.colorClass} flex items-center justify-center mb-5 group-hover:scale-110 transition-transform shadow-lg`}>
-                <tool.icon className="h-7 w-7 text-primary-foreground" />
+              <div className={`w-14 h-14 rounded-xl ${tool.iconBg} flex items-center justify-center mb-5 group-hover:scale-110 transition-transform shadow-lg`}>
+                <tool.icon className="h-7 w-7 text-white" />
               </div>
               
               <div className="mb-4">
                 <h3 className="font-heading text-xl font-bold text-primary mb-1 group-hover:text-primary/80 transition-colors">
                   {tool.title}
                 </h3>
-                <p className="text-sm text-accent font-medium">{tool.subtitle}</p>
+                <p className="text-sm text-orange font-medium">{tool.subtitle}</p>
               </div>
               
               <p className="text-sm text-muted-foreground leading-relaxed mb-5">
@@ -98,7 +96,7 @@ export function ResearchToolsSection() {
         <div className="text-center">
           <Button 
             size="lg" 
-            variant="spiritual"
+            className="bg-orange hover:bg-orange/90 text-white px-8 py-3 text-base font-medium rounded-lg"
             asChild
           >
             <Link to="/research">
