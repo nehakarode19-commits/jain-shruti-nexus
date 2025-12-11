@@ -42,8 +42,8 @@ html {
     --popover: 0 0% 100%;
     --popover-foreground: 30 8% 16%;
 
-    /* Golden Primary #C9A227 */
-    --primary: 43 71% 47%;
+    /* Primary Orange #D2811D */
+    --primary: 33 76% 47%;
     --primary-foreground: 0 0% 100%;
 
     /* Light cream secondary #F5EFE6 */
@@ -55,12 +55,12 @@ html {
     /* Muted text #6B6764 */
     --muted-foreground: 20 3% 41%;
 
-    /* Golden Accent #D4A03C */
-    --accent: 40 65% 53%;
-    --accent-foreground: 30 8% 16%;
+    /* Orange Accent #D2811D */
+    --accent: 33 76% 47%;
+    --accent-foreground: 0 0% 100%;
 
-    /* Orange gradient accent #C6933A */
-    --orange: 38 56% 50%;
+    /* Orange gradient accent #D2811D */
+    --orange: 33 76% 47%;
     --orange-foreground: 0 0% 100%;
 
     --destructive: 0 84% 60%;
@@ -69,15 +69,15 @@ html {
     /* Warm cream borders #E8E4DD */
     --border: 38 18% 88%;
     --input: 38 18% 88%;
-    --ring: 43 71% 47%;
+    --ring: 33 76% 47%;
 
     --radius: 0.75rem;
 
     /* Extended Heritage Palette */
-    --gold: 43 71% 47%;
-    --gold-light: 43 60% 60%;
-    --gold-gradient-start: 38 56% 50%;
-    --gold-gradient-end: 43 60% 65%;
+    --gold: 33 76% 47%;
+    --gold-light: 33 70% 55%;
+    --gold-gradient-start: 33 76% 47%;
+    --gold-gradient-end: 33 70% 60%;
     --burgundy: 345 50% 38%;
     --burgundy-light: 345 40% 50%;
     --sage: 155 25% 42%;
@@ -86,25 +86,25 @@ html {
     --ivory: 38 33% 96%;
     --cream: 38 40% 93%;
     --cream-light: 38 50% 96%;
-    --terracotta: 30 84% 51%;
+    --terracotta: 33 76% 47%;
     /* Dark brown for text #2D2A26 */
     --deep-brown: 30 8% 16%;
     --slate: 30 8% 16%;
-    --slate-light: 43 71% 47%;
+    --slate-light: 33 76% 47%;
 
-    /* Heritage Gradients - Using golden orange */
+    /* Heritage Gradients - Using orange #D2811D */
     --gradient-hero: linear-gradient(165deg, hsl(38 33% 96%) 0%, hsl(38 40% 93%) 100%);
-    --gradient-gold: linear-gradient(135deg, #C6933A 0%, #E3C075 50%, #C6933A 100%);
+    --gradient-gold: linear-gradient(135deg, #D2811D 0%, #E5A54D 50%, #D2811D 100%);
     --gradient-warm: linear-gradient(180deg, hsl(38 33% 96%) 0%, hsl(38 40% 93%) 100%);
     --gradient-spiritual: linear-gradient(145deg, hsl(0 0% 100%) 0%, hsl(38 40% 93%) 40%, hsl(38 33% 96%) 100%);
     --gradient-card: linear-gradient(145deg, hsl(0 0% 100%) 0%, hsl(38 50% 98%) 100%);
-    --gradient-shimmer: linear-gradient(90deg, transparent 0%, hsl(43 71% 47% / 0.08) 50%, transparent 100%);
+    --gradient-shimmer: linear-gradient(90deg, transparent 0%, hsl(33 76% 47% / 0.08) 50%, transparent 100%);
 
     /* Heritage Shadows */
     --shadow-xs: 0 1px 2px hsl(30 8% 16% / 0.04);
     --shadow-soft: 0 4px 16px -2px hsl(30 8% 16% / 0.08), 0 2px 6px -1px hsl(30 8% 16% / 0.04);
     --shadow-elevated: 0 12px 40px -8px hsl(30 8% 16% / 0.12), 0 4px 12px -2px hsl(30 8% 16% / 0.06);
-    --shadow-glow: 0 0 50px hsl(43 71% 47% / 0.15), 0 0 20px hsl(43 71% 47% / 0.1);
+    --shadow-glow: 0 0 50px hsl(33 76% 47% / 0.15), 0 0 20px hsl(33 76% 47% / 0.1);
     --shadow-card: 0 2px 8px hsl(30 8% 16% / 0.06), 0 4px 16px -6px hsl(30 8% 16% / 0.08);
 
     /* Typography */
@@ -115,16 +115,16 @@ html {
     /* Sidebar - Dark brown */
     --sidebar-background: 30 8% 12%;
     --sidebar-foreground: 0 0% 100%;
-    --sidebar-primary: 43 71% 47%;
-    --sidebar-primary-foreground: 30 8% 16%;
+    --sidebar-primary: 33 76% 47%;
+    --sidebar-primary-foreground: 0 0% 100%;
     --sidebar-accent: 30 10% 20%;
     --sidebar-accent-foreground: 0 0% 100%;
     --sidebar-border: 30 10% 25%;
-    --sidebar-ring: 43 71% 47%;
+    --sidebar-ring: 33 76% 47%;
   }
 
   .dark {
-    /* Dark mode - Deep brown with golden accents */
+    /* Dark mode - Deep brown with orange accents #D2811D */
     --background: 30 10% 10%;
     --foreground: 0 0% 95%;
 
@@ -134,8 +134,8 @@ html {
     --popover: 30 10% 15%;
     --popover-foreground: 0 0% 95%;
 
-    --primary: 43 71% 50%;
-    --primary-foreground: 30 8% 12%;
+    --primary: 33 76% 50%;
+    --primary-foreground: 0 0% 100%;
 
     --secondary: 30 10% 18%;
     --secondary-foreground: 0 0% 90%;
@@ -143,40 +143,40 @@ html {
     --muted: 30 8% 18%;
     --muted-foreground: 0 0% 65%;
 
-    --accent: 43 71% 50%;
-    --accent-foreground: 30 8% 12%;
+    --accent: 33 76% 50%;
+    --accent-foreground: 0 0% 100%;
 
     --destructive: 0 65% 50%;
     --destructive-foreground: 0 0% 95%;
 
     --border: 30 10% 22%;
     --input: 30 10% 22%;
-    --ring: 43 71% 50%;
+    --ring: 33 76% 50%;
 
-    --gold: 43 71% 50%;
-    --gold-light: 43 60% 45%;
+    --gold: 33 76% 50%;
+    --gold-light: 33 70% 45%;
     --burgundy: 345 45% 45%;
     --burgundy-light: 345 38% 52%;
     --sage: 155 22% 35%;
     --sage-light: 155 15% 22%;
     --ivory: 30 10% 15%;
     --cream: 30 10% 18%;
-    --terracotta: 43 71% 50%;
+    --terracotta: 33 76% 50%;
     --deep-brown: 30 10% 10%;
-    --slate: 43 71% 50%;
-    --slate-light: 43 60% 55%;
+    --slate: 33 76% 50%;
+    --slate-light: 33 70% 55%;
 
-    --gradient-hero: linear-gradient(165deg, hsl(30 10% 10%) 0%, hsl(30 10% 15%) 50%, hsl(43 71% 50% / 0.08) 100%);
-    --gradient-gold: linear-gradient(135deg, hsl(30 10% 18%) 0%, hsl(43 71% 50%) 100%);
+    --gradient-hero: linear-gradient(165deg, hsl(30 10% 10%) 0%, hsl(30 10% 15%) 50%, hsl(33 76% 50% / 0.08) 100%);
+    --gradient-gold: linear-gradient(135deg, hsl(30 10% 18%) 0%, hsl(33 76% 50%) 100%);
     --gradient-warm: linear-gradient(180deg, hsl(30 10% 10%) 0%, hsl(30 10% 15%) 100%);
-    --gradient-spiritual: linear-gradient(145deg, hsl(30 10% 15%) 0%, hsl(30 10% 18%) 40%, hsl(43 71% 50% / 0.08) 100%);
+    --gradient-spiritual: linear-gradient(145deg, hsl(30 10% 15%) 0%, hsl(30 10% 18%) 40%, hsl(33 76% 50% / 0.08) 100%);
     --gradient-card: linear-gradient(145deg, hsl(30 10% 18%) 0%, hsl(30 10% 12%) 100%);
-    --gradient-shimmer: linear-gradient(90deg, transparent 0%, hsl(43 71% 50% / 0.08) 50%, transparent 100%);
+    --gradient-shimmer: linear-gradient(90deg, transparent 0%, hsl(33 76% 50% / 0.08) 50%, transparent 100%);
 
     --shadow-xs: 0 1px 2px hsl(0 0% 0% / 0.15);
     --shadow-soft: 0 4px 16px -2px hsl(0 0% 0% / 0.25);
     --shadow-elevated: 0 12px 40px -8px hsl(0 0% 0% / 0.4);
-    --shadow-glow: 0 0 50px hsl(43 71% 50% / 0.15), 0 0 20px hsl(43 71% 50% / 0.1);
+    --shadow-glow: 0 0 50px hsl(33 76% 50% / 0.15), 0 0 20px hsl(33 76% 50% / 0.1);
     --shadow-card: 0 1px 3px hsl(0 0% 0% / 0.15), 0 4px 16px -6px hsl(0 0% 0% / 0.2);
 
     --sidebar-background: 30 10% 8%;
