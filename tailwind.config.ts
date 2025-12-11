@@ -137,10 +137,6 @@ export default {
           "0%": { opacity: "0", transform: "translateY(8px)" },
           "100%": { opacity: "1", transform: "translateY(0)" },
         },
-        "fade-up": {
-          "0%": { opacity: "0", transform: "translateY(20px)" },
-          "100%": { opacity: "1", transform: "translateY(0)" },
-        },
         "fade-out": {
           "0%": { opacity: "1", transform: "translateY(0)" },
           "100%": { opacity: "0", transform: "translateY(8px)" },
@@ -172,7 +168,6 @@ export default {
         shimmer: "shimmer 2s linear infinite",
         pulse: "pulse 2s ease-in-out infinite",
         "fade-in": "fade-in 0.3s ease-out",
-        "fade-up": "fade-up 0.6s ease-out forwards",
         "fade-out": "fade-out 0.3s ease-out",
         "scale-in": "scale-in 0.25s ease-out",
         "slide-in-right": "slide-in-right 0.3s ease-out",
@@ -183,14 +178,9 @@ export default {
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
-        'gradient-hero': 'linear-gradient(135deg, #FDF8F3 0%, #F7EFE4 40%, #ECE3D4 80%)',
-        'gradient-gold': 'linear-gradient(90deg, #C6933A, #E3C075)',
-        'lotus-pattern': "url('data:image/svg+xml,%3Csvg width=\"60\" height=\"60\" viewBox=\"0 0 60 60\" xmlns=\"http://www.w3.org/2000/svg\"%3E%3Cpath d=\"M30 5c-2 8-8 14-16 16 8 2 14 8 16 16 2-8 8-14 16-16-8-2-14-8-16-16z\" fill=\"%23C6933A\" fill-opacity=\"0.04\"/%3E%3C/svg%3E')",
       },
       boxShadow: {
         'inner-glow': 'inset 0 2px 4px 0 hsl(var(--primary) / 0.06)',
-        'soft': '0 4px 16px -2px rgba(0,0,0,0.08), 0 2px 6px -1px rgba(0,0,0,0.04)',
-        'elevated': '0 12px 40px -8px rgba(0,0,0,0.12), 0 4px 12px -2px rgba(0,0,0,0.06)',
       },
       transitionDuration: {
         '400': '400ms',
