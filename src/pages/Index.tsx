@@ -6,7 +6,6 @@ import { StatsAndServicesSection } from "@/components/home/StatsAndServicesSecti
 import { GuruvaniPreview } from "@/components/home/GuruvaniPreview";
 import { CommunitySection } from "@/components/home/CommunitySection";
 import { AdaniFoundation } from "@/components/home/AdaniFoundation";
-import { CTASection } from "@/components/home/CTASection";
 
 const Index = () => {
   return (
@@ -18,7 +17,6 @@ const Index = () => {
         <GuruvaniPreview />
         <AdaniFoundation />
         <CommunitySection />
-        <CTASection />
         <StatsAndServicesSection />
       </div>
     </Layout>
