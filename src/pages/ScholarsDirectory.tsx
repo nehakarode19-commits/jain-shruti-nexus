@@ -139,7 +139,7 @@ export default function ScholarsDirectory() {
   return (
     <Layout>
       {/* Hero Section */}
-      <section className="py-16 bg-secondary/50">
+      <section className="py-16 lotus-pattern bg-secondary/50">
         <div className="container mx-auto px-4">
           <AnimatedContainer animation="fade-in" className="max-w-3xl mx-auto text-center">
             <Link 
