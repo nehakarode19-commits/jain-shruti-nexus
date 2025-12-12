@@ -17,7 +17,7 @@ export function HeroSection() {
   return (
     <section className="relative min-h-[90vh] flex items-center overflow-hidden bg-gradient-hero lotus-pattern">
       <div className="container mx-auto px-6 lg:px-12 py-12 lg:py-16 relative z-10">
-        <div className="grid lg:grid-cols-2 gap-6 lg:gap-8 items-center max-w-6xl mx-auto">
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-10 items-center">
           {/* Content */}
           <div className="space-y-5 order-2 lg:order-1">
             {/* Badge */}
