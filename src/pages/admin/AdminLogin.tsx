@@ -33,8 +33,8 @@ export default function AdminLogin() {
 
   if (authLoading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-spiritual">
-        <Loader2 className="h-8 w-8 animate-spin text-primary" />
+      <div className="min-h-screen flex items-center justify-center p-4 lotus-pattern" style={{ backgroundColor: '#FAF7F2' }}>
+        <Loader2 className="h-8 w-8 animate-spin" style={{ color: '#D2811D' }} />
       </div>
     );
   }
@@ -120,8 +120,11 @@ export default function AdminLogin() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-spiritual p-4">
-      <div className="absolute inset-0 lotus-pattern opacity-30 pointer-events-none" />
+    <div className="min-h-screen flex items-center justify-center p-4 lotus-pattern" style={{ backgroundColor: '#FAF7F2' }}>
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full blur-3xl" style={{ backgroundColor: 'rgba(210, 129, 29, 0.08)' }} />
+        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 rounded-full blur-3xl" style={{ backgroundColor: 'rgba(45, 42, 38, 0.05)' }} />
+      </div>
       
       <Card className="w-full max-w-md relative z-10 shadow-elevated border-0 rounded-2xl overflow-hidden will-change-auto">
         <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary via-gold to-primary" />

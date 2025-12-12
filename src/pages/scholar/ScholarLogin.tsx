@@ -168,11 +168,11 @@ export default function ScholarLogin() {
   };
 
   return (
-    <div className="min-h-screen bg-background flex items-center justify-center p-4">
+    <div className="min-h-screen flex items-center justify-center p-4 lotus-pattern" style={{ backgroundColor: '#FAF7F2' }}>
       {/* Background decoration */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-orange/5 rounded-full blur-3xl" />
-        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full blur-3xl" style={{ backgroundColor: 'rgba(210, 129, 29, 0.08)' }} />
+        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 rounded-full blur-3xl" style={{ backgroundColor: 'rgba(45, 42, 38, 0.05)' }} />
       </div>
 
       <div className="w-full max-w-md relative">

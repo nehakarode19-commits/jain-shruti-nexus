@@ -14,7 +14,7 @@ export function ScholarLayout({ children, title }: ScholarLayoutProps) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   return (
-    <div className="min-h-screen bg-background flex">
+    <div className="min-h-screen flex" style={{ backgroundColor: '#FAF7F2' }}>
       {/* Desktop Sidebar */}
       <div className="hidden lg:block">
         <ScholarSidebar />
@@ -36,7 +36,7 @@ export function ScholarLayout({ children, title }: ScholarLayoutProps) {
       {/* Main Content */}
       <div className="flex-1 flex flex-col min-h-screen w-full">
         {/* Top Header */}
-        <header className="sticky top-0 z-40 bg-card border-b border-border">
+        <header className="sticky top-0 z-40 border-b" style={{ backgroundColor: '#FAF7F2', borderColor: '#E8E4DD' }}>
           <div className="flex items-center justify-between h-14 sm:h-16 px-3 sm:px-4 lg:px-6">
             <div className="flex items-center gap-2 sm:gap-4">
               <Button

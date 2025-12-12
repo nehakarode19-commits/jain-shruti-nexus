@@ -52,14 +52,14 @@ export function AdminLayout({ children }: AdminLayoutProps) {
   };
 
   return (
-    <div className="min-h-screen bg-background font-poppins">
+    <div className="min-h-screen font-poppins" style={{ backgroundColor: '#FAF7F2' }}>
       {/* Sidebar */}
       <AdminSidebar />
 
       {/* Main Content */}
       <div className="pl-64 transition-all duration-300">
         {/* Top Header */}
-        <header className="sticky top-0 z-30 h-16 bg-card/80 backdrop-blur-md border-b border-border flex items-center justify-between px-6">
+        <header className="sticky top-0 z-30 h-16 backdrop-blur-md border-b flex items-center justify-between px-6" style={{ backgroundColor: 'rgba(250, 247, 242, 0.9)', borderColor: '#E8E4DD' }}>
           {/* Search */}
           <div className="flex items-center gap-4 flex-1 max-w-md">
             <div className="relative flex-1">
