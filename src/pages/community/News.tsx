@@ -71,7 +71,7 @@ const News = () => {
       <section className="py-16 lg:py-20" style={{ backgroundColor: '#FAF7F2' }}>
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto text-center animate-fade-up">
-            <h1 className="font-display text-4xl sm:text-5xl font-bold mb-6">
+            <h1 className="text-4xl sm:text-5xl font-bold mb-6" style={{ fontFamily: 'Playfair Display, serif' }}>
               <span style={{ color: '#2D2A26' }}>News & </span>
               <span style={{ color: '#D2811D' }}>Announcements</span>
             </h1>
