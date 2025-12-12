@@ -205,9 +205,9 @@ const Research = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-16 lg:py-20 bg-foreground relative overflow-hidden">
+      <section className="py-16 lg:py-20 bg-primary relative overflow-hidden">
         <div className="absolute inset-0 opacity-20">
-          <div className="absolute top-10 right-20 w-64 h-64 bg-primary rounded-full blur-3xl" />
+          <div className="absolute top-10 right-20 w-64 h-64 bg-white rounded-full blur-3xl" />
           <div className="absolute bottom-10 left-10 w-48 h-48 bg-gold rounded-full blur-3xl" />
         </div>
 
@@ -220,7 +220,7 @@ const Research = () => {
           <h2 className="font-heading text-3xl lg:text-4xl font-bold text-white mb-4">
             Ready to Start Your Research?
           </h2>
-          <p className="font-body text-base text-white/70 mb-8 max-w-lg mx-auto">
+          <p className="font-body text-base text-white/80 mb-8 max-w-lg mx-auto">
             Join our scholarly community and get access to all research tools. Registered scholars can also contribute to the research database.
           </p>
 
@@ -228,7 +228,7 @@ const Research = () => {
             <Button 
               size="lg" 
               asChild
-              className="bg-white text-foreground hover:bg-white/90 rounded-lg"
+              className="bg-white text-primary hover:bg-white/90 rounded-lg font-semibold"
             >
               <Link to="/auth">
                 Create Account
@@ -239,7 +239,7 @@ const Research = () => {
               variant="outline" 
               size="lg" 
               asChild
-              className="border-white/30 text-white hover:bg-white/10 rounded-lg"
+              className="border-white text-white hover:bg-white/10 rounded-lg"
             >
               <Link to="/scholars">
                 Scholar Portal
