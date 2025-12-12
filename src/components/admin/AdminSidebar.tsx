@@ -1,6 +1,6 @@
-import { useState } from "react";
-import { NavLink, useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { cn } from "@/lib/utils";
+import { useAdminAuth } from "@/contexts/AdminAuthContext";
 import {
   LayoutDashboard,
   Users,
@@ -18,136 +18,136 @@ import {
   Key,
   ClipboardList,
   Settings,
-  ChevronLeft,
-  ChevronRight,
-  Scroll,
+  LogOut,
   Shield,
+  X,
   Newspaper,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
-const menuItems = [
-  { icon: LayoutDashboard, label: "Dashboard", path: "/admin/dashboard" },
-  { icon: Users, label: "Users & Roles", path: "/admin/users" },
-  { icon: BookOpen, label: "Guruvani", path: "/admin/guruvani" },
-  { icon: Globe, label: "Website CMS", path: "/admin/cms" },
-  { icon: Image, label: "Gallery", path: "/admin/gallery" },
-  { icon: FileText, label: "Books (PDFs)", path: "/admin/books" },
-  { icon: Newspaper, label: "Articles/Tributes", path: "/admin/articles" },
-  { icon: PenTool, label: "Blog", path: "/admin/blog" },
-  { icon: Calendar, label: "Events", path: "/admin/events" },
-  { icon: GraduationCap, label: "Scholars", path: "/admin/scholars" },
-  { icon: Search, label: "Research Tools", path: "/admin/research" },
-  { icon: Library, label: "LMS", path: "/admin/lms" },
-  { icon: Building, label: "Digital Museum", path: "/admin/museum" },
-  { icon: Brain, label: "AI & Indexing", path: "/admin/ai" },
-  { icon: Key, label: "Access Requests", path: "/admin/access-requests" },
-  { icon: ClipboardList, label: "Logs", path: "/admin/logs" },
-  { icon: Settings, label: "Settings", path: "/admin/settings" },
+const navItems = [
+  { icon: LayoutDashboard, label: "Dashboard", href: "/admin/dashboard" },
+  { icon: Users, label: "Users & Roles", href: "/admin/users" },
+  { icon: BookOpen, label: "Guruvani", href: "/admin/guruvani" },
+  { icon: Globe, label: "Website CMS", href: "/admin/cms" },
+  { icon: Image, label: "Gallery", href: "/admin/gallery" },
+  { icon: FileText, label: "Books (PDFs)", href: "/admin/books" },
+  { icon: Newspaper, label: "Articles/Tributes", href: "/admin/articles" },
+  { icon: PenTool, label: "Blog", href: "/admin/blog" },
+  { icon: Calendar, label: "Events", href: "/admin/events" },
+  { icon: GraduationCap, label: "Scholars", href: "/admin/scholars" },
+  { icon: Search, label: "Research Tools", href: "/admin/research" },
+  { icon: Library, label: "LMS", href: "/lms/dashboard" },
+  { icon: Building, label: "Digital Museum", href: "/admin/museum" },
+  { icon: Brain, label: "AI & Indexing", href: "/admin/ai" },
+  { icon: Key, label: "Access Requests", href: "/admin/access-requests" },
+  { icon: ClipboardList, label: "Logs", href: "/admin/logs" },
+  { icon: Settings, label: "Settings", href: "/admin/settings" },
 ];
 
-export function AdminSidebar() {
-  const [collapsed, setCollapsed] = useState(false);
+interface AdminSidebarProps {
+  onClose?: () => void;
+}
+
+export function AdminSidebar({ onClose }: AdminSidebarProps) {
   const location = useLocation();
+  const { user, logout } = useAdminAuth();
+
+  const handleLogout = async () => {
+    await logout();
+    window.location.href = "/admin";
+  };
 
   return (
-    <aside
-      className={cn(
-        "fixed left-0 top-0 z-40 h-screen border-r transition-all duration-300 flex flex-col",
-        collapsed ? "w-[72px]" : "w-64"
-      )}
-      style={{ backgroundColor: '#FAF7F2', borderColor: '#E8E4DD' }}
-    >
-      {/* Logo Section */}
-      <div className="h-16 flex items-center justify-between px-4 border-b" style={{ borderColor: '#E8E4DD' }}>
-        {!collapsed && (
-          <div className="flex items-center gap-3">
-            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-gold shadow-soft">
-              <Shield className="h-5 w-5 text-primary-foreground" />
-            </div>
-            <div className="flex flex-col">
-              <span className="font-poppins text-sm font-semibold text-foreground">
-                Admin Panel
-              </span>
-              <span className="text-[10px] text-muted-foreground">
-                Jambushrusti
-              </span>
-            </div>
+    <aside className="w-72 lg:w-64 min-h-screen bg-primary text-primary-foreground flex flex-col">
+      {/* Logo/Brand */}
+      <div className="p-4 sm:p-6 border-b border-primary-foreground/10 flex items-center justify-between">
+        <Link to="/admin/dashboard" className="flex items-center gap-3" onClick={onClose}>
+          <div className="w-10 h-10 rounded-xl bg-orange/20 flex items-center justify-center">
+            <Shield className="h-6 w-6 text-orange" />
           </div>
-        )}
-        {collapsed && (
-          <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-gold shadow-soft mx-auto">
-            <Shield className="h-5 w-5 text-primary-foreground" />
+          <div>
+            <h1 className="font-heading text-lg font-bold text-white">Admin Panel</h1>
+            <p className="text-xs text-white/60">Jambushrusti</p>
           </div>
+        </Link>
+        {onClose && (
+          <Button
+            variant="ghost"
+            size="icon"
+            className="lg:hidden text-white/70 hover:text-white hover:bg-white/10"
+            onClick={onClose}
+          >
+            <X className="h-5 w-5" />
+          </Button>
         )}
       </div>
 
-      {/* Toggle Button */}
-      <Button
-        variant="ghost"
-        size="icon"
-        onClick={() => setCollapsed(!collapsed)}
-        className="absolute -right-3 top-20 z-50 h-6 w-6 rounded-full border shadow-sm hover:bg-muted"
-        style={{ backgroundColor: '#FAF7F2', borderColor: '#E8E4DD' }}
-      >
-        {collapsed ? (
-          <ChevronRight className="h-3 w-3" />
-        ) : (
-          <ChevronLeft className="h-3 w-3" />
-        )}
-      </Button>
-
-      {/* Navigation */}
-      <nav className="flex-1 overflow-y-auto py-4 px-3">
-        <ul className="space-y-1">
-          {menuItems.map((item) => {
-            const isActive = location.pathname === item.path || location.pathname.startsWith(item.path + "/");
-            const Icon = item.icon;
-
-            const linkContent = (
-              <NavLink
-                to={item.path}
-                className={cn(
-                  "flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-200",
-                  isActive
-                    ? "bg-primary/10 text-primary shadow-sm"
-                    : "text-muted-foreground hover:bg-muted hover:text-foreground",
-                  collapsed && "justify-center px-2"
-                )}
-              >
-                <Icon className={cn("h-5 w-5 shrink-0", isActive && "text-primary")} />
-                {!collapsed && <span className="font-poppins">{item.label}</span>}
-              </NavLink>
-            );
-
-            return (
-              <li key={item.path}>
-                {collapsed ? (
-                  <Tooltip delayDuration={0}>
-                    <TooltipTrigger asChild>{linkContent}</TooltipTrigger>
-                    <TooltipContent side="right" className="font-poppins">
-                      {item.label}
-                    </TooltipContent>
-                  </Tooltip>
-                ) : (
-                  linkContent
-                )}
-              </li>
-            );
-          })}
-        </ul>
-      </nav>
-
-      {/* Footer */}
-      {!collapsed && (
-        <div className="p-4 border-t" style={{ borderColor: '#E8E4DD' }}>
-          <div className="flex items-center gap-2 text-xs text-muted-foreground">
-            <Scroll className="h-3 w-3" />
-            <span className="font-poppins">Version 1.0.0</span>
+      {/* User Info */}
+      <div className="p-4 border-b border-primary-foreground/10">
+        <div className="flex items-center gap-3">
+          <Avatar className="h-10 w-10 border-2 border-orange/30">
+            <AvatarImage src={user?.avatar} />
+            <AvatarFallback className="bg-orange/20 text-orange font-semibold">
+              {user?.name?.charAt(0).toUpperCase() || "A"}
+            </AvatarFallback>
+          </Avatar>
+          <div className="flex-1 min-w-0">
+            <p className="text-sm font-medium text-white truncate">{user?.name || "Admin"}</p>
+            <p className="text-xs text-white/60 truncate">{user?.email}</p>
           </div>
         </div>
-      )}
+      </div>
+
+      {/* Mobile Search */}
+      <div className="p-4 lg:hidden border-b border-primary-foreground/10">
+        <div className="relative">
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-white/50" />
+          <input 
+            type="text"
+            placeholder="Search..."
+            className="w-full pl-9 pr-4 py-2 rounded-lg bg-white/10 text-white placeholder:text-white/50 text-sm border-0 focus:outline-none focus:ring-2 focus:ring-orange/50"
+          />
+        </div>
+      </div>
+
+      {/* Navigation */}
+      <nav className="flex-1 p-3 sm:p-4 space-y-1 overflow-auto">
+        {navItems.map((item) => {
+          const isActive = location.pathname === item.href || 
+            (item.href !== "/admin/dashboard" && location.pathname.startsWith(item.href));
+          
+          return (
+            <Link
+              key={item.href}
+              to={item.href}
+              onClick={onClose}
+              className={cn(
+                "flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200",
+                isActive 
+                  ? "bg-orange text-white font-medium shadow-lg" 
+                  : "text-white/70 hover:bg-white/10 hover:text-white"
+              )}
+            >
+              <item.icon className="h-5 w-5 flex-shrink-0" />
+              <span className="text-sm">{item.label}</span>
+            </Link>
+          );
+        })}
+      </nav>
+
+      {/* Logout */}
+      <div className="p-4 border-t border-primary-foreground/10">
+        <Button
+          variant="ghost"
+          className="w-full justify-start text-white/70 hover:text-white hover:bg-white/10"
+          onClick={handleLogout}
+        >
+          <LogOut className="h-5 w-5 mr-3" />
+          Sign Out
+        </Button>
+      </div>
     </aside>
   );
 }
