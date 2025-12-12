@@ -43,7 +43,18 @@ const Gallery = () => {
   return (
     <Layout>
       {/* Hero Section */}
-      <section className="relative py-20 lg:py-28 overflow-hidden lotus-pattern" style={{ backgroundColor: '#FAF7F2' }}>
+      <section className="relative py-20 lg:py-28 overflow-hidden" style={{ backgroundColor: '#FAF7F2' }}>
+        {/* Decorative Background Pattern */}
+        <div className="absolute inset-0 opacity-30">
+          <div 
+            className="absolute inset-0"
+            style={{
+              backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 5L35 30L30 55L25 30L30 5z' fill='none' stroke='%23D2811D' stroke-width='0.5' opacity='0.3'/%3E%3Cpath d='M5 30L30 25L55 30L30 35L5 30z' fill='none' stroke='%23D2811D' stroke-width='0.5' opacity='0.3'/%3E%3C/svg%3E")`,
+              backgroundSize: '60px 60px'
+            }}
+          />
+        </div>
+        
         <div className="container mx-auto px-4 relative">
           <div className="max-w-3xl mx-auto text-center">
             <div 

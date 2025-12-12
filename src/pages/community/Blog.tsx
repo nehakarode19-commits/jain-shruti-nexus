@@ -26,7 +26,7 @@ const Blog = () => {
   return (
     <Layout>
       {/* Hero Section */}
-      <section className="py-16 lg:py-20 lotus-pattern" style={{ backgroundColor: '#FAF7F2' }}>
+      <section className="py-16 lg:py-20" style={{ backgroundColor: '#FAF7F2' }}>
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto text-center">
             <p 
