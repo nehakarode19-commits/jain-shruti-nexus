@@ -5,6 +5,7 @@ import { useGalleryFromDB } from "@/hooks/useContent";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { X, Image, Video, ExternalLink, ChevronLeft, ChevronRight, Loader2, Camera, Film, ArrowRight, Grid3X3, LayoutGrid } from "lucide-react";
+import { PageTitle } from "@/components/ui/page-title";
 import { Link } from "react-router-dom";
 
 const Gallery = () => {
@@ -43,51 +44,30 @@ const Gallery = () => {
   return (
     <Layout>
       {/* Hero Section */}
-      <section className="relative py-20 lg:py-28 overflow-hidden" style={{ backgroundColor: '#FAF7F2' }}>
-        <div className="container mx-auto px-4 relative">
-          <div className="max-w-3xl mx-auto text-center">
-            <div 
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium mb-6"
-              style={{ backgroundColor: 'white', border: '1px solid #E8E4DD', color: '#D2811D' }}
+      <PageTitle 
+        label="VISUAL ARCHIVE"
+        title="Photo & Video Gallery"
+        subtitle="Explore rare photographs and videos of Gurudev Muni Jambuvijayji Maharaj Saheb, capturing moments from his life of scholarship and spiritual dedication."
+      />
+      
+      {/* Tab Buttons */}
+      <section className="py-6 bg-background border-b border-border">
+        <div className="container mx-auto px-4">
+          <div className="flex flex-wrap items-center justify-center gap-4">
+            <Button 
+              onClick={() => setActiveTab("photos")}
+              variant={activeTab === "photos" ? "hero" : "outline"}
             >
-              <Camera className="h-4 w-4" />
-              Visual Archive
-            </div>
-            
-            <h1 
-              className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6"
-              style={{ fontFamily: 'Playfair Display, serif', color: '#2D2A26' }}
+              <Image className="h-4 w-4 mr-2" />
+              View Photos
+            </Button>
+            <Button 
+              onClick={() => setActiveTab("videos")}
+              variant={activeTab === "videos" ? "hero" : "outline"}
             >
-              Photo & Video Gallery
-            </h1>
-            
-            <p className="text-lg mb-8 max-w-2xl mx-auto" style={{ fontFamily: 'Inter, sans-serif', color: '#6B6764' }}>
-              Explore rare photographs and videos of Gurudev Muni Jambuvijayji Maharaj Saheb, 
-              capturing moments from his life of scholarship and spiritual dedication.
-            </p>
-            
-            <div className="flex flex-wrap items-center justify-center gap-4">
-              <Button 
-                onClick={() => setActiveTab("photos")}
-                style={activeTab === "photos" 
-                  ? { backgroundColor: '#D2811D', color: 'white' }
-                  : { backgroundColor: 'white', color: '#2D2A26', border: '1px solid #E8E4DD' }
-                }
-              >
-                <Image className="h-4 w-4 mr-2" />
-                View Photos
-              </Button>
-              <Button 
-                onClick={() => setActiveTab("videos")}
-                style={activeTab === "videos" 
-                  ? { backgroundColor: '#D2811D', color: 'white' }
-                  : { backgroundColor: 'white', color: '#2D2A26', border: '1px solid #E8E4DD' }
-                }
-              >
-                <Video className="h-4 w-4 mr-2" />
-                Watch Videos
-              </Button>
-            </div>
+              <Video className="h-4 w-4 mr-2" />
+              Watch Videos
+            </Button>
           </div>
         </div>
       </section>

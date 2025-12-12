@@ -11,6 +11,7 @@ import {
   BookOpen,
   Loader2
 } from "lucide-react";
+import { PageTitle } from "@/components/ui/page-title";
 
 const Blog = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -26,29 +27,11 @@ const Blog = () => {
   return (
     <Layout>
       {/* Hero Section */}
-      <section className="py-16 lg:py-20" style={{ backgroundColor: '#FAF7F2' }}>
-        <div className="container mx-auto px-4">
-          <div className="max-w-3xl mx-auto text-center">
-            <p 
-              className="font-semibold mb-3 uppercase tracking-wider text-sm"
-              style={{ color: '#C9A227', fontFamily: 'Inter, sans-serif' }}
-            >
-              Our Blog
-            </p>
-            <h1 
-              className="text-4xl sm:text-5xl font-bold mb-6"
-              style={{ fontFamily: 'Playfair Display, serif', color: '#2D2A26' }}
-            >
-              Blogs & Articles
-            </h1>
-            <p className="text-lg mb-4" style={{ fontFamily: 'Inter, sans-serif', color: '#6B6764' }}>
-              Explore articles, tributes, and stories about Gurudev Muni Jambuvijayji Maharaj, 
-              his teachings, and his invaluable contributions to Jain scholarship.
-            </p>
-            <div className="w-20 h-1 mx-auto rounded-full" style={{ backgroundColor: '#C9A227' }} />
-          </div>
-        </div>
-      </section>
+      <PageTitle 
+        label="OUR BLOG"
+        title="Blogs & Articles"
+        subtitle="Explore articles, tributes, and stories about Gurudev Muni Jambuvijayji Maharaj, his teachings, and his invaluable contributions to Jain scholarship."
+      />
 
       {/* Search */}
       <section className="py-6" style={{ backgroundColor: 'white', borderBottom: '1px solid #E8E4DD' }}>
