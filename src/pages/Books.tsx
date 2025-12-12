@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Search, ExternalLink, BookOpen, Filter, Globe, Loader2 } from "lucide-react";
+import { PageTitle } from "@/components/ui/page-title";
 import { Link } from "react-router-dom";
 
 const bookCategories = ["All", "Agama", "Sutra", "Commentary", "Grammar", "Research"];
@@ -26,23 +27,11 @@ const Books = () => {
   return (
     <Layout>
       {/* Hero */}
-      <section className="py-16 lg:py-20 bg-gradient-hero lotus-pattern">
-        <div className="container mx-auto px-4">
-          <div className="max-w-3xl mx-auto text-center animate-fade-up">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-secondary/80 border border-primary/20 text-sm mb-6">
-              <BookOpen className="h-4 w-4 text-primary" />
-              <span className="text-muted-foreground">{books.length} Sacred Texts</span>
-            </div>
-            <h1 className="font-heading text-4xl sm:text-5xl font-bold text-foreground mb-6">
-              Books & Publications
-            </h1>
-            <p className="font-body text-muted-foreground">
-              Explore the scholarly works edited and published by Gurudev Muni Jambuvijayji Maharaj Saheb, 
-              including critical editions of Jain Agamas, Sutras, and philosophical texts.
-            </p>
-          </div>
-        </div>
-      </section>
+      <PageTitle 
+        label="SACRED TEXTS"
+        title="Books & Publications"
+        subtitle="Explore the scholarly works edited and published by Gurudev Muni Jambuvijayji Maharaj Saheb, including critical editions of Jain Agamas, Sutras, and philosophical texts."
+      />
 
       {/* Search and Filter */}
       <section className="py-8 bg-background border-b border-border sticky top-16 z-10">

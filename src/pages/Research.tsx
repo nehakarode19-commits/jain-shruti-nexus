@@ -2,13 +2,13 @@ import { Layout } from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { Badge } from "@/components/ui/badge";
+import { PageTitle } from "@/components/ui/page-title";
 import { 
   Database, 
   Search, 
   FileText, 
   Globe, 
   ArrowRight, 
-  Sparkles,
   CheckCircle,
   Users
 } from "lucide-react";
@@ -95,23 +95,16 @@ const tools = [
 const Research = () => {
   return (
     <Layout>
+      {/* Hero */}
+      <PageTitle 
+        label="RESEARCH TOOLS"
+        title="Powerful Tools for Deep Research"
+        subtitle="Each tool is designed to work seamlessly together, creating a comprehensive research ecosystem."
+      />
+
       {/* Tools Section */}
       <section className="py-12 lg:py-16 bg-background">
         <div className="container-wide mx-auto px-4">
-          {/* Section Header */}
-          <div className="text-center mb-10">
-            <Badge variant="outline" className="mb-4 border-primary/30 text-primary">
-              <Sparkles className="h-3.5 w-3.5 mr-2" />
-              Research Tools
-            </Badge>
-            <h1 className="font-heading text-3xl lg:text-4xl font-bold text-foreground mb-4">
-              Powerful Tools for Deep Research
-            </h1>
-            <p className="font-body text-muted-foreground max-w-2xl mx-auto text-lg">
-              Each tool is designed to work seamlessly together, creating a comprehensive research ecosystem.
-            </p>
-          </div>
-
           {/* Tools Grid - 2x2 with left border accent */}
           <div className="grid md:grid-cols-2 gap-6 max-w-6xl mx-auto">
             {tools.map((tool, index) => (
