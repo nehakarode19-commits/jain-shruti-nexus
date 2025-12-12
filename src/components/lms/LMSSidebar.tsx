@@ -19,7 +19,7 @@ import {
 import { Button } from "@/components/ui/button";
 
 const menuItems = [
-  { icon: LayoutDashboard, label: "Dashboard", path: "/lms" },
+  { icon: LayoutDashboard, label: "Dashboard", path: "/lms/dashboard" },
   { icon: BookOpen, label: "Book Entry", path: "/lms/book-entry" },
   { icon: BookMarked, label: "Book Issue", path: "/lms/book-issue" },
   { icon: BookDown, label: "Book Receive", path: "/lms/book-receive" },
