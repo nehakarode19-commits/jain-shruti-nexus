@@ -68,17 +68,14 @@ const News = () => {
   return (
     <Layout>
       {/* Hero */}
-      <section className="py-16 lg:py-20 bg-gradient-hero lotus-pattern">
+      <section className="py-16 lg:py-20" style={{ backgroundColor: '#FAF7F2' }}>
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto text-center animate-fade-up">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-secondary/80 border border-primary/20 text-sm mb-6">
-              <Newspaper className="h-4 w-4 text-primary" />
-              <span className="text-muted-foreground">Latest Updates</span>
-            </div>
-            <h1 className="font-display text-4xl sm:text-5xl font-bold text-foreground mb-6">
-              News & Announcements
+            <h1 className="font-display text-4xl sm:text-5xl font-bold mb-6">
+              <span style={{ color: '#2D2A26' }}>News & </span>
+              <span style={{ color: '#D2811D' }}>Announcements</span>
             </h1>
-            <p className="text-lg text-muted-foreground">
+            <p className="text-lg" style={{ color: '#6B6764' }}>
               Stay informed about events, updates, and announcements from Jambushrusti 
               and the Siddhi Jambu Parivar community.
             </p>
