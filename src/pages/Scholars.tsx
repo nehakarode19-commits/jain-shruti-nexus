@@ -36,7 +36,6 @@ import {
   ExternalLink,
   LogIn
 } from "lucide-react";
-import { PageTitle } from "@/components/ui/page-title";
 
 // Import scholar profile images
 import scholarMale1 from "@/assets/scholars/scholar-male-1.jpg";
@@ -268,35 +267,46 @@ const Scholars = () => {
   return (
     <Layout>
       {/* Enhanced Hero */}
-      <PageTitle 
-        label="SCHOLAR PORTAL"
-        title="Scholars & Researchers"
-        subtitle="Join our global community of scholars dedicated to advancing Jain studies, manuscript research, and the preservation of ancient wisdom."
-      />
-      
-      {/* CTA Buttons */}
-      <section className="pb-12 bg-background">
-        <div className="container mx-auto px-4">
-          <div className="flex flex-wrap justify-center gap-4">
-            <Button variant="hero" size="lg" asChild className="shadow-elevated">
-              <Link to="/scholar/login">
-                <LogIn className="h-5 w-5 mr-2" />
-                Scholar Portal
-              </Link>
-            </Button>
-            <Button variant="outline" size="lg" asChild>
-              <Link to="/auth">
-                <GraduationCap className="h-5 w-5 mr-2" />
-                Join as Scholar
-              </Link>
-            </Button>
-            <Button variant="outline" size="lg" asChild>
-              <Link to="/research">
-                <Search className="h-5 w-5 mr-2" />
-                Explore Research Tools
-              </Link>
-            </Button>
-          </div>
+      <section className="py-16 lg:py-24 bg-gradient-hero lotus-pattern relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-background/50" />
+        <div className="container mx-auto px-4 relative">
+          <AnimatedContainer animation="fade-up" className="max-w-4xl mx-auto text-center">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-sm mb-6">
+              <GraduationCap className="h-4 w-4 text-primary" />
+              <span className="text-primary font-medium">Scholar Portal</span>
+            </div>
+            <h1 className="font-heading text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground mb-6">
+              Scholars & Researchers
+            </h1>
+            <p className="font-body text-lg text-muted-foreground max-w-2xl mx-auto mb-4">
+              Join our global community of scholars dedicated to advancing Jain studies, 
+              manuscript research, and the preservation of ancient wisdom.
+            </p>
+            <p className="font-body text-muted-foreground max-w-xl mx-auto mb-8">
+              Connect with leading researchers, access rare manuscripts, and contribute to 
+              the scholarly understanding of Jain philosophy and literature.
+            </p>
+            <div className="flex flex-wrap justify-center gap-4">
+              <Button variant="hero" size="lg" asChild className="shadow-elevated">
+                <Link to="/scholar/login">
+                  <LogIn className="h-5 w-5 mr-2" />
+                  Scholar Portal
+                </Link>
+              </Button>
+              <Button variant="outline" size="lg" asChild>
+                <Link to="/auth">
+                  <GraduationCap className="h-5 w-5 mr-2" />
+                  Join as Scholar
+                </Link>
+              </Button>
+              <Button variant="outline" size="lg" asChild>
+                <Link to="/research">
+                  <Search className="h-5 w-5 mr-2" />
+                  Explore Research Tools
+                </Link>
+              </Button>
+            </div>
+          </AnimatedContainer>
         </div>
       </section>
 

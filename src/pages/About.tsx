@@ -3,7 +3,6 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { useCMSContent } from "@/hooks/useCMSContent";
-import { PageTitle } from "@/components/ui/page-title";
 import { 
   ArrowRight, 
   BookOpen, 
@@ -60,11 +59,18 @@ const About = () => {
   return (
     <Layout>
       {/* Hero */}
-      <PageTitle 
-        label="ABOUT US"
-        title={cmsContent.aboutTitle}
-        subtitle={cmsContent.aboutDescription}
-      />
+      <section className="py-16 lg:py-24 bg-gradient-hero lotus-pattern">
+        <div className="container mx-auto px-4">
+          <div className="max-w-3xl mx-auto text-center">
+            <h1 className="font-heading text-4xl sm:text-5xl font-bold text-foreground mb-6 animate-fade-up">
+              {cmsContent.aboutTitle}
+            </h1>
+            <p className="font-body text-muted-foreground animate-fade-up delay-100">
+              {cmsContent.aboutDescription}
+            </p>
+          </div>
+        </div>
+      </section>
 
       {/* Vision & Mission */}
       <section className="py-16 lg:py-24 bg-background">

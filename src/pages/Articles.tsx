@@ -12,9 +12,9 @@ import {
   User, 
   ArrowRight,
   ExternalLink,
+  ScrollText,
   Loader2
 } from "lucide-react";
-import { PageTitle } from "@/components/ui/page-title";
 import { format } from "date-fns";
 
 const Articles = () => {
@@ -31,11 +31,23 @@ const Articles = () => {
   return (
     <Layout>
       {/* Hero */}
-      <PageTitle 
-        label="OUR ARTICLES"
-        title="Articles & Tributes"
-        subtitle="Scholarly articles, heartfelt tributes, and important documents celebrating the legacy of Gurudev Muni Jambuvijayji Maharaj Saheb."
-      />
+      <section className="py-16 lg:py-20 bg-gradient-hero lotus-pattern">
+        <div className="container mx-auto px-4">
+          <div className="max-w-3xl mx-auto text-center animate-fade-up">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-secondary/80 border border-primary/20 text-sm mb-6">
+              <ScrollText className="h-4 w-4 text-primary" />
+              <span className="text-muted-foreground">{articles.length} Articles</span>
+            </div>
+            <h1 className="font-heading text-4xl sm:text-5xl font-bold text-foreground mb-6">
+              Articles & Tributes
+            </h1>
+            <p className="font-body text-lg text-muted-foreground">
+              Scholarly articles, heartfelt tributes, and important documents 
+              celebrating the legacy of Gurudev Muni Jambuvijayji Maharaj Saheb.
+            </p>
+          </div>
+        </div>
+      </section>
 
       {/* Search */}
       <section className="py-8 bg-background border-b border-border">

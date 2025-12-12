@@ -20,7 +20,6 @@ import {
   Send,
   Clock
 } from "lucide-react";
-import { PageTitle } from "@/components/ui/page-title";
 
 const contactInfo = [
   {
@@ -81,11 +80,19 @@ const Contact = () => {
   return (
     <Layout>
       {/* Hero */}
-      <PageTitle 
-        label="GET IN TOUCH"
-        title="Contact Us"
-        subtitle="Have questions about our research, library, or programs? We'd love to hear from you."
-      />
+      <section className="py-16 lg:py-20 bg-gradient-hero lotus-pattern">
+        <div className="container mx-auto px-4">
+          <div className="max-w-3xl mx-auto text-center">
+            <h1 className="font-heading text-4xl sm:text-5xl font-bold text-foreground mb-6 animate-fade-up">
+              Contact Us
+            </h1>
+            <p className="font-body text-muted-foreground animate-fade-up delay-100">
+              Have questions about our research, library, or programs? 
+              We'd love to hear from you.
+            </p>
+          </div>
+        </div>
+      </section>
 
       {/* Contact Section */}
       <section className="py-16 lg:py-24 bg-background">
