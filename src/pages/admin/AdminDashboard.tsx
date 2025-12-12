@@ -79,11 +79,11 @@ const recentActivities = [
 ];
 
 const quickActions = [
-  { label: "Add Book", icon: Plus, href: "/admin/books/new", color: "bg-primary" },
-  { label: "Add Manuscript", icon: Plus, href: "/admin/lms/manuscripts/new", color: "bg-gold" },
-  { label: "Upload PDF", icon: Plus, href: "/admin/research/pdf/new", color: "bg-sage" },
-  { label: "Create Event", icon: Plus, href: "/admin/events/new", color: "bg-burgundy" },
-  { label: "Add Research", icon: Plus, href: "/admin/research/entry/new", color: "bg-terracotta" },
+  { label: "Add Book", icon: Plus, href: "/admin/books", color: "bg-primary" },
+  { label: "Add Manuscript", icon: Plus, href: "/lms/manuscripts", color: "bg-gold" },
+  { label: "Upload PDF", icon: Plus, href: "/research/shabdasangraha", color: "bg-sage" },
+  { label: "Create Event", icon: Plus, href: "/admin/events", color: "bg-burgundy" },
+  { label: "Add Research", icon: Plus, href: "/research/sodhsanchay", color: "bg-terracotta" },
 ];
 
 export default function AdminDashboard() {
