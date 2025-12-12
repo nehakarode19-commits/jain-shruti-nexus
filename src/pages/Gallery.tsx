@@ -48,7 +48,7 @@ const Gallery = () => {
           <div className="max-w-3xl mx-auto text-center">
             <div 
               className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium mb-6"
-              style={{ backgroundColor: 'white', border: '1px solid #E8E4DD', color: '#C9A227' }}
+              style={{ backgroundColor: 'white', border: '1px solid #E8E4DD', color: '#D2811D' }}
             >
               <Camera className="h-4 w-4" />
               Visual Archive
@@ -70,7 +70,7 @@ const Gallery = () => {
               <Button 
                 onClick={() => setActiveTab("photos")}
                 style={activeTab === "photos" 
-                  ? { backgroundColor: '#C9A227', color: 'white' }
+                  ? { backgroundColor: '#D2811D', color: 'white' }
                   : { backgroundColor: 'white', color: '#2D2A26', border: '1px solid #E8E4DD' }
                 }
               >
@@ -80,7 +80,7 @@ const Gallery = () => {
               <Button 
                 onClick={() => setActiveTab("videos")}
                 style={activeTab === "videos" 
-                  ? { backgroundColor: '#C9A227', color: 'white' }
+                  ? { backgroundColor: '#D2811D', color: 'white' }
                   : { backgroundColor: 'white', color: '#2D2A26', border: '1px solid #E8E4DD' }
                 }
               >
@@ -99,9 +99,9 @@ const Gallery = () => {
             <div className="flex items-start gap-4">
               <div 
                 className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0"
-                style={{ backgroundColor: 'rgba(201,162,39,0.1)' }}
+                style={{ backgroundColor: 'rgba(210,129,29,0.1)' }}
               >
-                <Camera className="h-6 w-6" style={{ color: '#C9A227' }} />
+                <Camera className="h-6 w-6" style={{ color: '#D2811D' }} />
               </div>
               <div>
                 <h3 className="font-semibold mb-1" style={{ fontFamily: 'Playfair Display, serif', color: '#2D2A26' }}>Rare Photographs</h3>
@@ -113,9 +113,9 @@ const Gallery = () => {
             <div className="flex items-start gap-4">
               <div 
                 className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0"
-                style={{ backgroundColor: 'rgba(201,162,39,0.1)' }}
+                style={{ backgroundColor: 'rgba(210,129,29,0.1)' }}
               >
-                <Film className="h-6 w-6" style={{ color: '#C9A227' }} />
+                <Film className="h-6 w-6" style={{ color: '#D2811D' }} />
               </div>
               <div>
                 <h3 className="font-semibold mb-1" style={{ fontFamily: 'Playfair Display, serif', color: '#2D2A26' }}>Video Collection</h3>
@@ -127,9 +127,9 @@ const Gallery = () => {
             <div className="flex items-start gap-4">
               <div 
                 className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0"
-                style={{ backgroundColor: 'rgba(201,162,39,0.1)' }}
+                style={{ backgroundColor: 'rgba(210,129,29,0.1)' }}
               >
-                <LayoutGrid className="h-6 w-6" style={{ color: '#C9A227' }} />
+                <LayoutGrid className="h-6 w-6" style={{ color: '#D2811D' }} />
               </div>
               <div>
                 <h3 className="font-semibold mb-1" style={{ fontFamily: 'Playfair Display, serif', color: '#2D2A26' }}>High Quality</h3>
@@ -161,7 +161,7 @@ const Gallery = () => {
                   size="sm"
                   onClick={() => setViewMode("grid")}
                   style={viewMode === "grid" 
-                    ? { backgroundColor: '#C9A227', color: 'white', border: '1px solid #C9A227' }
+                    ? { backgroundColor: '#D2811D', color: 'white', border: '1px solid #D2811D' }
                     : { backgroundColor: 'white', border: '1px solid #E8E4DD', color: '#2D2A26' }
                   }
                 >
@@ -172,7 +172,7 @@ const Gallery = () => {
                   size="sm"
                   onClick={() => setViewMode("masonry")}
                   style={viewMode === "masonry" 
-                    ? { backgroundColor: '#C9A227', color: 'white', border: '1px solid #C9A227' }
+                    ? { backgroundColor: '#D2811D', color: 'white', border: '1px solid #D2811D' }
                     : { backgroundColor: 'white', border: '1px solid #E8E4DD', color: '#2D2A26' }
                   }
                 >
@@ -183,7 +183,7 @@ const Gallery = () => {
 
             {isLoading ? (
               <div className="flex items-center justify-center py-20">
-                <Loader2 className="h-10 w-10 animate-spin" style={{ color: '#C9A227' }} />
+                <Loader2 className="h-10 w-10 animate-spin" style={{ color: '#D2811D' }} />
               </div>
             ) : (
               <div className={
@@ -279,7 +279,7 @@ const Gallery = () => {
                       target="_blank"
                       rel="noopener noreferrer"
                       className="inline-flex items-center gap-2 text-sm font-medium hover:underline"
-                      style={{ color: '#C9A227' }}
+                      style={{ color: '#D2811D' }}
                     >
                       Watch on YouTube
                       <ExternalLink className="h-3 w-3" />
@@ -295,7 +295,7 @@ const Gallery = () => {
               </p>
               <Button 
                 asChild
-                style={{ backgroundColor: '#C9A227', color: 'white' }}
+                style={{ backgroundColor: '#D2811D', color: 'white' }}
               >
                 <a
                   href="https://www.youtube.com/@JambuParivar"
@@ -321,7 +321,7 @@ const Gallery = () => {
               target="_blank" 
               rel="noopener noreferrer"
               className="hover:underline font-medium"
-              style={{ color: '#C9A227' }}
+              style={{ color: '#D2811D' }}
             >
               siddhijambuparivar.com
             </a>
@@ -411,7 +411,7 @@ const Gallery = () => {
             <div className="flex flex-wrap justify-center gap-4">
               <Button 
                 asChild
-                style={{ backgroundColor: '#C9A227', color: 'white' }}
+                style={{ backgroundColor: '#D2811D', color: 'white' }}
               >
                 <Link to="/about/gurudev">
                   Read Biography
