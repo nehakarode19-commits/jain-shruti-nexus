@@ -71,13 +71,17 @@ const News = () => {
       <section className="py-16 lg:py-20" style={{ backgroundColor: '#FAF7F2' }}>
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto text-center animate-fade-up">
-            <span className="text-xs font-medium tracking-[0.2em] uppercase mb-4 block" style={{ color: '#6B6764' }}>
-              OUR NEWS
-            </span>
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6" style={{ fontFamily: 'Playfair Display, serif' }}>
-              <span style={{ color: '#2D2A26' }}>News </span>
-              <span style={{ color: '#D2811D', fontStyle: 'italic' }}>&</span>
-              <span style={{ color: '#D2811D' }}> Announcements</span>
+            <p 
+              className="font-semibold mb-3 uppercase tracking-wider text-sm"
+              style={{ color: '#D2811D', fontFamily: 'Inter, sans-serif' }}
+            >
+              Our News
+            </p>
+            <h1 
+              className="text-4xl sm:text-5xl font-bold mb-6"
+              style={{ fontFamily: 'Playfair Display, serif', color: '#2D2A26' }}
+            >
+              News <span style={{ fontStyle: 'italic' }}>&</span> Announcements
             </h1>
             <p className="text-lg" style={{ color: '#6B6764' }}>
               Stay informed about events, updates, and announcements from Jambushrusti 
