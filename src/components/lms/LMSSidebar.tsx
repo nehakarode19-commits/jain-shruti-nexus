@@ -1,6 +1,6 @@
-import { useState } from "react";
-import { NavLink, useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { cn } from "@/lib/utils";
+import { useAdminAuth } from "@/contexts/AdminAuthContext";
 import {
   LayoutDashboard,
   BookOpen,
@@ -12,96 +12,129 @@ import {
   BarChart3,
   Ticket,
   Settings,
-  ChevronLeft,
-  ChevronRight,
+  LogOut,
   Library,
+  X,
+  Search,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
-const menuItems = [
-  { icon: LayoutDashboard, label: "Dashboard", path: "/lms/dashboard" },
-  { icon: BookOpen, label: "Book Entry", path: "/lms/book-entry" },
-  { icon: BookMarked, label: "Book Issue", path: "/lms/book-issue" },
-  { icon: BookDown, label: "Book Receive", path: "/lms/book-receive" },
-  { icon: ScrollText, label: "Manuscripts", path: "/lms/manuscripts" },
-  { icon: Users, label: "Members", path: "/lms/members" },
-  { icon: CheckCircle, label: "Approvals", path: "/lms/approvals" },
-  { icon: BarChart3, label: "Reports", path: "/lms/reports" },
-  { icon: Ticket, label: "Ticket Management", path: "/lms/tickets" },
-  { icon: Settings, label: "Settings", path: "/lms/settings" },
+const navItems = [
+  { icon: LayoutDashboard, label: "Dashboard", href: "/lms/dashboard" },
+  { icon: BookOpen, label: "Book Entry", href: "/lms/book-entry" },
+  { icon: BookMarked, label: "Book Issue", href: "/lms/book-issue" },
+  { icon: BookDown, label: "Book Receive", href: "/lms/book-receive" },
+  { icon: ScrollText, label: "Manuscripts", href: "/lms/manuscripts" },
+  { icon: Users, label: "Members", href: "/lms/members" },
+  { icon: CheckCircle, label: "Approvals", href: "/lms/approvals" },
+  { icon: BarChart3, label: "Reports", href: "/lms/reports" },
+  { icon: Ticket, label: "Ticket Management", href: "/lms/tickets" },
+  { icon: Settings, label: "Settings", href: "/lms/settings" },
 ];
 
-export function LMSSidebar() {
-  const [collapsed, setCollapsed] = useState(false);
+interface LMSSidebarProps {
+  onClose?: () => void;
+}
+
+export function LMSSidebar({ onClose }: LMSSidebarProps) {
   const location = useLocation();
+  const { user, logout } = useAdminAuth();
+
+  const handleLogout = async () => {
+    await logout();
+    window.location.href = "/lms";
+  };
 
   return (
-    <aside
-      className={cn(
-        "fixed left-0 top-0 z-40 h-screen border-r transition-all duration-300 ease-in-out shadow-lg",
-        collapsed ? "w-16" : "w-64"
-      )}
-      style={{ backgroundColor: '#FAF7F2', borderColor: '#E8E4DD' }}
-    >
-      {/* Logo Section */}
-      <div className="flex items-center justify-between h-16 px-4 border-b" style={{ borderColor: '#E8E4DD', backgroundColor: 'rgba(210, 129, 29, 0.08)' }}>
-        <div className={cn("flex items-center gap-3", collapsed && "justify-center w-full")}>
-          <Library className="h-8 w-8 text-primary shrink-0" />
-          {!collapsed && (
-            <div className="overflow-hidden">
-              <h1 className="font-bold text-foreground text-lg leading-tight">Jambushrusti</h1>
-              <p className="text-xs text-muted-foreground">Library Management</p>
-            </div>
-          )}
+    <aside className="w-72 lg:w-64 min-h-screen bg-primary text-primary-foreground flex flex-col">
+      {/* Logo/Brand */}
+      <div className="p-4 sm:p-6 border-b border-primary-foreground/10 flex items-center justify-between">
+        <Link to="/lms/dashboard" className="flex items-center gap-3" onClick={onClose}>
+          <div className="w-10 h-10 rounded-xl bg-orange/20 flex items-center justify-center">
+            <Library className="h-6 w-6 text-orange" />
+          </div>
+          <div>
+            <h1 className="font-heading text-lg font-bold text-white">LMS Portal</h1>
+            <p className="text-xs text-white/60">Jambushrusti</p>
+          </div>
+        </Link>
+        {onClose && (
+          <Button
+            variant="ghost"
+            size="icon"
+            className="lg:hidden text-white/70 hover:text-white hover:bg-white/10"
+            onClick={onClose}
+          >
+            <X className="h-5 w-5" />
+          </Button>
+        )}
+      </div>
+
+      {/* User Info */}
+      <div className="p-4 border-b border-primary-foreground/10">
+        <div className="flex items-center gap-3">
+          <Avatar className="h-10 w-10 border-2 border-orange/30">
+            <AvatarImage src={user?.avatar} />
+            <AvatarFallback className="bg-orange/20 text-orange font-semibold">
+              {user?.name?.charAt(0).toUpperCase() || "L"}
+            </AvatarFallback>
+          </Avatar>
+          <div className="flex-1 min-w-0">
+            <p className="text-sm font-medium text-white truncate">{user?.name || "Librarian"}</p>
+            <p className="text-xs text-white/60 truncate">{user?.email}</p>
+          </div>
         </div>
       </div>
 
-      {/* Toggle Button */}
-      <Button
-        variant="ghost"
-        size="icon"
-        onClick={() => setCollapsed(!collapsed)}
-        className="absolute -right-3 top-20 h-6 w-6 rounded-full border shadow-md hover:bg-secondary"
-        style={{ backgroundColor: '#FAF7F2', borderColor: '#E8E4DD' }}
-      >
-        {collapsed ? (
-          <ChevronRight className="h-3 w-3" />
-        ) : (
-          <ChevronLeft className="h-3 w-3" />
-        )}
-      </Button>
+      {/* Mobile Search */}
+      <div className="p-4 lg:hidden border-b border-primary-foreground/10">
+        <div className="relative">
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-white/50" />
+          <input 
+            type="text"
+            placeholder="Search..."
+            className="w-full pl-9 pr-4 py-2 rounded-lg bg-white/10 text-white placeholder:text-white/50 text-sm border-0 focus:outline-none focus:ring-2 focus:ring-orange/50"
+          />
+        </div>
+      </div>
 
       {/* Navigation */}
-      <nav className="p-3 space-y-1 overflow-y-auto h-[calc(100vh-4rem)]">
-        {menuItems.map((item) => {
-          const isActive = location.pathname === item.path || 
-            (item.path !== "/lms" && location.pathname.startsWith(item.path));
+      <nav className="flex-1 p-3 sm:p-4 space-y-1 overflow-auto">
+        {navItems.map((item) => {
+          const isActive = location.pathname === item.href || 
+            (item.href !== "/lms/dashboard" && location.pathname.startsWith(item.href));
           
           return (
-            <NavLink
-              key={item.path}
-              to={item.path}
+            <Link
+              key={item.href}
+              to={item.href}
+              onClick={onClose}
               className={cn(
-                "flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-200 group",
-                isActive
-                  ? "bg-primary text-primary-foreground shadow-md"
-                  : "text-muted-foreground hover:bg-secondary hover:text-foreground",
-                collapsed && "justify-center px-2"
+                "flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200",
+                isActive 
+                  ? "bg-orange text-white font-medium shadow-lg" 
+                  : "text-white/70 hover:bg-white/10 hover:text-white"
               )}
             >
-              <item.icon className={cn("h-5 w-5 shrink-0", isActive && "animate-pulse")} />
-              {!collapsed && (
-                <span className="font-medium text-sm">{item.label}</span>
-              )}
-              {collapsed && (
-                <div className="absolute left-full ml-2 px-2 py-1 bg-foreground text-background text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none z-50">
-                  {item.label}
-                </div>
-              )}
-            </NavLink>
+              <item.icon className="h-5 w-5 flex-shrink-0" />
+              <span className="text-sm">{item.label}</span>
+            </Link>
           );
         })}
       </nav>
+
+      {/* Logout */}
+      <div className="p-4 border-t border-primary-foreground/10">
+        <Button
+          variant="ghost"
+          className="w-full justify-start text-white/70 hover:text-white hover:bg-white/10"
+          onClick={handleLogout}
+        >
+          <LogOut className="h-5 w-5 mr-3" />
+          Sign Out
+        </Button>
+      </div>
     </aside>
   );
 }
