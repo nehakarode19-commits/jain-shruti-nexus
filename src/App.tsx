@@ -28,6 +28,7 @@ import Research from "./pages/Research";
 import Library from "./pages/Library";
 import LibraryItemDetails from "./pages/LibraryItemDetails";
 import Scholars from "./pages/Scholars";
+import ScholarsDirectory from "./pages/ScholarsDirectory";
 import Contact from "./pages/Contact";
 import Auth from "./pages/Auth";
 import CommunityEvents from "./pages/CommunityEvents";
@@ -123,6 +124,7 @@ function AppContent() {
       
       {/* Scholars */}
       <Route path="/scholars" element={<Scholars />} />
+      <Route path="/scholars/directory" element={<ScholarsDirectory />} />
       
       {/* Community */}
       <Route path="/community" element={<CommunityEvents />} />
