@@ -54,12 +54,13 @@ export function AdminSidebar() {
   return (
     <aside
       className={cn(
-        "fixed left-0 top-0 z-40 h-screen bg-card border-r border-border transition-all duration-300 flex flex-col",
+        "fixed left-0 top-0 z-40 h-screen border-r transition-all duration-300 flex flex-col",
         collapsed ? "w-[72px]" : "w-64"
       )}
+      style={{ backgroundColor: '#FAF7F2', borderColor: '#E8E4DD' }}
     >
       {/* Logo Section */}
-      <div className="h-16 flex items-center justify-between px-4 border-b border-border">
+      <div className="h-16 flex items-center justify-between px-4 border-b" style={{ borderColor: '#E8E4DD' }}>
         {!collapsed && (
           <div className="flex items-center gap-3">
             <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-gold shadow-soft">
@@ -87,7 +88,8 @@ export function AdminSidebar() {
         variant="ghost"
         size="icon"
         onClick={() => setCollapsed(!collapsed)}
-        className="absolute -right-3 top-20 z-50 h-6 w-6 rounded-full border border-border bg-card shadow-sm hover:bg-muted"
+        className="absolute -right-3 top-20 z-50 h-6 w-6 rounded-full border shadow-sm hover:bg-muted"
+        style={{ backgroundColor: '#FAF7F2', borderColor: '#E8E4DD' }}
       >
         {collapsed ? (
           <ChevronRight className="h-3 w-3" />
@@ -139,7 +141,7 @@ export function AdminSidebar() {
 
       {/* Footer */}
       {!collapsed && (
-        <div className="p-4 border-t border-border">
+        <div className="p-4 border-t" style={{ borderColor: '#E8E4DD' }}>
           <div className="flex items-center gap-2 text-xs text-muted-foreground">
             <Scroll className="h-3 w-3" />
             <span className="font-poppins">Version 1.0.0</span>

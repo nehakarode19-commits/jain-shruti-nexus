@@ -38,12 +38,13 @@ export function LMSSidebar() {
   return (
     <aside
       className={cn(
-        "fixed left-0 top-0 z-40 h-screen bg-card border-r border-border transition-all duration-300 ease-in-out shadow-lg",
+        "fixed left-0 top-0 z-40 h-screen border-r transition-all duration-300 ease-in-out shadow-lg",
         collapsed ? "w-16" : "w-64"
       )}
+      style={{ backgroundColor: '#FAF7F2', borderColor: '#E8E4DD' }}
     >
       {/* Logo Section */}
-      <div className="flex items-center justify-between h-16 px-4 border-b border-border bg-primary/5">
+      <div className="flex items-center justify-between h-16 px-4 border-b" style={{ borderColor: '#E8E4DD', backgroundColor: 'rgba(210, 129, 29, 0.08)' }}>
         <div className={cn("flex items-center gap-3", collapsed && "justify-center w-full")}>
           <Library className="h-8 w-8 text-primary shrink-0" />
           {!collapsed && (
@@ -60,7 +61,8 @@ export function LMSSidebar() {
         variant="ghost"
         size="icon"
         onClick={() => setCollapsed(!collapsed)}
-        className="absolute -right-3 top-20 h-6 w-6 rounded-full border border-border bg-card shadow-md hover:bg-secondary"
+        className="absolute -right-3 top-20 h-6 w-6 rounded-full border shadow-md hover:bg-secondary"
+        style={{ backgroundColor: '#FAF7F2', borderColor: '#E8E4DD' }}
       >
         {collapsed ? (
           <ChevronRight className="h-3 w-3" />

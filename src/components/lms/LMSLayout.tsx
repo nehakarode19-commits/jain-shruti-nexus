@@ -29,7 +29,7 @@ export function LMSLayout({ children }: LMSLayoutProps) {
     navigate("/lms");
   };
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen" style={{ backgroundColor: '#FAF7F2' }}>
       <LMSSidebar />
       
       {/* Main Content */}
@@ -38,7 +38,7 @@ export function LMSLayout({ children }: LMSLayoutProps) {
         "ml-64" // Adjust based on sidebar state
       )}>
         {/* Top Header */}
-        <header className="sticky top-0 z-30 h-16 bg-card/80 backdrop-blur-md border-b border-border px-6 flex items-center justify-between">
+        <header className="sticky top-0 z-30 h-16 backdrop-blur-md border-b px-6 flex items-center justify-between" style={{ backgroundColor: 'rgba(250, 247, 242, 0.9)', borderColor: '#E8E4DD' }}>
           <div className="flex items-center gap-4">
             <Button
               variant="ghost"
