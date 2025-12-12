@@ -205,7 +205,7 @@ const Research = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-16 lg:py-20 bg-slate relative overflow-hidden">
+      <section className="py-16 lg:py-20 bg-foreground relative overflow-hidden">
         <div className="absolute inset-0 opacity-20">
           <div className="absolute top-10 right-20 w-64 h-64 bg-primary rounded-full blur-3xl" />
           <div className="absolute bottom-10 left-10 w-48 h-48 bg-gold rounded-full blur-3xl" />
@@ -228,7 +228,7 @@ const Research = () => {
             <Button 
               size="lg" 
               asChild
-              className="bg-white text-slate hover:bg-white/90 rounded-lg"
+              className="bg-white text-foreground hover:bg-white/90 rounded-lg"
             >
               <Link to="/auth">
                 Create Account
