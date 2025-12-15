@@ -320,10 +320,10 @@ const MaterialsManage = () => {
 
               <div>
                 <Label>Link to Lecture (optional)</Label>
-                <Select value={form.lecture_id} onValueChange={(v) => setForm({ ...form, lecture_id: v })}>
+                <Select value={form.lecture_id || "none"} onValueChange={(v) => setForm({ ...form, lecture_id: v === "none" ? "" : v })}>
                   <SelectTrigger><SelectValue placeholder="Course-level material" /></SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="">Course-level (not linked)</SelectItem>
+                    <SelectItem value="none">Course-level (not linked)</SelectItem>
                     {lectures.map((lecture) => (
                       <SelectItem key={lecture.id} value={lecture.id}>
                         {lecture.order_index}. {lecture.title}
