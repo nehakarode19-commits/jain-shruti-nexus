@@ -31,11 +31,12 @@ import {
   GraduationCap,
   BookOpen,
   UserCheck,
-  Globe
+  Globe,
+  Ticket
 } from "lucide-react";
 
 // Extended roles for display (includes Public Visitor which isn't a DB role)
-type DisplayRole = UserRole | "visitor";
+type DisplayRole = UserRole | "visitor" | "ticket";
 
 const DISPLAY_ROLES: { value: DisplayRole; label: string; description: string; icon: React.ReactNode }[] = [
   { value: "superadmin", label: "Super Admin", description: "Full system access, manage admins & settings", icon: <Crown className="h-4 w-4 text-amber-500" /> },
@@ -43,6 +44,7 @@ const DISPLAY_ROLES: { value: DisplayRole; label: string; description: string; i
   { value: "scholar", label: "Scholar", description: "Research portal, submissions, access requests", icon: <GraduationCap className="h-4 w-4 text-blue-500" /> },
   { value: "librarian", label: "Librarian", description: "Library management system access", icon: <BookOpen className="h-4 w-4 text-gray-600" /> },
   { value: "lms", label: "LMS (Learning)", description: "Learning portal, courses, lectures & materials", icon: <UserCheck className="h-4 w-4 text-primary" /> },
+  { value: "ticket", label: "Ticket Management", description: "Support tickets, SLA tracking & issue resolution", icon: <Ticket className="h-4 w-4 text-green-600" /> },
 ];
 
 const Auth = () => {
@@ -85,6 +87,8 @@ const Auth = () => {
         return "/research";
       case "lms":
         return "/learning/dashboard";
+      case "ticket":
+        return "/tickets/dashboard";
       default:
         return "/";
     }
