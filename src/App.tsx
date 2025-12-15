@@ -84,7 +84,9 @@ import EventsManagement from "./pages/admin/EventsManagement";
 import GalleryManagement from "./pages/admin/GalleryManagement";
 import EmagazineManagement from "./pages/admin/EmagazineManagement";
 import SocialMediaManagement from "./pages/admin/SocialMediaManagement";
+import FeedbackManagement from "./pages/admin/FeedbackManagement";
 import EmagazinePage from "./pages/Emagazine";
+import Feedback from "./pages/Feedback";
 
 const queryClient = new QueryClient();
 
@@ -142,8 +144,9 @@ function AppContent() {
       {/* Auth */}
       <Route path="/auth" element={<Auth />} />
       
-      {/* Contact */}
+      {/* Contact & Feedback */}
       <Route path="/contact" element={<Contact />} />
+      <Route path="/feedback" element={<Feedback />} />
       
       {/* Search */}
       <Route path="/search" element={<Search />} />
@@ -191,6 +194,7 @@ function AppContent() {
       <Route path="/admin/events" element={<ProtectedAdminRoute><EventsManagement /></ProtectedAdminRoute>} />
       <Route path="/admin/emagazine" element={<ProtectedAdminRoute><EmagazineManagement /></ProtectedAdminRoute>} />
       <Route path="/admin/social-media" element={<ProtectedAdminRoute><SocialMediaManagement /></ProtectedAdminRoute>} />
+      <Route path="/admin/feedback" element={<ProtectedAdminRoute><FeedbackManagement /></ProtectedAdminRoute>} />
       <Route path="/admin/scholars" element={<ProtectedAdminRoute><ScholarsPage /></ProtectedAdminRoute>} />
       <Route path="/admin/research" element={<ProtectedAdminRoute><ResearchPage /></ProtectedAdminRoute>} />
       <Route path="/admin/lms" element={<ProtectedAdminRoute><LMSPage /></ProtectedAdminRoute>} />

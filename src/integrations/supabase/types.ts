@@ -395,6 +395,42 @@ export type Database = {
         }
         Relationships: []
       }
+      visitor_feedback: {
+        Row: {
+          created_at: string
+          email: string | null
+          feedback_type: string | null
+          id: string
+          is_read: boolean | null
+          message: string
+          name: string | null
+          phone: string | null
+          rating: number | null
+        }
+        Insert: {
+          created_at?: string
+          email?: string | null
+          feedback_type?: string | null
+          id?: string
+          is_read?: boolean | null
+          message: string
+          name?: string | null
+          phone?: string | null
+          rating?: number | null
+        }
+        Update: {
+          created_at?: string
+          email?: string | null
+          feedback_type?: string | null
+          id?: string
+          is_read?: boolean | null
+          message?: string
+          name?: string | null
+          phone?: string | null
+          rating?: number | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never

@@ -13,6 +13,8 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
+import { GoogleMap } from "@/components/shared/GoogleMap";
+import { FeedbackQRCode } from "@/components/shared/FeedbackQRCode";
 import { 
   Mail, 
   MapPin, 
@@ -25,7 +27,7 @@ const contactInfo = [
   {
     icon: MapPin,
     title: "Address",
-    content: "Muni Jambuvijay Research Center\nShantigram, Gujarat, India",
+    content: "Muni Jambuvijayji Gyan Mandir\nNear Adani Shantigram Jain Temple\nAdani Shantigram Township\nAhmedabad 382 421",
   },
   {
     icon: Mail,
@@ -35,12 +37,12 @@ const contactInfo = [
   {
     icon: Phone,
     title: "Phone",
-    content: "+91 XXX XXX XXXX",
+    content: "+91-98250 44911",
   },
   {
     icon: Clock,
     title: "Hours",
-    content: "Mon - Sat: 9:00 AM - 5:00 PM",
+    content: "Mon - Sat: 10:00 AM - 6:00 PM IST\nVisiting: 10:45 AM - 5:15 PM IST",
   },
 ];
 
@@ -120,6 +122,11 @@ const Contact = () => {
                   </div>
                 </div>
               ))}
+
+              {/* Feedback QR Code */}
+              <div className="pt-4">
+                <FeedbackQRCode compact />
+              </div>
             </div>
 
             {/* Contact Form */}
@@ -168,7 +175,6 @@ const Contact = () => {
                           <SelectItem value="scholar">Scholar Access</SelectItem>
                           <SelectItem value="library">Library Visit</SelectItem>
                           <SelectItem value="research">Research Collaboration</SelectItem>
-                          
                           <SelectItem value="technical">Technical Support</SelectItem>
                         </SelectContent>
                       </Select>
@@ -216,6 +222,23 @@ const Contact = () => {
                 </form>
               </CardContent>
             </Card>
+          </div>
+        </div>
+      </section>
+
+      {/* Map Section */}
+      <section className="py-16 bg-secondary/20">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-10">
+            <h2 className="font-heading text-2xl lg:text-3xl font-bold text-foreground mb-3">
+              Find Us
+            </h2>
+            <p className="text-muted-foreground max-w-xl mx-auto">
+              Visit our library and research center located near Adani Shantigram Jain Temple
+            </p>
+          </div>
+          <div className="max-w-5xl mx-auto">
+            <GoogleMap height="450px" />
           </div>
         </div>
       </section>

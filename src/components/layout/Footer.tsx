@@ -30,6 +30,7 @@ const footerLinks = {
     { title: "Events & Workshops", href: "/community/events" },
     { title: "Blog & Insights", href: "/community/blog" },
     { title: "News Updates", href: "/community/news" },
+    { title: "Visitor Feedback", href: "/feedback" },
     { title: "Contact Us", href: "/contact" },
   ],
 };

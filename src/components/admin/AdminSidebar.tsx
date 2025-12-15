@@ -23,6 +23,7 @@ import {
   X,
   Newspaper,
   Share2,
+  MessageSquare,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -39,6 +40,7 @@ const navItems = [
   { icon: Calendar, label: "Events", href: "/admin/events" },
   { icon: FileText, label: "eMagazine", href: "/admin/emagazine" },
   { icon: Share2, label: "Social Media", href: "/admin/social-media" },
+  { icon: MessageSquare, label: "Visitor Feedback", href: "/admin/feedback" },
   { icon: GraduationCap, label: "Scholars", href: "/admin/scholars" },
   { icon: Search, label: "Research Tools", href: "/admin/research" },
   { icon: Library, label: "LMS", href: "/lms/dashboard" },
