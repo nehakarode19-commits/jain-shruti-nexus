@@ -111,6 +111,17 @@ import QuizzesManage from "./pages/learning/QuizzesManage";
 import AssignmentsManage from "./pages/learning/AssignmentsManage";
 import LMSCoursesManagement from "./pages/admin/LMSCoursesManagement";
 import LecturesManagement from "./pages/admin/LecturesManagement";
+
+// Ticket Management Pages
+import TicketDashboard from "./pages/tickets/TicketDashboard";
+import CreateTicket from "./pages/tickets/CreateTicket";
+import TicketList from "./pages/tickets/TicketList";
+import TicketDetail from "./pages/tickets/TicketDetail";
+import TicketCategories from "./pages/tickets/TicketCategories";
+import TicketReports from "./pages/tickets/TicketReports";
+import SLASettings from "./pages/tickets/SLASettings";
+import MyTickets from "./pages/tickets/MyTickets";
+import { ProtectedTicketRoute } from "@/components/tickets/ProtectedTicketRoute";
 import { ProtectedLearningRoute } from "@/components/learning/ProtectedLearningRoute";
 
 const queryClient = new QueryClient();
@@ -250,6 +261,17 @@ function AppContent() {
       <Route path="/admin/settings" element={<ProtectedAdminRoute><SettingsPage /></ProtectedAdminRoute>} />
       <Route path="/admin/learning-courses" element={<ProtectedAdminRoute><LMSCoursesManagement /></ProtectedAdminRoute>} />
       <Route path="/admin/lectures" element={<ProtectedAdminRoute><LecturesManagement /></ProtectedAdminRoute>} />
+      
+      {/* Ticket Management Routes */}
+      <Route path="/tickets" element={<ProtectedTicketRoute><TicketDashboard /></ProtectedTicketRoute>} />
+      <Route path="/tickets/dashboard" element={<ProtectedTicketRoute><TicketDashboard /></ProtectedTicketRoute>} />
+      <Route path="/tickets/create" element={<ProtectedTicketRoute><CreateTicket /></ProtectedTicketRoute>} />
+      <Route path="/tickets/list" element={<ProtectedTicketRoute><TicketList /></ProtectedTicketRoute>} />
+      <Route path="/tickets/my-tickets" element={<ProtectedTicketRoute><MyTickets /></ProtectedTicketRoute>} />
+      <Route path="/tickets/categories" element={<ProtectedTicketRoute><TicketCategories /></ProtectedTicketRoute>} />
+      <Route path="/tickets/reports" element={<ProtectedTicketRoute><TicketReports /></ProtectedTicketRoute>} />
+      <Route path="/tickets/sla-settings" element={<ProtectedTicketRoute><SLASettings /></ProtectedTicketRoute>} />
+      <Route path="/tickets/:id" element={<ProtectedTicketRoute><TicketDetail /></ProtectedTicketRoute>} />
       
       {/* Catch-all */}
       <Route path="*" element={<NotFound />} />
