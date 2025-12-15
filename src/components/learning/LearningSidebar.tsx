@@ -103,12 +103,14 @@ export function LearningSidebar({ onClose }: LearningSidebarProps) {
           <Avatar className="h-10 w-10 border-2 border-orange/30">
             <AvatarImage src={user?.avatar} />
             <AvatarFallback className="bg-orange/20 text-orange font-semibold">
-              {user?.name?.charAt(0).toUpperCase() || "U"}
+              {user?.name?.charAt(0).toUpperCase() || "A"}
             </AvatarFallback>
           </Avatar>
           <div className="flex-1 min-w-0">
-            <p className="text-sm font-medium text-white truncate">{user?.name || "User"}</p>
-            <p className="text-xs text-white/60 truncate capitalize">{user?.role || "Student"}</p>
+            <p className="text-sm font-medium text-white truncate">{user?.name || "Admin"}</p>
+            <p className="text-xs text-white/60 truncate capitalize">
+              {isAdmin ? "Administrator" : (user?.role || "User")}
+            </p>
           </div>
         </div>
       </div>
