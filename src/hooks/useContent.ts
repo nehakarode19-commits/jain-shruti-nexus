@@ -239,12 +239,34 @@ export function useGalleryFromDB() {
           description: img.alt || "",
           image_url: img.url,
           category: "Gurudev",
+          category_division: "gurudev",
           is_published: true,
           created_at: new Date().toISOString(),
         }));
       }
 
       return data;
+    },
+  });
+}
+
+// Live Telecasts Hook
+export function useLiveTelecastsFromDB() {
+  return useQuery({
+    queryKey: ["live-telecasts-public"],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from("live_telecasts")
+        .select("*")
+        .eq("is_published", true)
+        .order("event_date", { ascending: false });
+
+      if (error) {
+        console.error("Error fetching live telecasts:", error);
+        return [];
+      }
+
+      return data || [];
     },
   });
 }

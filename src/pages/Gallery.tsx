@@ -4,21 +4,44 @@ import { galleryImages, videos } from "@/data/gurudevData";
 import { useGalleryFromDB } from "@/hooks/useContent";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
-import { X, Image, Video, ExternalLink, ChevronLeft, ChevronRight, Loader2, Camera, Film, ArrowRight, Grid3X3, LayoutGrid } from "lucide-react";
+import { X, Image, Video, ExternalLink, ChevronLeft, ChevronRight, Loader2, Camera, Film, ArrowRight, Grid3X3, LayoutGrid, User, Crown, Building2, Building } from "lucide-react";
 import { Link } from "react-router-dom";
+
+const GALLERY_DIVISIONS = [
+  { value: 'gurudev', label: 'Gurudev Muni Jambuvijayaji', icon: User },
+  { value: 'legacy', label: 'Legacy', icon: Crown },
+  { value: 'mjrc', label: 'MJRC', icon: Building2 },
+  { value: 'temple', label: 'Adani Shantigram Jain Temple', icon: Building },
+];
 
 const Gallery = () => {
   const [selectedImage, setSelectedImage] = useState<number | null>(null);
   const [activeTab, setActiveTab] = useState<"photos" | "videos">("photos");
+  const [activeDivision, setActiveDivision] = useState<string>("gurudev");
   const [viewMode, setViewMode] = useState<"grid" | "masonry">("grid");
   
   const { data: dbGallery = [], isLoading } = useGalleryFromDB();
   
-  const displayImages = dbGallery.length > 0 
-    ? dbGallery.map(img => ({ url: img.image_url, thumb: img.image_url, alt: img.title, category: img.category }))
-    : galleryImages;
+  // Filter images by division
+  const allImages = dbGallery.length > 0 
+    ? dbGallery.map(img => ({ 
+        url: img.image_url, 
+        thumb: img.image_url, 
+        alt: img.title, 
+        category: img.category,
+        division: (img as any).category_division || 'gurudev'
+      }))
+    : galleryImages.map(img => ({ ...img, division: 'gurudev' }));
 
-  const openLightbox = (index: number) => setSelectedImage(index);
+  const displayImages = allImages.filter(img => img.division === activeDivision);
+  const allDisplayImages = allImages; // For lightbox navigation
+
+  const openLightbox = (index: number) => {
+    // Find the actual index in the filtered array
+    const filteredIndex = displayImages.indexOf(displayImages[index]);
+    setSelectedImage(filteredIndex);
+  };
+  
   const closeLightbox = () => setSelectedImage(null);
   
   const goToPrevious = () => {
@@ -38,6 +61,10 @@ const Gallery = () => {
     if (e.key === "ArrowLeft") goToPrevious();
     if (e.key === "ArrowRight") goToNext();
     if (e.key === "Escape") closeLightbox();
+  };
+
+  const getDivisionCount = (division: string) => {
+    return allImages.filter(img => img.division === division).length;
   };
 
   return (
@@ -92,6 +119,43 @@ const Gallery = () => {
         </div>
       </section>
 
+      {/* Photo Gallery Division Tabs */}
+      {activeTab === "photos" && (
+        <section className="py-6" style={{ backgroundColor: 'white', borderBottom: '1px solid #E8E4DD' }}>
+          <div className="container mx-auto px-4">
+            <div className="flex flex-wrap items-center justify-center gap-3">
+              {GALLERY_DIVISIONS.map((division) => {
+                const Icon = division.icon;
+                const count = getDivisionCount(division.value);
+                return (
+                  <Button
+                    key={division.value}
+                    onClick={() => setActiveDivision(division.value)}
+                    className="gap-2"
+                    style={activeDivision === division.value 
+                      ? { backgroundColor: '#D2811D', color: 'white' }
+                      : { backgroundColor: 'white', color: '#2D2A26', border: '1px solid #E8E4DD' }
+                    }
+                  >
+                    <Icon className="h-4 w-4" />
+                    {division.label}
+                    <span 
+                      className="ml-1 text-xs px-2 py-0.5 rounded-full"
+                      style={{ 
+                        backgroundColor: activeDivision === division.value ? 'rgba(255,255,255,0.2)' : 'rgba(210,129,29,0.1)',
+                        color: activeDivision === division.value ? 'white' : '#D2811D'
+                      }}
+                    >
+                      {count}
+                    </span>
+                  </Button>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+      )}
+
       {/* Feature Highlights */}
       <section className="py-12" style={{ backgroundColor: 'white', borderBottom: '1px solid #E8E4DD' }}>
         <div className="container mx-auto px-4">
@@ -106,7 +170,7 @@ const Gallery = () => {
               <div>
                 <h3 className="font-semibold mb-1" style={{ fontFamily: 'Playfair Display, serif', color: '#2D2A26' }}>Rare Photographs</h3>
                 <p className="text-sm" style={{ fontFamily: 'Inter, sans-serif', color: '#6B6764' }}>
-                  {displayImages.length}+ photos from Gurudev's life and teachings
+                  {allImages.length}+ photos from Gurudev's life and teachings
                 </p>
               </div>
             </div>
@@ -149,10 +213,10 @@ const Gallery = () => {
             <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-8">
               <div>
                 <h2 className="text-2xl font-bold mb-1" style={{ fontFamily: 'Playfair Display, serif', color: '#2D2A26' }}>
-                  Photo Collection
+                  {GALLERY_DIVISIONS.find(d => d.value === activeDivision)?.label || 'Photo Collection'}
                 </h2>
                 <p style={{ fontFamily: 'Inter, sans-serif', color: '#6B6764' }}>
-                  Showing {displayImages.length} photos from the official archive
+                  Showing {displayImages.length} photos from the {GALLERY_DIVISIONS.find(d => d.value === activeDivision)?.label.toLowerCase()} collection
                 </p>
               </div>
               <div className="flex items-center gap-2">
@@ -185,6 +249,16 @@ const Gallery = () => {
               <div className="flex items-center justify-center py-20">
                 <Loader2 className="h-10 w-10 animate-spin" style={{ color: '#D2811D' }} />
               </div>
+            ) : displayImages.length === 0 ? (
+              <div className="text-center py-20 rounded-2xl" style={{ backgroundColor: 'white', border: '1px solid #E8E4DD' }}>
+                <Camera className="h-16 w-16 mx-auto mb-4" style={{ color: '#6B6764' }} />
+                <h3 className="text-xl font-semibold mb-2" style={{ fontFamily: 'Playfair Display, serif', color: '#2D2A26' }}>
+                  No Photos Available
+                </h3>
+                <p style={{ fontFamily: 'Inter, sans-serif', color: '#6B6764' }}>
+                  Photos for this category will be added soon.
+                </p>
+              </div>
             ) : (
               <div className={
                 viewMode === "grid" 
@@ -203,7 +277,7 @@ const Gallery = () => {
                   >
                     <img
                       src={image.thumb || image.url}
-                      alt={image.alt || `Gurudev Jambuvijayji Maharaj - Photo ${index + 1}`}
+                      alt={image.alt || `Photo ${index + 1}`}
                       className={`
                         w-full object-cover group-hover:scale-105 transition-transform duration-500
                         ${viewMode === "grid" ? "h-full" : "h-auto"}
@@ -368,11 +442,11 @@ const Gallery = () => {
               <ChevronRight className="h-6 w-6" />
             </Button>
 
-            {selectedImage !== null && (
+            {selectedImage !== null && displayImages[selectedImage] && (
               <div className="flex items-center justify-center min-h-[60vh] p-8">
                 <img
                   src={displayImages[selectedImage].url}
-                  alt={displayImages[selectedImage].alt || `Gurudev Photo ${selectedImage + 1}`}
+                  alt={displayImages[selectedImage].alt || `Photo ${selectedImage + 1}`}
                   className="max-w-full max-h-[80vh] object-contain rounded-lg"
                   onError={(e) => {
                     (e.target as HTMLImageElement).src = '/placeholder.svg';
@@ -381,7 +455,7 @@ const Gallery = () => {
               </div>
             )}
 
-            {selectedImage !== null && (
+            {selectedImage !== null && displayImages[selectedImage] && (
               <div className="text-center pb-6">
                 <p className="text-sm mb-2" style={{ color: 'rgba(255,255,255,0.6)' }}>
                   {selectedImage + 1} / {displayImages.length}
@@ -404,9 +478,8 @@ const Gallery = () => {
             <h2 className="text-2xl md:text-3xl font-bold text-white mb-4" style={{ fontFamily: 'Playfair Display, serif' }}>
               Explore More of Gurudev's Legacy
             </h2>
-            <p className="mb-8" style={{ color: 'rgba(255,255,255,0.7)' }}>
-              Dive deeper into the life, teachings, and scholarly contributions of 
-              Gurudev Muni Jambuvijayji Maharaj Saheb.
+            <p className="text-white/70 mb-8" style={{ fontFamily: 'Inter, sans-serif' }}>
+              Discover the vast collection of Gurudev's teachings, books, and spiritual wisdom.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
               <Button 
@@ -414,26 +487,26 @@ const Gallery = () => {
                 style={{ backgroundColor: '#D2811D', color: 'white' }}
               >
                 <Link to="/about/gurudev">
-                  Read Biography
+                  About Gurudev
                   <ArrowRight className="h-4 w-4 ml-2" />
                 </Link>
               </Button>
               <Button 
-                variant="outline" 
                 asChild
-                style={{ borderColor: 'rgba(255,255,255,0.3)', color: 'white' }}
+                variant="outline"
+                className="border-white text-white hover:bg-white/10"
               >
-                <Link to="/guruvani">
-                  Explore Guruvani
+                <Link to="/books">
+                  View Books Collection
                 </Link>
               </Button>
               <Button 
-                variant="outline" 
                 asChild
-                style={{ borderColor: 'rgba(255,255,255,0.3)', color: 'white' }}
+                variant="outline"
+                className="border-white text-white hover:bg-white/10"
               >
-                <Link to="/books">
-                  View Books
+                <Link to="/live-telecast">
+                  Live Telecasts
                 </Link>
               </Button>
             </div>
