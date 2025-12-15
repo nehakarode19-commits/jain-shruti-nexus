@@ -24,6 +24,7 @@ import {
   Newspaper,
   Share2,
   MessageSquare,
+  Video,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -38,6 +39,7 @@ const navItems = [
   { icon: Newspaper, label: "Articles/Tributes", href: "/admin/articles" },
   { icon: PenTool, label: "Blog", href: "/admin/blog" },
   { icon: Calendar, label: "Events", href: "/admin/events" },
+  { icon: Video, label: "Live Telecast", href: "/admin/live-telecast" },
   { icon: FileText, label: "eMagazine", href: "/admin/emagazine" },
   { icon: Share2, label: "Social Media", href: "/admin/social-media" },
   { icon: MessageSquare, label: "Visitor Feedback", href: "/admin/feedback" },
