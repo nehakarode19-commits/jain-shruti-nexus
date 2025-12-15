@@ -42,6 +42,7 @@ const DISPLAY_ROLES: { value: DisplayRole; label: string; description: string; i
   { value: "admin", label: "Admin", description: "CMS control, content management, approvals", icon: <Shield className="h-4 w-4 text-red-500" /> },
   { value: "scholar", label: "Scholar", description: "Research portal, submissions, access requests", icon: <GraduationCap className="h-4 w-4 text-blue-500" /> },
   { value: "librarian", label: "Librarian", description: "Library management system access", icon: <BookOpen className="h-4 w-4 text-gray-600" /> },
+  { value: "lms", label: "LMS (Learning)", description: "Learning portal, courses, lectures & materials", icon: <UserCheck className="h-4 w-4 text-primary" /> },
 ];
 
 const Auth = () => {
@@ -82,6 +83,8 @@ const Auth = () => {
         return "/lms/dashboard";
       case "scholar":
         return "/research";
+      case "lms":
+        return "/learning/dashboard";
       default:
         return "/";
     }

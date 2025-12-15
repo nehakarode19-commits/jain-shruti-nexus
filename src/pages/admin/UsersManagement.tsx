@@ -70,7 +70,7 @@ const roleColors: Record<string, string> = {
   user: "bg-muted text-muted-foreground",
   scholar: "bg-gold/10 text-gold border-gold/20",
   librarian: "bg-sage/10 text-sage border-sage/20",
-  lms: "bg-blue-500/10 text-blue-600 border-blue-500/20",
+  lms: "bg-primary/10 text-primary border-primary/20",
   admin: "bg-primary/10 text-primary border-primary/20",
   superadmin: "bg-destructive/10 text-destructive border-destructive/20",
 };
