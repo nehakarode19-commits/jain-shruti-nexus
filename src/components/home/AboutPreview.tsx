@@ -11,7 +11,7 @@ const teachings = [
   },
   {
     icon: Users,
-    title: "Gurudev Parivar",
+    title: "Legacy of Pujyapad Muni Jambuvijayaji Maharaj",
     description: "Explore the lineage and contributions of disciples",
     href: "/about/parivar",
   },
@@ -99,7 +99,7 @@ export function AboutPreview() {
                 className="px-5 py-2.5 text-sm text-[#5A5650] bg-white border border-[#E5E0D5] rounded-full hover:bg-gray-50 transition-colors"
                 style={{ fontFamily: 'Inter, sans-serif' }}
               >
-                Gurudev Parivar
+                Legacy
               </Link>
               <Link 
                 to="/about/gyan-kendra" 
