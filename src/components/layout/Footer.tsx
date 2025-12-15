@@ -4,35 +4,46 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { SocialLinks } from "@/components/social/SocialLinks";
 
-const quickLinks = [
-  { title: "About Jambushrusti", href: "/about" },
-  { title: "Gurudev Muni Jambuvijayji", href: "/about/gurudev" },
-  { title: "Research Hub", href: "/research" },
-  { title: "Library Catalog", href: "/library" },
-  { title: "Guruvani", href: "/guruvani" },
-  { title: "Books Collection", href: "/books" },
-  { title: "Scholar Portal", href: "/scholars" },
-];
-
-const resourceLinks = [
-  { title: "SodhSanchay", href: "/research/sodhsanchay" },
-  { title: "SodhSandarbh", href: "/research/sodhsandarbh" },
-  { title: "Śabdasaṅgraha", href: "/research/shabdasangraha" },
-  { title: "Articles", href: "/articles" },
-  { title: "Events & Workshops", href: "/community/events" },
-  { title: "Blog & Insights", href: "/community/blog" },
-  { title: "Contact Us", href: "/contact" },
-];
+const footerLinks = {
+  about: [
+    { title: "About Jambushrusti", href: "/about" },
+    { title: "Gurudev Muni Jambuvijayji", href: "/about/gurudev" },
+    { title: "Legacy of Pujyapad Muni Jambuvijayaji Maharaj", href: "/about/parivar" },
+    { title: "Muni Jambuvijayaji Research Center", href: "/about/gyan-kendra" },
+    { title: "Photo Gallery", href: "/gallery" },
+  ],
+  research: [
+    { title: "Research Hub", href: "/research" },
+    { title: "SodhSanchay", href: "/research/sodhsanchay" },
+    { title: "SodhSandarbh", href: "/research/sodhsandarbh" },
+    { title: "Śabdasaṅgraha", href: "/research/shabdasangraha" },
+    { title: "Shastrasandarbha", href: "/research/shastrasandarbha" },
+  ],
+  resources: [
+    { title: "Library Catalog", href: "/library" },
+    { title: "Guruvani", href: "/guruvani" },
+    { title: "Books Collection", href: "/books" },
+    { title: "Articles", href: "/articles" },
+    { title: "Scholar Portal", href: "/scholars" },
+  ],
+  community: [
+    { title: "Events & Workshops", href: "/community/events" },
+    { title: "Blog & Insights", href: "/community/blog" },
+    { title: "News Updates", href: "/community/news" },
+    { title: "Visitor Feedback", href: "/feedback" },
+    { title: "Contact Us", href: "/contact" },
+  ],
+};
 
 export function Footer() {
   return (
     <footer className="bg-gradient-to-b from-background to-secondary/30 border-t border-border">
       {/* Main Footer */}
       <div className="container mx-auto px-4 py-12 lg:py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 lg:gap-16">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8">
           
           {/* Left Column - Logo, Description & Social */}
-          <div className="space-y-6">
+          <div className="lg:col-span-4 space-y-6">
             <Link to="/" className="flex items-center gap-3">
               <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-gold shadow-soft">
                 <Scroll className="h-6 w-6 text-primary-foreground" />
@@ -79,29 +90,13 @@ export function Footer() {
             </div>
           </div>
 
-          {/* Center Column - Quick Links */}
-          <div className="lg:text-center">
-            <h4 className="font-heading font-semibold text-foreground mb-6 text-lg">Quick Links</h4>
-            <ul className="space-y-3">
-              {quickLinks.map((link) => (
-                <li key={link.href}>
-                  <Link
-                    to={link.href}
-                    className="font-body text-sm text-muted-foreground hover:text-primary transition-colors"
-                  >
-                    {link.title}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Right Column - Resources & Newsletter */}
-          <div className="space-y-8">
+          {/* Link Columns */}
+          <div className="lg:col-span-8 grid grid-cols-2 md:grid-cols-4 gap-8">
+            {/* About */}
             <div>
-              <h4 className="font-heading font-semibold text-foreground mb-6 text-lg">Resources</h4>
+              <h4 className="font-heading font-semibold text-foreground mb-5">About</h4>
               <ul className="space-y-3">
-                {resourceLinks.map((link) => (
+                {footerLinks.about.map((link) => (
                   <li key={link.href}>
                     <Link
                       to={link.href}
@@ -114,21 +109,72 @@ export function Footer() {
               </ul>
             </div>
 
-            {/* Newsletter */}
-            <div className="p-5 rounded-xl bg-card border border-border">
-              <h5 className="font-heading font-semibold text-foreground mb-2">Stay Updated</h5>
-              <p className="font-body text-xs text-muted-foreground mb-4">
-                Subscribe for updates on events & research
-              </p>
-              <div className="flex gap-2">
-                <Input 
-                  type="email" 
-                  placeholder="Your email" 
-                  className="h-10 text-sm"
-                />
-                <Button size="sm" className="h-10 px-4">
-                  <Send className="h-4 w-4" />
-                </Button>
+            {/* Research */}
+            <div>
+              <h4 className="font-heading font-semibold text-foreground mb-5">Research</h4>
+              <ul className="space-y-3">
+                {footerLinks.research.map((link) => (
+                  <li key={link.href}>
+                    <Link
+                      to={link.href}
+                      className="font-body text-sm text-muted-foreground hover:text-primary transition-colors"
+                    >
+                      {link.title}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Resources */}
+            <div>
+              <h4 className="font-heading font-semibold text-foreground mb-5">Resources</h4>
+              <ul className="space-y-3">
+                {footerLinks.resources.map((link) => (
+                  <li key={link.href}>
+                    <Link
+                      to={link.href}
+                      className="font-body text-sm text-muted-foreground hover:text-primary transition-colors"
+                    >
+                      {link.title}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Community */}
+            <div>
+              <h4 className="font-heading font-semibold text-foreground mb-5">Community</h4>
+              <ul className="space-y-3">
+                {footerLinks.community.map((link) => (
+                  <li key={link.href}>
+                    <Link
+                      to={link.href}
+                      className="font-body text-sm text-muted-foreground hover:text-primary transition-colors"
+                    >
+                      {link.title}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+
+              {/* Newsletter */}
+              <div className="mt-6 p-4 rounded-xl bg-card border border-border">
+                <h5 className="font-heading font-semibold text-foreground mb-2 text-sm">Newsletter</h5>
+                <p className="font-body text-xs text-muted-foreground mb-3">
+                  Get updates on events & research
+                </p>
+                <div className="flex gap-2">
+                  <Input 
+                    type="email" 
+                    placeholder="Your email" 
+                    className="h-9 text-sm"
+                  />
+                  <Button size="sm" className="h-9 px-3">
+                    <Send className="h-4 w-4" />
+                  </Button>
+                </div>
               </div>
             </div>
           </div>
