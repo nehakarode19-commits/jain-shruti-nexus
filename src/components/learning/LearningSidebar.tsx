@@ -24,8 +24,8 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 // Admin/Faculty navigation items
 const adminNavItems = [
   { icon: LayoutDashboard, label: "Dashboard", href: "/learning/dashboard" },
-  { icon: BookOpen, label: "Courses", href: "/learning/courses-manage" },
-  { icon: Video, label: "Lectures", href: "/learning/lectures" },
+  { icon: BookOpen, label: "Courses", href: "/learning/manage-courses" },
+  { icon: Video, label: "Lectures", href: "/learning/manage-lectures" },
   { icon: FileText, label: "Study Materials", href: "/learning/materials" },
   { icon: Users, label: "Students", href: "/learning/students" },
   { icon: ClipboardList, label: "Attendance", href: "/learning/attendance" },
@@ -36,12 +36,12 @@ const adminNavItems = [
 
 // Student navigation items
 const studentNavItems = [
-  { icon: LayoutDashboard, label: "My Dashboard", href: "/learning/student" },
-  { icon: BookOpen, label: "My Courses", href: "/learning/my-courses" },
-  { icon: Calendar, label: "Schedule", href: "/learning/my-schedule" },
-  { icon: PlayCircle, label: "Recordings", href: "/learning/recordings" },
-  { icon: FileText, label: "Materials", href: "/learning/my-materials" },
-  { icon: BarChart3, label: "My Progress", href: "/learning/progress" },
+  { icon: LayoutDashboard, label: "My Dashboard", href: "/learning/student-dashboard" },
+  { icon: BookOpen, label: "My Courses", href: "/learning/courses" },
+  { icon: Calendar, label: "Schedule", href: "/learning/schedule" },
+  { icon: PlayCircle, label: "Recordings", href: "/learning/manage-lectures" },
+  { icon: FileText, label: "Materials", href: "/learning/materials" },
+  { icon: BarChart3, label: "My Progress", href: "/learning/reports" },
 ];
 
 interface LearningSidebarProps {

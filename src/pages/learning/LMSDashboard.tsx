@@ -37,8 +37,8 @@ const LMSDashboard = () => {
   ];
 
   const quickActions = [
-    { label: "Add New Course", href: "/learning/courses-manage", icon: Plus, description: "Create a new course" },
-    { label: "Schedule Lecture", href: "/learning/lectures", icon: Calendar, description: "Add online or offline lecture" },
+    { label: "Add New Course", href: "/learning/manage-courses", icon: Plus, description: "Create a new course" },
+    { label: "Schedule Lecture", href: "/learning/manage-lectures", icon: Calendar, description: "Add online or offline lecture" },
     { label: "Upload Materials", href: "/learning/materials", icon: FileText, description: "Add study resources" },
     { label: "View Attendance", href: "/learning/attendance", icon: ClipboardList, description: "Track student attendance" },
   ];
@@ -58,7 +58,7 @@ const LMSDashboard = () => {
               </p>
             </div>
             <Button asChild className="gap-2">
-              <Link to="/learning/courses-manage">
+              <Link to="/learning/manage-courses">
                 <Plus className="h-4 w-4" />
                 Add Course
               </Link>
@@ -110,7 +110,7 @@ const LMSDashboard = () => {
               <CardDescription>Your latest courses</CardDescription>
             </div>
             <Button variant="outline" size="sm" asChild>
-              <Link to="/learning/courses-manage">
+              <Link to="/learning/manage-courses">
                 View All
                 <ArrowRight className="h-4 w-4 ml-1" />
               </Link>
@@ -122,7 +122,7 @@ const LMSDashboard = () => {
                 <GraduationCap className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
                 <p className="text-muted-foreground">No courses yet. Create your first course!</p>
                 <Button className="mt-4" asChild>
-                  <Link to="/learning/courses-manage">
+                  <Link to="/learning/manage-courses">
                     <Plus className="h-4 w-4 mr-2" />
                     Create Course
                   </Link>
@@ -179,7 +179,7 @@ const LMSDashboard = () => {
                 <span>Track student progress</span>
               </div>
               <Button variant="outline" className="w-full mt-4" asChild>
-                <Link to="/learning/lectures">Manage Lectures</Link>
+                <Link to="/learning/manage-lectures">Manage Lectures</Link>
               </Button>
             </CardContent>
           </Card>
