@@ -96,6 +96,15 @@ import LearningCourses from "./pages/learning/Courses";
 import LearningCourseDetail from "./pages/learning/CourseDetail";
 import LearningLogin from "./pages/learning/LearningLogin";
 import StudentDashboard from "./pages/learning/StudentDashboard";
+import LearningDashboard from "./pages/learning/LMSDashboard";
+import CoursesManage from "./pages/learning/CoursesManage";
+import LearningLecturesManage from "./pages/learning/LecturesManage";
+import StudentsManage from "./pages/learning/StudentsManage";
+import AttendanceManage from "./pages/learning/AttendanceManage";
+import ScheduleManage from "./pages/learning/ScheduleManage";
+import MaterialsManage from "./pages/learning/MaterialsManage";
+import ReportsManage from "./pages/learning/ReportsManage";
+import LearningSettings from "./pages/learning/LMSSettings";
 import LMSCoursesManagement from "./pages/admin/LMSCoursesManagement";
 import LecturesManagement from "./pages/admin/LecturesManagement";
 import { ProtectedLearningRoute } from "@/components/learning/ProtectedLearningRoute";
@@ -197,7 +206,16 @@ function AppContent() {
       <Route path="/learning/login" element={<LearningLogin />} />
       <Route path="/learning/courses" element={<LearningCourses />} />
       <Route path="/learning/courses/:courseId" element={<LearningCourseDetail />} />
-      <Route path="/learning/dashboard" element={<ProtectedLearningRoute><StudentDashboard /></ProtectedLearningRoute>} />
+      <Route path="/learning/student-dashboard" element={<ProtectedLearningRoute><StudentDashboard /></ProtectedLearningRoute>} />
+      <Route path="/learning/dashboard" element={<ProtectedLearningRoute><LearningDashboard /></ProtectedLearningRoute>} />
+      <Route path="/learning/manage-courses" element={<ProtectedLearningRoute><CoursesManage /></ProtectedLearningRoute>} />
+      <Route path="/learning/manage-lectures" element={<ProtectedLearningRoute><LearningLecturesManage /></ProtectedLearningRoute>} />
+      <Route path="/learning/students" element={<ProtectedLearningRoute><StudentsManage /></ProtectedLearningRoute>} />
+      <Route path="/learning/attendance" element={<ProtectedLearningRoute><AttendanceManage /></ProtectedLearningRoute>} />
+      <Route path="/learning/schedule" element={<ProtectedLearningRoute><ScheduleManage /></ProtectedLearningRoute>} />
+      <Route path="/learning/materials" element={<ProtectedLearningRoute><MaterialsManage /></ProtectedLearningRoute>} />
+      <Route path="/learning/reports" element={<ProtectedLearningRoute><ReportsManage /></ProtectedLearningRoute>} />
+      <Route path="/learning/settings" element={<ProtectedLearningRoute><LearningSettings /></ProtectedLearningRoute>} />
       
       
       {/* Admin Routes */}
