@@ -5,6 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
+import { FeedbackQRCode } from "@/components/shared/FeedbackQRCode";
 import { 
   Library as LibraryIcon, 
   Search, 
@@ -196,14 +197,21 @@ const Library = () => {
             Located at Muni Jambuvijay Research Center, Shantigram. 
             Contact us to schedule a visit or inquire about specific materials.
           </p>
-          <div className="flex flex-wrap justify-center gap-4">
+          <div className="flex flex-wrap justify-center gap-4 mb-8">
             <Button variant="hero" asChild>
               <a href="/contact">Contact Library</a>
             </Button>
-            <Button variant="outline">
-              <MapPin className="h-4 w-4 mr-2" />
-              Get Directions
+            <Button variant="outline" asChild>
+              <a href="https://maps.app.goo.gl/mk3KCxWMSVLmXYiC6" target="_blank" rel="noopener noreferrer">
+                <MapPin className="h-4 w-4 mr-2" />
+                Get Directions
+              </a>
             </Button>
+          </div>
+          
+          {/* Feedback QR Code */}
+          <div className="max-w-xs mx-auto">
+            <FeedbackQRCode />
           </div>
         </div>
       </section>
