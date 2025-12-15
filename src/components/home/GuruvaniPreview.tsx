@@ -37,7 +37,7 @@ export function GuruvaniPreview() {
           
           <p className="text-[15px] leading-relaxed" style={{ fontFamily: 'Inter, sans-serif', color: '#5A5650' }}>
             Explore the profound discourses, teachings, and spiritual guidance from Gurudev Muni 
-            Jambuvijayji Maharaj's lifetime of devotion.
+            Jambuvijayaji Maharaj's lifetime of devotion.
           </p>
         </div>
 

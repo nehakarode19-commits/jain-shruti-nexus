@@ -19,7 +19,7 @@ export function useBooksFromDB() {
         return staticBooks.map((book) => ({
           id: String(book.id),
           title: book.title,
-          author: "Gurudev Muni Jambuvijayji",
+          author: "Gurudev Muni Jambuvijayaji",
           description: "",
           cover_image: book.image,
           category: book.category || "Agama",
@@ -37,7 +37,7 @@ export function useBooksFromDB() {
         return staticBooks.map((book) => ({
           id: String(book.id),
           title: book.title,
-          author: "Gurudev Muni Jambuvijayji",
+          author: "Gurudev Muni Jambuvijayaji",
           description: "",
           cover_image: book.image,
           category: book.category || "Agama",
@@ -208,7 +208,7 @@ export function useEventsFromDB() {
           title: event.titleEn || event.title,
           description: `${event.titleEn || event.title} - Community Event`,
           event_date: event.date,
-          location: "Muni Jambuvijay Research Center",
+          location: "Muni Jambuvijayaji Research Center",
           image_url: event.image,
           is_published: true,
           created_at: new Date().toISOString(),

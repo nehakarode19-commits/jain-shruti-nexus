@@ -66,7 +66,7 @@ export function HeroSection() {
               className="text-base lg:text-lg max-w-lg leading-relaxed"
               style={{ fontFamily: 'Inter, sans-serif', color: '#6B6764' }}
             >
-              Explore the profound teachings of Gurudev Muni Jambuvijayji Maharaj Saheb (1923–2009). Discover sacred texts, research tools, and a community dedicated to preserving Jain philosophy.
+              Explore the profound teachings of Gurudev Muni Jambuvijayaji Maharaj Saheb (1923–2009). Discover sacred texts, research tools, and a community dedicated to preserving Jain philosophy.
             </p>
 
             {/* CTA Buttons */}
@@ -144,7 +144,7 @@ export function HeroSection() {
                 {/* Main Image */}
                 <img 
                   src={gurudevBio.mainImage}
-                  alt="Gurudev Muni Jambuvijayji Maharaj Saheb"
+                  alt="Gurudev Muni Jambuvijayaji Maharaj Saheb"
                   className="w-full max-w-xs lg:max-w-sm h-auto object-contain rounded-xl"
                 />
 
@@ -154,7 +154,7 @@ export function HeroSection() {
                     className="font-semibold text-sm"
                     style={{ fontFamily: 'Inter, sans-serif', color: '#2D2A26' }}
                   >
-                    Gurudev Muni Jambuvijayji Maharaj Saheb
+                    Gurudev Muni Jambuvijayaji Maharaj Saheb
                   </p>
                   <p 
                     className="text-xs"

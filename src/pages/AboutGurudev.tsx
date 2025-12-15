@@ -55,8 +55,8 @@ const AboutGurudev = () => {
   return (
     <Layout>
       <SEO 
-        title="About Gurudev Muni Jambuvijayji Maharaj Saheb"
-        description="Explore the life, teachings, and legacy of Gurudev Muni Jambuvijayji Maharaj Saheb (1923-2009) - a revered Jain saint, scholar, and pioneer in manuscript preservation."
+        title="About Gurudev Muni Jambuvijayaji Maharaj Saheb"
+        description="Explore the life, teachings, and legacy of Gurudev Muni Jambuvijayaji Maharaj Saheb (1923-2009) - a revered Jain saint, scholar, and pioneer in manuscript preservation."
       />
       {/* Hero */}
       <section className="py-16 lg:py-24 bg-gradient-hero lotus-pattern">
@@ -75,7 +75,7 @@ const AboutGurudev = () => {
                   {gurudevBio.hindiName}
                 </p>
                 <h1 className="font-heading text-4xl sm:text-5xl font-bold text-foreground mb-6">
-                  Gurudev Muni Jambuvijayji Maharaj Saheb
+                  Gurudev Muni Jambuvijayaji Maharaj Saheb
                 </h1>
                 <p className="font-body text-lg text-muted-foreground mb-6">
                   {gurudevBio.shortBio}
@@ -134,12 +134,12 @@ const AboutGurudev = () => {
                 <div className="relative rounded-2xl overflow-hidden shadow-elevated">
                   <img 
                     src={gurudevBio.mainImage}
-                    alt="Jambuvijayji Maharaj Saheb in white robes sitting cross-legged"
+                    alt="Gurudev Muni Jambuvijayaji Maharaj Saheb in white robes sitting cross-legged"
                     className="w-full h-auto"
                   />
                   <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-background/90 to-transparent p-6">
                     <p className="font-body text-base text-muted-foreground">
-                      Gurudev Muni Jambuvijayji Maharaj Saheb
+                      Gurudev Muni Jambuvijayaji Maharaj Saheb
                     </p>
                   </div>
                 </div>
@@ -194,7 +194,7 @@ const AboutGurudev = () => {
               "True knowledge illuminates the path of liberation. Through rigorous study 
               and unwavering devotion, one attains the wisdom that transcends worldly bonds."
             </blockquote>
-            <p className="font-body text-base text-muted-foreground">— Gurudev Muni Jambuvijayji</p>
+            <p className="font-body text-base text-muted-foreground">— Gurudev Muni Jambuvijayaji</p>
           </div>
         </div>
       </section>

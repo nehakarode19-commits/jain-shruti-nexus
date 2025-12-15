@@ -93,7 +93,7 @@ const LiveTelecast = () => {
             </h2>
             <p style={{ fontFamily: 'Inter, sans-serif', color: '#6B6764' }}>
               {activeTab === 'mjrc' 
-                ? 'Live events and broadcasts from Muni Jambuvijay Research Center'
+                ? 'Live events and broadcasts from Muni Jambuvijayaji Research Center'
                 : 'External broadcasts and events from partner organizations'
               }
             </p>

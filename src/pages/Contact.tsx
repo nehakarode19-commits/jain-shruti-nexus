@@ -28,7 +28,7 @@ const contactInfo = [
   {
     icon: MapPin,
     title: "Address",
-    content: "Muni Jambuvijayji Gyan Mandir\nNear Adani Shantigram Jain Temple\nAdani Shantigram Township\nAhmedabad 382 421",
+    content: "Muni Jambuvijayaji Gyan Mandir\nNear Adani Shantigram Jain Temple\nAdani Shantigram Township\nAhmedabad 382 421",
   },
   {
     icon: Mail,
@@ -84,7 +84,7 @@ const Contact = () => {
     <Layout>
       <SEO 
         title="Contact Us"
-        description="Get in touch with Muni Jambuvijayji Research Center. Contact us for research inquiries, library access, or questions about Gurudev Muni Jambuvijayji Maharaj Saheb's teachings."
+        description="Get in touch with Muni Jambuvijayaji Research Center. Contact us for research inquiries, library access, or questions about Gurudev Muni Jambuvijayaji Maharaj Saheb's teachings."
       />
       {/* Hero */}
       <section className="py-16 lg:py-20 bg-gradient-hero lotus-pattern">

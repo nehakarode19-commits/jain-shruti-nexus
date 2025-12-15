@@ -36,7 +36,7 @@ const visionItems = [
 const sections = [
   {
     icon: Scroll,
-    title: "Gurudev Muni Jambuvijayji Maharaj Saheb",
+    title: "Gurudev Muni Jambuvijayaji Maharaj Saheb",
     description: "Explore the life, teachings, and legacy of the revered Jain saint and scholar",
     href: "/about/gurudev",
   },
@@ -61,7 +61,7 @@ const About = () => {
     <Layout>
       <SEO 
         title="About"
-        description="Learn about Jambushrusti - a comprehensive digital ecosystem dedicated to preserving and sharing the teachings of Gurudev Muni Jambuvijayji Maharaj Saheb."
+        description="Learn about Jambushrusti - a comprehensive digital ecosystem dedicated to preserving and sharing the teachings of Gurudev Muni Jambuvijayaji Maharaj Saheb."
       />
       {/* Hero */}
       <section className="py-16 lg:py-24 bg-gradient-hero lotus-pattern">

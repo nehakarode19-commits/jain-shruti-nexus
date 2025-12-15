@@ -165,7 +165,7 @@ const ArticleDetails = () => {
           {!article.content && !article.excerpt && (
             <p className="text-muted-foreground leading-relaxed max-w-3xl font-body text-base">
               This article by {article.author || "Research Team"} explores important aspects 
-              of Gurudev Muni Jambuvijayji Maharaj Saheb's life and contributions.
+              of Gurudev Muni Jambuvijayaji Maharaj Saheb's life and contributions.
             </p>
           )}
         </div>

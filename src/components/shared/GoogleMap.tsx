@@ -22,7 +22,7 @@ export function GoogleMap({ className = "", height = "400px", showCard = true }:
         allowFullScreen
         loading="lazy"
         referrerPolicy="no-referrer-when-downgrade"
-        title="Muni Jambuvijayji Gyan Mandir Location"
+        title="Muni Jambuvijayaji Gyan Mandir Location"
         className="rounded-xl"
       />
       
@@ -33,7 +33,7 @@ export function GoogleMap({ className = "", height = "400px", showCard = true }:
             <MapPin className="h-4 w-4 text-primary mt-0.5 shrink-0" />
             <div>
               <p className="font-heading font-semibold text-foreground text-sm">
-                Muni Jambuvijayji Gyan Mandir
+                Muni Jambuvijayaji Gyan Mandir
               </p>
               <p className="text-xs text-muted-foreground">
                 Near Adani Shantigram Jain Temple, Ahmedabad

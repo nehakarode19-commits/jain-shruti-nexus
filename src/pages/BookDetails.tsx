@@ -112,7 +112,7 @@ const BookDetails = () => {
                   <div className="flex items-center gap-3 text-muted-foreground">
                     <User className="h-4 w-4 text-primary" />
                     <span className="text-sm font-body">
-                      <span className="font-medium text-foreground">Author:</span> {book.author || "Muni Jambuvijayji"}
+                      <span className="font-medium text-foreground">Author:</span> {book.author || "Gurudev Muni Jambuvijayaji"}
                     </span>
                   </div>
                   
@@ -189,7 +189,7 @@ const BookDetails = () => {
           </h2>
           <p className="text-muted-foreground leading-relaxed max-w-3xl font-body text-base">
             {book.description || `${book.title} - A scholarly work edited and published under the guidance of 
-            Gurudev Muni Jambuvijayji Maharaj Saheb. This text is part of the invaluable 
+            Gurudev Muni Jambuvijayaji Maharaj Saheb. This text is part of the invaluable 
             collection of Jain scriptures preserved and made accessible through the 
             tireless efforts of Shri Mahavira Jaina Vidyalaya.`}
           </p>

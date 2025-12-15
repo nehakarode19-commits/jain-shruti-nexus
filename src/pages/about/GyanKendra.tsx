@@ -77,7 +77,7 @@ const GyanKendra = () => {
               Muni Jambuvijayaji Research Center
             </h1>
             <p className="text-lg text-muted-foreground">
-              A dedicated center preserving Gurudev Muni Jambuvijayji Maharaj Saheb's scholarly works, 
+              A dedicated center preserving Gurudev Muni Jambuvijayaji Maharaj Saheb's scholarly works, 
               manuscripts, and teachings for future generations.
             </p>
           </div>

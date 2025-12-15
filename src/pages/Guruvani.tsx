@@ -45,7 +45,7 @@ const Guruvani = () => {
     <Layout>
       <SEO 
         title="Guruvani"
-        description="Explore the profound discourses, written works, and spiritual guidance from Gurudev Muni Jambuvijayji Maharaj Saheb - sacred teachings of Jain philosophy."
+        description="Explore the profound discourses, written works, and spiritual guidance from Gurudev Muni Jambuvijayaji Maharaj Saheb - sacred teachings of Jain philosophy."
       />
       {/* Hero */}
       <section className="py-16 lg:py-20" style={{ backgroundColor: '#FAF7F2' }}>
@@ -66,7 +66,7 @@ const Guruvani = () => {
             </h1>
             <p style={{ fontFamily: 'Inter, sans-serif', color: '#6B6764', fontSize: '1.125rem' }}>
               Explore the profound discourses, written works, letters, and spiritual guidance 
-              from Gurudev Muni Jambuvijayji Maharaj.
+              from Gurudev Muni Jambuvijayaji Maharaj.
             </p>
           </div>
         </div>

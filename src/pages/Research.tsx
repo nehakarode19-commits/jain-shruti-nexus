@@ -98,7 +98,7 @@ const Research = () => {
     <Layout>
       <SEO 
         title="Research Tools"
-        description="Powerful AI-powered research tools for exploring Jain scriptures and teachings of Gurudev Muni Jambuvijayji Maharaj Saheb - SodhSanchay, SodhSandarbh, Shabdasangraha, and more."
+        description="Powerful AI-powered research tools for exploring Jain scriptures and teachings of Gurudev Muni Jambuvijayaji Maharaj Saheb - SodhSanchay, SodhSandarbh, Shabdasangraha, and more."
       />
       {/* Tools Section */}
       <section className="py-12 lg:py-16 bg-background">

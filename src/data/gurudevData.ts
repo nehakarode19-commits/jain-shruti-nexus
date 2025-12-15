@@ -2,7 +2,7 @@
 // This file contains content from the official Siddhi Jambu Parivar website
 
 export const gurudevBio = {
-  name: "Gurudev Muni Jambuvijayji Maharaj Saheb",
+  name: "Gurudev Muni Jambuvijayaji Maharaj Saheb",
   hindiName: "आगमप्रज्ञ पू. मुनिराज श्री जम्बू विजयजी महाराज साहेब",
   birthName: "Chunilal Bhogilal Joitram",
   birthYear: 1923,
@@ -15,7 +15,7 @@ export const gurudevBio = {
   order: "Tapa Gaccha order of Shwetambar sect of Jainism",
   mainImage: "https://siddhijambuparivar.com/wp-content/uploads/2022/11/MicrosoftTeams-image-29-778x1024.png",
   centenaryLogo: "https://siddhijambuparivar.com/wp-content/uploads/2019/07/MicrosoftTeams-image-26-370x400.png",
-  shortBio: "Jambuvijayji Maharaj Saheb (1923–2009), also known as Muni Jambuvijayji Maharajsaheb, was a monk belonging to the Tapa Gaccha order of Shwetambar sect of Jainism. Jambuvijayji was born as Chunilal Bhogilal Joitram in 1923 in town of Mandal, Gujarat. His father's name was Bhogilal Mohanlal Joitram (1895–1959) and his mother's name was Aniben Popatlal (1894–1995). He was born into a deeply religious family.",
+  shortBio: "Muni Jambuvijayaji Maharaj Saheb (1923–2009), also known as Gurudev Muni Jambuvijayaji Maharajsaheb, was a monk belonging to the Tapa Gaccha order of Shwetambar sect of Jainism. Muni Jambuvijayaji was born as Chunilal Bhogilal Joitram in 1923 in town of Mandal, Gujarat. His father's name was Bhogilal Mohanlal Joitram (1895–1959) and his mother's name was Aniben Popatlal (1894–1995). He was born into a deeply religious family.",
 };
 
 // Complete gallery images from siddhijambuparivar.com/photo-gallery/

@@ -43,7 +43,7 @@ const Articles = () => {
             </h1>
             <p className="font-body text-lg text-muted-foreground">
               Scholarly articles, heartfelt tributes, and important documents 
-              celebrating the legacy of Gurudev Muni Jambuvijayji Maharaj Saheb.
+              celebrating the legacy of Gurudev Muni Jambuvijayaji Maharaj Saheb.
             </p>
           </div>
         </div>
