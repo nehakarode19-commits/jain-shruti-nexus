@@ -46,6 +46,15 @@ const navigationItems = [
     description: "Jain Knowledge & Research Ecosystem",
   },
   {
+    title: "Learning",
+    href: "/learning",
+    items: [
+      { title: "Browse Courses", href: "/learning/courses", description: "Explore all available courses" },
+      { title: "Student Dashboard", href: "/learning/student-dashboard", description: "Track your learning progress" },
+      { title: "My Courses", href: "/learning/dashboard", description: "Access your enrolled courses" },
+    ],
+  },
+  {
     title: "Library",
     href: "/library",
     description: "Browse our book & manuscript collection",
