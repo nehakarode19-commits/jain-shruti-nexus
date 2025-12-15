@@ -745,7 +745,7 @@ const Scholars = () => {
               "The pursuit of knowledge is the path to liberation."
             </blockquote>
             <p className="font-heading text-sm font-semibold text-foreground">
-              — Gurudev Muni Jambuvijayji
+              — Gurudev Muni Jambuvijayji Maharaj Saheb
             </p>
             <div className="h-px w-16 bg-primary/30 mx-auto mt-6" />
           </AnimatedContainer>

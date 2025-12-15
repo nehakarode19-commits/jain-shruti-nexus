@@ -58,8 +58,8 @@ const sampleResults = [
   },
   {
     id: 4,
-    title: "Complete Works of Muni Jambuvijayji",
-    snippet: "Comprehensive collection of scholarly works, edited manuscripts, and research notes by the revered Gurudev Muni Jambuvijayji, pioneer in Jain manuscript preservation.",
+    title: "Complete Works of Gurudev Muni Jambuvijayji Maharaj Saheb",
+    snippet: "Comprehensive collection of scholarly works, edited manuscripts, and research notes by the revered Gurudev Muni Jambuvijayji Maharaj Saheb, pioneer in Jain manuscript preservation.",
     source: "Jain eLibrary" as keyof typeof sources,
     year: "2015",
     author: "Jain Vishva Bharati",

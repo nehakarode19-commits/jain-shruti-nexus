@@ -154,13 +154,13 @@ export function HeroSection() {
                     className="font-semibold text-sm"
                     style={{ fontFamily: 'Inter, sans-serif', color: '#2D2A26' }}
                   >
-                    Gurudev Muni Jambuvijayji
+                    Gurudev Muni Jambuvijayji Maharaj Saheb
                   </p>
                   <p 
                     className="text-xs"
                     style={{ fontFamily: 'Inter, sans-serif', color: '#9B9B9B' }}
                   >
-                    Maharaj Saheb (1923–2009)
+                    (1923–2009)
                   </p>
                 </div>
               </div>

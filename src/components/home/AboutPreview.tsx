@@ -35,7 +35,7 @@ export function AboutPreview() {
                 About Gurudev
               </p>
               <h2 className="text-3xl md:text-4xl font-bold text-[#2D2A26] leading-tight" style={{ fontFamily: 'Playfair Display, serif' }}>
-                Muni Jambuvijayji Maharaj Saheb
+                Gurudev Muni Jambuvijayji Maharaj Saheb
               </h2>
             </div>
 
@@ -58,7 +58,7 @@ export function AboutPreview() {
                     contemplation, we illuminate the darkness of ignorance."
                   </p>
                   <p className="mt-3 text-sm font-medium text-[#8B8B8B]" style={{ fontFamily: 'Inter, sans-serif' }}>
-                    — Gurudev Muni Jambuvijayji
+                    — Gurudev Muni Jambuvijayji Maharaj Saheb
                   </p>
                 </div>
               </div>

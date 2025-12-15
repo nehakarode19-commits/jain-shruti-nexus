@@ -19,9 +19,9 @@ export interface CMSContent {
 export const defaultCMSContent: CMSContent = {
   heroTitle: "Jambushrusti Digital Knowledge Hub",
   heroSubtitle: "Preserving Sacred Jain Wisdom",
-  heroDescription: "Explore the vast repository of Jain scriptures, teachings, and scholarly works curated under the guidance of Pujya Gurudev Shri Jambuvijayji Maharaj.",
+  heroDescription: "Explore the vast repository of Jain scriptures, teachings, and scholarly works curated under the guidance of Gurudev Muni Jambuvijayji Maharaj Saheb.",
   aboutTitle: "About Jambushrusti",
-  aboutDescription: "A comprehensive digital ecosystem dedicated to preserving, researching, and sharing the timeless wisdom of Jain philosophy through the teachings of Gurudev Muni Jambuvijayji Maharaj.",
+  aboutDescription: "A comprehensive digital ecosystem dedicated to preserving, researching, and sharing the timeless wisdom of Jain philosophy through the teachings of Gurudev Muni Jambuvijayji Maharaj Saheb.",
   missionStatement: "To digitize, preserve, and make accessible the rich heritage of Jain literature and teachings for scholars and seekers worldwide.",
   contactEmail: "contact@jambushrusti.org",
   contactPhone: "+91 98765 43210",

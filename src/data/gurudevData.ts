@@ -2,7 +2,7 @@
 // This file contains content from the official Siddhi Jambu Parivar website
 
 export const gurudevBio = {
-  name: "Jambuvijayji Maharaj Saheb",
+  name: "Gurudev Muni Jambuvijayji Maharaj Saheb",
   hindiName: "आगमप्रज्ञ पू. मुनिराज श्री जम्बू विजयजी महाराज साहेब",
   birthName: "Chunilal Bhogilal Joitram",
   birthYear: 1923,
