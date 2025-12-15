@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Layout } from "@/components/layout/Layout";
+import { SEO } from "@/components/shared/SEO";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -81,6 +82,10 @@ const Contact = () => {
 
   return (
     <Layout>
+      <SEO 
+        title="Contact Us"
+        description="Get in touch with Muni Jambuvijayji Research Center. Contact us for research inquiries, library access, or questions about Gurudev Muni Jambuvijayji Maharaj Saheb's teachings."
+      />
       {/* Hero */}
       <section className="py-16 lg:py-20 bg-gradient-hero lotus-pattern">
         <div className="container mx-auto px-4">

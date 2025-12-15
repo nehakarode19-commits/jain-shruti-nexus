@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Layout } from "@/components/layout/Layout";
+import { SEO } from "@/components/shared/SEO";
 import { galleryImages, videos } from "@/data/gurudevData";
 import { useGalleryFromDB } from "@/hooks/useContent";
 import { Button } from "@/components/ui/button";
@@ -69,6 +70,10 @@ const Gallery = () => {
 
   return (
     <Layout>
+      <SEO 
+        title="Photo & Video Gallery"
+        description="Explore rare photographs and videos of Gurudev Muni Jambuvijayji Maharaj Saheb, capturing moments from his life of scholarship and spiritual dedication."
+      />
       {/* Hero Section */}
       <section className="relative py-20 lg:py-28 overflow-hidden" style={{ backgroundColor: '#FAF7F2' }}>
         <div className="container mx-auto px-4 relative">

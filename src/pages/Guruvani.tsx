@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Layout } from "@/components/layout/Layout";
+import { SEO } from "@/components/shared/SEO";
 import { useGuruvaniFromDB } from "@/hooks/useContent";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -42,6 +43,10 @@ const Guruvani = () => {
 
   return (
     <Layout>
+      <SEO 
+        title="Guruvani"
+        description="Explore the profound discourses, written works, and spiritual guidance from Gurudev Muni Jambuvijayji Maharaj Saheb - sacred teachings of Jain philosophy."
+      />
       {/* Hero */}
       <section className="py-16 lg:py-20" style={{ backgroundColor: '#FAF7F2' }}>
         <div className="container mx-auto px-4">
