@@ -168,7 +168,7 @@ const Contact = () => {
                           <SelectItem value="scholar">Scholar Access</SelectItem>
                           <SelectItem value="library">Library Visit</SelectItem>
                           <SelectItem value="research">Research Collaboration</SelectItem>
-                          <SelectItem value="donor">Donor Information</SelectItem>
+                          
                           <SelectItem value="technical">Technical Support</SelectItem>
                         </SelectContent>
                       </Select>
