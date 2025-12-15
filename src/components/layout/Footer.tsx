@@ -7,7 +7,7 @@ const footerLinks = {
   about: [
     { title: "About Jambushrusti", href: "/about" },
     { title: "Gurudev Muni Jambuvijayji", href: "/about/gurudev" },
-    { title: "Gurudev Parivar", href: "/about/parivar" },
+    { title: "Legacy of Pujyapad Muni Jambuvijayaji Maharaj", href: "/about/parivar" },
     { title: "Muni Jambuvijayaji Research Center", href: "/about/gyan-kendra" },
     { title: "Photo Gallery", href: "/gallery" },
   ],

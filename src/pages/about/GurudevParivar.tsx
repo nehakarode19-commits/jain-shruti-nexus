@@ -120,7 +120,7 @@ const GurudevParivar = () => {
                 <div className="aspect-square rounded-2xl overflow-hidden shadow-elevated">
                   <img 
                     src="https://siddhijambuparivar.com/wp-content/uploads/2022/11/107-min.jpg"
-                    alt="Gurudev Parivar"
+                    alt="Legacy of Pujyapad Muni Jambuvijayaji Maharaj"
                     className="w-full h-full object-cover"
                   />
                 </div>

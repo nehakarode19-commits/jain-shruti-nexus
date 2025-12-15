@@ -41,7 +41,7 @@ const sections = [
   },
   {
     icon: Users,
-    title: "Gurudev Parivar",
+    title: "Legacy of Pujyapad Muni Jambuvijayaji Maharaj",
     description: "Learn about the lineage, disciples, and their contributions",
     href: "/about/parivar",
   },

@@ -302,7 +302,7 @@ const AboutGurudev = () => {
           <div className="flex flex-wrap justify-center gap-4">
             <Button variant="outline" asChild>
               <Link to="/about/parivar">
-                Gurudev Parivar
+                Legacy of Pujyapad Muni Jambuvijayaji Maharaj
                 <ArrowRight className="h-4 w-4 ml-2" />
               </Link>
             </Button>
