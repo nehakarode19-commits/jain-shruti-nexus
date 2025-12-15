@@ -91,6 +91,14 @@ import Feedback from "./pages/Feedback";
 import LiveTelecast from "./pages/LiveTelecast";
 import LiveTelecastManagement from "./pages/admin/LiveTelecastManagement";
 
+// Learning Portal Pages
+import LearningCourses from "./pages/learning/Courses";
+import LearningCourseDetail from "./pages/learning/CourseDetail";
+import LearningLogin from "./pages/learning/LearningLogin";
+import StudentDashboard from "./pages/learning/StudentDashboard";
+import LMSCoursesManagement from "./pages/admin/LMSCoursesManagement";
+import { ProtectedLearningRoute } from "@/components/learning/ProtectedLearningRoute";
+
 const queryClient = new QueryClient();
 
 // Wrapper component to use the hook
@@ -183,6 +191,13 @@ function AppContent() {
       <Route path="/scholar/ai-tools" element={<ProtectedScholarRoute><ScholarAITools /></ProtectedScholarRoute>} />
       <Route path="/scholar/settings" element={<ProtectedScholarRoute><ScholarSettings /></ProtectedScholarRoute>} />
       
+      {/* Learning Portal Routes */}
+      <Route path="/learning" element={<LearningLogin />} />
+      <Route path="/learning/login" element={<LearningLogin />} />
+      <Route path="/learning/courses" element={<LearningCourses />} />
+      <Route path="/learning/courses/:courseId" element={<LearningCourseDetail />} />
+      <Route path="/learning/dashboard" element={<ProtectedLearningRoute><StudentDashboard /></ProtectedLearningRoute>} />
+      
       
       {/* Admin Routes */}
       <Route path="/admin" element={<AdminLogin />} />
@@ -208,6 +223,7 @@ function AppContent() {
       <Route path="/admin/access-requests" element={<ProtectedAdminRoute><AccessRequestsPage /></ProtectedAdminRoute>} />
       <Route path="/admin/logs" element={<ProtectedAdminRoute><LogsPage /></ProtectedAdminRoute>} />
       <Route path="/admin/settings" element={<ProtectedAdminRoute><SettingsPage /></ProtectedAdminRoute>} />
+      <Route path="/admin/learning-courses" element={<ProtectedAdminRoute><LMSCoursesManagement /></ProtectedAdminRoute>} />
       
       {/* Catch-all */}
       <Route path="*" element={<NotFound />} />
