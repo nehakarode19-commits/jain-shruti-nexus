@@ -62,6 +62,7 @@ const navigationItems = [
       { title: "Events", href: "/community/events", description: "Workshops & lectures" },
       { title: "Blog", href: "/community/blog", description: "Insights & articles" },
       { title: "News", href: "/community/news", description: "Latest announcements" },
+      { title: "eMagazine – Jambu Jyoti", href: "/emagazine", description: "Digital magazine archive" },
     ],
   },
 ];

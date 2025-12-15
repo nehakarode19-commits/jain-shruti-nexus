@@ -143,6 +143,51 @@ export type Database = {
         }
         Relationships: []
       }
+      emagazines: {
+        Row: {
+          cover_image: string | null
+          created_at: string
+          created_by: string | null
+          description: string | null
+          id: string
+          is_published: boolean | null
+          issue_date: string | null
+          pdf_url: string
+          title: string
+          updated_at: string
+          volume: string | null
+          year: number
+        }
+        Insert: {
+          cover_image?: string | null
+          created_at?: string
+          created_by?: string | null
+          description?: string | null
+          id?: string
+          is_published?: boolean | null
+          issue_date?: string | null
+          pdf_url: string
+          title: string
+          updated_at?: string
+          volume?: string | null
+          year: number
+        }
+        Update: {
+          cover_image?: string | null
+          created_at?: string
+          created_by?: string | null
+          description?: string | null
+          id?: string
+          is_published?: boolean | null
+          issue_date?: string | null
+          pdf_url?: string
+          title?: string
+          updated_at?: string
+          volume?: string | null
+          year?: number
+        }
+        Relationships: []
+      }
       events: {
         Row: {
           created_at: string

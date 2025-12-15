@@ -36,6 +36,7 @@ const navItems = [
   { icon: Newspaper, label: "Articles/Tributes", href: "/admin/articles" },
   { icon: PenTool, label: "Blog", href: "/admin/blog" },
   { icon: Calendar, label: "Events", href: "/admin/events" },
+  { icon: FileText, label: "eMagazine", href: "/admin/emagazine" },
   { icon: GraduationCap, label: "Scholars", href: "/admin/scholars" },
   { icon: Search, label: "Research Tools", href: "/admin/research" },
   { icon: Library, label: "LMS", href: "/lms/dashboard" },
