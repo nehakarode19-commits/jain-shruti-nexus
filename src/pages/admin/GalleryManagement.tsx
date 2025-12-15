@@ -33,6 +33,7 @@ const GALLERY_DIVISIONS = [
 
 export default function GalleryManagement() {
   const [searchQuery, setSearchQuery] = useState("");
+  const [filterDivision, setFilterDivision] = useState<string>("all");
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [editingItem, setEditingItem] = useState<GalleryItem | null>(null);
   const [formData, setFormData] = useState({
@@ -167,10 +168,12 @@ export default function GalleryManagement() {
     }
   };
 
-  const filteredItems = items.filter(item => 
-    item.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    (item.category || "").toLowerCase().includes(searchQuery.toLowerCase())
-  );
+  const filteredItems = items.filter(item => {
+    const matchesSearch = item.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      (item.category || "").toLowerCase().includes(searchQuery.toLowerCase());
+    const matchesDivision = filterDivision === "all" || item.category_division === filterDivision;
+    return matchesSearch && matchesDivision;
+  });
 
   return (
     <AdminLayout>
@@ -275,14 +278,26 @@ export default function GalleryManagement() {
           </Dialog>
         </div>
 
-        <div className="relative w-full max-w-sm">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-          <Input
-            placeholder="Search gallery..."
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            className="pl-10"
-          />
+        <div className="flex flex-wrap gap-4">
+          <div className="relative w-full max-w-sm">
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+            <Input
+              placeholder="Search gallery..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="pl-10"
+            />
+          </div>
+          <select
+            value={filterDivision}
+            onChange={(e) => setFilterDivision(e.target.value)}
+            className="px-4 py-2 border rounded-md bg-background text-sm"
+          >
+            <option value="all">All Divisions</option>
+            {GALLERY_DIVISIONS.map(div => (
+              <option key={div.value} value={div.value}>{div.label}</option>
+            ))}
+          </select>
         </div>
 
         {isLoading ? (
@@ -334,9 +349,16 @@ export default function GalleryManagement() {
                   </div>
                   <CardContent className="p-3">
                     <h3 className="font-medium text-sm line-clamp-1">{item.title}</h3>
-                    {item.category && (
-                      <Badge variant="outline" className="mt-1 text-xs">{item.category}</Badge>
-                    )}
+                    <div className="flex flex-wrap gap-1 mt-1">
+                      {item.category_division && (
+                        <Badge variant="default" className="text-xs">
+                          {GALLERY_DIVISIONS.find(d => d.value === item.category_division)?.label || item.category_division}
+                        </Badge>
+                      )}
+                      {item.category && (
+                        <Badge variant="outline" className="text-xs">{item.category}</Badge>
+                      )}
+                    </div>
                   </CardContent>
                 </Card>
               ))
