@@ -97,6 +97,7 @@ import LearningCourseDetail from "./pages/learning/CourseDetail";
 import LearningLogin from "./pages/learning/LearningLogin";
 import StudentDashboard from "./pages/learning/StudentDashboard";
 import LMSCoursesManagement from "./pages/admin/LMSCoursesManagement";
+import LecturesManagement from "./pages/admin/LecturesManagement";
 import { ProtectedLearningRoute } from "@/components/learning/ProtectedLearningRoute";
 
 const queryClient = new QueryClient();
@@ -224,6 +225,7 @@ function AppContent() {
       <Route path="/admin/logs" element={<ProtectedAdminRoute><LogsPage /></ProtectedAdminRoute>} />
       <Route path="/admin/settings" element={<ProtectedAdminRoute><SettingsPage /></ProtectedAdminRoute>} />
       <Route path="/admin/learning-courses" element={<ProtectedAdminRoute><LMSCoursesManagement /></ProtectedAdminRoute>} />
+      <Route path="/admin/lectures" element={<ProtectedAdminRoute><LecturesManagement /></ProtectedAdminRoute>} />
       
       {/* Catch-all */}
       <Route path="*" element={<NotFound />} />
