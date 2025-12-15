@@ -90,6 +90,36 @@ export function AdaniFoundation() {
                 </div>
               </div>
             </div>
+
+            {/* Founding & Trust Info */}
+            <div className="mt-6 pt-6 border-t border-[#E5E0D5]">
+              <div className="grid md:grid-cols-2 gap-6">
+                {/* Founded By */}
+                <div className="text-center md:text-left">
+                  <p className="text-xs uppercase tracking-wider font-semibold mb-2 text-[#C9A227]" style={{ fontFamily: 'Inter, sans-serif' }}>
+                    Founded by
+                  </p>
+                  <p className="text-sm text-[#2D2A26] leading-relaxed" style={{ fontFamily: 'Inter, sans-serif' }}>
+                    Srimati Shantaben Shantilal Bhudarmal Adani Family
+                  </p>
+                  <p className="text-sm text-[#5A5650] leading-relaxed" style={{ fontFamily: 'Inter, sans-serif' }}>
+                    Muni Jambuvijayaji Gyankendra (Muni Jambuvijayaji Research Centre)
+                  </p>
+                </div>
+                {/* Run By */}
+                <div className="text-center md:text-left">
+                  <p className="text-xs uppercase tracking-wider font-semibold mb-2 text-[#C9A227]" style={{ fontFamily: 'Inter, sans-serif' }}>
+                    Run by
+                  </p>
+                  <p className="text-sm text-[#2D2A26] leading-relaxed" style={{ fontFamily: 'Inter, sans-serif' }}>
+                    Sri Siddhi-Bhuvan-Manohar Jain Trust
+                  </p>
+                  <p className="text-xs text-[#8B8B8B]" style={{ fontFamily: 'Inter, sans-serif' }}>
+                    (Regd. No. 3402) Ahmedabad
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>

@@ -112,6 +112,38 @@ export function Footer() {
         </div>
       </div>
 
+      {/* Founding & Trust Info */}
+      <div className="border-t border-background/10">
+        <div className="container mx-auto px-4 py-8">
+          <div className="grid md:grid-cols-2 gap-6 text-center md:text-left">
+            {/* Founded By */}
+            <div className="space-y-2">
+              <p className="font-heading text-xs uppercase tracking-wider text-primary font-semibold">
+                Founded by
+              </p>
+              <p className="font-body text-sm text-background/80 leading-relaxed">
+                Srimati Shantaben Shantilal Bhudarmal Adani Family
+              </p>
+              <p className="font-body text-sm text-background/80 leading-relaxed">
+                Muni Jambuvijayaji Gyankendra (Muni Jambuvijayaji Research Centre)
+              </p>
+            </div>
+            {/* Run By */}
+            <div className="space-y-2">
+              <p className="font-heading text-xs uppercase tracking-wider text-primary font-semibold">
+                Run by
+              </p>
+              <p className="font-body text-sm text-background/80 leading-relaxed">
+                Sri Siddhi-Bhuvan-Manohar Jain Trust
+              </p>
+              <p className="font-body text-xs text-background/60">
+                (Regd. No. 3402) Ahmedabad
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
       {/* Bottom Bar */}
       <div className="border-t border-background/10">
         <div className="container mx-auto px-4 py-5">
