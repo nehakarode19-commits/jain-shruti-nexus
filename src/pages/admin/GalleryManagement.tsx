@@ -19,9 +19,17 @@ interface GalleryItem {
   description: string | null;
   image_url: string;
   category: string | null;
+  category_division: string | null;
   is_published: boolean | null;
   created_at: string;
 }
+
+const GALLERY_DIVISIONS = [
+  { value: 'gurudev', label: 'Gurudev Muni Jambuvijayaji' },
+  { value: 'legacy', label: 'Legacy' },
+  { value: 'mjrc', label: 'MJRC' },
+  { value: 'temple', label: 'Adani Shantigram Jain Temple' },
+];
 
 export default function GalleryManagement() {
   const [searchQuery, setSearchQuery] = useState("");
@@ -32,6 +40,7 @@ export default function GalleryManagement() {
     description: "",
     image_url: "",
     category: "",
+    category_division: "gurudev",
     is_published: true,
   });
 
@@ -57,6 +66,7 @@ export default function GalleryManagement() {
         description: data.description || null,
         image_url: data.image_url,
         category: data.category || null,
+        category_division: data.category_division || 'gurudev',
         is_published: data.is_published,
       });
       if (error) throw error;
@@ -82,6 +92,7 @@ export default function GalleryManagement() {
           description: data.description || null,
           image_url: data.image_url,
           category: data.category || null,
+          category_division: data.category_division || 'gurudev',
           is_published: data.is_published,
         })
         .eq("id", id);
@@ -120,6 +131,7 @@ export default function GalleryManagement() {
       description: "",
       image_url: "",
       category: "",
+      category_division: "gurudev",
       is_published: true,
     });
     setEditingItem(null);
@@ -132,6 +144,7 @@ export default function GalleryManagement() {
       description: item.description || "",
       image_url: item.image_url,
       category: item.category || "",
+      category_division: item.category_division || "gurudev",
       is_published: item.is_published ?? true,
     });
     setIsDialogOpen(true);
@@ -211,11 +224,23 @@ export default function GalleryManagement() {
                   )}
                 </div>
                 <div>
-                  <Label>Category</Label>
+                  <Label>Gallery Division *</Label>
+                  <select
+                    value={formData.category_division}
+                    onChange={(e) => setFormData({ ...formData, category_division: e.target.value })}
+                    className="w-full px-3 py-2 border rounded-md bg-background"
+                  >
+                    {GALLERY_DIVISIONS.map(div => (
+                      <option key={div.value} value={div.value}>{div.label}</option>
+                    ))}
+                  </select>
+                </div>
+                <div>
+                  <Label>Additional Category/Tag</Label>
                   <Input
                     value={formData.category}
                     onChange={(e) => setFormData({ ...formData, category: e.target.value })}
-                    placeholder="e.g., Events, Gurudev, Temple"
+                    placeholder="e.g., Events, Lectures, Archives"
                   />
                 </div>
                 <div>

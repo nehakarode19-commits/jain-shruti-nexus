@@ -87,6 +87,8 @@ import SocialMediaManagement from "./pages/admin/SocialMediaManagement";
 import FeedbackManagement from "./pages/admin/FeedbackManagement";
 import EmagazinePage from "./pages/Emagazine";
 import Feedback from "./pages/Feedback";
+import LiveTelecast from "./pages/LiveTelecast";
+import LiveTelecastManagement from "./pages/admin/LiveTelecastManagement";
 
 const queryClient = new QueryClient();
 
@@ -122,6 +124,7 @@ function AppContent() {
       
       {/* Gallery & Books */}
       <Route path="/gallery" element={<Gallery />} />
+      <Route path="/live-telecast" element={<LiveTelecast />} />
       <Route path="/books" element={<Books />} />
       <Route path="/books/:id" element={<BookDetails />} />
       <Route path="/articles" element={<Articles />} />
@@ -195,6 +198,7 @@ function AppContent() {
       <Route path="/admin/emagazine" element={<ProtectedAdminRoute><EmagazineManagement /></ProtectedAdminRoute>} />
       <Route path="/admin/social-media" element={<ProtectedAdminRoute><SocialMediaManagement /></ProtectedAdminRoute>} />
       <Route path="/admin/feedback" element={<ProtectedAdminRoute><FeedbackManagement /></ProtectedAdminRoute>} />
+      <Route path="/admin/live-telecast" element={<ProtectedAdminRoute><LiveTelecastManagement /></ProtectedAdminRoute>} />
       <Route path="/admin/scholars" element={<ProtectedAdminRoute><ScholarsPage /></ProtectedAdminRoute>} />
       <Route path="/admin/research" element={<ProtectedAdminRoute><ResearchPage /></ProtectedAdminRoute>} />
       <Route path="/admin/lms" element={<ProtectedAdminRoute><LMSPage /></ProtectedAdminRoute>} />

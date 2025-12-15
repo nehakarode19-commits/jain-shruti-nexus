@@ -230,6 +230,7 @@ export type Database = {
       gallery: {
         Row: {
           category: string | null
+          category_division: string | null
           created_at: string
           created_by: string | null
           description: string | null
@@ -240,6 +241,7 @@ export type Database = {
         }
         Insert: {
           category?: string | null
+          category_division?: string | null
           created_at?: string
           created_by?: string | null
           description?: string | null
@@ -250,6 +252,7 @@ export type Database = {
         }
         Update: {
           category?: string | null
+          category_division?: string | null
           created_at?: string
           created_by?: string | null
           description?: string | null
@@ -308,6 +311,48 @@ export type Database = {
           title?: string
           updated_at?: string
           video_url?: string | null
+        }
+        Relationships: []
+      }
+      live_telecasts: {
+        Row: {
+          created_at: string
+          description: string | null
+          event_date: string | null
+          id: string
+          is_live: boolean | null
+          is_published: boolean | null
+          source_type: string
+          stream_url: string | null
+          thumbnail_url: string | null
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          event_date?: string | null
+          id?: string
+          is_live?: boolean | null
+          is_published?: boolean | null
+          source_type?: string
+          stream_url?: string | null
+          thumbnail_url?: string | null
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          event_date?: string | null
+          id?: string
+          is_live?: boolean | null
+          is_published?: boolean | null
+          source_type?: string
+          stream_url?: string | null
+          thumbnail_url?: string | null
+          title?: string
+          updated_at?: string
         }
         Relationships: []
       }
