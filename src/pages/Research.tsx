@@ -1,4 +1,5 @@
 import { Layout } from "@/components/layout/Layout";
+import { SEO } from "@/components/shared/SEO";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { Badge } from "@/components/ui/badge";
@@ -95,6 +96,10 @@ const tools = [
 const Research = () => {
   return (
     <Layout>
+      <SEO 
+        title="Research Tools"
+        description="Powerful AI-powered research tools for exploring Jain scriptures and teachings of Gurudev Muni Jambuvijayji Maharaj Saheb - SodhSanchay, SodhSandarbh, Shabdasangraha, and more."
+      />
       {/* Tools Section */}
       <section className="py-12 lg:py-16 bg-background">
         <div className="container-wide mx-auto px-4">

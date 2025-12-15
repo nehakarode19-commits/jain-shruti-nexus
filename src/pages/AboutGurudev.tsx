@@ -1,4 +1,5 @@
 import { Layout } from "@/components/layout/Layout";
+import { SEO } from "@/components/shared/SEO";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
@@ -53,6 +54,10 @@ const familyInfo = {
 const AboutGurudev = () => {
   return (
     <Layout>
+      <SEO 
+        title="About Gurudev Muni Jambuvijayji Maharaj Saheb"
+        description="Explore the life, teachings, and legacy of Gurudev Muni Jambuvijayji Maharaj Saheb (1923-2009) - a revered Jain saint, scholar, and pioneer in manuscript preservation."
+      />
       {/* Hero */}
       <section className="py-16 lg:py-24 bg-gradient-hero lotus-pattern">
         <div className="container mx-auto px-4">

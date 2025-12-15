@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Layout } from "@/components/layout/Layout";
+import { SEO } from "@/components/shared/SEO";
 import { useBooksFromDB } from "@/hooks/useContent";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -25,6 +26,10 @@ const Books = () => {
 
   return (
     <Layout>
+      <SEO 
+        title="Books & Publications"
+        description="Explore the scholarly works edited and published by Gurudev Muni Jambuvijayji Maharaj Saheb, including critical editions of Jain Agamas and philosophical texts."
+      />
       {/* Hero */}
       <section className="py-16 lg:py-20 bg-gradient-hero lotus-pattern">
         <div className="container mx-auto px-4">

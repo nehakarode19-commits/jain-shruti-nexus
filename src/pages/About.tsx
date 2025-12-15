@@ -1,4 +1,5 @@
 import { Layout } from "@/components/layout/Layout";
+import { SEO } from "@/components/shared/SEO";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
@@ -58,6 +59,10 @@ const About = () => {
 
   return (
     <Layout>
+      <SEO 
+        title="About"
+        description="Learn about Jambushrusti - a comprehensive digital ecosystem dedicated to preserving and sharing the teachings of Gurudev Muni Jambuvijayji Maharaj Saheb."
+      />
       {/* Hero */}
       <section className="py-16 lg:py-24 bg-gradient-hero lotus-pattern">
         <div className="container mx-auto px-4">

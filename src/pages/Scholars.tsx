@@ -1,4 +1,5 @@
 import { Layout } from "@/components/layout/Layout";
+import { SEO } from "@/components/shared/SEO";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -266,6 +267,10 @@ const getBadgeLabel = (badge: string) => {
 const Scholars = () => {
   return (
     <Layout>
+      <SEO 
+        title="Scholars & Researchers"
+        description="Join our global community of Jain scholars dedicated to preserving and studying the teachings of Gurudev Muni Jambuvijayji Maharaj Saheb."
+      />
       {/* Enhanced Hero */}
       <section className="py-16 lg:py-24 bg-gradient-hero lotus-pattern relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-background/50" />
