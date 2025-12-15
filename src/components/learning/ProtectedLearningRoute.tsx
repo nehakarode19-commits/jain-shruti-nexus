@@ -1,26 +1,11 @@
 import { ReactNode } from "react";
-import { Navigate } from "react-router-dom";
-import { useAdminAuth } from "@/contexts/AdminAuthContext";
-import { Loader2 } from "lucide-react";
 
 interface ProtectedLearningRouteProps {
   children: ReactNode;
 }
 
+// DEMO MODE: Allow direct access without authentication
+// This matches the behavior of other role-based dashboards
 export function ProtectedLearningRoute({ children }: ProtectedLearningRouteProps) {
-  const { isAuthenticated, isLoading } = useAdminAuth();
-
-  if (isLoading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-background">
-        <Loader2 className="h-8 w-8 animate-spin text-primary" />
-      </div>
-    );
-  }
-
-  if (!isAuthenticated) {
-    return <Navigate to="/learning/login" replace />;
-  }
-
   return <>{children}</>;
 }
