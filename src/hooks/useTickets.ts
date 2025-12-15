@@ -1,6 +1,12 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
+import {
+  notifyTicketCreated,
+  notifyTicketAssigned,
+  notifyStatusChanged,
+  notifyTicketResolved,
+} from "@/lib/ticketNotifications";
 
 export interface Ticket {
   id: string;
@@ -157,8 +163,14 @@ export function useSaveTicket() {
         return data;
       }
     },
-    onSuccess: () => {
+    onSuccess: (data, variables) => {
       queryClient.invalidateQueries({ queryKey: ["tickets"] });
+      
+      // Send notification for new tickets
+      if (!variables.id && data) {
+        notifyTicketCreated(data.ticket_number, data.title);
+      }
+      
       toast.success("Ticket saved successfully");
     },
     onError: (error) => {
@@ -214,8 +226,25 @@ export function useUpdateTicketStatus() {
 
       return data;
     },
-    onSuccess: () => {
+    onSuccess: (data, variables) => {
       queryClient.invalidateQueries({ queryKey: ["tickets"] });
+      queryClient.invalidateQueries({ queryKey: ["ticket", variables.id] });
+      
+      // Send notification for status change
+      if (data) {
+        notifyStatusChanged(
+          data.ticket_number,
+          data.title,
+          "", // Old status not tracked here
+          variables.status
+        );
+        
+        // Additional notification for resolved status
+        if (variables.status === "resolved") {
+          notifyTicketResolved(data.ticket_number, data.title);
+        }
+      }
+      
       toast.success("Ticket status updated");
     },
     onError: (error) => {
@@ -246,8 +275,14 @@ export function useAssignTicket() {
 
       return data;
     },
-    onSuccess: () => {
+    onSuccess: (data) => {
       queryClient.invalidateQueries({ queryKey: ["tickets"] });
+      
+      // Send notification for assignment
+      if (data) {
+        notifyTicketAssigned(data.ticket_number, data.title, "Admin User");
+      }
+      
       toast.success("Ticket assigned");
     },
     onError: (error) => {
