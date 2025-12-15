@@ -33,15 +33,16 @@ import {
   Pencil,
   Trash2,
   ExternalLink,
-  Plus,
   File,
   Video,
   Image,
   Music,
+  Link as LinkIcon,
 } from "lucide-react";
 import { toast } from "sonner";
 import { useAdminCourses, LMSMaterial } from "@/hooks/useLMS";
 import { useAdminMaterials, useSaveMaterial, useDeleteMaterial, useAdminLectures } from "@/hooks/useLMSAdmin";
+import { FileUpload } from "@/components/learning/FileUpload";
 
 const getFileIcon = (type: string | null) => {
   switch (type) {
@@ -64,6 +65,7 @@ const MaterialsManage = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [editingMaterial, setEditingMaterial] = useState<LMSMaterial | null>(null);
+  const [uploadMode, setUploadMode] = useState<"upload" | "url">("upload");
 
   const { data: courses = [] } = useAdminCourses();
   const { data: materials = [], isLoading } = useAdminMaterials(selectedCourseId);
@@ -100,8 +102,8 @@ const MaterialsManage = () => {
   };
 
   const handleSave = async () => {
-    if (!form.title || !form.file_url || !selectedCourseId) {
-      toast.error("Please fill in required fields");
+    if (!form.title || !selectedCourseId) {
+      toast.error("Please enter a title");
       return;
     }
 
@@ -111,7 +113,7 @@ const MaterialsManage = () => {
         course_id: selectedCourseId,
         lecture_id: form.lecture_id || null,
         title: form.title,
-        file_url: form.file_url,
+        file_url: form.file_url || "",
         file_type: form.file_type,
       });
 
@@ -293,14 +295,49 @@ const MaterialsManage = () => {
                 />
               </div>
 
-              <div>
-                <Label>File URL *</Label>
-                <Input
-                  value={form.file_url}
-                  onChange={(e) => setForm({ ...form, file_url: e.target.value })}
-                  placeholder="https://drive.google.com/..."
-                />
+              {/* Upload Mode Toggle */}
+              <div className="flex gap-2">
+                <Button
+                  type="button"
+                  variant={uploadMode === "upload" ? "default" : "outline"}
+                  size="sm"
+                  onClick={() => setUploadMode("upload")}
+                  className="flex-1"
+                >
+                  <Upload className="h-4 w-4 mr-2" />
+                  Upload File
+                </Button>
+                <Button
+                  type="button"
+                  variant={uploadMode === "url" ? "default" : "outline"}
+                  size="sm"
+                  onClick={() => setUploadMode("url")}
+                  className="flex-1"
+                >
+                  <LinkIcon className="h-4 w-4 mr-2" />
+                  Paste URL
+                </Button>
               </div>
+
+              {uploadMode === "upload" ? (
+                <FileUpload
+                  label="Upload Material"
+                  folder="materials"
+                  accept=".pdf,.doc,.docx,.ppt,.pptx,.mp4,.mp3,.jpg,.png,.zip"
+                  currentUrl={form.file_url}
+                  onUploadComplete={(url) => setForm({ ...form, file_url: url })}
+                  maxSizeMB={50}
+                />
+              ) : (
+                <div>
+                  <Label>File URL (optional)</Label>
+                  <Input
+                    value={form.file_url}
+                    onChange={(e) => setForm({ ...form, file_url: e.target.value })}
+                    placeholder="https://drive.google.com/..."
+                  />
+                </div>
+              )}
 
               <div>
                 <Label>File Type</Label>

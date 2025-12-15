@@ -892,7 +892,7 @@ export type Database = {
           course_id: string | null
           created_at: string
           file_type: string | null
-          file_url: string
+          file_url: string | null
           id: string
           lecture_id: string | null
           title: string
@@ -901,7 +901,7 @@ export type Database = {
           course_id?: string | null
           created_at?: string
           file_type?: string | null
-          file_url: string
+          file_url?: string | null
           id?: string
           lecture_id?: string | null
           title: string
@@ -910,7 +910,7 @@ export type Database = {
           course_id?: string | null
           created_at?: string
           file_type?: string | null
-          file_url?: string
+          file_url?: string | null
           id?: string
           lecture_id?: string | null
           title?: string
