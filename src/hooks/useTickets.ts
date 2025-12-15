@@ -453,3 +453,41 @@ export function useTicketStats() {
     },
   });
 }
+
+// Fetch admin/staff users for assignment
+export function useAdminUsers() {
+  return useQuery({
+    queryKey: ["admin-users"],
+    queryFn: async () => {
+      // Fetch users who have admin, librarian, or superadmin roles
+      const { data: roleData, error: roleError } = await supabase
+        .from("user_roles")
+        .select("user_id, role")
+        .in("role", ["admin", "superadmin", "librarian"]);
+
+      if (roleError) throw roleError;
+
+      if (!roleData || roleData.length === 0) {
+        return [];
+      }
+
+      const userIds = [...new Set(roleData.map((r) => r.user_id))];
+
+      // Fetch profiles for these users
+      const { data: profiles, error: profileError } = await supabase
+        .from("profiles")
+        .select("user_id, full_name, email")
+        .in("user_id", userIds);
+
+      if (profileError) throw profileError;
+
+      // Combine role and profile data
+      return (profiles || []).map((profile) => ({
+        id: profile.user_id,
+        name: profile.full_name || profile.email || "Unknown User",
+        email: profile.email,
+        role: roleData.find((r) => r.user_id === profile.user_id)?.role,
+      }));
+    },
+  });
+}
