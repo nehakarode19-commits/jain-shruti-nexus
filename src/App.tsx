@@ -105,6 +105,10 @@ import ScheduleManage from "./pages/learning/ScheduleManage";
 import MaterialsManage from "./pages/learning/MaterialsManage";
 import ReportsManage from "./pages/learning/ReportsManage";
 import LearningSettings from "./pages/learning/LMSSettings";
+import ProgramsManage from "./pages/learning/ProgramsManage";
+import BatchesManage from "./pages/learning/BatchesManage";
+import QuizzesManage from "./pages/learning/QuizzesManage";
+import AssignmentsManage from "./pages/learning/AssignmentsManage";
 import LMSCoursesManagement from "./pages/admin/LMSCoursesManagement";
 import LecturesManagement from "./pages/admin/LecturesManagement";
 import { ProtectedLearningRoute } from "@/components/learning/ProtectedLearningRoute";
@@ -216,8 +220,10 @@ function AppContent() {
       <Route path="/learning/materials" element={<ProtectedLearningRoute><MaterialsManage /></ProtectedLearningRoute>} />
       <Route path="/learning/reports" element={<ProtectedLearningRoute><ReportsManage /></ProtectedLearningRoute>} />
       <Route path="/learning/settings" element={<ProtectedLearningRoute><LearningSettings /></ProtectedLearningRoute>} />
-      
-      
+      <Route path="/learning/programs" element={<ProtectedLearningRoute><ProgramsManage /></ProtectedLearningRoute>} />
+      <Route path="/learning/batches" element={<ProtectedLearningRoute><BatchesManage /></ProtectedLearningRoute>} />
+      <Route path="/learning/quizzes" element={<ProtectedLearningRoute><QuizzesManage /></ProtectedLearningRoute>} />
+      <Route path="/learning/assignments" element={<ProtectedLearningRoute><AssignmentsManage /></ProtectedLearningRoute>} />
       {/* Admin Routes */}
       <Route path="/admin" element={<AdminLogin />} />
       <Route path="/admin/login" element={<AdminLogin />} />
