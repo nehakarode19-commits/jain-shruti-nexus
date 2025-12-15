@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { AdminLayout } from "@/components/admin/AdminLayout";
@@ -11,7 +11,7 @@ import { Switch } from "@/components/ui/switch";
 import { Badge } from "@/components/ui/badge";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { useToast } from "@/hooks/use-toast";
-import { Plus, Pencil, Trash2, Loader2, Search, Eye, EyeOff, Image } from "lucide-react";
+import { Plus, Pencil, Trash2, Loader2, Search, Eye, EyeOff, Image, Upload, Link as LinkIcon } from "lucide-react";
 
 interface GalleryItem {
   id: string;
@@ -36,6 +36,11 @@ export default function GalleryManagement() {
   const [filterDivision, setFilterDivision] = useState<string>("all");
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [editingItem, setEditingItem] = useState<GalleryItem | null>(null);
+  const [uploadMode, setUploadMode] = useState<'upload' | 'url'>('upload');
+  const [isUploading, setIsUploading] = useState(false);
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [previewUrl, setPreviewUrl] = useState<string>("");
+  const fileInputRef = useRef<HTMLInputElement>(null);
   const [formData, setFormData] = useState({
     title: "",
     description: "",
@@ -60,12 +65,47 @@ export default function GalleryManagement() {
     },
   });
 
+  const uploadImage = async (file: File): Promise<string> => {
+    const fileExt = file.name.split('.').pop();
+    const fileName = `${Date.now()}-${Math.random().toString(36).substring(7)}.${fileExt}`;
+    const filePath = `gallery/${fileName}`;
+
+    const { error: uploadError } = await supabase.storage
+      .from('gallery-images')
+      .upload(filePath, file);
+
+    if (uploadError) throw uploadError;
+
+    const { data } = supabase.storage
+      .from('gallery-images')
+      .getPublicUrl(filePath);
+
+    return data.publicUrl;
+  };
+
+  const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      if (!file.type.startsWith('image/')) {
+        toast({ title: "Please select an image file", variant: "destructive" });
+        return;
+      }
+      if (file.size > 10 * 1024 * 1024) {
+        toast({ title: "File size must be less than 10MB", variant: "destructive" });
+        return;
+      }
+      setSelectedFile(file);
+      setPreviewUrl(URL.createObjectURL(file));
+    }
+  };
+
   const createMutation = useMutation({
-    mutationFn: async (data: typeof formData) => {
+    mutationFn: async (data: typeof formData & { uploadedUrl?: string }) => {
+      const imageUrl = data.uploadedUrl || data.image_url;
       const { error } = await supabase.from("gallery").insert({
         title: data.title,
         description: data.description || null,
-        image_url: data.image_url,
+        image_url: imageUrl,
         category: data.category || null,
         category_division: data.category_division || 'gurudev',
         is_published: data.is_published,
@@ -85,13 +125,14 @@ export default function GalleryManagement() {
   });
 
   const updateMutation = useMutation({
-    mutationFn: async ({ id, data }: { id: string; data: typeof formData }) => {
+    mutationFn: async ({ id, data }: { id: string; data: typeof formData & { uploadedUrl?: string } }) => {
+      const imageUrl = data.uploadedUrl || data.image_url;
       const { error } = await supabase
         .from("gallery")
         .update({
           title: data.title,
           description: data.description || null,
-          image_url: data.image_url,
+          image_url: imageUrl,
           category: data.category || null,
           category_division: data.category_division || 'gurudev',
           is_published: data.is_published,
@@ -136,6 +177,9 @@ export default function GalleryManagement() {
       is_published: true,
     });
     setEditingItem(null);
+    setSelectedFile(null);
+    setPreviewUrl("");
+    setUploadMode('upload');
   };
 
   const handleEdit = (item: GalleryItem) => {
@@ -148,23 +192,47 @@ export default function GalleryManagement() {
       category_division: item.category_division || "gurudev",
       is_published: item.is_published ?? true,
     });
+    setPreviewUrl(item.image_url);
+    setUploadMode('url');
     setIsDialogOpen(true);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!formData.title.trim()) {
       toast({ title: "Title is required", variant: "destructive" });
       return;
     }
-    if (!formData.image_url.trim()) {
+
+    // Check if we have either a file to upload or a URL
+    if (uploadMode === 'upload' && !selectedFile && !editingItem) {
+      toast({ title: "Please select an image to upload", variant: "destructive" });
+      return;
+    }
+    if (uploadMode === 'url' && !formData.image_url.trim() && !editingItem) {
       toast({ title: "Image URL is required", variant: "destructive" });
       return;
     }
+
+    let uploadedUrl: string | undefined;
+
+    // Upload file if selected
+    if (uploadMode === 'upload' && selectedFile) {
+      setIsUploading(true);
+      try {
+        uploadedUrl = await uploadImage(selectedFile);
+      } catch (error) {
+        toast({ title: "Error uploading image", description: (error as Error).message, variant: "destructive" });
+        setIsUploading(false);
+        return;
+      }
+      setIsUploading(false);
+    }
+
     if (editingItem) {
-      updateMutation.mutate({ id: editingItem.id, data: formData });
+      updateMutation.mutate({ id: editingItem.id, data: { ...formData, uploadedUrl } });
     } else {
-      createMutation.mutate(formData);
+      createMutation.mutate({ ...formData, uploadedUrl });
     }
   };
 
@@ -204,19 +272,84 @@ export default function GalleryManagement() {
                   />
                 </div>
                 <div>
-                  <Label>Image URL *</Label>
-                  <Input
-                    value={formData.image_url}
-                    onChange={(e) => setFormData({ ...formData, image_url: e.target.value })}
-                    placeholder="https://example.com/image.jpg"
-                  />
-                  <p className="text-xs text-muted-foreground mt-1">
-                    Use a direct image URL ending in .jpg, .png, .webp, etc. Social media post links won't work.
-                  </p>
-                  {formData.image_url && (
-                    <div className="mt-2 rounded-md border overflow-hidden h-24 w-24">
+                  <Label>Image Source</Label>
+                  <div className="flex gap-2 mt-1 mb-3">
+                    <Button
+                      type="button"
+                      variant={uploadMode === 'upload' ? 'default' : 'outline'}
+                      size="sm"
+                      onClick={() => setUploadMode('upload')}
+                      className="flex-1"
+                    >
+                      <Upload className="h-4 w-4 mr-2" />
+                      Upload File
+                    </Button>
+                    <Button
+                      type="button"
+                      variant={uploadMode === 'url' ? 'default' : 'outline'}
+                      size="sm"
+                      onClick={() => setUploadMode('url')}
+                      className="flex-1"
+                    >
+                      <LinkIcon className="h-4 w-4 mr-2" />
+                      Paste URL
+                    </Button>
+                  </div>
+
+                  {uploadMode === 'upload' ? (
+                    <div className="space-y-2">
+                      <input
+                        type="file"
+                        ref={fileInputRef}
+                        accept="image/*"
+                        onChange={handleFileSelect}
+                        className="hidden"
+                      />
+                      <div
+                        onClick={() => fileInputRef.current?.click()}
+                        className="border-2 border-dashed border-border rounded-lg p-6 text-center cursor-pointer hover:border-primary transition-colors"
+                      >
+                        {selectedFile ? (
+                          <div className="space-y-2">
+                            <p className="text-sm font-medium text-foreground">{selectedFile.name}</p>
+                            <p className="text-xs text-muted-foreground">
+                              {(selectedFile.size / 1024 / 1024).toFixed(2)} MB
+                            </p>
+                          </div>
+                        ) : (
+                          <div className="space-y-2">
+                            <Upload className="h-8 w-8 mx-auto text-muted-foreground" />
+                            <p className="text-sm text-muted-foreground">
+                              Click to select an image
+                            </p>
+                            <p className="text-xs text-muted-foreground">
+                              JPG, PNG, WEBP (max 10MB)
+                            </p>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  ) : (
+                    <div>
+                      <Input
+                        value={formData.image_url}
+                        onChange={(e) => {
+                          setFormData({ ...formData, image_url: e.target.value });
+                          setPreviewUrl(e.target.value);
+                        }}
+                        placeholder="https://example.com/image.jpg"
+                      />
+                      <p className="text-xs text-muted-foreground mt-1">
+                        Use a direct image URL ending in .jpg, .png, .webp, etc.
+                      </p>
+                    </div>
+                  )}
+
+                  {/* Image Preview */}
+                  {previewUrl && (
+                    <div className="mt-3 rounded-lg border overflow-hidden h-32 w-32">
                       <img 
-                        src={formData.image_url} 
+                        src={previewUrl} 
                         alt="Preview" 
                         className="w-full h-full object-cover"
                         onError={(e) => {
@@ -266,11 +399,11 @@ export default function GalleryManagement() {
                   <Button type="button" variant="outline" onClick={() => setIsDialogOpen(false)}>
                     Cancel
                   </Button>
-                  <Button type="submit" disabled={createMutation.isPending || updateMutation.isPending}>
-                    {(createMutation.isPending || updateMutation.isPending) && (
+                  <Button type="submit" disabled={createMutation.isPending || updateMutation.isPending || isUploading}>
+                    {(createMutation.isPending || updateMutation.isPending || isUploading) && (
                       <Loader2 className="h-4 w-4 animate-spin mr-2" />
                     )}
-                    {editingItem ? "Update Image" : "Add Image"}
+                    {isUploading ? "Uploading..." : editingItem ? "Update Image" : "Add Image"}
                   </Button>
                 </div>
               </form>
