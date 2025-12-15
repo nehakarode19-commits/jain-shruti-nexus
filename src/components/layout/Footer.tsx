@@ -88,11 +88,23 @@ export function Footer() {
                   +91-98250 44911
                 </a>
               </div>
-              <div className="flex items-start gap-3 text-muted-foreground">
-                <Clock className="h-4 w-4 text-primary shrink-0 mt-1" />
-                <div className="flex flex-col gap-1">
-                  <span>Office Time Mon - Sat: 10:00 AM - 6:00 PM IST</span>
-                  <span>Visiting Time Mon - Sat: 10:45 AM - 5:15 PM IST</span>
+              {/* Timing Card */}
+              <div className="mt-4 p-4 rounded-xl bg-gradient-to-br from-primary/5 via-primary/10 to-primary/5 border border-primary/20 shadow-sm">
+                <div className="flex items-center gap-2 mb-3">
+                  <div className="w-8 h-8 rounded-lg bg-primary/15 flex items-center justify-center">
+                    <Clock className="h-4 w-4 text-primary" />
+                  </div>
+                  <span className="font-heading font-semibold text-foreground text-sm">Timings</span>
+                </div>
+                <div className="space-y-2">
+                  <div className="flex items-center justify-between py-2 px-3 rounded-lg bg-background/60 border border-border/30">
+                    <span className="text-xs font-medium text-muted-foreground">Office Hours</span>
+                    <span className="text-xs font-semibold text-foreground">Mon - Sat: 10:00 AM - 6:00 PM IST</span>
+                  </div>
+                  <div className="flex items-center justify-between py-2 px-3 rounded-lg bg-background/60 border border-border/30">
+                    <span className="text-xs font-medium text-muted-foreground">Visiting Hours</span>
+                    <span className="text-xs font-semibold text-foreground">Mon - Sat: 10:45 AM - 5:15 PM IST</span>
+                  </div>
                 </div>
               </div>
             </div>
