@@ -1,8 +1,8 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { Link } from "react-router-dom";
 import { TicketLayout } from "@/components/tickets/TicketLayout";
 import { SEO } from "@/components/shared/SEO";
-import { useTickets, useTicketCategories } from "@/hooks/useTickets";
+import { useTickets, useTicketCategories, useAdminUsers } from "@/hooks/useTickets";
 import { TicketCard } from "@/components/tickets/TicketCard";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -20,12 +20,22 @@ export default function TicketList() {
   });
 
   const { data: categories = [] } = useTicketCategories();
+  const { data: adminUsers = [] } = useAdminUsers();
   const { data: tickets, isLoading } = useTickets({
     status: filters.status || undefined,
     category: filters.category || undefined,
     priority: filters.priority || undefined,
     search: filters.search || undefined,
   });
+
+  // Create a map of user IDs to names for quick lookup
+  const userNameMap = useMemo(() => {
+    const map: Record<string, string> = {};
+    adminUsers.forEach((user) => {
+      map[user.id] = user.name;
+    });
+    return map;
+  }, [adminUsers]);
 
   const clearFilters = () => {
     setFilters({ status: "", category: "", priority: "", search: "" });
@@ -148,7 +158,13 @@ export default function TicketList() {
               ))}
             </div>
           ) : tickets && tickets.length > 0 ? (
-            tickets.map((ticket) => <TicketCard key={ticket.id} ticket={ticket} />)
+            tickets.map((ticket) => (
+              <TicketCard
+                key={ticket.id}
+                ticket={ticket}
+                assigneeName={ticket.assigned_to ? userNameMap[ticket.assigned_to] : undefined}
+              />
+            ))
           ) : (
             <Card>
               <CardContent className="py-12 text-center">

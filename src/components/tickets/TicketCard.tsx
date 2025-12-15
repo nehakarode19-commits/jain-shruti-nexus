@@ -8,6 +8,7 @@ import { ChevronRight, User } from "lucide-react";
 
 interface TicketCardProps {
   ticket: Ticket;
+  assigneeName?: string;
 }
 
 const priorityColors = {
@@ -33,7 +34,7 @@ const statusLabels = {
   closed: "Closed",
 };
 
-export function TicketCard({ ticket }: TicketCardProps) {
+export function TicketCard({ ticket, assigneeName }: TicketCardProps) {
   return (
     <Link to={`/tickets/${ticket.id}`}>
       <Card className="hover:shadow-md transition-shadow cursor-pointer group">
@@ -68,9 +69,9 @@ export function TicketCard({ ticket }: TicketCardProps) {
                 )}
                 <span>{format(new Date(ticket.created_at), "MMM dd, yyyy HH:mm")}</span>
                 {ticket.assigned_to && (
-                  <span className="flex items-center gap-1">
+                  <span className="flex items-center gap-1 bg-green-100 text-green-700 px-2 py-0.5 rounded">
                     <User className="h-3 w-3" />
-                    Assigned
+                    {assigneeName || "Assigned"}
                   </span>
                 )}
               </div>
