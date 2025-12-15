@@ -13,57 +13,65 @@ import {
   GraduationCap,
   X,
   Users,
+  ClipboardList,
+  PlayCircle,
+  Upload,
+  UserCheck,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
-const studentNavItems = [
+// Admin/Faculty navigation items
+const adminNavItems = [
   { icon: LayoutDashboard, label: "Dashboard", href: "/learning/dashboard" },
-  { icon: BookOpen, label: "My Courses", href: "/learning/my-courses" },
+  { icon: BookOpen, label: "Courses", href: "/learning/courses-manage" },
+  { icon: Video, label: "Lectures", href: "/learning/lectures" },
+  { icon: FileText, label: "Study Materials", href: "/learning/materials" },
+  { icon: Users, label: "Students", href: "/learning/students" },
+  { icon: ClipboardList, label: "Attendance", href: "/learning/attendance" },
   { icon: Calendar, label: "Schedule", href: "/learning/schedule" },
-  { icon: Video, label: "Recordings", href: "/learning/recordings" },
-  { icon: FileText, label: "Materials", href: "/learning/materials" },
-  { icon: BarChart3, label: "Progress", href: "/learning/progress" },
+  { icon: BarChart3, label: "Reports", href: "/learning/reports" },
   { icon: Settings, label: "Settings", href: "/learning/settings" },
 ];
 
-const instructorNavItems = [
-  { icon: LayoutDashboard, label: "Dashboard", href: "/learning/instructor" },
-  { icon: BookOpen, label: "My Courses", href: "/learning/instructor/courses" },
-  { icon: Users, label: "Students", href: "/learning/instructor/students" },
-  { icon: Calendar, label: "Schedule", href: "/learning/instructor/schedule" },
-  { icon: FileText, label: "Materials", href: "/learning/instructor/materials" },
-  { icon: BarChart3, label: "Reports", href: "/learning/instructor/reports" },
-  { icon: Settings, label: "Settings", href: "/learning/settings" },
+// Student navigation items
+const studentNavItems = [
+  { icon: LayoutDashboard, label: "My Dashboard", href: "/learning/student" },
+  { icon: BookOpen, label: "My Courses", href: "/learning/my-courses" },
+  { icon: Calendar, label: "Schedule", href: "/learning/my-schedule" },
+  { icon: PlayCircle, label: "Recordings", href: "/learning/recordings" },
+  { icon: FileText, label: "Materials", href: "/learning/my-materials" },
+  { icon: BarChart3, label: "My Progress", href: "/learning/progress" },
 ];
 
 interface LearningSidebarProps {
   onClose?: () => void;
-  isInstructor?: boolean;
 }
 
-export function LearningSidebar({ onClose, isInstructor = false }: LearningSidebarProps) {
+export function LearningSidebar({ onClose }: LearningSidebarProps) {
   const location = useLocation();
-  const { user, logout } = useAdminAuth();
+  const { user, logout, hasRole } = useAdminAuth();
 
-  const navItems = isInstructor ? instructorNavItems : studentNavItems;
+  // LMS role users and admins get admin view, others get student view
+  const isAdmin = hasRole(["lms", "admin", "superadmin"]);
+  const navItems = isAdmin ? adminNavItems : studentNavItems;
 
   const handleLogout = async () => {
     await logout();
-    window.location.href = "/learning";
+    window.location.href = "/auth";
   };
 
   return (
     <aside className="w-72 lg:w-64 min-h-screen bg-primary text-primary-foreground flex flex-col">
       {/* Logo/Brand */}
       <div className="p-4 sm:p-6 border-b border-primary-foreground/10 flex items-center justify-between">
-        <Link to="/learning" className="flex items-center gap-3" onClick={onClose}>
+        <Link to="/learning/dashboard" className="flex items-center gap-3" onClick={onClose}>
           <div className="w-10 h-10 rounded-xl bg-orange/20 flex items-center justify-center">
             <GraduationCap className="h-6 w-6 text-orange" />
           </div>
           <div>
             <h1 className="font-heading text-lg font-bold text-white">Learning Portal</h1>
-            <p className="text-xs text-white/60">Jambushrusti</p>
+            <p className="text-xs text-white/60">Jambushrusti LMS</p>
           </div>
         </Link>
         {onClose && (
@@ -84,13 +92,20 @@ export function LearningSidebar({ onClose, isInstructor = false }: LearningSideb
           <Avatar className="h-10 w-10 border-2 border-orange/30">
             <AvatarImage src={user?.avatar} />
             <AvatarFallback className="bg-orange/20 text-orange font-semibold">
-              {user?.name?.charAt(0).toUpperCase() || "S"}
+              {user?.name?.charAt(0).toUpperCase() || "U"}
             </AvatarFallback>
           </Avatar>
           <div className="flex-1 min-w-0">
-            <p className="text-sm font-medium text-white truncate">{user?.name || "Student"}</p>
-            <p className="text-xs text-white/60 truncate">{user?.email}</p>
+            <p className="text-sm font-medium text-white truncate">{user?.name || "User"}</p>
+            <p className="text-xs text-white/60 truncate capitalize">{user?.role || "Student"}</p>
           </div>
+        </div>
+      </div>
+
+      {/* Role Badge */}
+      <div className="px-4 py-2">
+        <div className="px-3 py-1.5 rounded-lg bg-orange/20 text-orange text-xs font-medium text-center">
+          {isAdmin ? "Admin / Faculty" : "Student"}
         </div>
       </div>
 
@@ -98,7 +113,7 @@ export function LearningSidebar({ onClose, isInstructor = false }: LearningSideb
       <nav className="flex-1 p-3 sm:p-4 space-y-1 overflow-auto">
         {navItems.map((item) => {
           const isActive = location.pathname === item.href || 
-            (item.href !== "/learning/dashboard" && location.pathname.startsWith(item.href));
+            (item.href !== "/learning/dashboard" && item.href !== "/learning/student" && location.pathname.startsWith(item.href));
           
           return (
             <Link
@@ -119,7 +134,7 @@ export function LearningSidebar({ onClose, isInstructor = false }: LearningSideb
         })}
       </nav>
 
-      {/* Browse Courses Link */}
+      {/* Browse All Courses */}
       <div className="p-4 border-t border-primary-foreground/10">
         <Link
           to="/learning/courses"
