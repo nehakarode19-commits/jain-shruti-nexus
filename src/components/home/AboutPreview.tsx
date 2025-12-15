@@ -17,7 +17,7 @@ const teachings = [
   },
   {
     icon: Building2,
-    title: "Gyan Kendra",
+    title: "Research Center",
     description: "Digital museum preserving Gurudev's legacy",
     href: "/about/gyan-kendra",
   },
@@ -106,7 +106,7 @@ export function AboutPreview() {
                 className="px-5 py-2.5 text-sm text-[#5A5650] bg-white border border-[#E5E0D5] rounded-full hover:bg-gray-50 transition-colors"
                 style={{ fontFamily: 'Inter, sans-serif' }}
               >
-                Gyan Kendra
+                Research Center
               </Link>
             </div>
           </div>

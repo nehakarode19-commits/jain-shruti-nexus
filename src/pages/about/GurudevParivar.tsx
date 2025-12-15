@@ -222,7 +222,7 @@ const GurudevParivar = () => {
             Learn More About Our Spiritual Heritage
           </h2>
           <p className="text-muted-foreground mb-6 max-w-xl mx-auto">
-            Explore Gurudev's life, teachings, and the Gyan Kendra dedicated to preserving his legacy
+            Explore Gurudev's life, teachings, and the Muni Jambuvijayaji Research Center dedicated to preserving his legacy
           </p>
           <div className="flex flex-wrap justify-center gap-4">
             <Button variant="hero" asChild>
@@ -233,7 +233,7 @@ const GurudevParivar = () => {
             </Button>
             <Button variant="outline" asChild>
               <Link to="/about/gyan-kendra">
-                Visit Gyan Kendra
+                Visit Research Center
                 <ArrowRight className="h-4 w-4 ml-2" />
               </Link>
             </Button>

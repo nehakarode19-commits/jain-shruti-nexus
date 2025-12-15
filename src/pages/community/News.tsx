@@ -37,7 +37,7 @@ const newsItems = [
     title: "New Manuscript Collection Added to Digital Archive",
     titleEn: "New Manuscript Collection Added to Digital Archive",
     date: "October 15, 2024",
-    location: "Gyan Kendra",
+    location: "Muni Jambuvijayaji Research Center",
     description: "50 new rare manuscripts have been digitized and added to our searchable online collection.",
     image: "https://siddhijambuparivar.com/wp-content/uploads/2022/11/99-min.jpg",
     type: "Update"

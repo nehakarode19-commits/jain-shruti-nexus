@@ -308,7 +308,7 @@ const AboutGurudev = () => {
             </Button>
             <Button variant="outline" asChild>
               <Link to="/about/gyan-kendra">
-                Gyan Kendra
+                Research Center
                 <ArrowRight className="h-4 w-4 ml-2" />
               </Link>
             </Button>
