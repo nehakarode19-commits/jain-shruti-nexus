@@ -35,7 +35,7 @@ const visionItems = [
 const sections = [
   {
     icon: Scroll,
-    title: "Gurudev Muni Jambuvijayji",
+    title: "Gurudev Muni Jambuvijayji Maharaj Saheb",
     description: "Explore the life, teachings, and legacy of the revered Jain saint and scholar",
     href: "/about/gurudev",
   },
