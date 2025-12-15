@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
-import { Scroll, Mail, MapPin, Phone, ExternalLink, Clock, Facebook, Twitter, Youtube, Send } from "lucide-react";
+import { Scroll, Mail, MapPin, Phone, ExternalLink, Clock, Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { SocialLinks } from "@/components/social/SocialLinks";
 
 const footerLinks = {
   about: [
@@ -33,11 +34,6 @@ const footerLinks = {
   ],
 };
 
-const socialLinks = [
-  { icon: Facebook, href: "https://facebook.com", label: "Facebook" },
-  { icon: Twitter, href: "https://twitter.com", label: "Twitter" },
-  { icon: Youtube, href: "https://youtube.com", label: "YouTube" },
-];
 
 export function Footer() {
   return (
@@ -110,20 +106,7 @@ export function Footer() {
             </div>
 
             {/* Social Links */}
-            <div className="flex items-center gap-3 mt-6">
-              {socialLinks.map((social) => (
-                <a
-                  key={social.label}
-                  href={social.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary hover:bg-primary hover:text-primary-foreground transition-all duration-300"
-                  aria-label={social.label}
-                >
-                  <social.icon className="h-5 w-5" />
-                </a>
-              ))}
-            </div>
+            <SocialLinks className="mt-6" />
           </div>
 
           {/* About Links */}

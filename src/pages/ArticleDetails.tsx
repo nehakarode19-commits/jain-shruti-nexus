@@ -5,6 +5,7 @@ import { SimilarItems } from "@/components/ui/similar-items";
 import { useArticlesFromDB } from "@/hooks/useContent";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { SocialShareButtons } from "@/components/social/SocialShareButtons";
 import { 
   ArrowLeft, 
   Download, 
@@ -128,6 +129,15 @@ const ArticleDetails = () => {
                     <Badge variant="secondary">{article.category}</Badge>
                   </div>
                 )}
+                
+                {/* Share Buttons */}
+                <div className="pt-4 border-t border-border mt-4">
+                  <SocialShareButtons 
+                    title={article.title}
+                    description={article.excerpt || ''}
+                    compact
+                  />
+                </div>
               </div>
             </div>
           </div>

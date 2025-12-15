@@ -5,6 +5,7 @@ import { SimilarItems } from "@/components/ui/similar-items";
 import { useBooksFromDB } from "@/hooks/useContent";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { SocialShareButtons } from "@/components/social/SocialShareButtons";
 import { 
   ArrowLeft, 
   Download, 
@@ -162,9 +163,18 @@ const BookDetails = () => {
                   <div className="flex items-center gap-2">
                     <Globe className="h-4 w-4 text-muted-foreground" />
                     <span className="text-sm text-muted-foreground font-body">Language:</span>
-                    <Badge variant="outline">{book.language}</Badge>
+                  <Badge variant="outline">{book.language}</Badge>
                   </div>
                 )}
+              </div>
+              
+              {/* Share Buttons */}
+              <div className="pt-4 border-t border-border mt-4">
+                <SocialShareButtons 
+                  title={book.title}
+                  description={book.description || ''}
+                  compact
+                />
               </div>
             </div>
           </div>
