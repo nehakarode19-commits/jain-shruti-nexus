@@ -36,7 +36,7 @@ export function Footer() {
             
             <p className="font-body text-background/70 leading-relaxed text-sm max-w-sm">
               Preserving and sharing the timeless wisdom of Jain philosophy through 
-              Gurudev Muni Jambuvijayji Maharaj Saheb's teachings, research tools, and scholarly resources.
+              Gurudev Muni Jambuvijayaji Maharaj Saheb's teachings, research tools, and scholarly resources.
             </p>
 
             {/* Social Links - Horizontal */}
@@ -76,7 +76,7 @@ export function Footer() {
                   <MapPin className="h-5 w-5 text-background/80" />
                 </div>
                 <div className="font-body text-sm text-background/70 leading-relaxed">
-                  <p>Muni Jambuvijayji Gyan Mandir,</p>
+                  <p>Muni Jambuvijayaji Gyan Mandir,</p>
                   <p>Near Adani Shantigram Jain Temple,</p>
                   <p>Adani Shantigram Township,</p>
                   <p>Ahmedabad 382 421</p>

@@ -35,14 +35,14 @@ export function AboutPreview() {
                 About Gurudev
               </p>
               <h2 className="text-3xl md:text-4xl font-bold text-[#2D2A26] leading-tight" style={{ fontFamily: 'Playfair Display, serif' }}>
-                Gurudev Muni Jambuvijayji Maharaj Saheb
+                Gurudev Muni Jambuvijayaji Maharaj Saheb
               </h2>
             </div>
 
             <p className="text-[15px] leading-relaxed text-[#5A5650]" style={{ fontFamily: 'Inter, sans-serif' }}>
-              Jambuvijayji Maharaj Saheb (1923–2009), also known as Muni Jambuvijayji 
+              Muni Jambuvijayaji Maharaj Saheb (1923–2009), also known as Gurudev Muni Jambuvijayaji 
               Maharajsaheb, was a monk belonging to the Tapa Gaccha order of 
-              Shwetambar sect of Jainism. Jambuvijayji was born as Chunilal Bhogilal 
+              Shwetambar sect of Jainism. Muni Jambuvijayaji was born as Chunilal Bhogilal 
               Joitram in 1923 in town of Mandal, Gujarat. His father's name was Bhogilal 
               Mohanlal Joitram (1895–1959) and his mother's name was Aniben Popatlal 
               (1894–1995). He was born into a deeply religious family.
@@ -58,7 +58,7 @@ export function AboutPreview() {
                     contemplation, we illuminate the darkness of ignorance."
                   </p>
                   <p className="mt-3 text-sm font-medium text-[#8B8B8B]" style={{ fontFamily: 'Inter, sans-serif' }}>
-                    — Gurudev Muni Jambuvijayji Maharaj Saheb
+                    — Gurudev Muni Jambuvijayaji Maharaj Saheb
                   </p>
                 </div>
               </div>
@@ -117,7 +117,7 @@ export function AboutPreview() {
             <div className="grid grid-cols-3 gap-3">
               <img
                 src="https://siddhijambuparivar.com/wp-content/uploads/2022/11/96-min.jpg"
-                alt="Gurudev Muni Jambuvijayji Maharaj Saheb"
+                alt="Gurudev Muni Jambuvijayaji Maharaj Saheb"
                 className="w-full h-52 object-cover object-top rounded-xl"
               />
               <img

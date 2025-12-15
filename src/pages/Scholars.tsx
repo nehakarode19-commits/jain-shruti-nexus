@@ -269,7 +269,7 @@ const Scholars = () => {
     <Layout>
       <SEO 
         title="Scholars & Researchers"
-        description="Join our global community of Jain scholars dedicated to preserving and studying the teachings of Gurudev Muni Jambuvijayji Maharaj Saheb."
+        description="Join our global community of Jain scholars dedicated to preserving and studying the teachings of Gurudev Muni Jambuvijayaji Maharaj Saheb."
       />
       {/* Enhanced Hero */}
       <section className="py-16 lg:py-24 bg-gradient-hero lotus-pattern relative overflow-hidden">
@@ -750,7 +750,7 @@ const Scholars = () => {
               "The pursuit of knowledge is the path to liberation."
             </blockquote>
             <p className="font-heading text-sm font-semibold text-foreground">
-              — Gurudev Muni Jambuvijayji Maharaj Saheb
+              — Gurudev Muni Jambuvijayaji Maharaj Saheb
             </p>
             <div className="h-px w-16 bg-primary/30 mx-auto mt-6" />
           </AnimatedContainer>

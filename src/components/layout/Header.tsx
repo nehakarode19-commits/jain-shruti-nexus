@@ -29,8 +29,8 @@ const navigationItems = [
     href: "/about",
     items: [
       { title: "About Jambushrusti", href: "/about", description: "Vision & mission of our platform" },
-      { title: "Gurudev Muni Jambuvijayji", href: "/about/gurudev", description: "Life journey & spiritual contributions" },
-      { title: "Muni Jambuvijayaji's Legacy", href: "/about/parivar", description: "Lineage & disciples" },
+      { title: "Gurudev Muni Jambuvijayaji", href: "/about/gurudev", description: "Life journey & spiritual contributions" },
+      { title: "Legacy of Pujyapad Muni Jambuvijayaji Maharaj", href: "/about/parivar", description: "Lineage & disciples" },
       { title: "Muni Jambuvijayaji Research Center", href: "/about/gyan-kendra", description: "Digital museum of teachings" },
       { title: "Photo Gallery", href: "/gallery", description: "Rare photographs from Gurudev's life" },
     ],
