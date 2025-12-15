@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { LearningLayout } from "@/components/learning/LearningLayout";
 import { SEO } from "@/components/shared/SEO";
-import { useEnrollments } from "@/hooks/useLMS";
+import { useEnrollments, useAdminCourses } from "@/hooks/useLMS";
 import { useAdminAuth } from "@/contexts/AdminAuthContext";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -17,6 +17,9 @@ import {
   FileText,
   ChevronRight,
   TrendingUp,
+  Plus,
+  Users,
+  Settings,
 } from "lucide-react";
 import { Skeleton } from "@/components/ui/skeleton";
 
@@ -39,8 +42,11 @@ const upcomingSessions = [
 ];
 
 export default function StudentDashboard() {
-  const { user } = useAdminAuth();
+  const { user, hasRole } = useAdminAuth();
   const { data: enrollments, isLoading } = useEnrollments();
+  const { data: courses = [] } = useAdminCourses();
+
+  const isAdmin = hasRole(["lms", "admin", "superadmin"]);
 
   const stats = {
     enrolledCourses: enrollments?.length || 0,
@@ -49,10 +55,18 @@ export default function StudentDashboard() {
     certificates: 0,
   };
 
+  // Admin stats
+  const adminStats = {
+    totalCourses: courses.length,
+    publishedCourses: courses.filter(c => c.is_published).length,
+    totalStudents: 156,
+    totalEnrollments: 423,
+  };
+
   return (
-    <LearningLayout title="Student Dashboard">
+    <LearningLayout title={isAdmin ? "Admin Dashboard" : "Student Dashboard"}>
       <SEO
-        title="Student Dashboard | Jambushrusti Learning Portal"
+        title={`${isAdmin ? "Admin" : "Student"} Dashboard | Jambushrusti Learning Portal`}
         description="Access your enrolled courses, track progress, and view upcoming lectures."
       />
 
@@ -62,71 +76,136 @@ export default function StudentDashboard() {
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
             <div>
               <h1 className="font-heading text-2xl md:text-3xl font-bold text-foreground">
-                Welcome back, {user?.name?.split(" ")[0] || "Student"}!
+                Welcome back, {user?.name?.split(" ")[0] || (isAdmin ? "Admin" : "Student")}!
               </h1>
               <p className="text-muted-foreground mt-1">
-                Continue your learning journey with Jain knowledge and wisdom.
+                {isAdmin 
+                  ? "Manage courses, lectures, and student learning progress."
+                  : "Continue your learning journey with Jain knowledge and wisdom."
+                }
               </p>
             </div>
-            <Button asChild>
-              <Link to="/learning/courses">
-                <BookOpen className="h-4 w-4 mr-2" />
-                Browse Courses
-              </Link>
-            </Button>
+            <div className="flex gap-2">
+              {isAdmin && (
+                <Button asChild>
+                  <Link to="/learning/manage-courses">
+                    <Plus className="h-4 w-4 mr-2" />
+                    Add Course
+                  </Link>
+                </Button>
+              )}
+              <Button variant={isAdmin ? "outline" : "default"} asChild>
+                <Link to="/learning/courses">
+                  <BookOpen className="h-4 w-4 mr-2" />
+                  Browse Courses
+                </Link>
+              </Button>
+            </div>
           </div>
         </div>
 
-        {/* Stats Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          <Card>
-            <CardContent className="p-4 flex items-center gap-4">
-              <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
-                <GraduationCap className="h-6 w-6 text-primary" />
-              </div>
-              <div>
-                <p className="text-2xl font-bold text-foreground">{stats.enrolledCourses}</p>
-                <p className="text-sm text-muted-foreground">Enrolled Courses</p>
-              </div>
-            </CardContent>
-          </Card>
+        {/* Stats Grid - Different for Admin vs Student */}
+        {isAdmin ? (
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <Card>
+              <CardContent className="p-4 flex items-center gap-4">
+                <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
+                  <BookOpen className="h-6 w-6 text-primary" />
+                </div>
+                <div>
+                  <p className="text-2xl font-bold text-foreground">{adminStats.totalCourses}</p>
+                  <p className="text-sm text-muted-foreground">Total Courses</p>
+                </div>
+              </CardContent>
+            </Card>
 
-          <Card>
-            <CardContent className="p-4 flex items-center gap-4">
-              <div className="w-12 h-12 rounded-xl bg-green-100 flex items-center justify-center">
-                <Video className="h-6 w-6 text-green-600" />
-              </div>
-              <div>
-                <p className="text-2xl font-bold text-foreground">{stats.completedLectures}</p>
-                <p className="text-sm text-muted-foreground">Completed</p>
-              </div>
-            </CardContent>
-          </Card>
+            <Card>
+              <CardContent className="p-4 flex items-center gap-4">
+                <div className="w-12 h-12 rounded-xl bg-green-100 flex items-center justify-center">
+                  <TrendingUp className="h-6 w-6 text-green-600" />
+                </div>
+                <div>
+                  <p className="text-2xl font-bold text-foreground">{adminStats.publishedCourses}</p>
+                  <p className="text-sm text-muted-foreground">Published</p>
+                </div>
+              </CardContent>
+            </Card>
 
-          <Card>
-            <CardContent className="p-4 flex items-center gap-4">
-              <div className="w-12 h-12 rounded-xl bg-orange/10 flex items-center justify-center">
-                <Clock className="h-6 w-6 text-orange" />
-              </div>
-              <div>
-                <p className="text-2xl font-bold text-foreground">{stats.hoursLearned}</p>
-                <p className="text-sm text-muted-foreground">Hours Learned</p>
-              </div>
-            </CardContent>
-          </Card>
+            <Card>
+              <CardContent className="p-4 flex items-center gap-4">
+                <div className="w-12 h-12 rounded-xl bg-orange/10 flex items-center justify-center">
+                  <Users className="h-6 w-6 text-orange" />
+                </div>
+                <div>
+                  <p className="text-2xl font-bold text-foreground">{adminStats.totalStudents}</p>
+                  <p className="text-sm text-muted-foreground">Total Students</p>
+                </div>
+              </CardContent>
+            </Card>
 
-          <Card>
-            <CardContent className="p-4 flex items-center gap-4">
-              <div className="w-12 h-12 rounded-xl bg-purple-100 flex items-center justify-center">
-                <FileText className="h-6 w-6 text-purple-600" />
-              </div>
-              <div>
-                <p className="text-2xl font-bold text-foreground">{stats.certificates}</p>
-                <p className="text-sm text-muted-foreground">Certificates</p>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
+            <Card>
+              <CardContent className="p-4 flex items-center gap-4">
+                <div className="w-12 h-12 rounded-xl bg-purple-100 flex items-center justify-center">
+                  <GraduationCap className="h-6 w-6 text-purple-600" />
+                </div>
+                <div>
+                  <p className="text-2xl font-bold text-foreground">{adminStats.totalEnrollments}</p>
+                  <p className="text-sm text-muted-foreground">Enrollments</p>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        ) : (
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <Card>
+              <CardContent className="p-4 flex items-center gap-4">
+                <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
+                  <GraduationCap className="h-6 w-6 text-primary" />
+                </div>
+                <div>
+                  <p className="text-2xl font-bold text-foreground">{stats.enrolledCourses}</p>
+                  <p className="text-sm text-muted-foreground">Enrolled Courses</p>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardContent className="p-4 flex items-center gap-4">
+                <div className="w-12 h-12 rounded-xl bg-green-100 flex items-center justify-center">
+                  <Video className="h-6 w-6 text-green-600" />
+                </div>
+                <div>
+                  <p className="text-2xl font-bold text-foreground">{stats.completedLectures}</p>
+                  <p className="text-sm text-muted-foreground">Completed</p>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardContent className="p-4 flex items-center gap-4">
+                <div className="w-12 h-12 rounded-xl bg-orange/10 flex items-center justify-center">
+                  <Clock className="h-6 w-6 text-orange" />
+                </div>
+                <div>
+                  <p className="text-2xl font-bold text-foreground">{stats.hoursLearned}</p>
+                  <p className="text-sm text-muted-foreground">Hours Learned</p>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardContent className="p-4 flex items-center gap-4">
+                <div className="w-12 h-12 rounded-xl bg-purple-100 flex items-center justify-center">
+                  <FileText className="h-6 w-6 text-purple-600" />
+                </div>
+                <div>
+                  <p className="text-2xl font-bold text-foreground">{stats.certificates}</p>
+                  <p className="text-sm text-muted-foreground">Certificates</p>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        )}
 
         <div className="grid lg:grid-cols-3 gap-6">
           {/* My Courses */}
@@ -246,7 +325,7 @@ export default function StudentDashboard() {
           </div>
         </div>
 
-        {/* Quick Actions */}
+        {/* Quick Actions - Different for Admin vs Student */}
         <Card>
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
@@ -255,32 +334,61 @@ export default function StudentDashboard() {
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-              <Button variant="outline" className="h-auto py-4 flex-col gap-2" asChild>
-                <Link to="/learning/schedule">
-                  <Video className="h-6 w-6" />
-                  <span className="text-sm">Watch Recordings</span>
-                </Link>
-              </Button>
-              <Button variant="outline" className="h-auto py-4 flex-col gap-2" asChild>
-                <Link to="/learning/materials">
-                  <FileText className="h-6 w-6" />
-                  <span className="text-sm">Study Materials</span>
-                </Link>
-              </Button>
-              <Button variant="outline" className="h-auto py-4 flex-col gap-2" asChild>
-                <Link to="/learning/reports">
-                  <TrendingUp className="h-6 w-6" />
-                  <span className="text-sm">View Progress</span>
-                </Link>
-              </Button>
-              <Button variant="outline" className="h-auto py-4 flex-col gap-2" asChild>
-                <Link to="/learning/courses">
-                  <BookOpen className="h-6 w-6" />
-                  <span className="text-sm">Browse Courses</span>
-                </Link>
-              </Button>
-            </div>
+            {isAdmin ? (
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <Button variant="outline" className="h-auto py-4 flex-col gap-2" asChild>
+                  <Link to="/learning/manage-courses">
+                    <Plus className="h-6 w-6" />
+                    <span className="text-sm">Add Course</span>
+                  </Link>
+                </Button>
+                <Button variant="outline" className="h-auto py-4 flex-col gap-2" asChild>
+                  <Link to="/learning/manage-lectures">
+                    <Video className="h-6 w-6" />
+                    <span className="text-sm">Add Lecture</span>
+                  </Link>
+                </Button>
+                <Button variant="outline" className="h-auto py-4 flex-col gap-2" asChild>
+                  <Link to="/learning/students">
+                    <Users className="h-6 w-6" />
+                    <span className="text-sm">Manage Students</span>
+                  </Link>
+                </Button>
+                <Button variant="outline" className="h-auto py-4 flex-col gap-2" asChild>
+                  <Link to="/learning/settings">
+                    <Settings className="h-6 w-6" />
+                    <span className="text-sm">LMS Settings</span>
+                  </Link>
+                </Button>
+              </div>
+            ) : (
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <Button variant="outline" className="h-auto py-4 flex-col gap-2" asChild>
+                  <Link to="/learning/schedule">
+                    <Video className="h-6 w-6" />
+                    <span className="text-sm">Watch Recordings</span>
+                  </Link>
+                </Button>
+                <Button variant="outline" className="h-auto py-4 flex-col gap-2" asChild>
+                  <Link to="/learning/materials">
+                    <FileText className="h-6 w-6" />
+                    <span className="text-sm">Study Materials</span>
+                  </Link>
+                </Button>
+                <Button variant="outline" className="h-auto py-4 flex-col gap-2" asChild>
+                  <Link to="/learning/reports">
+                    <TrendingUp className="h-6 w-6" />
+                    <span className="text-sm">View Progress</span>
+                  </Link>
+                </Button>
+                <Button variant="outline" className="h-auto py-4 flex-col gap-2" asChild>
+                  <Link to="/learning/courses">
+                    <BookOpen className="h-6 w-6" />
+                    <span className="text-sm">Browse Courses</span>
+                  </Link>
+                </Button>
+              </div>
+            )}
           </CardContent>
         </Card>
       </div>
