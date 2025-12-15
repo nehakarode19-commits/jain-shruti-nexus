@@ -111,7 +111,7 @@ const ScheduleManage = () => {
               </SelectContent>
             </Select>
             <Button asChild className="gap-2">
-              <Link to="/learning/lectures">
+              <Link to="/learning/manage-lectures">
                 <Plus className="h-4 w-4" />
                 Schedule Lecture
               </Link>
@@ -134,7 +134,7 @@ const ScheduleManage = () => {
                 <Calendar className="h-12 w-12 mx-auto mb-4 opacity-50" />
                 <p>No upcoming lectures scheduled</p>
                 <Button className="mt-4" variant="outline" asChild>
-                  <Link to="/learning/lectures">Schedule a Lecture</Link>
+                  <Link to="/learning/manage-lectures">Schedule a Lecture</Link>
                 </Button>
               </div>
             ) : (
