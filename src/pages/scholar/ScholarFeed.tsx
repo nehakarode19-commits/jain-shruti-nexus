@@ -17,7 +17,8 @@ import {
   Bookmark,
   MoreHorizontal,
   TrendingUp,
-  Clock
+  Clock,
+  Star
 } from "lucide-react";
 import { useAdminAuth } from "@/contexts/AdminAuthContext";
 
@@ -161,6 +162,10 @@ export default function ScholarFeed() {
               Trending
             </TabsTrigger>
             <TabsTrigger value="following">Following</TabsTrigger>
+            <TabsTrigger value="favorites" className="flex items-center gap-2">
+              <Star className="h-4 w-4" />
+              Favorites
+            </TabsTrigger>
           </TabsList>
 
           <TabsContent value="all" className="mt-4 space-y-4">
@@ -266,6 +271,105 @@ export default function ScholarFeed() {
             <div className="text-center py-8 text-muted-foreground">
               Follow scholars to see their posts here
             </div>
+          </TabsContent>
+
+          <TabsContent value="favorites" className="mt-4 space-y-4">
+            {feedPosts.filter(post => post.isBookmarked).length > 0 ? (
+              feedPosts.filter(post => post.isBookmarked).map((post) => (
+                <Card key={post.id} className="overflow-hidden">
+                  <CardHeader className="p-4 pb-0">
+                    <div className="flex items-start justify-between">
+                      <div className="flex items-center gap-3">
+                        <Avatar className="h-12 w-12">
+                          {post.author.avatar ? (
+                            <AvatarImage src={post.author.avatar} />
+                          ) : null}
+                          <AvatarFallback className="bg-primary/10 text-primary">
+                            {post.author.name.charAt(0)}
+                          </AvatarFallback>
+                        </Avatar>
+                        <div>
+                          <div className="flex items-center gap-2">
+                            <h4 className="font-semibold">{post.author.name}</h4>
+                            <Badge 
+                              variant="secondary" 
+                              className={`text-xs ${
+                                post.author.badge === "Announcement" 
+                                  ? "bg-gold/10 text-gold" 
+                                  : ""
+                              }`}
+                            >
+                              {post.author.badge}
+                            </Badge>
+                          </div>
+                          <p className="text-sm text-muted-foreground">
+                            {post.author.affiliation} · {post.timestamp}
+                          </p>
+                        </div>
+                      </div>
+                      <Button variant="ghost" size="icon">
+                        <MoreHorizontal className="h-5 w-5" />
+                      </Button>
+                    </div>
+                  </CardHeader>
+                  <CardContent className="p-4">
+                    <p className="text-foreground whitespace-pre-wrap mb-3">{post.content}</p>
+                    
+                    {post.image && (
+                      <div className="rounded-xl overflow-hidden mb-3">
+                        <img 
+                          src={post.image} 
+                          alt="Post image" 
+                          className="w-full h-64 object-cover"
+                        />
+                      </div>
+                    )}
+
+                    <div className="flex flex-wrap gap-2 mb-4">
+                      {post.tags.map((tag) => (
+                        <Badge key={tag} variant="outline" className="text-xs cursor-pointer hover:bg-primary/10">
+                          #{tag}
+                        </Badge>
+                      ))}
+                    </div>
+
+                    <div className="flex items-center justify-between pt-3 border-t">
+                      <div className="flex items-center gap-1">
+                        <Button 
+                          variant="ghost" 
+                          size="sm"
+                          className={post.isLiked ? "text-red-500" : ""}
+                        >
+                          <Heart className={`h-4 w-4 mr-1 ${post.isLiked ? "fill-current" : ""}`} />
+                          {post.likes}
+                        </Button>
+                        <Button variant="ghost" size="sm">
+                          <MessageSquare className="h-4 w-4 mr-1" />
+                          {post.comments}
+                        </Button>
+                        <Button variant="ghost" size="sm">
+                          <Share2 className="h-4 w-4 mr-1" />
+                          {post.shares}
+                        </Button>
+                      </div>
+                      <Button 
+                        variant="ghost" 
+                        size="icon"
+                        className="text-gold"
+                      >
+                        <Bookmark className="h-5 w-5 fill-current" />
+                      </Button>
+                    </div>
+                  </CardContent>
+                </Card>
+              ))
+            ) : (
+              <div className="text-center py-8 text-muted-foreground">
+                <Star className="h-12 w-12 mx-auto mb-3 opacity-30" />
+                <p>No favorite posts yet</p>
+                <p className="text-sm">Bookmark posts to see them here</p>
+              </div>
+            )}
           </TabsContent>
         </Tabs>
       </div>
