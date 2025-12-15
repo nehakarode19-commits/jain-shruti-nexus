@@ -91,24 +91,23 @@ export function AdaniFoundation() {
               </div>
             </div>
 
-            {/* Organization Info */}
-            <div className="mt-6 pt-6 border-t border-[#E5E0D5]">
-              <div className="text-center space-y-2">
-                <p className="text-sm text-[#5A5650]" style={{ fontFamily: 'Inter, sans-serif' }}>
-                  <span className="font-semibold text-[#C9A227]">Founded by:</span>{" "}
-                  Srimati Shantaben Shantilal Bhudarmal Adani Family
-                </p>
-                <p className="text-sm text-[#5A5650]" style={{ fontFamily: 'Inter, sans-serif' }}>
-                  <span className="font-semibold text-[#2D2A26]">Muni Jambuvijayaji Gyankendra</span>{" "}
-                  (Muni Jambuvijayaji Research Centre)
-                </p>
-                <p className="text-sm text-[#5A5650]" style={{ fontFamily: 'Inter, sans-serif' }}>
-                  <span className="font-semibold text-[#C9A227]">Run by:</span>{" "}
-                  Sri Siddhi-Bhuvan-Manohar Jain Trust (Regd. No. 3402) Ahmedabad
-                </p>
-              </div>
-            </div>
           </div>
+        </div>
+
+        {/* Organization Info - Outside Card */}
+        <div className="mt-10 text-center space-y-3">
+          <p className="text-[15px] text-[#5A5650]" style={{ fontFamily: 'Inter, sans-serif' }}>
+            <span className="font-semibold text-[#C9A227]">Founded by:</span>{" "}
+            Srimati Shantaben Shantilal Bhudarmal Adani Family
+          </p>
+          <p className="text-[15px]" style={{ fontFamily: 'Inter, sans-serif' }}>
+            <span className="font-bold text-[#2D2A26]">Muni Jambuvijayaji Gyankendra</span>{" "}
+            <span className="text-[#5A5650]">(Muni Jambuvijayaji Research Centre)</span>
+          </p>
+          <p className="text-[15px] text-[#5A5650]" style={{ fontFamily: 'Inter, sans-serif' }}>
+            <span className="font-semibold text-[#C9A227]">Run by:</span>{" "}
+            Sri Siddhi-Bhuvan-Manohar Jain Trust (Regd. No. 3402) Ahmedabad
+          </p>
         </div>
       </div>
     </section>
