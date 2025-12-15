@@ -138,7 +138,7 @@ export default function StudentDashboard() {
                   My Courses
                 </CardTitle>
                 <Button variant="ghost" size="sm" asChild>
-                  <Link to="/learning/my-courses">
+                  <Link to="/learning/courses">
                     View All <ChevronRight className="h-4 w-4 ml-1" />
                   </Link>
                 </Button>
@@ -257,7 +257,7 @@ export default function StudentDashboard() {
           <CardContent>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               <Button variant="outline" className="h-auto py-4 flex-col gap-2" asChild>
-                <Link to="/learning/recordings">
+                <Link to="/learning/schedule">
                   <Video className="h-6 w-6" />
                   <span className="text-sm">Watch Recordings</span>
                 </Link>
@@ -269,7 +269,7 @@ export default function StudentDashboard() {
                 </Link>
               </Button>
               <Button variant="outline" className="h-auto py-4 flex-col gap-2" asChild>
-                <Link to="/learning/progress">
+                <Link to="/learning/reports">
                   <TrendingUp className="h-6 w-6" />
                   <span className="text-sm">View Progress</span>
                 </Link>
