@@ -16,6 +16,8 @@ export interface LMSCourse {
   thumbnail_url: string | null;
   is_published: boolean;
   is_restricted: boolean;
+  is_paid: boolean | null;
+  price: number | null;
   created_at: string;
   updated_at: string;
 }
