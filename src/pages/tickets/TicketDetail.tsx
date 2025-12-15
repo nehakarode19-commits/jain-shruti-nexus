@@ -9,6 +9,8 @@ import {
   useUpdateTicketStatus,
   useAddComment,
   useDeleteTicket,
+  useAssignTicket,
+  useAdminUsers,
 } from "@/hooks/useTickets";
 import { SLAIndicator } from "@/components/tickets/SLAIndicator";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -25,6 +27,7 @@ import {
   ArrowLeft,
   Clock,
   User,
+  UserCheck,
   MessageSquare,
   Activity,
   Trash2,
@@ -75,12 +78,27 @@ export default function TicketDetail() {
   const { data: comments = [] } = useTicketComments(id || "");
   const { data: activities = [] } = useTicketActivity(id || "");
 
+  const { data: adminUsers = [] } = useAdminUsers();
+
   const updateStatus = useUpdateTicketStatus();
   const addComment = useAddComment();
   const deleteTicket = useDeleteTicket();
+  const assignTicket = useAssignTicket();
 
   const [newComment, setNewComment] = useState("");
   const [isInternal, setIsInternal] = useState(false);
+
+  const handleAssign = async (userId: string) => {
+    if (id) {
+      await assignTicket.mutateAsync({ id, assignedTo: userId });
+    }
+  };
+
+  const getAssignedUserName = () => {
+    if (!ticket?.assigned_to) return null;
+    const user = adminUsers.find((u) => u.id === ticket.assigned_to);
+    return user?.name || "Unknown";
+  };
 
   const handleStatusChange = async (status: string) => {
     if (id) {
@@ -370,6 +388,44 @@ export default function TicketDetail() {
                 {ticket.sla_deadline && (
                   <p className="text-xs text-muted-foreground mt-2">
                     Deadline: {format(new Date(ticket.sla_deadline), "MMM dd, yyyy HH:mm")}
+                  </p>
+                )}
+              </CardContent>
+            </Card>
+
+            {/* Assignment */}
+            <Card>
+              <CardHeader className="pb-3">
+                <CardTitle className="text-base flex items-center gap-2">
+                  <UserCheck className="h-4 w-4" />
+                  Assignment
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-3">
+                <Select
+                  value={ticket.assigned_to || "unassigned"}
+                  onValueChange={(value) => handleAssign(value === "unassigned" ? "" : value)}
+                >
+                  <SelectTrigger className="w-full">
+                    <SelectValue placeholder="Assign to..." />
+                  </SelectTrigger>
+                  <SelectContent className="bg-background border shadow-lg z-50">
+                    <SelectItem value="unassigned">Unassigned</SelectItem>
+                    {adminUsers.map((user) => (
+                      <SelectItem key={user.id} value={user.id}>
+                        <div className="flex items-center gap-2">
+                          <span>{user.name}</span>
+                          <Badge variant="outline" className="text-xs capitalize">
+                            {user.role}
+                          </Badge>
+                        </div>
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+                {ticket.assigned_to && (
+                  <p className="text-xs text-muted-foreground">
+                    Currently assigned to: {getAssignedUserName()}
                   </p>
                 )}
               </CardContent>
