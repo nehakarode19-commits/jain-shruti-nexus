@@ -341,6 +341,39 @@ export type Database = {
         }
         Relationships: []
       }
+      social_media_settings: {
+        Row: {
+          created_at: string
+          display_order: number | null
+          icon_name: string | null
+          id: string
+          is_enabled: boolean | null
+          platform: string
+          updated_at: string
+          url: string | null
+        }
+        Insert: {
+          created_at?: string
+          display_order?: number | null
+          icon_name?: string | null
+          id?: string
+          is_enabled?: boolean | null
+          platform: string
+          updated_at?: string
+          url?: string | null
+        }
+        Update: {
+          created_at?: string
+          display_order?: number | null
+          icon_name?: string | null
+          id?: string
+          is_enabled?: boolean | null
+          platform?: string
+          updated_at?: string
+          url?: string | null
+        }
+        Relationships: []
+      }
       user_roles: {
         Row: {
           created_at: string

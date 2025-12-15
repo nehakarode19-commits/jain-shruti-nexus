@@ -6,6 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { useGuruvaniById } from "@/hooks/useGuruvani";
 import { useGuruvaniFromDB } from "@/hooks/useContent";
+import { SocialShareButtons } from "@/components/social/SocialShareButtons";
 import { 
   ArrowLeft, 
   BookOpen, 
@@ -17,7 +18,6 @@ import {
   Hash,
   Quote,
   ArrowRight,
-  Share2,
   Loader2
 } from "lucide-react";
 
@@ -216,13 +216,13 @@ const GuruvaniDetails = () => {
               </div>
             )}
 
-            {/* Share Button */}
+            {/* Share Buttons */}
             {!item.is_restricted && (
-              <div className="mt-8 flex justify-end animate-fade-up delay-300">
-                <Button variant="outline" size="sm">
-                  <Share2 className="h-4 w-4 mr-2" />
-                  Share
-                </Button>
+              <div className="mt-8 pt-6 border-t border-border animate-fade-up delay-300">
+                <SocialShareButtons 
+                  title={item.title}
+                  description={item.content?.substring(0, 200) || ''}
+                />
               </div>
             )}
           </div>

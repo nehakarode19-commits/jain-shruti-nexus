@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { useBlogsFromDB } from "@/hooks/useContent";
+import { SocialShareButtons } from "@/components/social/SocialShareButtons";
 import { 
   ArrowLeft, 
   Calendar, 
@@ -12,10 +13,6 @@ import {
   Clock,
   BookOpen,
   ArrowRight,
-  Share2,
-  Facebook,
-  Twitter,
-  Linkedin,
   Loader2
 } from "lucide-react";
 import { format } from "date-fns";
@@ -190,25 +187,10 @@ As we continue to study and apply these teachings, we honor the legacy of great 
 
             {/* Share Section */}
             <div className="mt-12 pt-8 border-t border-[#DCE3E7] animate-fade-up delay-200">
-              <div className="flex flex-wrap items-center justify-between gap-4">
-                <div className="flex items-center gap-2">
-                  <span className="text-sm text-[#555555]">Share this article:</span>
-                  <div className="flex gap-2">
-                    <Button variant="outline" size="icon" className="h-9 w-9 border-[#DCE3E7]">
-                      <Facebook className="h-4 w-4" />
-                    </Button>
-                    <Button variant="outline" size="icon" className="h-9 w-9 border-[#DCE3E7]">
-                      <Twitter className="h-4 w-4" />
-                    </Button>
-                    <Button variant="outline" size="icon" className="h-9 w-9 border-[#DCE3E7]">
-                      <Linkedin className="h-4 w-4" />
-                    </Button>
-                    <Button variant="outline" size="icon" className="h-9 w-9 border-[#DCE3E7]">
-                      <Share2 className="h-4 w-4" />
-                    </Button>
-                  </div>
-                </div>
-              </div>
+              <SocialShareButtons 
+                title={post.title}
+                description={post.excerpt || ''}
+              />
             </div>
 
             {/* Author Box */}

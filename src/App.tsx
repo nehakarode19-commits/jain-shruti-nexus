@@ -83,6 +83,7 @@ import BlogManagement from "./pages/admin/BlogManagement";
 import EventsManagement from "./pages/admin/EventsManagement";
 import GalleryManagement from "./pages/admin/GalleryManagement";
 import EmagazineManagement from "./pages/admin/EmagazineManagement";
+import SocialMediaManagement from "./pages/admin/SocialMediaManagement";
 import EmagazinePage from "./pages/Emagazine";
 
 const queryClient = new QueryClient();
@@ -189,6 +190,7 @@ function AppContent() {
       <Route path="/admin/blog" element={<ProtectedAdminRoute><BlogManagement /></ProtectedAdminRoute>} />
       <Route path="/admin/events" element={<ProtectedAdminRoute><EventsManagement /></ProtectedAdminRoute>} />
       <Route path="/admin/emagazine" element={<ProtectedAdminRoute><EmagazineManagement /></ProtectedAdminRoute>} />
+      <Route path="/admin/social-media" element={<ProtectedAdminRoute><SocialMediaManagement /></ProtectedAdminRoute>} />
       <Route path="/admin/scholars" element={<ProtectedAdminRoute><ScholarsPage /></ProtectedAdminRoute>} />
       <Route path="/admin/research" element={<ProtectedAdminRoute><ResearchPage /></ProtectedAdminRoute>} />
       <Route path="/admin/lms" element={<ProtectedAdminRoute><LMSPage /></ProtectedAdminRoute>} />
