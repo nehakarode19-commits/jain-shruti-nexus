@@ -112,33 +112,30 @@ export function Footer() {
         </div>
       </div>
 
-      {/* Founding & Trust Info */}
-      <div className="border-t border-background/10">
-        <div className="container mx-auto px-4 py-8">
-          <div className="grid md:grid-cols-2 gap-6 text-center md:text-left">
+      {/* Founding & Trust Info - Clean single line */}
+      <div className="border-t border-background/10 bg-[#252220]">
+        <div className="container mx-auto px-4 py-4">
+          <div className="flex flex-col md:flex-row md:items-center md:justify-center gap-4 md:gap-8 text-center">
             {/* Founded By */}
-            <div className="space-y-2">
-              <p className="font-heading text-xs uppercase tracking-wider text-primary font-semibold">
-                Founded by
-              </p>
-              <p className="font-body text-sm text-background/80 leading-relaxed">
+            <div className="flex flex-col md:flex-row md:items-center gap-1 md:gap-2">
+              <span className="font-body text-xs uppercase tracking-wider text-primary font-semibold">
+                Founded by:
+              </span>
+              <span className="font-body text-sm text-background/80">
                 Srimati Shantaben Shantilal Bhudarmal Adani Family
-              </p>
-              <p className="font-body text-sm text-background/80 leading-relaxed">
-                Muni Jambuvijayaji Gyankendra (Muni Jambuvijayaji Research Centre)
-              </p>
+              </span>
             </div>
+            
+            <span className="hidden md:block text-background/30">|</span>
+            
             {/* Run By */}
-            <div className="space-y-2">
-              <p className="font-heading text-xs uppercase tracking-wider text-primary font-semibold">
-                Run by
-              </p>
-              <p className="font-body text-sm text-background/80 leading-relaxed">
-                Sri Siddhi-Bhuvan-Manohar Jain Trust
-              </p>
-              <p className="font-body text-xs text-background/60">
-                (Regd. No. 3402) Ahmedabad
-              </p>
+            <div className="flex flex-col md:flex-row md:items-center gap-1 md:gap-2">
+              <span className="font-body text-xs uppercase tracking-wider text-primary font-semibold">
+                Run by:
+              </span>
+              <span className="font-body text-sm text-background/80">
+                Sri Siddhi-Bhuvan-Manohar Jain Trust (Regd. No. 3402) Ahmedabad
+              </span>
             </div>
           </div>
         </div>
