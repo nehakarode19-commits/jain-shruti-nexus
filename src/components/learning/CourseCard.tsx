@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Clock, Users, BookOpen, Play } from "lucide-react";
+import { Clock, Users, BookOpen, Play, ArrowRight, Globe } from "lucide-react";
 import { LMSCourse } from "@/hooks/useLMS";
 
 interface CourseCardProps {
@@ -14,11 +14,11 @@ export function CourseCard({ course, showEnrollButton = true }: CourseCardProps)
   const getModeColor = (mode: string) => {
     switch (mode.toLowerCase()) {
       case "online":
-        return "bg-green-100 text-green-800 border-green-200";
+        return "bg-emerald-500/10 text-emerald-700 border-emerald-200";
       case "offline":
-        return "bg-blue-100 text-blue-800 border-blue-200";
+        return "bg-blue-500/10 text-blue-700 border-blue-200";
       case "hybrid":
-        return "bg-purple-100 text-purple-800 border-purple-200";
+        return "bg-violet-500/10 text-violet-700 border-violet-200";
       default:
         return "bg-muted text-muted-foreground";
     }
@@ -27,96 +27,106 @@ export function CourseCard({ course, showEnrollButton = true }: CourseCardProps)
   const getLevelColor = (level: string) => {
     switch (level.toLowerCase()) {
       case "beginner":
-        return "bg-emerald-100 text-emerald-800 border-emerald-200";
+        return "bg-primary/10 text-primary border-primary/20";
       case "intermediate":
-        return "bg-amber-100 text-amber-800 border-amber-200";
+        return "bg-amber-500/10 text-amber-700 border-amber-200";
       case "advanced":
-        return "bg-rose-100 text-rose-800 border-rose-200";
+        return "bg-rose-500/10 text-rose-700 border-rose-200";
       default:
         return "bg-muted text-muted-foreground";
     }
   };
 
   return (
-    <Card className="group overflow-hidden border border-border hover:shadow-lg transition-all duration-300 bg-card">
+    <Card className="group overflow-hidden border-2 border-border/50 hover:border-primary/30 hover:shadow-xl transition-all duration-500 bg-card rounded-2xl">
       {/* Thumbnail */}
-      <div className="relative aspect-video overflow-hidden bg-muted">
+      <div className="relative aspect-[16/10] overflow-hidden bg-gradient-to-br from-primary/5 to-primary/10">
         {course.thumbnail_url ? (
           <img
             src={course.thumbnail_url}
             alt={course.title}
-            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
           />
         ) : (
-          <div className="w-full h-full flex items-center justify-center bg-primary/10">
-            <BookOpen className="h-12 w-12 text-primary/40" />
+          <div className="w-full h-full flex items-center justify-center">
+            <div className="w-20 h-20 rounded-2xl bg-primary/10 flex items-center justify-center">
+              <BookOpen className="h-10 w-10 text-primary/50" />
+            </div>
           </div>
         )}
         
+        {/* Gradient Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-t from-foreground/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+        
         {/* Mode Badge */}
-        <Badge className={`absolute top-3 left-3 ${getModeColor(course.course_mode)}`}>
+        <Badge className={`absolute top-4 left-4 ${getModeColor(course.course_mode)} font-medium shadow-sm`}>
           {course.course_mode}
         </Badge>
 
         {/* Play overlay on hover */}
-        <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-          <div className="w-14 h-14 rounded-full bg-white/90 flex items-center justify-center">
-            <Play className="h-6 w-6 text-primary ml-1" />
+        <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-500">
+          <div className="w-16 h-16 rounded-full bg-card/95 shadow-xl flex items-center justify-center transform scale-75 group-hover:scale-100 transition-transform duration-500">
+            <Play className="h-7 w-7 text-primary ml-1" />
           </div>
         </div>
       </div>
 
-      <CardContent className="p-4 space-y-3">
+      <CardContent className="p-5 space-y-4">
         {/* Subject & Level */}
         <div className="flex items-center gap-2 flex-wrap">
-          <Badge variant="outline" className="text-xs">
+          <Badge variant="outline" className="text-xs font-medium border-border">
             {course.subject}
           </Badge>
-          <Badge className={`text-xs ${getLevelColor(course.level)}`}>
+          <Badge className={`text-xs font-medium ${getLevelColor(course.level)}`}>
             {course.level}
           </Badge>
         </div>
 
         {/* Title */}
-        <h3 className="font-heading font-semibold text-lg text-foreground line-clamp-2 group-hover:text-primary transition-colors">
+        <h3 className="font-heading font-bold text-lg text-foreground line-clamp-2 group-hover:text-primary transition-colors duration-300 leading-tight">
           {course.title}
         </h3>
 
         {/* Description */}
         {course.description && (
-          <p className="text-sm text-muted-foreground line-clamp-2">
+          <p className="text-sm text-muted-foreground line-clamp-2 leading-relaxed">
             {course.description}
           </p>
         )}
 
+        {/* Divider */}
+        <div className="h-px bg-border/50" />
+
         {/* Meta info */}
-        <div className="flex items-center gap-4 text-sm text-muted-foreground">
-          {course.instructor_name && (
+        <div className="flex items-center justify-between text-sm text-muted-foreground">
+          <div className="flex items-center gap-4">
+            {course.instructor_name && (
+              <div className="flex items-center gap-1.5">
+                <Users className="h-4 w-4 text-primary/70" />
+                <span className="truncate max-w-[100px] font-medium">{course.instructor_name}</span>
+              </div>
+            )}
+            {course.duration && (
+              <div className="flex items-center gap-1.5">
+                <Clock className="h-4 w-4 text-primary/70" />
+                <span>{course.duration}</span>
+              </div>
+            )}
+          </div>
+          {course.language && (
             <div className="flex items-center gap-1">
-              <Users className="h-4 w-4" />
-              <span className="truncate max-w-[120px]">{course.instructor_name}</span>
-            </div>
-          )}
-          {course.duration && (
-            <div className="flex items-center gap-1">
-              <Clock className="h-4 w-4" />
-              <span>{course.duration}</span>
+              <Globe className="h-3.5 w-3.5" />
+              <span className="text-xs">{course.language}</span>
             </div>
           )}
         </div>
 
-        {/* Language */}
-        {course.language && (
-          <p className="text-xs text-muted-foreground">
-            Language: {course.language}
-          </p>
-        )}
-
         {/* Action Button */}
         {showEnrollButton && (
-          <Button asChild className="w-full mt-2 bg-primary hover:bg-primary/90">
-            <Link to={`/learning/courses/${course.id}`}>
+          <Button asChild className="w-full mt-2 bg-primary hover:bg-primary/90 group/btn rounded-xl h-11 font-medium">
+            <Link to={`/learning/courses/${course.id}`} className="flex items-center justify-center gap-2">
               View Course
+              <ArrowRight className="h-4 w-4 group-hover/btn:translate-x-1 transition-transform duration-300" />
             </Link>
           </Button>
         )}
