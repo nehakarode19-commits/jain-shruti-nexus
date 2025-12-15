@@ -112,26 +112,6 @@ export function Footer() {
         </div>
       </div>
 
-      {/* Organization Info */}
-      <div className="border-t border-background/10">
-        <div className="container mx-auto px-4 py-6">
-          <div className="text-center space-y-2">
-            <p className="font-body text-sm text-background/80">
-              <span className="text-primary font-medium">Founded by:</span>{" "}
-              <span className="text-background/70">Srimati Shantaben Shantilal Bhudarmal Adani Family</span>
-            </p>
-            <p className="font-body text-sm text-background/80">
-              <span className="text-primary font-medium">Muni Jambuvijayaji Gyankendra</span>{" "}
-              <span className="text-background/70">(Muni Jambuvijayaji Research Centre)</span>
-            </p>
-            <p className="font-body text-sm text-background/80">
-              <span className="text-primary font-medium">Run by:</span>{" "}
-              <span className="text-background/70">Sri Siddhi-Bhuvan-Manohar Jain Trust (Regd. No. 3402) Ahmedabad</span>
-            </p>
-          </div>
-        </div>
-      </div>
-
       {/* Bottom Bar */}
       <div className="border-t border-background/10">
         <div className="container mx-auto px-4 py-5">

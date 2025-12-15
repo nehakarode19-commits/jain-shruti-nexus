@@ -76,25 +76,10 @@ const GyanKendra = () => {
             <h1 className="font-display text-4xl sm:text-5xl font-bold text-foreground mb-6">
               Muni Jambuvijayaji Research Center
             </h1>
-            <p className="text-lg text-muted-foreground mb-6">
+            <p className="text-lg text-muted-foreground">
               A dedicated center preserving Gurudev Muni Jambuvijayji Maharaj Saheb's scholarly works, 
               manuscripts, and teachings for future generations.
             </p>
-            
-            {/* Organization Info */}
-            <div className="max-w-2xl mx-auto bg-secondary/80 rounded-xl p-4 border border-primary/20 space-y-2">
-              <p className="text-sm text-muted-foreground">
-                <span className="font-semibold text-primary">Founded by:</span>{" "}
-                Srimati Shantaben Shantilal Bhudarmal Adani Family
-              </p>
-              <p className="text-sm text-foreground font-medium">
-                Muni Jambuvijayaji Gyankendra (Muni Jambuvijayaji Research Centre)
-              </p>
-              <p className="text-sm text-muted-foreground">
-                <span className="font-semibold text-primary">Run by:</span>{" "}
-                Sri Siddhi-Bhuvan-Manohar Jain Trust (Regd. No. 3402) Ahmedabad
-              </p>
-            </div>
           </div>
         </div>
       </section>
