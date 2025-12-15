@@ -73,6 +73,7 @@ const ROLE_ICONS: Record<UserRole, string> = {
   admin: "🛡️",
   scholar: "📚",
   librarian: "📖",
+  lms: "🎓",
   user: "👤",
 };
 
@@ -101,6 +102,8 @@ export function Header() {
         return "/lms/dashboard";
       case "scholar":
         return "/research";
+      case "lms":
+        return "/learning/dashboard";
       default:
         return "/";
     }

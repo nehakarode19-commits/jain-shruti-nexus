@@ -2,13 +2,14 @@ import { createContext, useContext, useState, useEffect, ReactNode } from "react
 import { supabase } from "@/integrations/supabase/client";
 import { User, Session } from "@supabase/supabase-js";
 
-export type UserRole = "superadmin" | "admin" | "librarian" | "scholar" | "user";
+export type UserRole = "superadmin" | "admin" | "librarian" | "scholar" | "lms" | "user";
 
 export const ROLE_LABELS: Record<UserRole, string> = {
   superadmin: "Super Admin",
   admin: "Admin",
   scholar: "Scholar",
   librarian: "Librarian",
+  lms: "LMS (Learning)",
   user: "Registered User",
 };
 
@@ -17,6 +18,7 @@ export const ROLE_DESCRIPTIONS: Record<UserRole, string> = {
   admin: "CMS control, content management, approvals",
   scholar: "Research portal, submissions, access requests",
   librarian: "Library management system access",
+  lms: "Learning portal access (courses, lectures, materials)",
   user: "Public site + bookmarks & profile",
 };
 
@@ -42,7 +44,7 @@ interface AdminAuthContextType {
 
 const AdminAuthContext = createContext<AdminAuthContextType | undefined>(undefined);
 
-export const AVAILABLE_ROLES: UserRole[] = ["superadmin", "admin", "scholar", "librarian", "user"];
+export const AVAILABLE_ROLES: UserRole[] = ["superadmin", "admin", "scholar", "librarian", "lms", "user"];
 
 export function AdminAuthProvider({ children }: { children: ReactNode }) {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -124,6 +126,8 @@ export function AdminAuthProvider({ children }: { children: ReactNode }) {
         return "/lms/dashboard";
       case "scholar":
         return "/scholar/dashboard";
+      case "lms":
+        return "/learning/dashboard";
       case "user":
         return "/";
       default:
