@@ -14,23 +14,17 @@ import {
   X,
   Users,
   ClipboardList,
-  PlayCircle,
-  Upload,
-  UserCheck,
-} from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-
-import {
   Layers,
   Users2,
   HelpCircle,
   ClipboardCheck,
 } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
-// Admin/Faculty navigation items
+// Admin navigation items
 const adminNavItems = [
-  { icon: LayoutDashboard, label: "Dashboard", href: "/learning/dashboard" },
+  { icon: LayoutDashboard, label: "Dashboard", href: "/learning/admin-dashboard" },
   { icon: BookOpen, label: "Courses", href: "/learning/manage-courses" },
   { icon: Layers, label: "Programs", href: "/learning/programs" },
   { icon: Users2, label: "Batches", href: "/learning/batches" },
@@ -45,27 +39,13 @@ const adminNavItems = [
   { icon: Settings, label: "Settings", href: "/learning/settings" },
 ];
 
-// Student navigation items
-const studentNavItems = [
-  { icon: LayoutDashboard, label: "My Dashboard", href: "/learning/student-dashboard" },
-  { icon: BookOpen, label: "My Courses", href: "/learning/courses" },
-  { icon: Calendar, label: "Schedule", href: "/learning/schedule" },
-  { icon: PlayCircle, label: "Recordings", href: "/learning/manage-lectures" },
-  { icon: FileText, label: "Materials", href: "/learning/materials" },
-  { icon: BarChart3, label: "My Progress", href: "/learning/reports" },
-];
-
 interface LearningSidebarProps {
   onClose?: () => void;
 }
 
 export function LearningSidebar({ onClose }: LearningSidebarProps) {
   const location = useLocation();
-  const { user, logout, hasRole } = useAdminAuth();
-
-  // LMS role users and admins get admin view, others get student view
-  const isAdmin = hasRole(["lms", "admin", "superadmin"]);
-  const navItems = isAdmin ? adminNavItems : studentNavItems;
+  const { user, logout } = useAdminAuth();
 
   const handleLogout = async () => {
     await logout();
@@ -76,13 +56,13 @@ export function LearningSidebar({ onClose }: LearningSidebarProps) {
     <aside className="w-72 lg:w-64 min-h-screen bg-primary text-primary-foreground flex flex-col">
       {/* Logo/Brand */}
       <div className="p-4 sm:p-6 border-b border-primary-foreground/10 flex items-center justify-between">
-        <Link to="/learning/dashboard" className="flex items-center gap-3" onClick={onClose}>
+        <Link to="/learning/admin-dashboard" className="flex items-center gap-3" onClick={onClose}>
           <div className="w-10 h-10 rounded-xl bg-orange/20 flex items-center justify-center">
             <GraduationCap className="h-6 w-6 text-orange" />
           </div>
           <div>
-            <h1 className="font-heading text-lg font-bold text-white">Learning Portal</h1>
-            <p className="text-xs text-white/60">Jambushrusti LMS</p>
+            <h1 className="font-heading text-lg font-bold text-white">LMS Admin</h1>
+            <p className="text-xs text-white/60">Jambushrusti</p>
           </div>
         </Link>
         {onClose && (
@@ -108,9 +88,7 @@ export function LearningSidebar({ onClose }: LearningSidebarProps) {
           </Avatar>
           <div className="flex-1 min-w-0">
             <p className="text-sm font-medium text-white truncate">{user?.name || "Admin"}</p>
-            <p className="text-xs text-white/60 truncate capitalize">
-              {isAdmin ? "Administrator" : (user?.role || "User")}
-            </p>
+            <p className="text-xs text-white/60 truncate">Administrator</p>
           </div>
         </div>
       </div>
@@ -118,15 +96,15 @@ export function LearningSidebar({ onClose }: LearningSidebarProps) {
       {/* Role Badge */}
       <div className="px-4 py-2">
         <div className="px-3 py-1.5 rounded-lg bg-orange/20 text-orange text-xs font-medium text-center">
-          {isAdmin ? "Admin / Faculty" : "Student"}
+          LMS Administrator
         </div>
       </div>
 
       {/* Navigation */}
       <nav className="flex-1 p-3 sm:p-4 space-y-1 overflow-auto">
-        {navItems.map((item) => {
+        {adminNavItems.map((item) => {
           const isActive = location.pathname === item.href || 
-            (item.href !== "/learning/dashboard" && item.href !== "/learning/student" && location.pathname.startsWith(item.href));
+            (item.href !== "/learning/admin-dashboard" && location.pathname.startsWith(item.href));
           
           return (
             <Link
