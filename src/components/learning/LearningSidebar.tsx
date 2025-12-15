@@ -21,12 +21,23 @@ import {
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
+import {
+  Layers,
+  Users2,
+  HelpCircle,
+  ClipboardCheck,
+} from "lucide-react";
+
 // Admin/Faculty navigation items
 const adminNavItems = [
   { icon: LayoutDashboard, label: "Dashboard", href: "/learning/dashboard" },
   { icon: BookOpen, label: "Courses", href: "/learning/manage-courses" },
+  { icon: Layers, label: "Programs", href: "/learning/programs" },
+  { icon: Users2, label: "Batches", href: "/learning/batches" },
   { icon: Video, label: "Lectures", href: "/learning/manage-lectures" },
-  { icon: FileText, label: "Study Materials", href: "/learning/materials" },
+  { icon: HelpCircle, label: "Quizzes", href: "/learning/quizzes" },
+  { icon: ClipboardCheck, label: "Assignments", href: "/learning/assignments" },
+  { icon: FileText, label: "Materials", href: "/learning/materials" },
   { icon: Users, label: "Students", href: "/learning/students" },
   { icon: ClipboardList, label: "Attendance", href: "/learning/attendance" },
   { icon: Calendar, label: "Schedule", href: "/learning/schedule" },

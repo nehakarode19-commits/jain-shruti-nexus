@@ -356,6 +356,161 @@ export type Database = {
         }
         Relationships: []
       }
+      lms_announcements: {
+        Row: {
+          batch_id: string | null
+          content: string | null
+          course_id: string | null
+          created_at: string | null
+          created_by: string | null
+          id: string
+          is_pinned: boolean | null
+          title: string
+        }
+        Insert: {
+          batch_id?: string | null
+          content?: string | null
+          course_id?: string | null
+          created_at?: string | null
+          created_by?: string | null
+          id?: string
+          is_pinned?: boolean | null
+          title: string
+        }
+        Update: {
+          batch_id?: string | null
+          content?: string | null
+          course_id?: string | null
+          created_at?: string | null
+          created_by?: string | null
+          id?: string
+          is_pinned?: boolean | null
+          title?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "lms_announcements_batch_id_fkey"
+            columns: ["batch_id"]
+            isOneToOne: false
+            referencedRelation: "lms_batches"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "lms_announcements_course_id_fkey"
+            columns: ["course_id"]
+            isOneToOne: false
+            referencedRelation: "lms_courses"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      lms_assignment_submissions: {
+        Row: {
+          assignment_id: string
+          feedback: string | null
+          file_url: string | null
+          graded_at: string | null
+          graded_by: string | null
+          id: string
+          score: number | null
+          status: string | null
+          submission_text: string | null
+          submitted_at: string | null
+          user_id: string
+        }
+        Insert: {
+          assignment_id: string
+          feedback?: string | null
+          file_url?: string | null
+          graded_at?: string | null
+          graded_by?: string | null
+          id?: string
+          score?: number | null
+          status?: string | null
+          submission_text?: string | null
+          submitted_at?: string | null
+          user_id: string
+        }
+        Update: {
+          assignment_id?: string
+          feedback?: string | null
+          file_url?: string | null
+          graded_at?: string | null
+          graded_by?: string | null
+          id?: string
+          score?: number | null
+          status?: string | null
+          submission_text?: string | null
+          submitted_at?: string | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "lms_assignment_submissions_assignment_id_fkey"
+            columns: ["assignment_id"]
+            isOneToOne: false
+            referencedRelation: "lms_assignments"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      lms_assignments: {
+        Row: {
+          course_id: string | null
+          created_at: string
+          description: string | null
+          due_date: string | null
+          id: string
+          instructions: string | null
+          is_published: boolean | null
+          lecture_id: string | null
+          max_score: number | null
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          course_id?: string | null
+          created_at?: string
+          description?: string | null
+          due_date?: string | null
+          id?: string
+          instructions?: string | null
+          is_published?: boolean | null
+          lecture_id?: string | null
+          max_score?: number | null
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          course_id?: string | null
+          created_at?: string
+          description?: string | null
+          due_date?: string | null
+          id?: string
+          instructions?: string | null
+          is_published?: boolean | null
+          lecture_id?: string | null
+          max_score?: number | null
+          title?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "lms_assignments_course_id_fkey"
+            columns: ["course_id"]
+            isOneToOne: false
+            referencedRelation: "lms_courses"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "lms_assignments_lecture_id_fkey"
+            columns: ["lecture_id"]
+            isOneToOne: false
+            referencedRelation: "lms_lectures"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       lms_attendance: {
         Row: {
           attended_at: string
@@ -391,6 +546,140 @@ export type Database = {
           },
         ]
       }
+      lms_batch_enrollments: {
+        Row: {
+          batch_id: string
+          enrolled_at: string | null
+          id: string
+          status: string | null
+          user_id: string
+        }
+        Insert: {
+          batch_id: string
+          enrolled_at?: string | null
+          id?: string
+          status?: string | null
+          user_id: string
+        }
+        Update: {
+          batch_id?: string
+          enrolled_at?: string | null
+          id?: string
+          status?: string | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "lms_batch_enrollments_batch_id_fkey"
+            columns: ["batch_id"]
+            isOneToOne: false
+            referencedRelation: "lms_batches"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      lms_batches: {
+        Row: {
+          course_id: string | null
+          created_at: string
+          end_date: string | null
+          id: string
+          max_students: number | null
+          name: string
+          program_id: string | null
+          start_date: string
+          status: string | null
+          updated_at: string
+        }
+        Insert: {
+          course_id?: string | null
+          created_at?: string
+          end_date?: string | null
+          id?: string
+          max_students?: number | null
+          name: string
+          program_id?: string | null
+          start_date: string
+          status?: string | null
+          updated_at?: string
+        }
+        Update: {
+          course_id?: string | null
+          created_at?: string
+          end_date?: string | null
+          id?: string
+          max_students?: number | null
+          name?: string
+          program_id?: string | null
+          start_date?: string
+          status?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "lms_batches_course_id_fkey"
+            columns: ["course_id"]
+            isOneToOne: false
+            referencedRelation: "lms_courses"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "lms_batches_program_id_fkey"
+            columns: ["program_id"]
+            isOneToOne: false
+            referencedRelation: "lms_programs"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      lms_certificates: {
+        Row: {
+          certificate_number: string
+          certificate_url: string | null
+          course_id: string | null
+          id: string
+          issued_at: string | null
+          program_id: string | null
+          user_id: string
+          valid_until: string | null
+        }
+        Insert: {
+          certificate_number: string
+          certificate_url?: string | null
+          course_id?: string | null
+          id?: string
+          issued_at?: string | null
+          program_id?: string | null
+          user_id: string
+          valid_until?: string | null
+        }
+        Update: {
+          certificate_number?: string
+          certificate_url?: string | null
+          course_id?: string | null
+          id?: string
+          issued_at?: string | null
+          program_id?: string | null
+          user_id?: string
+          valid_until?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "lms_certificates_course_id_fkey"
+            columns: ["course_id"]
+            isOneToOne: false
+            referencedRelation: "lms_courses"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "lms_certificates_program_id_fkey"
+            columns: ["program_id"]
+            isOneToOne: false
+            referencedRelation: "lms_programs"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       lms_courses: {
         Row: {
           course_mode: string
@@ -401,10 +690,12 @@ export type Database = {
           id: string
           instructor_id: string | null
           instructor_name: string | null
+          is_paid: boolean | null
           is_published: boolean | null
           is_restricted: boolean | null
           language: string | null
           level: string
+          price: number | null
           subject: string
           thumbnail_url: string | null
           title: string
@@ -419,10 +710,12 @@ export type Database = {
           id?: string
           instructor_id?: string | null
           instructor_name?: string | null
+          is_paid?: boolean | null
           is_published?: boolean | null
           is_restricted?: boolean | null
           language?: string | null
           level?: string
+          price?: number | null
           subject?: string
           thumbnail_url?: string | null
           title: string
@@ -437,10 +730,12 @@ export type Database = {
           id?: string
           instructor_id?: string | null
           instructor_name?: string | null
+          is_paid?: boolean | null
           is_published?: boolean | null
           is_restricted?: boolean | null
           language?: string | null
           level?: string
+          price?: number | null
           subject?: string
           thumbnail_url?: string | null
           title?: string
@@ -630,6 +925,259 @@ export type Database = {
           },
           {
             foreignKeyName: "lms_materials_lecture_id_fkey"
+            columns: ["lecture_id"]
+            isOneToOne: false
+            referencedRelation: "lms_lectures"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      lms_notifications: {
+        Row: {
+          created_at: string | null
+          id: string
+          is_read: boolean | null
+          link: string | null
+          message: string | null
+          title: string
+          type: string | null
+          user_id: string
+        }
+        Insert: {
+          created_at?: string | null
+          id?: string
+          is_read?: boolean | null
+          link?: string | null
+          message?: string | null
+          title: string
+          type?: string | null
+          user_id: string
+        }
+        Update: {
+          created_at?: string | null
+          id?: string
+          is_read?: boolean | null
+          link?: string | null
+          message?: string | null
+          title?: string
+          type?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
+      lms_program_courses: {
+        Row: {
+          course_id: string
+          id: string
+          order_index: number | null
+          program_id: string
+        }
+        Insert: {
+          course_id: string
+          id?: string
+          order_index?: number | null
+          program_id: string
+        }
+        Update: {
+          course_id?: string
+          id?: string
+          order_index?: number | null
+          program_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "lms_program_courses_course_id_fkey"
+            columns: ["course_id"]
+            isOneToOne: false
+            referencedRelation: "lms_courses"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "lms_program_courses_program_id_fkey"
+            columns: ["program_id"]
+            isOneToOne: false
+            referencedRelation: "lms_programs"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      lms_programs: {
+        Row: {
+          created_at: string
+          created_by: string | null
+          description: string | null
+          duration: string | null
+          id: string
+          is_paid: boolean | null
+          is_published: boolean | null
+          level: string | null
+          price: number | null
+          thumbnail_url: string | null
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          created_by?: string | null
+          description?: string | null
+          duration?: string | null
+          id?: string
+          is_paid?: boolean | null
+          is_published?: boolean | null
+          level?: string | null
+          price?: number | null
+          thumbnail_url?: string | null
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          created_by?: string | null
+          description?: string | null
+          duration?: string | null
+          id?: string
+          is_paid?: boolean | null
+          is_published?: boolean | null
+          level?: string | null
+          price?: number | null
+          thumbnail_url?: string | null
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      lms_quiz_attempts: {
+        Row: {
+          answers: Json | null
+          completed_at: string | null
+          id: string
+          passed: boolean | null
+          quiz_id: string
+          score: number | null
+          started_at: string | null
+          user_id: string
+        }
+        Insert: {
+          answers?: Json | null
+          completed_at?: string | null
+          id?: string
+          passed?: boolean | null
+          quiz_id: string
+          score?: number | null
+          started_at?: string | null
+          user_id: string
+        }
+        Update: {
+          answers?: Json | null
+          completed_at?: string | null
+          id?: string
+          passed?: boolean | null
+          quiz_id?: string
+          score?: number | null
+          started_at?: string | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "lms_quiz_attempts_quiz_id_fkey"
+            columns: ["quiz_id"]
+            isOneToOne: false
+            referencedRelation: "lms_quizzes"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      lms_quiz_questions: {
+        Row: {
+          correct_answer: string | null
+          id: string
+          options: Json | null
+          order_index: number | null
+          points: number | null
+          question_text: string
+          question_type: string | null
+          quiz_id: string
+        }
+        Insert: {
+          correct_answer?: string | null
+          id?: string
+          options?: Json | null
+          order_index?: number | null
+          points?: number | null
+          question_text: string
+          question_type?: string | null
+          quiz_id: string
+        }
+        Update: {
+          correct_answer?: string | null
+          id?: string
+          options?: Json | null
+          order_index?: number | null
+          points?: number | null
+          question_text?: string
+          question_type?: string | null
+          quiz_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "lms_quiz_questions_quiz_id_fkey"
+            columns: ["quiz_id"]
+            isOneToOne: false
+            referencedRelation: "lms_quizzes"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      lms_quizzes: {
+        Row: {
+          course_id: string | null
+          created_at: string
+          description: string | null
+          id: string
+          is_published: boolean | null
+          lecture_id: string | null
+          max_attempts: number | null
+          passing_score: number | null
+          time_limit_minutes: number | null
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          course_id?: string | null
+          created_at?: string
+          description?: string | null
+          id?: string
+          is_published?: boolean | null
+          lecture_id?: string | null
+          max_attempts?: number | null
+          passing_score?: number | null
+          time_limit_minutes?: number | null
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          course_id?: string | null
+          created_at?: string
+          description?: string | null
+          id?: string
+          is_published?: boolean | null
+          lecture_id?: string | null
+          max_attempts?: number | null
+          passing_score?: number | null
+          time_limit_minutes?: number | null
+          title?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "lms_quizzes_course_id_fkey"
+            columns: ["course_id"]
+            isOneToOne: false
+            referencedRelation: "lms_courses"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "lms_quizzes_lecture_id_fkey"
             columns: ["lecture_id"]
             isOneToOne: false
             referencedRelation: "lms_lectures"
