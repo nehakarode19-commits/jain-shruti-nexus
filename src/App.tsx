@@ -95,7 +95,7 @@ import LiveTelecastManagement from "./pages/admin/LiveTelecastManagement";
 import LearningCourses from "./pages/learning/Courses";
 import LearningCourseDetail from "./pages/learning/CourseDetail";
 import LearningLogin from "./pages/learning/LearningLogin";
-import StudentDashboard from "./pages/learning/StudentDashboard";
+import LMSAdminDashboard from "./pages/learning/LMSAdminDashboard";
 import LearningDashboard from "./pages/learning/LMSDashboard";
 import CoursesManage from "./pages/learning/CoursesManage";
 import LearningLecturesManage from "./pages/learning/LecturesManage";
@@ -210,7 +210,7 @@ function AppContent() {
       <Route path="/learning/login" element={<LearningLogin />} />
       <Route path="/learning/courses" element={<LearningCourses />} />
       <Route path="/learning/courses/:courseId" element={<LearningCourseDetail />} />
-      <Route path="/learning/student-dashboard" element={<ProtectedLearningRoute><StudentDashboard /></ProtectedLearningRoute>} />
+      <Route path="/learning/admin-dashboard" element={<ProtectedLearningRoute><LMSAdminDashboard /></ProtectedLearningRoute>} />
       <Route path="/learning/dashboard" element={<ProtectedLearningRoute><LearningDashboard /></ProtectedLearningRoute>} />
       <Route path="/learning/manage-courses" element={<ProtectedLearningRoute><CoursesManage /></ProtectedLearningRoute>} />
       <Route path="/learning/manage-lectures" element={<ProtectedLearningRoute><LearningLecturesManage /></ProtectedLearningRoute>} />
