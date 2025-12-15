@@ -43,6 +43,7 @@ import {
 import { toast } from "sonner";
 import { useAdminCourses, LMSLecture, LMSMaterial } from "@/hooks/useLMS";
 import { useAdminLectures, useSaveLecture, useDeleteLecture, useAdminMaterials, useSaveMaterial, useDeleteMaterial } from "@/hooks/useLMSAdmin";
+import { FileUpload } from "@/components/learning/FileUpload";
 
 const LecturesManage = () => {
   const [selectedCourseId, setSelectedCourseId] = useState<string>("");
@@ -504,16 +505,18 @@ const LecturesManage = () => {
                 </div>
 
                 <div className="col-span-2">
-                  <Label>Video URL (YouTube, Zoom recording)</Label>
-                  <Input
-                    value={lectureForm.video_url}
-                    onChange={(e) => setLectureForm({ ...lectureForm, video_url: e.target.value })}
-                    placeholder="https://youtube.com/watch?v=..."
+                  <FileUpload
+                    label="Video Recording (Upload or paste URL)"
+                    accept="video/*"
+                    folder="recordings"
+                    currentUrl={lectureForm.video_url}
+                    maxSizeMB={100}
+                    onUploadComplete={(url) => setLectureForm({ ...lectureForm, video_url: url })}
                   />
                 </div>
 
                 <div className="col-span-2">
-                  <Label>Live Stream URL</Label>
+                  <Label>Live Stream URL (Zoom, YouTube Live)</Label>
                   <Input
                     value={lectureForm.stream_url}
                     onChange={(e) => setLectureForm({ ...lectureForm, stream_url: e.target.value })}
@@ -577,11 +580,13 @@ const LecturesManage = () => {
               </div>
 
               <div>
-                <Label>File URL *</Label>
-                <Input
-                  value={materialForm.file_url}
-                  onChange={(e) => setMaterialForm({ ...materialForm, file_url: e.target.value })}
-                  placeholder="https://drive.google.com/..."
+                <FileUpload
+                  label="Upload File or Paste URL *"
+                  accept=".pdf,.doc,.docx,.ppt,.pptx,.xls,.xlsx,.mp3,.mp4,.jpg,.jpeg,.png"
+                  folder="materials"
+                  currentUrl={materialForm.file_url}
+                  maxSizeMB={50}
+                  onUploadComplete={(url) => setMaterialForm({ ...materialForm, file_url: url })}
                 />
               </div>
 
