@@ -24,7 +24,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 // Admin navigation items
 const adminNavItems = [
-  { icon: LayoutDashboard, label: "Dashboard", href: "/learning/admin-dashboard" },
+  { icon: LayoutDashboard, label: "Admin Dashboard", href: "/learning/admin-dashboard" },
   { icon: BookOpen, label: "Courses", href: "/learning/manage-courses" },
   { icon: Layers, label: "Programs", href: "/learning/programs" },
   { icon: Users2, label: "Batches", href: "/learning/batches" },
@@ -38,6 +38,9 @@ const adminNavItems = [
   { icon: BarChart3, label: "Reports", href: "/learning/reports" },
   { icon: Settings, label: "Settings", href: "/learning/settings" },
 ];
+
+// Student navigation item
+const studentNavItem = { icon: GraduationCap, label: "My Learning", href: "/learning/student-dashboard" };
 
 interface LearningSidebarProps {
   onClose?: () => void;
@@ -124,6 +127,23 @@ export function LearningSidebar({ onClose }: LearningSidebarProps) {
           );
         })}
       </nav>
+
+      {/* Student Dashboard Link */}
+      <div className="px-4 py-2 border-t border-primary-foreground/10">
+        <Link
+          to={studentNavItem.href}
+          onClick={onClose}
+          className={cn(
+            "flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200",
+            location.pathname === studentNavItem.href
+              ? "bg-orange text-white font-medium shadow-lg"
+              : "text-white/70 hover:bg-white/10 hover:text-white"
+          )}
+        >
+          <studentNavItem.icon className="h-5 w-5 flex-shrink-0" />
+          <span className="text-sm">{studentNavItem.label}</span>
+        </Link>
+      </div>
 
       {/* Browse All Courses */}
       <div className="p-4 border-t border-primary-foreground/10">
