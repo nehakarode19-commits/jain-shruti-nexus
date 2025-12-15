@@ -70,8 +70,10 @@ export function Footer() {
               <div className="flex items-start gap-3 text-muted-foreground">
                 <MapPin className="h-4 w-4 text-primary mt-0.5 shrink-0" />
                 <div>
-                  <p>Muni Jambuvijay Research Center</p>
-                  <p>Shantigram, Ahmedabad, Gujarat, India</p>
+                  <p>Muni Jambuvijayji Gyan Mandir</p>
+                  <p>Near Adani Shantigram Jain Temple</p>
+                  <p>Adani Shantigram Township</p>
+                  <p>Ahmedabad 382 421</p>
                 </div>
               </div>
               <div className="flex items-center gap-3 text-muted-foreground">
@@ -82,15 +84,15 @@ export function Footer() {
               </div>
               <div className="flex items-center gap-3 text-muted-foreground">
                 <Phone className="h-4 w-4 text-primary shrink-0" />
-                <a href="tel:+919876543210" className="hover:text-primary transition-colors">
-                  +91 98765 43210
+                <a href="tel:+919825044911" className="hover:text-primary transition-colors">
+                  +91-98250 44911
                 </a>
               </div>
               <div className="flex items-start gap-3 text-muted-foreground">
                 <Clock className="h-4 w-4 text-primary shrink-0 mt-1" />
                 <div className="flex flex-col gap-1">
-                  <span>Office Time: 10:00 AM - 6:00 PM</span>
-                  <span>Visiting Time: 10:45 AM - 5:15 PM</span>
+                  <span>Office Time Mon - Sat: 10:00 AM - 6:00 PM IST</span>
+                  <span>Visiting Time Mon - Sat: 10:45 AM - 5:15 PM IST</span>
                 </div>
               </div>
             </div>
