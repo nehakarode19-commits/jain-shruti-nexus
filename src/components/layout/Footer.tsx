@@ -8,7 +8,7 @@ const footerLinks = {
     { title: "About Jambushrusti", href: "/about" },
     { title: "Gurudev Muni Jambuvijayji", href: "/about/gurudev" },
     { title: "Gurudev Parivar", href: "/about/parivar" },
-    { title: "Jambuji Gyan Kendra", href: "/about/gyan-kendra" },
+    { title: "Muni Jambuvijayaji Research Center", href: "/about/gyan-kendra" },
     { title: "Photo Gallery", href: "/gallery" },
   ],
   research: [

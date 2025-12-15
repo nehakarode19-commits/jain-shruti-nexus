@@ -74,7 +74,7 @@ const GyanKendra = () => {
               <span className="text-muted-foreground">Digital Museum</span>
             </div>
             <h1 className="font-display text-4xl sm:text-5xl font-bold text-foreground mb-6">
-              Jambuji Gyan Kendra
+              Muni Jambuvijayaji Research Center
             </h1>
             <p className="text-lg text-muted-foreground">
               A dedicated center preserving Gurudev Muni Jambuvijayji Maharaj Saheb's scholarly works, 
@@ -93,7 +93,7 @@ const GyanKendra = () => {
                 Preserving <span className="text-primary">Wisdom</span> for Generations
               </h2>
               <p className="text-muted-foreground mb-4">
-                Jambuji Gyan Kendra stands as a testament to Gurudev's extraordinary life of scholarship 
+                Muni Jambuvijayaji Research Center stands as a testament to Gurudev's extraordinary life of scholarship 
                 and spiritual service. Located in Shantigram, this center houses an extensive collection 
                 of manuscripts, books, photographs, and audio-visual materials.
               </p>
@@ -131,7 +131,7 @@ const GyanKendra = () => {
               <div className="aspect-[4/3] rounded-2xl overflow-hidden shadow-elevated">
                 <img 
                   src="https://siddhijambuparivar.com/wp-content/uploads/2022/11/111-min.jpg"
-                  alt="Gyan Kendra"
+                  alt="Research Center"
                   className="w-full h-full object-cover"
                 />
               </div>
@@ -141,7 +141,7 @@ const GyanKendra = () => {
                     <Building2 className="h-6 w-6 text-primary" />
                   </div>
                   <div>
-                    <div className="font-display font-semibold text-foreground">Gyan Kendra</div>
+                    <div className="font-display font-semibold text-foreground">Research Center</div>
                     <div className="text-xs text-muted-foreground">Shantigram, Gujarat</div>
                   </div>
                 </div>
@@ -159,7 +159,7 @@ const GyanKendra = () => {
               What You'll Find Here
             </h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
-              Explore the various sections and facilities available at Jambuji Gyan Kendra
+              Explore the various sections and facilities available at Muni Jambuvijayaji Research Center
             </p>
           </div>
 
@@ -197,7 +197,7 @@ const GyanKendra = () => {
                 Plan Your Visit
               </h2>
               <p className="text-muted-foreground">
-                Experience the Gyan Kendra in person and explore Gurudev's legacy
+                Experience the Research Center in person and explore Gurudev's legacy
               </p>
             </div>
 

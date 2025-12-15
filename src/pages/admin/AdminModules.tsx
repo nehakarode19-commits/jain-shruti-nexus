@@ -11,7 +11,7 @@ const placeholderModules = [
   { title: "Scholars", icon: GraduationCap, description: "Approve and manage scholar applications" },
   { title: "Research Tools", icon: Search, description: "SodhSanchay, SodhSandarbh, Śabdasaṅgraha management" },
   { title: "LMS", icon: Library, description: "Library Management System for Shantigram" },
-  { title: "Digital Museum", icon: Building, description: "Jambuji Gyan Kendra exhibits and multimedia" },
+  { title: "Digital Museum", icon: Building, description: "Muni Jambuvijayaji Research Center exhibits and multimedia" },
   { title: "AI & Indexing", icon: Brain, description: "Search index and AI configuration" },
   { title: "Access Requests", icon: Key, description: "Manage content access approvals" },
   { title: "Logs", icon: ClipboardList, description: "System audit trails and activity logs" },
