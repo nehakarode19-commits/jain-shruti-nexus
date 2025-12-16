@@ -145,6 +145,19 @@ export function LearningSidebar({ onClose }: LearningSidebarProps) {
           <span className="text-sm">{studentNavItem.label}</span>
         </Link>
         <Link
+          to="/learning/my-courses"
+          onClick={onClose}
+          className={cn(
+            "flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200",
+            location.pathname === "/learning/my-courses"
+              ? "bg-orange text-white font-medium shadow-lg"
+              : "text-white/70 hover:bg-white/10 hover:text-white"
+          )}
+        >
+          <BookOpen className="h-5 w-5 flex-shrink-0" />
+          <span className="text-sm">Enrolled Courses</span>
+        </Link>
+        <Link
           to="/learning/certificates"
           onClick={onClose}
           className={cn(
