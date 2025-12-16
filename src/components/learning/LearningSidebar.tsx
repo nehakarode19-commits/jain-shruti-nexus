@@ -18,6 +18,7 @@ import {
   Users2,
   HelpCircle,
   ClipboardCheck,
+  Award,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -129,7 +130,7 @@ export function LearningSidebar({ onClose }: LearningSidebarProps) {
       </nav>
 
       {/* Student Dashboard Link */}
-      <div className="px-4 py-2 border-t border-primary-foreground/10">
+      <div className="px-4 py-2 border-t border-primary-foreground/10 space-y-1">
         <Link
           to={studentNavItem.href}
           onClick={onClose}
@@ -142,6 +143,19 @@ export function LearningSidebar({ onClose }: LearningSidebarProps) {
         >
           <studentNavItem.icon className="h-5 w-5 flex-shrink-0" />
           <span className="text-sm">{studentNavItem.label}</span>
+        </Link>
+        <Link
+          to="/learning/certificates"
+          onClick={onClose}
+          className={cn(
+            "flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200",
+            location.pathname === "/learning/certificates"
+              ? "bg-orange text-white font-medium shadow-lg"
+              : "text-white/70 hover:bg-white/10 hover:text-white"
+          )}
+        >
+          <Award className="h-5 w-5 flex-shrink-0" />
+          <span className="text-sm">My Certificates</span>
         </Link>
       </div>
 
