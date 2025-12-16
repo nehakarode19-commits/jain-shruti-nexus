@@ -2,7 +2,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
 import { AdminAuthProvider } from "@/contexts/AdminAuthContext";
 import { ProtectedLMSRoute } from "@/components/lms/ProtectedLMSRoute";
@@ -166,9 +166,9 @@ function AppContent() {
       <Route path="/research/shastrasandarbha" element={<Shastrasandarbha />} />
       <Route path="/research/indology" element={<IndologyResearch />} />
       
-      {/* Library - Redirect to Books */}
-      <Route path="/library" element={<Navigate to="/books" replace />} />
-      <Route path="/library/:id" element={<Navigate to="/books" replace />} />
+      {/* Library */}
+      <Route path="/library" element={<Library />} />
+      <Route path="/library/:id" element={<LibraryItemDetails />} />
       
       {/* Gallery & Books */}
       <Route path="/gallery" element={<Gallery />} />
