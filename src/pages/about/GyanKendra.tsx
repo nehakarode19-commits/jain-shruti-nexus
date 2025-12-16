@@ -128,9 +128,9 @@ const forumFeatures = [
   },
   {
     icon: PlayCircle,
-    title: "Lecture Repository",
+    title: "Video Lecture Gallery",
     description: "Access recorded lectures from renowned scholars on Jain philosophy, history, and textual studies",
-    link: "/learning/courses",
+    link: "/resources/video-lectures",
     linkText: "Browse Lectures"
   },
   {
@@ -142,10 +142,10 @@ const forumFeatures = [
   },
   {
     icon: FileText,
-    title: "Research Publications",
-    description: "Browse and contribute to peer-reviewed papers and research articles",
-    link: "/scholar/publications",
-    linkText: "Explore Publications"
+    title: "Indology Research",
+    description: "Explore manuscript analysis tools, cross-reference databases, and collaboration opportunities",
+    link: "/research/indology",
+    linkText: "Explore Indology"
   }
 ];
 
