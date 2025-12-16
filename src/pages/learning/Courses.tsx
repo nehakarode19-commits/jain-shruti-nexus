@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { Layout } from "@/components/layout/Layout";
 import { CourseCard } from "@/components/learning/CourseCard";
 import { EnrollmentDialog } from "@/components/learning/EnrollmentDialog";
 import { useCourses, useEnrollments, LMSCourse } from "@/hooks/useLMS";
@@ -13,10 +14,10 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Search, Filter, BookOpen, GraduationCap, Video, Users, Sparkles, LogIn, Home } from "lucide-react";
+import { Search, Filter, BookOpen, GraduationCap, Video, Users, Sparkles, LogIn } from "lucide-react";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Badge } from "@/components/ui/badge";
-import { isDemoMode } from "@/components/learning/ProtectedStudentRoute";
+import { Link } from "react-router-dom";
 
 const SUBJECTS = [
   "All Subjects",
@@ -34,7 +35,6 @@ const MODES = ["All Modes", "Online", "Offline", "Hybrid"];
 export default function Courses() {
   const navigate = useNavigate();
   const { isAuthenticated } = useAdminAuth();
-  const isDemo = isDemoMode();
   const { data: courses, isLoading } = useCourses();
   const { data: enrollments } = useEnrollments();
   const [search, setSearch] = useState("");
@@ -75,45 +75,8 @@ export default function Courses() {
   const offlineCourses = courses?.filter(c => c.course_mode === "Offline").length || 0;
 
   return (
-    <div className="min-h-screen bg-background">
-      {/* Simple Header */}
-      <div className="bg-card border-b border-border py-4 px-4 md:px-6">
-        <div className="max-w-7xl mx-auto flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
-              <GraduationCap className="h-5 w-5 text-primary" />
-            </div>
-            <div>
-              <h1 className="font-heading text-lg font-semibold text-foreground">Learning Portal</h1>
-              <p className="text-xs text-muted-foreground">Browse Courses</p>
-            </div>
-          </div>
-          <div className="flex items-center gap-3">
-            <Button variant="ghost" size="sm" asChild>
-              <Link to="/">
-                <Home className="h-4 w-4 mr-2" />
-                Home
-              </Link>
-            </Button>
-            {(isAuthenticated || isDemo) ? (
-              <Button size="sm" asChild>
-                <Link to="/learning/student-dashboard">
-                  My Dashboard
-                </Link>
-              </Button>
-            ) : (
-              <Button size="sm" asChild>
-                <Link to="/learning/login">
-                  <LogIn className="h-4 w-4 mr-2" />
-                  Login
-                </Link>
-              </Button>
-            )}
-          </div>
-        </div>
-      </div>
-
-      <div className="max-w-7xl mx-auto px-4 md:px-6 py-8 space-y-8">
+    <Layout>
+      <div className="space-y-8">
         {/* Hero Section */}
         <div className="relative bg-gradient-to-br from-primary/10 via-primary/5 to-background rounded-3xl p-8 md:p-10 overflow-hidden border border-primary/10">
           {/* Decorative Elements */}
@@ -327,6 +290,6 @@ export default function Courses() {
         open={enrollDialogOpen}
         onOpenChange={setEnrollDialogOpen}
       />
-    </div>
+    </Layout>
   );
 }
