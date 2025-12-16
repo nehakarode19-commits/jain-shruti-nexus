@@ -61,6 +61,10 @@ import SodhSanchay from "./pages/research/SodhSanchay";
 import SodhSandarbh from "./pages/research/SodhSandarbh";
 import Shabdasangraha from "./pages/research/Shabdasangraha";
 import Shastrasandarbha from "./pages/research/Shastrasandarbha";
+import IndologyResearch from "./pages/research/IndologyResearch";
+
+// Resources
+import VideoLectures from "./pages/resources/VideoLectures";
 
 // LMS Pages
 import LMSLogin from "./pages/lms/LMSLogin";
@@ -163,6 +167,10 @@ function AppContent() {
       <Route path="/research/sodhsandarbh" element={<SodhSandarbh />} />
       <Route path="/research/shabdasangraha" element={<Shabdasangraha />} />
       <Route path="/research/shastrasandarbha" element={<Shastrasandarbha />} />
+      <Route path="/research/indology" element={<IndologyResearch />} />
+      
+      {/* Resources */}
+      <Route path="/resources/video-lectures" element={<VideoLectures />} />
       
       {/* Library */}
       <Route path="/library" element={<Library />} />
