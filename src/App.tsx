@@ -51,6 +51,7 @@ import GyanKendra from "./pages/about/GyanKendra";
 import Blog from "./pages/community/Blog";
 import BlogDetails from "./pages/community/BlogDetails";
 import News from "./pages/community/News";
+import EventDetails from "./pages/community/EventDetails";
 
 // Research Modules
 import SodhSanchay from "./pages/research/SodhSanchay";
@@ -179,6 +180,7 @@ function AppContent() {
       {/* Community */}
       <Route path="/community" element={<CommunityEvents />} />
       <Route path="/community/events" element={<CommunityEvents />} />
+      <Route path="/community/events/:id" element={<EventDetails />} />
       <Route path="/community/blog" element={<Blog />} />
       <Route path="/community/blog/:id" element={<BlogDetails />} />
       
