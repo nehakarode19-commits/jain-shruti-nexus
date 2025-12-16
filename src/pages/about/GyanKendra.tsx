@@ -14,7 +14,7 @@ import {
   Mail,
   ExternalLink,
   Quote,
-  Database,
+  
   Globe,
   MessageSquare,
   PlayCircle,
@@ -95,26 +95,26 @@ const testimonials = [
   }
 ];
 
-const dataMiningFeatures = [
+const indologyFeatures = [
   {
-    icon: Database,
-    title: "Digital Text Mining",
-    description: "Advanced tools for extracting and analyzing patterns from digitized Jain manuscripts and texts"
+    icon: Scroll,
+    title: "Manuscript Studies",
+    description: "Explore ancient Jain manuscripts with scholarly annotations and detailed textual analysis"
   },
   {
     icon: Languages,
-    title: "Multi-Script Analysis",
-    description: "Support for Prakrit, Sanskrit, Gujarati, and Devanagari script processing and transliteration"
+    title: "Multi-Script Support",
+    description: "Access texts in Prakrit, Sanskrit, Gujarati, and Devanagari with transliteration support"
   },
   {
-    icon: Search,
-    title: "Semantic Search",
-    description: "AI-powered search across vast collections of philosophical texts and commentaries"
+    icon: BookOpen,
+    title: "Comparative Studies",
+    description: "Research connections between Jain literature and Vedic, Buddhist, and Sanskrit traditions"
   },
   {
     icon: Globe,
     title: "Indology Resources",
-    description: "Comprehensive databases connecting Jain literature with broader Indian scholarly traditions"
+    description: "Comprehensive databases connecting Jain philosophy with broader Indian scholarly traditions"
   }
 ];
 
@@ -275,26 +275,26 @@ const GyanKendra = () => {
         </div>
       </section>
 
-      {/* Data Mining & Indology Section */}
+      {/* Indology & Research Section */}
       <section className="py-16 lg:py-20 bg-background">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-12">
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-sm mb-4">
-                <Database className="h-4 w-4 text-primary" />
-                <span className="text-primary font-medium">Research Tools</span>
+                <BookOpen className="h-4 w-4 text-primary" />
+                <span className="text-primary font-medium">Scholarly Research</span>
               </div>
               <h2 className="font-display text-3xl font-bold text-foreground mb-4">
-                Data Mining & Indology
+                Indology & Comparative Studies
               </h2>
               <p className="text-muted-foreground max-w-2xl mx-auto">
-                Leverage cutting-edge technology to explore ancient wisdom. Our digital tools enable 
-                sophisticated analysis of Jain manuscripts and their connections to broader Indological studies.
+                Explore the rich traditions of Jain scholarship and their connections to broader Indian 
+                philosophical heritage through our comprehensive research resources.
               </p>
             </div>
 
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
-              {dataMiningFeatures.map((item, index) => (
+              {indologyFeatures.map((item, index) => (
                 <Card 
                   key={item.title}
                   variant="feature"
