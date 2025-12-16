@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { ScholarLayout } from "@/components/scholar/ScholarLayout";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -7,6 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Badge } from "@/components/ui/badge";
+import { Switch } from "@/components/ui/switch";
 import {
   Select,
   SelectContent,
@@ -23,15 +24,19 @@ import {
   X,
   Upload,
   Image,
-  Loader2
+  Loader2,
+  File,
+  CheckCircle
 } from "lucide-react";
 import { useCreatePublication, PUBLICATION_CATEGORIES } from "@/hooks/useScholarPublications";
 import { useToast } from "@/hooks/use-toast";
+import { supabase } from "@/integrations/supabase/client";
 
 const ScholarPublicationSubmit = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
   const createPublication = useCreatePublication();
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const [formData, setFormData] = useState({
     title: "",
@@ -45,6 +50,9 @@ const ScholarPublicationSubmit = () => {
   const [keywords, setKeywords] = useState<string[]>([]);
   const [keywordInput, setKeywordInput] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [useFileUpload, setUseFileUpload] = useState(true);
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [isUploading, setIsUploading] = useState(false);
 
   const handleAddKeyword = () => {
     if (keywordInput.trim() && !keywords.includes(keywordInput.trim())) {
@@ -64,6 +72,67 @@ const ScholarPublicationSubmit = () => {
     }
   };
 
+  const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      // Validate file type
+      const allowedTypes = ['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'];
+      if (!allowedTypes.includes(file.type)) {
+        toast({
+          title: "Invalid file type",
+          description: "Please upload a PDF or Word document.",
+          variant: "destructive",
+        });
+        return;
+      }
+      // Validate file size (max 50MB)
+      if (file.size > 50 * 1024 * 1024) {
+        toast({
+          title: "File too large",
+          description: "Maximum file size is 50MB.",
+          variant: "destructive",
+        });
+        return;
+      }
+      setSelectedFile(file);
+    }
+  };
+
+  const uploadFile = async (): Promise<string | null> => {
+    if (!selectedFile) return formData.file_url || null;
+
+    setIsUploading(true);
+    try {
+      const fileExt = selectedFile.name.split('.').pop();
+      const fileName = `${Date.now()}-${Math.random().toString(36).substring(7)}.${fileExt}`;
+      const filePath = `publications/${fileName}`;
+
+      const { error: uploadError } = await supabase.storage
+        .from('scholar-publications')
+        .upload(filePath, selectedFile);
+
+      if (uploadError) {
+        throw uploadError;
+      }
+
+      const { data: { publicUrl } } = supabase.storage
+        .from('scholar-publications')
+        .getPublicUrl(filePath);
+
+      return publicUrl;
+    } catch (error) {
+      console.error('Error uploading file:', error);
+      toast({
+        title: "Upload failed",
+        description: "Failed to upload the file. Please try again.",
+        variant: "destructive",
+      });
+      return null;
+    } finally {
+      setIsUploading(false);
+    }
+  };
+
   const handleSaveDraft = async () => {
     if (!formData.title.trim()) {
       toast({
@@ -76,8 +145,17 @@ const ScholarPublicationSubmit = () => {
 
     setIsSubmitting(true);
     try {
+      let fileUrl = formData.file_url;
+      if (useFileUpload && selectedFile) {
+        const uploadedUrl = await uploadFile();
+        if (uploadedUrl) {
+          fileUrl = uploadedUrl;
+        }
+      }
+
       await createPublication.mutateAsync({
         ...formData,
+        file_url: fileUrl,
         keywords,
         status: "draft",
         is_published: false,
@@ -111,8 +189,17 @@ const ScholarPublicationSubmit = () => {
 
     setIsSubmitting(true);
     try {
+      let fileUrl = formData.file_url;
+      if (useFileUpload && selectedFile) {
+        const uploadedUrl = await uploadFile();
+        if (uploadedUrl) {
+          fileUrl = uploadedUrl;
+        }
+      }
+
       await createPublication.mutateAsync({
         ...formData,
+        file_url: fileUrl,
         keywords,
         status: "published",
         is_published: true,
@@ -277,22 +364,97 @@ const ScholarPublicationSubmit = () => {
               )}
             </div>
 
-            {/* File URL */}
-            <div className="space-y-2">
-              <Label htmlFor="file_url">Document URL (PDF)</Label>
-              <div className="relative">
-                <Upload className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                <Input
-                  id="file_url"
-                  placeholder="https://example.com/document.pdf"
-                  className="pl-10"
-                  value={formData.file_url}
-                  onChange={(e) => setFormData({ ...formData, file_url: e.target.value })}
-                />
+            {/* File Upload / URL Toggle */}
+            <div className="space-y-4">
+              <div className="flex items-center justify-between">
+                <Label>Document (PDF/Word)</Label>
+                <div className="flex items-center gap-2">
+                  <span className={`text-sm ${!useFileUpload ? 'text-foreground' : 'text-muted-foreground'}`}>
+                    Paste URL
+                  </span>
+                  <Switch
+                    checked={useFileUpload}
+                    onCheckedChange={setUseFileUpload}
+                  />
+                  <span className={`text-sm ${useFileUpload ? 'text-foreground' : 'text-muted-foreground'}`}>
+                    Upload File
+                  </span>
+                </div>
               </div>
-              <p className="text-xs text-muted-foreground">
-                Provide a link to the full document if available
-              </p>
+
+              {useFileUpload ? (
+                <div className="space-y-3">
+                  <input
+                    type="file"
+                    ref={fileInputRef}
+                    onChange={handleFileSelect}
+                    accept=".pdf,.doc,.docx"
+                    className="hidden"
+                  />
+                  <div
+                    onClick={() => fileInputRef.current?.click()}
+                    className="border-2 border-dashed border-border rounded-lg p-6 text-center cursor-pointer hover:border-primary/50 hover:bg-muted/30 transition-colors"
+                  >
+                    {selectedFile ? (
+                      <div className="flex items-center justify-center gap-3">
+                        <CheckCircle className="h-8 w-8 text-green-500" />
+                        <div className="text-left">
+                          <p className="font-medium text-foreground">{selectedFile.name}</p>
+                          <p className="text-sm text-muted-foreground">
+                            {(selectedFile.size / 1024 / 1024).toFixed(2)} MB
+                          </p>
+                        </div>
+                        <Button
+                          type="button"
+                          variant="ghost"
+                          size="sm"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            setSelectedFile(null);
+                            if (fileInputRef.current) {
+                              fileInputRef.current.value = '';
+                            }
+                          }}
+                        >
+                          <X className="h-4 w-4" />
+                        </Button>
+                      </div>
+                    ) : (
+                      <>
+                        <File className="h-10 w-10 text-muted-foreground mx-auto mb-2" />
+                        <p className="text-sm font-medium text-foreground">
+                          Click to upload or drag and drop
+                        </p>
+                        <p className="text-xs text-muted-foreground mt-1">
+                          PDF or Word document (max 50MB)
+                        </p>
+                      </>
+                    )}
+                  </div>
+                  {isUploading && (
+                    <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                      <Loader2 className="h-4 w-4 animate-spin" />
+                      Uploading file...
+                    </div>
+                  )}
+                </div>
+              ) : (
+                <div className="space-y-2">
+                  <div className="relative">
+                    <Upload className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                    <Input
+                      id="file_url"
+                      placeholder="https://example.com/document.pdf"
+                      className="pl-10"
+                      value={formData.file_url}
+                      onChange={(e) => setFormData({ ...formData, file_url: e.target.value })}
+                    />
+                  </div>
+                  <p className="text-xs text-muted-foreground">
+                    Provide a direct link to the full document
+                  </p>
+                </div>
+              )}
             </div>
 
             {/* Action Buttons */}
