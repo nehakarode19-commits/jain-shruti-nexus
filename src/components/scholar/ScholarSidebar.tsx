@@ -22,12 +22,12 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 const navItems = [
   { icon: LayoutDashboard, label: "Dashboard", href: "/scholar/dashboard" },
   { icon: Users, label: "Scholar Directory", href: "/scholar/directory" },
+  { icon: FileText, label: "Publications", href: "/scholar/publications" },
   { icon: MessageSquare, label: "Collaborate", href: "/scholar/chat" },
   { icon: Newspaper, label: "Community Feed", href: "/scholar/feed" },
   { icon: Calendar, label: "Events", href: "/scholar/events" },
   { icon: Sparkles, label: "AI Tools", href: "/scholar/ai-tools" },
   { icon: BookOpen, label: "Research Tools", href: "/research" },
-  { icon: FileText, label: "My Research", href: "/scholar/feed" },
   { icon: Settings, label: "Settings", href: "/scholar/settings" },
 ];
 

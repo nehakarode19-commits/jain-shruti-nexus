@@ -1215,6 +1215,107 @@ export type Database = {
         }
         Relationships: []
       }
+      publication_reviews: {
+        Row: {
+          comment: string | null
+          created_at: string
+          id: string
+          is_approved: boolean | null
+          publication_id: string
+          rating: number | null
+          reviewer_id: string
+        }
+        Insert: {
+          comment?: string | null
+          created_at?: string
+          id?: string
+          is_approved?: boolean | null
+          publication_id: string
+          rating?: number | null
+          reviewer_id: string
+        }
+        Update: {
+          comment?: string | null
+          created_at?: string
+          id?: string
+          is_approved?: boolean | null
+          publication_id?: string
+          rating?: number | null
+          reviewer_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "publication_reviews_publication_id_fkey"
+            columns: ["publication_id"]
+            isOneToOne: false
+            referencedRelation: "scholar_publications"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      scholar_publications: {
+        Row: {
+          abstract: string | null
+          category: string
+          content: string | null
+          cover_image: string | null
+          created_at: string
+          downloads_count: number | null
+          file_url: string | null
+          id: string
+          is_published: boolean | null
+          keywords: string[] | null
+          published_at: string | null
+          status: string
+          sub_category: string | null
+          submitted_at: string | null
+          title: string
+          updated_at: string
+          user_id: string
+          views_count: number | null
+        }
+        Insert: {
+          abstract?: string | null
+          category?: string
+          content?: string | null
+          cover_image?: string | null
+          created_at?: string
+          downloads_count?: number | null
+          file_url?: string | null
+          id?: string
+          is_published?: boolean | null
+          keywords?: string[] | null
+          published_at?: string | null
+          status?: string
+          sub_category?: string | null
+          submitted_at?: string | null
+          title: string
+          updated_at?: string
+          user_id: string
+          views_count?: number | null
+        }
+        Update: {
+          abstract?: string | null
+          category?: string
+          content?: string | null
+          cover_image?: string | null
+          created_at?: string
+          downloads_count?: number | null
+          file_url?: string | null
+          id?: string
+          is_published?: boolean | null
+          keywords?: string[] | null
+          published_at?: string | null
+          status?: string
+          sub_category?: string | null
+          submitted_at?: string | null
+          title?: string
+          updated_at?: string
+          user_id?: string
+          views_count?: number | null
+        }
+        Relationships: []
+      }
       social_media_settings: {
         Row: {
           created_at: string
