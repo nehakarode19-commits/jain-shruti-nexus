@@ -19,6 +19,9 @@ import ScholarFeed from "./pages/scholar/ScholarFeed";
 import ScholarEvents from "./pages/scholar/ScholarEvents";
 import ScholarAITools from "./pages/scholar/ScholarAITools";
 import ScholarSettings from "./pages/scholar/ScholarSettings";
+import ScholarPublications from "./pages/scholar/ScholarPublications";
+import ScholarPublicationSubmit from "./pages/scholar/ScholarPublicationSubmit";
+import ScholarPublicationDetail from "./pages/scholar/ScholarPublicationDetail";
 
 import Index from "./pages/Index";
 import About from "./pages/About";
@@ -220,6 +223,9 @@ function AppContent() {
       <Route path="/scholar/login" element={<ScholarLogin />} />
       <Route path="/scholar/dashboard" element={<ProtectedScholarRoute><ScholarDashboard /></ProtectedScholarRoute>} />
       <Route path="/scholar/directory" element={<ProtectedScholarRoute><ScholarDirectory /></ProtectedScholarRoute>} />
+      <Route path="/scholar/publications" element={<ProtectedScholarRoute><ScholarPublications /></ProtectedScholarRoute>} />
+      <Route path="/scholar/publications/submit" element={<ProtectedScholarRoute><ScholarPublicationSubmit /></ProtectedScholarRoute>} />
+      <Route path="/scholar/publications/:id" element={<ProtectedScholarRoute><ScholarPublicationDetail /></ProtectedScholarRoute>} />
       <Route path="/scholar/chat" element={<ProtectedScholarRoute><ScholarChat /></ProtectedScholarRoute>} />
       <Route path="/scholar/feed" element={<ProtectedScholarRoute><ScholarFeed /></ProtectedScholarRoute>} />
       <Route path="/scholar/events" element={<ProtectedScholarRoute><ScholarEvents /></ProtectedScholarRoute>} />
