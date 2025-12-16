@@ -320,25 +320,32 @@ const GyanKendra = () => {
               <div className="grid md:grid-cols-2 gap-8 items-center">
                 <div>
                   <h3 className="font-display text-xl font-bold text-foreground mb-4">
-                    Bridging Ancient Wisdom with Modern Research
+                    Specialized Research Areas
                   </h3>
                   <p className="text-muted-foreground mb-4">
-                    Our Indology division specializes in comparative studies, exploring connections between 
-                    Jain literature and broader Indian philosophical traditions including Vedic, Buddhist, 
-                    and Sanskrit scholarly works.
+                    Our Indology division offers in-depth resources for specialized scholarly research, 
+                    connecting ancient Jain wisdom with contemporary academic methodologies.
                   </p>
-                  <ul className="space-y-2 text-sm text-muted-foreground">
-                    <li className="flex items-center gap-2">
-                      <div className="w-1.5 h-1.5 rounded-full bg-primary" />
-                      Cross-referencing with major Indological databases
+                  <ul className="space-y-3 text-sm text-muted-foreground">
+                    <li className="flex items-start gap-2">
+                      <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 flex-shrink-0" />
+                      <span><strong className="text-foreground">Agamic Studies</strong> - Critical analysis of Jain canonical texts, Anga-pravishta and Anga-bahya literature</span>
                     </li>
-                    <li className="flex items-center gap-2">
-                      <div className="w-1.5 h-1.5 rounded-full bg-primary" />
-                      Collaborative research with international institutions
+                    <li className="flex items-start gap-2">
+                      <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 flex-shrink-0" />
+                      <span><strong className="text-foreground">Prakrit Linguistics</strong> - Study of Ardhamagadhi, Shauraseni, and other Prakrit dialects in Jain scriptures</span>
                     </li>
-                    <li className="flex items-center gap-2">
-                      <div className="w-1.5 h-1.5 rounded-full bg-primary" />
-                      Digital preservation using latest archival standards
+                    <li className="flex items-start gap-2">
+                      <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 flex-shrink-0" />
+                      <span><strong className="text-foreground">Philosophical Commentaries</strong> - Research on Tika, Churni, and Bhashya traditions across centuries</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 flex-shrink-0" />
+                      <span><strong className="text-foreground">Manuscript Paleography</strong> - Analysis of scripts, dating methods, and textual variants</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 flex-shrink-0" />
+                      <span><strong className="text-foreground">Comparative Philosophy</strong> - Connections with Vedic, Buddhist, and Sanskrit scholarly traditions</span>
                     </li>
                   </ul>
                 </div>
