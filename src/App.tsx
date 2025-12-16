@@ -110,6 +110,7 @@ import BatchesManage from "./pages/learning/BatchesManage";
 import QuizzesManage from "./pages/learning/QuizzesManage";
 import AssignmentsManage from "./pages/learning/AssignmentsManage";
 import StudentDashboard from "./pages/learning/StudentDashboard";
+import MyCertificates from "./pages/learning/MyCertificates";
 import LMSCoursesManagement from "./pages/admin/LMSCoursesManagement";
 import LecturesManagement from "./pages/admin/LecturesManagement";
 
@@ -237,6 +238,7 @@ function AppContent() {
       <Route path="/learning/batches" element={<ProtectedLearningRoute><BatchesManage /></ProtectedLearningRoute>} />
       <Route path="/learning/quizzes" element={<ProtectedLearningRoute><QuizzesManage /></ProtectedLearningRoute>} />
       <Route path="/learning/assignments" element={<ProtectedLearningRoute><AssignmentsManage /></ProtectedLearningRoute>} />
+      <Route path="/learning/certificates" element={<MyCertificates />} />
       {/* Admin Routes */}
       <Route path="/admin" element={<AdminLogin />} />
       <Route path="/admin/login" element={<AdminLogin />} />
