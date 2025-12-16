@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Textarea } from "@/components/ui/textarea";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { CitationGenerator } from "@/components/scholar/CitationGenerator";
 import {
   FileText,
   ArrowLeft,
@@ -299,12 +300,15 @@ const ScholarPublicationDetail = () => {
                     {publication.keywords.map((keyword, i) => (
                       <Badge key={i} variant="secondary" className="text-xs">
                         {keyword}
-                      </Badge>
+                    </Badge>
                     ))}
                   </div>
                 </CardContent>
               </Card>
             )}
+
+            {/* Citation Generator */}
+            <CitationGenerator publication={publication} />
 
             {/* Stats */}
             <Card variant="feature">
