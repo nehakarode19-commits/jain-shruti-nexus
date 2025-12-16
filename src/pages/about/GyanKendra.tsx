@@ -14,15 +14,16 @@ import {
   Mail,
   ExternalLink,
   Quote,
-  
   Globe,
   MessageSquare,
   PlayCircle,
   Users,
-  Search,
   FileText,
   GraduationCap,
-  Languages
+  Languages,
+  PenLine,
+  BookMarked,
+  Library
 } from "lucide-react";
 
 const facilities = [
@@ -102,17 +103,17 @@ const indologyFeatures = [
     description: "Explore ancient Jain manuscripts with scholarly annotations and detailed textual analysis"
   },
   {
-    icon: Languages,
+    icon: PenLine,
     title: "Multi-Script Support",
     description: "Access texts in Prakrit, Sanskrit, Gujarati, and Devanagari with transliteration support"
   },
   {
-    icon: BookOpen,
+    icon: BookMarked,
     title: "Comparative Studies",
     description: "Research connections between Jain literature and Vedic, Buddhist, and Sanskrit traditions"
   },
   {
-    icon: Globe,
+    icon: Library,
     title: "Indology Resources",
     description: "Comprehensive databases connecting Jain philosophy with broader Indian scholarly traditions"
   }
