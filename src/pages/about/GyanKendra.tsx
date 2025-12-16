@@ -11,11 +11,8 @@ import {
   Video,
   MapPin,
   Clock,
-  Phone,
   Mail,
-  ExternalLink,
-  Heart,
-  Landmark
+  ExternalLink
 } from "lucide-react";
 
 const facilities = [
@@ -186,76 +183,6 @@ const GyanKendra = () => {
                 </CardContent>
               </Card>
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Organizational Info */}
-      <section className="py-16 lg:py-20 bg-secondary/30">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="font-display text-3xl font-bold text-foreground mb-4">
-              Our Organization
-            </h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto">
-              Rooted in faith, driven by service to preserve Jain heritage
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-            {/* Founded By Card */}
-            <Card className="border-border hover:shadow-lg transition-all duration-300 overflow-hidden">
-              <CardContent className="p-6 relative">
-                <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-bl from-primary/10 to-transparent rounded-bl-full" />
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="w-12 h-12 rounded-xl flex items-center justify-center bg-gradient-to-br from-primary to-primary/80 shadow-md">
-                    <Heart className="h-6 w-6 text-primary-foreground" />
-                  </div>
-                  <p className="font-heading text-sm uppercase tracking-wider text-primary font-semibold">
-                    Founded by
-                  </p>
-                </div>
-                <h3 className="font-display text-xl font-bold text-foreground mb-3">
-                  Srimati Shantaben Shantilal Bhudarmal Adani Family
-                </h3>
-                <div className="h-px w-16 bg-primary/30 my-4" />
-                <div>
-                  <p className="font-body text-foreground font-medium">
-                    Muni Jambuvijayaji Gyankendra
-                  </p>
-                  <p className="font-body text-muted-foreground text-sm">
-                    (Muni Jambuvijayaji Research Centre)
-                  </p>
-                </div>
-              </CardContent>
-            </Card>
-
-            {/* Run By Card */}
-            <Card className="border-border hover:shadow-lg transition-all duration-300 overflow-hidden">
-              <CardContent className="p-6 relative">
-                <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-bl from-primary/10 to-transparent rounded-bl-full" />
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="w-12 h-12 rounded-xl flex items-center justify-center bg-gradient-to-br from-primary to-primary/80 shadow-md">
-                    <Landmark className="h-6 w-6 text-primary-foreground" />
-                  </div>
-                  <p className="font-heading text-sm uppercase tracking-wider text-primary font-semibold">
-                    Run by
-                  </p>
-                </div>
-                <h3 className="font-display text-xl font-bold text-foreground mb-3">
-                  Sri Siddhi-Bhuvan-Manohar Jain Trust
-                </h3>
-                <div className="h-px w-16 bg-primary/30 my-4" />
-                <div>
-                  <p className="font-body text-foreground font-medium">
-                    Regd. No. 3402
-                  </p>
-                  <p className="font-body text-muted-foreground text-sm">
-                    Ahmedabad, Gujarat
-                  </p>
-                </div>
-              </CardContent>
-            </Card>
           </div>
         </div>
       </section>
