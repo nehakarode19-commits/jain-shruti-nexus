@@ -3,6 +3,7 @@ import { useEventsFromDB } from "@/hooks/useContent";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { Link } from "react-router-dom";
 import { 
   Calendar, 
   MapPin,
@@ -104,14 +105,10 @@ const CommunityEvents = () => {
                           </div>
                           <div className="flex gap-3">
                             <Button variant="hero" size="sm" asChild>
-                              <a 
-                                href="https://siddhijambuparivar.com/events-list/" 
-                                target="_blank" 
-                                rel="noopener noreferrer"
-                              >
+                              <Link to={`/community/events/${event.id}`}>
                                 Learn More
                                 <ArrowRight className="h-4 w-4 ml-2" />
-                              </a>
+                              </Link>
                             </Button>
                           </div>
                         </CardContent>
