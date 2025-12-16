@@ -37,6 +37,7 @@ const ScholarPublicationSubmit = () => {
   const { toast } = useToast();
   const createPublication = useCreatePublication();
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const coverImageInputRef = useRef<HTMLInputElement>(null);
 
   const [formData, setFormData] = useState({
     title: "",
@@ -51,7 +52,10 @@ const ScholarPublicationSubmit = () => {
   const [keywordInput, setKeywordInput] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [useFileUpload, setUseFileUpload] = useState(true);
+  const [useCoverImageUpload, setUseCoverImageUpload] = useState(true);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [selectedCoverImage, setSelectedCoverImage] = useState<File | null>(null);
+  const [coverImagePreview, setCoverImagePreview] = useState<string | null>(null);
   const [isUploading, setIsUploading] = useState(false);
 
   const handleAddKeyword = () => {
@@ -94,7 +98,39 @@ const ScholarPublicationSubmit = () => {
         });
         return;
       }
-      setSelectedFile(file);
+    setSelectedFile(file);
+    }
+  };
+
+  const handleCoverImageSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      // Validate file type
+      const allowedTypes = ['image/jpeg', 'image/png', 'image/webp', 'image/gif'];
+      if (!allowedTypes.includes(file.type)) {
+        toast({
+          title: "Invalid file type",
+          description: "Please upload a JPG, PNG, WebP, or GIF image.",
+          variant: "destructive",
+        });
+        return;
+      }
+      // Validate file size (max 10MB)
+      if (file.size > 10 * 1024 * 1024) {
+        toast({
+          title: "File too large",
+          description: "Maximum image size is 10MB.",
+          variant: "destructive",
+        });
+        return;
+      }
+      setSelectedCoverImage(file);
+      // Create preview URL
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setCoverImagePreview(reader.result as string);
+      };
+      reader.readAsDataURL(file);
     }
   };
 
@@ -133,6 +169,41 @@ const ScholarPublicationSubmit = () => {
     }
   };
 
+  const uploadCoverImage = async (): Promise<string | null> => {
+    if (!selectedCoverImage) return formData.cover_image || null;
+
+    setIsUploading(true);
+    try {
+      const fileExt = selectedCoverImage.name.split('.').pop();
+      const fileName = `${Date.now()}-${Math.random().toString(36).substring(7)}.${fileExt}`;
+      const filePath = `covers/${fileName}`;
+
+      const { error: uploadError } = await supabase.storage
+        .from('scholar-publications')
+        .upload(filePath, selectedCoverImage);
+
+      if (uploadError) {
+        throw uploadError;
+      }
+
+      const { data: { publicUrl } } = supabase.storage
+        .from('scholar-publications')
+        .getPublicUrl(filePath);
+
+      return publicUrl;
+    } catch (error) {
+      console.error('Error uploading cover image:', error);
+      toast({
+        title: "Upload failed",
+        description: "Failed to upload the cover image. Please try again.",
+        variant: "destructive",
+      });
+      return null;
+    } finally {
+      setIsUploading(false);
+    }
+  };
+
   const handleSaveDraft = async () => {
     if (!formData.title.trim()) {
       toast({
@@ -146,6 +217,8 @@ const ScholarPublicationSubmit = () => {
     setIsSubmitting(true);
     try {
       let fileUrl = formData.file_url;
+      let coverImageUrl = formData.cover_image;
+      
       if (useFileUpload && selectedFile) {
         const uploadedUrl = await uploadFile();
         if (uploadedUrl) {
@@ -153,9 +226,17 @@ const ScholarPublicationSubmit = () => {
         }
       }
 
+      if (useCoverImageUpload && selectedCoverImage) {
+        const uploadedCoverUrl = await uploadCoverImage();
+        if (uploadedCoverUrl) {
+          coverImageUrl = uploadedCoverUrl;
+        }
+      }
+
       await createPublication.mutateAsync({
         ...formData,
         file_url: fileUrl,
+        cover_image: coverImageUrl,
         keywords,
         status: "draft",
         is_published: false,
@@ -190,6 +271,8 @@ const ScholarPublicationSubmit = () => {
     setIsSubmitting(true);
     try {
       let fileUrl = formData.file_url;
+      let coverImageUrl = formData.cover_image;
+      
       if (useFileUpload && selectedFile) {
         const uploadedUrl = await uploadFile();
         if (uploadedUrl) {
@@ -197,9 +280,17 @@ const ScholarPublicationSubmit = () => {
         }
       }
 
+      if (useCoverImageUpload && selectedCoverImage) {
+        const uploadedCoverUrl = await uploadCoverImage();
+        if (uploadedCoverUrl) {
+          coverImageUrl = uploadedCoverUrl;
+        }
+      }
+
       await createPublication.mutateAsync({
         ...formData,
         file_url: fileUrl,
+        cover_image: coverImageUrl,
         keywords,
         status: "published",
         is_published: true,
@@ -335,31 +426,103 @@ const ScholarPublicationSubmit = () => {
               )}
             </div>
 
-            {/* Cover Image URL */}
-            <div className="space-y-2">
-              <Label htmlFor="cover_image">Cover Image URL</Label>
-              <div className="flex gap-2">
-                <div className="relative flex-1">
-                  <Image className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                  <Input
-                    id="cover_image"
-                    placeholder="https://example.com/image.jpg"
-                    className="pl-10"
-                    value={formData.cover_image}
-                    onChange={(e) => setFormData({ ...formData, cover_image: e.target.value })}
+            {/* Cover Image Upload / URL Toggle */}
+            <div className="space-y-4">
+              <div className="flex items-center justify-between">
+                <Label>Cover Image</Label>
+                <div className="flex items-center gap-2">
+                  <span className={`text-sm ${!useCoverImageUpload ? 'text-foreground' : 'text-muted-foreground'}`}>
+                    Paste URL
+                  </span>
+                  <Switch
+                    checked={useCoverImageUpload}
+                    onCheckedChange={setUseCoverImageUpload}
                   />
+                  <span className={`text-sm ${useCoverImageUpload ? 'text-foreground' : 'text-muted-foreground'}`}>
+                    Upload Image
+                  </span>
                 </div>
               </div>
-              {formData.cover_image && (
-                <div className="mt-2">
-                  <img
-                    src={formData.cover_image}
-                    alt="Cover preview"
-                    className="w-32 h-44 object-cover rounded-lg border"
-                    onError={(e) => {
-                      (e.target as HTMLImageElement).style.display = "none";
-                    }}
+
+              {useCoverImageUpload ? (
+                <div className="space-y-3">
+                  <input
+                    type="file"
+                    ref={coverImageInputRef}
+                    onChange={handleCoverImageSelect}
+                    accept="image/jpeg,image/png,image/webp,image/gif"
+                    className="hidden"
                   />
+                  <div
+                    onClick={() => coverImageInputRef.current?.click()}
+                    className="border-2 border-dashed border-border rounded-lg p-6 text-center cursor-pointer hover:border-primary/50 hover:bg-muted/30 transition-colors"
+                  >
+                    {selectedCoverImage && coverImagePreview ? (
+                      <div className="flex items-center justify-center gap-4">
+                        <img 
+                          src={coverImagePreview} 
+                          alt="Cover preview" 
+                          className="w-20 h-28 object-cover rounded-lg"
+                        />
+                        <div className="text-left">
+                          <p className="font-medium text-foreground">{selectedCoverImage.name}</p>
+                          <p className="text-sm text-muted-foreground">
+                            {(selectedCoverImage.size / 1024 / 1024).toFixed(2)} MB
+                          </p>
+                        </div>
+                        <Button
+                          type="button"
+                          variant="ghost"
+                          size="sm"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            setSelectedCoverImage(null);
+                            setCoverImagePreview(null);
+                            if (coverImageInputRef.current) {
+                              coverImageInputRef.current.value = '';
+                            }
+                          }}
+                        >
+                          <X className="h-4 w-4" />
+                        </Button>
+                      </div>
+                    ) : (
+                      <>
+                        <Image className="h-10 w-10 text-muted-foreground mx-auto mb-2" />
+                        <p className="text-sm font-medium text-foreground">
+                          Click to upload cover image
+                        </p>
+                        <p className="text-xs text-muted-foreground mt-1">
+                          JPG, PNG, WebP or GIF (max 10MB)
+                        </p>
+                      </>
+                    )}
+                  </div>
+                </div>
+              ) : (
+                <div className="space-y-2">
+                  <div className="relative">
+                    <Image className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                    <Input
+                      id="cover_image"
+                      placeholder="https://example.com/image.jpg"
+                      className="pl-10"
+                      value={formData.cover_image}
+                      onChange={(e) => setFormData({ ...formData, cover_image: e.target.value })}
+                    />
+                  </div>
+                  {formData.cover_image && (
+                    <div className="mt-2">
+                      <img
+                        src={formData.cover_image}
+                        alt="Cover preview"
+                        className="w-32 h-44 object-cover rounded-lg border"
+                        onError={(e) => {
+                          (e.target as HTMLImageElement).style.display = "none";
+                        }}
+                      />
+                    </div>
+                  )}
                 </div>
               )}
             </div>
