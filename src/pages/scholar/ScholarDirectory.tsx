@@ -217,7 +217,7 @@ export default function ScholarDirectory() {
                   </Avatar>
                   <div className="flex-1 min-w-0">
                     <Link 
-                      to={`/scholar/publications?author=${scholar.id}`}
+                      to={`/scholar/profile/${scholar.id}`}
                       className="font-semibold text-lg text-foreground truncate hover:text-primary transition-colors block"
                     >
                       {scholar.name}
