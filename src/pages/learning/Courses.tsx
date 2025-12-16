@@ -1,12 +1,10 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Layout } from "@/components/layout/Layout";
-import { StudentLayout } from "@/components/learning/StudentLayout";
 import { CourseCard } from "@/components/learning/CourseCard";
 import { EnrollmentDialog } from "@/components/learning/EnrollmentDialog";
 import { useCourses, useEnrollments, LMSCourse } from "@/hooks/useLMS";
 import { useAdminAuth } from "@/contexts/AdminAuthContext";
-import { isDemoMode } from "@/components/learning/ProtectedStudentRoute";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import {
@@ -37,7 +35,6 @@ const MODES = ["All Modes", "Online", "Offline", "Hybrid"];
 export default function Courses() {
   const navigate = useNavigate();
   const { isAuthenticated } = useAdminAuth();
-  const isLoggedIn = isAuthenticated || isDemoMode();
   const { data: courses, isLoading } = useCourses();
   const { data: enrollments } = useEnrollments();
   const [search, setSearch] = useState("");
@@ -53,7 +50,7 @@ export default function Courses() {
   const enrolledCourseIds = new Set(enrollments?.map(e => e.course_id) || []);
 
   const handleEnrollClick = (course: LMSCourse) => {
-    if (!isLoggedIn) {
+    if (!isAuthenticated) {
       // Redirect to login with return URL
       navigate("/learning/login", { state: { from: `/learning/courses/${course.id}` } });
       return;
@@ -77,8 +74,8 @@ export default function Courses() {
   const onlineCourses = courses?.filter(c => c.course_mode === "Online").length || 0;
   const offlineCourses = courses?.filter(c => c.course_mode === "Offline").length || 0;
 
-  const pageContent = (
-    <>
+  return (
+    <Layout>
       <div className="space-y-8">
         {/* Hero Section */}
         <div className="relative bg-gradient-to-br from-primary/10 via-primary/5 to-background rounded-3xl p-8 md:p-10 overflow-hidden border border-primary/10">
@@ -134,7 +131,7 @@ export default function Courses() {
             </div>
 
             {/* Login CTA for non-authenticated users */}
-            {!isLoggedIn && (
+            {!isAuthenticated && (
               <div className="mt-6 flex items-center gap-4">
                 <Button asChild className="rounded-xl">
                   <Link to="/learning/login">
@@ -147,7 +144,7 @@ export default function Courses() {
                 </span>
               </div>
             )}
-            {isLoggedIn && (
+            {isAuthenticated && (
               <div className="mt-6">
                 <Button asChild variant="outline" className="rounded-xl">
                   <Link to="/learning/student-dashboard">
@@ -293,13 +290,6 @@ export default function Courses() {
         open={enrollDialogOpen}
         onOpenChange={setEnrollDialogOpen}
       />
-    </>
+    </Layout>
   );
-
-  // Use StudentLayout for logged-in users, Layout for public
-  if (isLoggedIn) {
-    return <StudentLayout title="Browse Courses">{pageContent}</StudentLayout>;
-  }
-
-  return <Layout>{pageContent}</Layout>;
 }
