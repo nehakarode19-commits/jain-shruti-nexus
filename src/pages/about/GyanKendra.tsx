@@ -12,7 +12,17 @@ import {
   MapPin,
   Clock,
   Mail,
-  ExternalLink
+  ExternalLink,
+  Quote,
+  Database,
+  Globe,
+  MessageSquare,
+  PlayCircle,
+  Users,
+  Search,
+  FileText,
+  GraduationCap,
+  Languages
 } from "lucide-react";
 
 const facilities = [
@@ -59,6 +69,84 @@ const highlights = [
     count: "100+",
     description: "Lectures and discourses"
   },
+];
+
+const testimonials = [
+  {
+    name: "Dr. Ramesh Jain",
+    designation: "Professor, Jain Studies",
+    institution: "University of Mumbai",
+    quote: "Muni Jambuvijayaji Research Center is an invaluable resource for Jain scholarship. The manuscript collection is unparalleled, and the staff's dedication to preservation is commendable.",
+    image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop"
+  },
+  {
+    name: "Prof. Nalini Shah",
+    designation: "Research Scholar",
+    institution: "Gujarat University",
+    quote: "My research on Prakrit literature was transformed by the resources available here. The digital archives and expert guidance made my work significantly easier.",
+    image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop"
+  },
+  {
+    name: "Dr. Mahavir Sanghi",
+    designation: "Indologist",
+    institution: "Bhandarkar Oriental Research Institute",
+    quote: "This center bridges traditional Jain knowledge with modern research methodologies. A must-visit for anyone serious about Agamic studies.",
+    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop"
+  }
+];
+
+const dataMiningFeatures = [
+  {
+    icon: Database,
+    title: "Digital Text Mining",
+    description: "Advanced tools for extracting and analyzing patterns from digitized Jain manuscripts and texts"
+  },
+  {
+    icon: Languages,
+    title: "Multi-Script Analysis",
+    description: "Support for Prakrit, Sanskrit, Gujarati, and Devanagari script processing and transliteration"
+  },
+  {
+    icon: Search,
+    title: "Semantic Search",
+    description: "AI-powered search across vast collections of philosophical texts and commentaries"
+  },
+  {
+    icon: Globe,
+    title: "Indology Resources",
+    description: "Comprehensive databases connecting Jain literature with broader Indian scholarly traditions"
+  }
+];
+
+const forumFeatures = [
+  {
+    icon: MessageSquare,
+    title: "Discussion Forums",
+    description: "Engage with scholars worldwide on topics ranging from Agamic interpretation to manuscript authentication",
+    link: "/scholar/feed",
+    linkText: "Join Discussions"
+  },
+  {
+    icon: PlayCircle,
+    title: "Lecture Repository",
+    description: "Access recorded lectures from renowned scholars on Jain philosophy, history, and textual studies",
+    link: "/learning/courses",
+    linkText: "Browse Lectures"
+  },
+  {
+    icon: Users,
+    title: "Scholar Network",
+    description: "Connect with researchers, professors, and students from institutions worldwide",
+    link: "/scholars",
+    linkText: "View Directory"
+  },
+  {
+    icon: FileText,
+    title: "Research Publications",
+    description: "Browse and contribute to peer-reviewed papers and research articles",
+    link: "/scholar/publications",
+    linkText: "Explore Publications"
+  }
 ];
 
 const GyanKendra = () => {
@@ -187,8 +275,211 @@ const GyanKendra = () => {
         </div>
       </section>
 
-      {/* Visit Information */}
+      {/* Data Mining & Indology Section */}
       <section className="py-16 lg:py-20 bg-background">
+        <div className="container mx-auto px-4">
+          <div className="max-w-6xl mx-auto">
+            <div className="text-center mb-12">
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-sm mb-4">
+                <Database className="h-4 w-4 text-primary" />
+                <span className="text-primary font-medium">Research Tools</span>
+              </div>
+              <h2 className="font-display text-3xl font-bold text-foreground mb-4">
+                Data Mining & Indology
+              </h2>
+              <p className="text-muted-foreground max-w-2xl mx-auto">
+                Leverage cutting-edge technology to explore ancient wisdom. Our digital tools enable 
+                sophisticated analysis of Jain manuscripts and their connections to broader Indological studies.
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
+              {dataMiningFeatures.map((item, index) => (
+                <Card 
+                  key={item.title}
+                  variant="feature"
+                  className="animate-fade-up group hover:border-primary/30 transition-colors"
+                  style={{ animationDelay: `${index * 100}ms` }}
+                >
+                  <CardContent className="p-6">
+                    <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
+                      <item.icon className="h-6 w-6 text-primary" />
+                    </div>
+                    <h3 className="font-display font-semibold text-foreground mb-2">
+                      {item.title}
+                    </h3>
+                    <p className="text-sm text-muted-foreground">
+                      {item.description}
+                    </p>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+
+            <div className="bg-secondary/30 rounded-2xl p-8 border border-border">
+              <div className="grid md:grid-cols-2 gap-8 items-center">
+                <div>
+                  <h3 className="font-display text-xl font-bold text-foreground mb-4">
+                    Bridging Ancient Wisdom with Modern Research
+                  </h3>
+                  <p className="text-muted-foreground mb-4">
+                    Our Indology division specializes in comparative studies, exploring connections between 
+                    Jain literature and broader Indian philosophical traditions including Vedic, Buddhist, 
+                    and Sanskrit scholarly works.
+                  </p>
+                  <ul className="space-y-2 text-sm text-muted-foreground">
+                    <li className="flex items-center gap-2">
+                      <div className="w-1.5 h-1.5 rounded-full bg-primary" />
+                      Cross-referencing with major Indological databases
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <div className="w-1.5 h-1.5 rounded-full bg-primary" />
+                      Collaborative research with international institutions
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <div className="w-1.5 h-1.5 rounded-full bg-primary" />
+                      Digital preservation using latest archival standards
+                    </li>
+                  </ul>
+                </div>
+                <div className="flex justify-center">
+                  <Button variant="hero" asChild>
+                    <Link to="/research">
+                      Explore Research Tools
+                      <ArrowRight className="h-4 w-4 ml-2" />
+                    </Link>
+                  </Button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Academic Discussion Forum & Lecture Repository */}
+      <section className="py-16 lg:py-20 bg-gradient-spiritual">
+        <div className="container mx-auto px-4">
+          <div className="max-w-6xl mx-auto">
+            <div className="text-center mb-12">
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-sm mb-4">
+                <GraduationCap className="h-4 w-4 text-primary" />
+                <span className="text-primary font-medium">Academic Community</span>
+              </div>
+              <h2 className="font-display text-3xl font-bold text-foreground mb-4">
+                Discussion Forum & Lecture Repository
+              </h2>
+              <p className="text-muted-foreground max-w-2xl mx-auto">
+                Join a vibrant community of scholars and access an extensive library of academic 
+                lectures, discussions, and research materials.
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-2 gap-6">
+              {forumFeatures.map((item, index) => (
+                <Card 
+                  key={item.title}
+                  variant="feature"
+                  className="animate-fade-up group"
+                  style={{ animationDelay: `${index * 100}ms` }}
+                >
+                  <CardContent className="p-6">
+                    <div className="flex gap-4">
+                      <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0 group-hover:bg-primary/20 transition-colors">
+                        <item.icon className="h-7 w-7 text-primary" />
+                      </div>
+                      <div className="flex-1">
+                        <h3 className="font-display font-semibold text-foreground mb-2">
+                          {item.title}
+                        </h3>
+                        <p className="text-sm text-muted-foreground mb-4">
+                          {item.description}
+                        </p>
+                        <Button variant="outline" size="sm" asChild>
+                          <Link to={item.link}>
+                            {item.linkText}
+                            <ArrowRight className="h-3 w-3 ml-1" />
+                          </Link>
+                        </Button>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+
+            <div className="mt-10 text-center">
+              <p className="text-muted-foreground mb-4">
+                Ready to contribute to the scholarly community?
+              </p>
+              <Button variant="hero" asChild>
+                <Link to="/scholar/login">
+                  Join as Scholar
+                  <ArrowRight className="h-4 w-4 ml-2" />
+                </Link>
+              </Button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonials Section */}
+      <section className="py-16 lg:py-20 bg-background">
+        <div className="container mx-auto px-4">
+          <div className="max-w-6xl mx-auto">
+            <div className="text-center mb-12">
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-sm mb-4">
+                <Quote className="h-4 w-4 text-primary" />
+                <span className="text-primary font-medium">Testimonials</span>
+              </div>
+              <h2 className="font-display text-3xl font-bold text-foreground mb-4">
+                What Scholars Say
+              </h2>
+              <p className="text-muted-foreground max-w-2xl mx-auto">
+                Hear from researchers and academics who have benefited from our resources
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-3 gap-6">
+              {testimonials.map((item, index) => (
+                <Card 
+                  key={item.name}
+                  variant="feature"
+                  className="animate-fade-up"
+                  style={{ animationDelay: `${index * 100}ms` }}
+                >
+                  <CardContent className="p-6">
+                    <Quote className="h-8 w-8 text-primary/20 mb-4" />
+                    <p className="text-muted-foreground text-sm mb-6 italic leading-relaxed">
+                      "{item.quote}"
+                    </p>
+                    <div className="flex items-center gap-3 pt-4 border-t border-border">
+                      <img 
+                        src={item.image} 
+                        alt={item.name}
+                        className="w-12 h-12 rounded-full object-cover"
+                      />
+                      <div>
+                        <div className="font-display font-semibold text-foreground text-sm">
+                          {item.name}
+                        </div>
+                        <div className="text-xs text-muted-foreground">
+                          {item.designation}
+                        </div>
+                        <div className="text-xs text-primary">
+                          {item.institution}
+                        </div>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Visit Information */}
+      <section className="py-16 lg:py-20 bg-gradient-spiritual">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
             <div className="text-center mb-12">
