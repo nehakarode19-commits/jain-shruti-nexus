@@ -128,9 +128,9 @@ const forumFeatures = [
   },
   {
     icon: PlayCircle,
-    title: "Video Lecture Gallery",
+    title: "Lecture Repository",
     description: "Access recorded lectures from renowned scholars on Jain philosophy, history, and textual studies",
-    link: "/resources/video-lectures",
+    link: "/learning/courses",
     linkText: "Browse Lectures"
   },
   {

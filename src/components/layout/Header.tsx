@@ -46,7 +46,6 @@ const navigationItems = [
     items: [
       { title: "Research Hub", href: "/research", description: "Jain Knowledge & Research Ecosystem" },
       { title: "Jain Indology", href: "/research/indology", description: "Manuscript analysis & collaboration" },
-      { title: "Video Lectures", href: "/resources/video-lectures", description: "Academic lectures by scholars" },
     ],
   },
   {
