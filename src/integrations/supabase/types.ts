@@ -97,6 +97,11 @@ export type Database = {
       }
       books: {
         Row: {
+          audio_english: string | null
+          audio_gujarati: string | null
+          audio_hindi: string | null
+          audio_prakrit: string | null
+          audio_sanskrit: string | null
           author: string | null
           category: string | null
           cover_image: string | null
@@ -112,6 +117,11 @@ export type Database = {
           year: number | null
         }
         Insert: {
+          audio_english?: string | null
+          audio_gujarati?: string | null
+          audio_hindi?: string | null
+          audio_prakrit?: string | null
+          audio_sanskrit?: string | null
           author?: string | null
           category?: string | null
           cover_image?: string | null
@@ -127,6 +137,11 @@ export type Database = {
           year?: number | null
         }
         Update: {
+          audio_english?: string | null
+          audio_gujarati?: string | null
+          audio_hindi?: string | null
+          audio_prakrit?: string | null
+          audio_sanskrit?: string | null
           author?: string | null
           category?: string | null
           cover_image?: string | null

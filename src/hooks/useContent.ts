@@ -27,6 +27,11 @@ export function useBooksFromDB() {
           year: null,
           is_published: true,
           pdf_url: book.link || null,
+          audio_hindi: null,
+          audio_english: null,
+          audio_sanskrit: null,
+          audio_prakrit: null,
+          audio_gujarati: null,
           created_at: new Date().toISOString(),
           updated_at: new Date().toISOString(),
         }));
@@ -45,6 +50,11 @@ export function useBooksFromDB() {
           year: null,
           is_published: true,
           pdf_url: book.link || null,
+          audio_hindi: null,
+          audio_english: null,
+          audio_sanskrit: null,
+          audio_prakrit: null,
+          audio_gujarati: null,
           created_at: new Date().toISOString(),
           updated_at: new Date().toISOString(),
         }));
