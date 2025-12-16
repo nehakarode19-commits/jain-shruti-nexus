@@ -23,12 +23,15 @@ import {
   Loader2,
   FileText,
   Volume2,
+  Volume1,
+  VolumeX,
   Play,
   Pause,
   SkipBack,
   SkipForward,
   RotateCcw
 } from "lucide-react";
+import { Slider } from "@/components/ui/slider";
 
 // Helper to format time as mm:ss
 const formatTime = (seconds: number) => {
@@ -56,6 +59,7 @@ const BookDetails = () => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
+  const [volume, setVolume] = useState(1);
   const audioRef = useRef<HTMLAudioElement | null>(null);
   
   const book = books.find((b) => b.id === id);
@@ -173,6 +177,28 @@ const BookDetails = () => {
       localStorage.removeItem(getProgressKey(id, selectedAudioLang));
     }
   };
+
+  const handleVolumeChange = (value: number[]) => {
+    const newVolume = value[0];
+    setVolume(newVolume);
+    if (audioRef.current) {
+      audioRef.current.volume = newVolume;
+    }
+  };
+
+  const toggleMute = () => {
+    if (audioRef.current) {
+      if (volume > 0) {
+        audioRef.current.volume = 0;
+        setVolume(0);
+      } else {
+        audioRef.current.volume = 1;
+        setVolume(1);
+      }
+    }
+  };
+
+  const VolumeIcon = volume === 0 ? VolumeX : volume < 0.5 ? Volume1 : Volume2;
 
   if (isLoading) {
     return (
@@ -445,6 +471,29 @@ const BookDetails = () => {
                       <Button variant="ghost" size="icon" onClick={() => audioRef.current && (audioRef.current.currentTime += 10)}>
                         <SkipForward className="h-5 w-5" />
                       </Button>
+                    </div>
+
+                    {/* Volume Control */}
+                    <div className="flex items-center justify-center gap-3 px-4">
+                      <Button 
+                        variant="ghost" 
+                        size="icon" 
+                        onClick={toggleMute}
+                        className="h-8 w-8"
+                        title={volume === 0 ? "Unmute" : "Mute"}
+                      >
+                        <VolumeIcon className="h-4 w-4" />
+                      </Button>
+                      <Slider
+                        value={[volume]}
+                        onValueChange={handleVolumeChange}
+                        max={1}
+                        step={0.01}
+                        className="w-32"
+                      />
+                      <span className="text-xs text-muted-foreground w-8">
+                        {Math.round(volume * 100)}%
+                      </span>
                     </div>
 
                     {/* Resume indicator */}
