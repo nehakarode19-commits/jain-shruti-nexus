@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { ScholarLayout } from "@/components/scholar/ScholarLayout";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -13,6 +14,8 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Search, Filter, MessageSquare, Mail, MapPin, BookOpen, Award } from "lucide-react";
+import { MessageDialog } from "@/components/scholar/MessageDialog";
+import { EmailDialog } from "@/components/scholar/EmailDialog";
 
 // Mock scholar data
 const scholars = [
@@ -99,6 +102,11 @@ export default function ScholarDirectory() {
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [selectedExpertise, setSelectedExpertise] = useState("All");
   const [selectedCountry, setSelectedCountry] = useState("All");
+  
+  // Dialog states
+  const [messageDialogOpen, setMessageDialogOpen] = useState(false);
+  const [emailDialogOpen, setEmailDialogOpen] = useState(false);
+  const [selectedScholar, setSelectedScholar] = useState<typeof scholars[0] | null>(null);
 
   const filteredScholars = scholars.filter((scholar) => {
     const matchesSearch = scholar.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -119,6 +127,16 @@ export default function ScholarDirectory() {
       case "New Scholar": return "bg-green-500/10 text-green-500 border-green-500/30";
       default: return "bg-muted text-muted-foreground";
     }
+  };
+
+  const handleMessage = (scholar: typeof scholars[0]) => {
+    setSelectedScholar(scholar);
+    setMessageDialogOpen(true);
+  };
+
+  const handleEmail = (scholar: typeof scholars[0]) => {
+    setSelectedScholar(scholar);
+    setEmailDialogOpen(true);
   };
 
   return (
@@ -198,7 +216,12 @@ export default function ScholarDirectory() {
                     </AvatarFallback>
                   </Avatar>
                   <div className="flex-1 min-w-0">
-                    <h3 className="font-semibold text-lg text-foreground truncate">{scholar.name}</h3>
+                    <Link 
+                      to={`/scholar/publications?author=${scholar.id}`}
+                      className="font-semibold text-lg text-foreground truncate hover:text-primary transition-colors block"
+                    >
+                      {scholar.name}
+                    </Link>
                     <p className="text-sm text-muted-foreground truncate">{scholar.affiliation}</p>
                     <Badge variant="outline" className={`mt-2 ${getCategoryColor(scholar.category)}`}>
                       {scholar.category}
@@ -233,11 +256,21 @@ export default function ScholarDirectory() {
 
                 {/* Actions */}
                 <div className="flex gap-2">
-                  <Button variant="outline" size="sm" className="flex-1">
+                  <Button 
+                    variant="outline" 
+                    size="sm" 
+                    className="flex-1"
+                    onClick={() => handleMessage(scholar)}
+                  >
                     <MessageSquare className="h-4 w-4 mr-2" />
                     Message
                   </Button>
-                  <Button variant="outline" size="sm" className="flex-1">
+                  <Button 
+                    variant="outline" 
+                    size="sm" 
+                    className="flex-1"
+                    onClick={() => handleEmail(scholar)}
+                  >
                     <Mail className="h-4 w-4 mr-2" />
                     Email
                   </Button>
@@ -257,6 +290,18 @@ export default function ScholarDirectory() {
           </div>
         )}
       </div>
+
+      {/* Dialogs */}
+      <MessageDialog 
+        open={messageDialogOpen} 
+        onOpenChange={setMessageDialogOpen}
+        scholar={selectedScholar}
+      />
+      <EmailDialog 
+        open={emailDialogOpen} 
+        onOpenChange={setEmailDialogOpen}
+        scholar={selectedScholar}
+      />
     </ScholarLayout>
   );
 }

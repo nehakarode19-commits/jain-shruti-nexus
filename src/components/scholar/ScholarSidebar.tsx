@@ -14,7 +14,8 @@ import {
   GraduationCap,
   X,
   FileText,
-  Search
+  Search,
+  Handshake
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -23,7 +24,7 @@ const navItems = [
   { icon: LayoutDashboard, label: "Dashboard", href: "/scholar/dashboard" },
   { icon: Users, label: "Scholar Directory", href: "/scholar/directory" },
   { icon: FileText, label: "Publications", href: "/scholar/publications" },
-  { icon: MessageSquare, label: "Collaborate", href: "/scholar/chat" },
+  { icon: Handshake, label: "Collaborate", href: "/scholar/collaborate" },
   { icon: Newspaper, label: "Community Feed", href: "/scholar/feed" },
   { icon: Calendar, label: "Events", href: "/scholar/events" },
   { icon: Sparkles, label: "AI Tools", href: "/scholar/ai-tools" },
@@ -79,8 +80,8 @@ export function ScholarSidebar({ onClose }: ScholarSidebarProps) {
             </AvatarFallback>
           </Avatar>
           <div className="flex-1 min-w-0">
-            <p className="text-sm font-medium text-white truncate">{user?.name || "Scholar"}</p>
-            <p className="text-xs text-white/60 truncate">{user?.email}</p>
+            <p className="text-sm font-medium text-white truncate">{user?.name || "Demo Scholar"}</p>
+            <p className="text-xs text-white/60 truncate">{user?.email || "scholar@demo.com"}</p>
           </div>
         </div>
       </div>
