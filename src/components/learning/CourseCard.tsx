@@ -2,15 +2,17 @@ import { Link } from "react-router-dom";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Clock, Users, BookOpen, Play, ArrowRight, Globe } from "lucide-react";
+import { Clock, Users, BookOpen, Play, ArrowRight, Globe, GraduationCap } from "lucide-react";
 import { LMSCourse } from "@/hooks/useLMS";
 
 interface CourseCardProps {
   course: LMSCourse;
   showEnrollButton?: boolean;
+  onEnroll?: (course: LMSCourse) => void;
+  isEnrolled?: boolean;
 }
 
-export function CourseCard({ course, showEnrollButton = true }: CourseCardProps) {
+export function CourseCard({ course, showEnrollButton = true, onEnroll, isEnrolled = false }: CourseCardProps) {
   const getModeColor = (mode: string) => {
     switch (mode.toLowerCase()) {
       case "online":
@@ -62,6 +64,13 @@ export function CourseCard({ course, showEnrollButton = true }: CourseCardProps)
         <Badge className={`absolute top-4 left-4 ${getModeColor(course.course_mode)} font-medium shadow-sm`}>
           {course.course_mode}
         </Badge>
+
+        {/* Enrolled Badge */}
+        {isEnrolled && (
+          <Badge className="absolute top-4 right-4 bg-green-500 text-white font-medium shadow-sm">
+            Enrolled
+          </Badge>
+        )}
 
         {/* Play overlay on hover */}
         <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-500">
@@ -121,14 +130,31 @@ export function CourseCard({ course, showEnrollButton = true }: CourseCardProps)
           )}
         </div>
 
-        {/* Action Button */}
+        {/* Action Buttons */}
         {showEnrollButton && (
-          <Button asChild className="w-full mt-2 bg-primary hover:bg-primary/90 group/btn rounded-xl h-11 font-medium">
-            <Link to={`/learning/courses/${course.id}`} className="flex items-center justify-center gap-2">
-              View Course
-              <ArrowRight className="h-4 w-4 group-hover/btn:translate-x-1 transition-transform duration-300" />
-            </Link>
-          </Button>
+          <div className="flex gap-2 mt-2">
+            <Button asChild variant="outline" className="flex-1 rounded-xl h-11">
+              <Link to={`/learning/courses/${course.id}`} className="flex items-center justify-center gap-2">
+                View Details
+              </Link>
+            </Button>
+            {isEnrolled ? (
+              <Button asChild className="flex-1 bg-green-600 hover:bg-green-700 rounded-xl h-11">
+                <Link to="/learning/my-courses" className="flex items-center justify-center gap-2">
+                  Continue
+                  <ArrowRight className="h-4 w-4" />
+                </Link>
+              </Button>
+            ) : (
+              <Button 
+                onClick={() => onEnroll?.(course)}
+                className="flex-1 bg-primary hover:bg-primary/90 rounded-xl h-11"
+              >
+                <GraduationCap className="h-4 w-4 mr-2" />
+                Enroll
+              </Button>
+            )}
+          </div>
         )}
       </CardContent>
     </Card>
