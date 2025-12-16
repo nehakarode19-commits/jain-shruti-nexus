@@ -189,53 +189,6 @@ const About = () => {
         </div>
       </section>
 
-      {/* Founding & Trust Info */}
-      <section className="py-12 lg:py-16 bg-gradient-spiritual">
-        <div className="container mx-auto px-4">
-          <div className="max-w-3xl mx-auto">
-            <div className="bg-card rounded-2xl p-8 shadow-elegant border border-border">
-              <div className="grid md:grid-cols-2 gap-8">
-                {/* Founded By */}
-                <div className="text-center md:text-left">
-                  <div className="inline-flex items-center gap-2 mb-3">
-                    <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center">
-                      <Heart className="h-4 w-4 text-primary" />
-                    </div>
-                    <p className="font-heading text-sm uppercase tracking-wider text-primary font-semibold">
-                      Founded by
-                    </p>
-                  </div>
-                  <p className="font-body text-foreground font-medium mb-1">
-                    Srimati Shantaben Shantilal Bhudarmal Adani Family
-                  </p>
-                  <p className="font-body text-muted-foreground text-sm">
-                    Muni Jambuvijayaji Gyankendra<br />
-                    (Muni Jambuvijayaji Research Centre)
-                  </p>
-                </div>
-                
-                {/* Run By */}
-                <div className="text-center md:text-left">
-                  <div className="inline-flex items-center gap-2 mb-3">
-                    <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center">
-                      <Building2 className="h-4 w-4 text-primary" />
-                    </div>
-                    <p className="font-heading text-sm uppercase tracking-wider text-primary font-semibold">
-                      Run by
-                    </p>
-                  </div>
-                  <p className="font-body text-foreground font-medium mb-1">
-                    Sri Siddhi-Bhuvan-Manohar Jain Trust
-                  </p>
-                  <p className="font-body text-muted-foreground text-sm">
-                    (Regd. No. 3402) Ahmedabad
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
     </Layout>
   );
 };
