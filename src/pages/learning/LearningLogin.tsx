@@ -8,6 +8,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { toast } from "sonner";
 import { GraduationCap, Loader2, Eye, EyeOff, Home } from "lucide-react";
+import { setDemoMode } from "@/components/learning/ProtectedStudentRoute";
 
 export default function LearningLogin() {
   const navigate = useNavigate();
@@ -126,6 +127,35 @@ export default function LearningLogin() {
               </TabsList>
 
               <TabsContent value="login">
+                {/* Demo Access Button */}
+                <div className="mb-4 p-4 bg-primary/5 rounded-lg border border-primary/20">
+                  <p className="text-sm text-muted-foreground mb-3 text-center">
+                    <strong>Demo Mode:</strong> Access the student portal for demo
+                  </p>
+                  <Button
+                    type="button"
+                    variant="outline"
+                    className="w-full border-primary text-primary hover:bg-primary hover:text-primary-foreground"
+                    onClick={() => {
+                      setDemoMode(true);
+                      toast.success("Demo login successful!");
+                      navigate("/learning/student-dashboard", { replace: true });
+                    }}
+                  >
+                    <GraduationCap className="h-4 w-4 mr-2" />
+                    Use Demo Account
+                  </Button>
+                </div>
+
+                <div className="relative my-4">
+                  <div className="absolute inset-0 flex items-center">
+                    <span className="w-full border-t border-border" />
+                  </div>
+                  <div className="relative flex justify-center text-xs uppercase">
+                    <span className="bg-card px-2 text-muted-foreground">Or login with email</span>
+                  </div>
+                </div>
+
                 <form onSubmit={handleLogin} className="space-y-4">
                   <div className="space-y-2">
                     <Label htmlFor="login-email">Email</Label>
