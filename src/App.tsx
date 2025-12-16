@@ -228,7 +228,7 @@ function AppContent() {
       <Route path="/learning" element={<LearningLogin />} />
       <Route path="/learning/login" element={<LearningLogin />} />
       <Route path="/learning/courses" element={<LearningCourses />} />
-      <Route path="/learning/courses/:courseId" element={<LearningCourseDetail />} />
+      <Route path="/learning/courses/:courseId" element={<ProtectedStudentRoute><LearningCourseDetail /></ProtectedStudentRoute>} />
       <Route path="/learning/student-dashboard" element={<ProtectedStudentRoute><StudentDashboard /></ProtectedStudentRoute>} />
       <Route path="/learning/admin-dashboard" element={<ProtectedLearningRoute><LMSAdminDashboard /></ProtectedLearningRoute>} />
       <Route path="/learning/dashboard" element={<ProtectedLearningRoute><LearningDashboard /></ProtectedLearningRoute>} />
