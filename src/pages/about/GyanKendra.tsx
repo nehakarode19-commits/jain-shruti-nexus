@@ -210,15 +210,15 @@ const GyanKendra = () => {
                     <div className="flex items-start gap-3">
                       <Clock className="h-5 w-5 text-primary mt-0.5" />
                       <div>
-                        <div className="font-medium text-foreground">Open Daily</div>
+                        <div className="font-medium text-foreground">Mon - Sat</div>
                         <div className="text-sm text-muted-foreground">
-                          Morning: 9:00 AM - 12:00 PM<br />
-                          Evening: 4:00 PM - 7:00 PM
+                          Office: 10:00 AM - 6:00 PM IST<br />
+                          Visiting: 10:45 AM - 5:15 PM IST
                         </div>
                       </div>
                     </div>
                     <div className="text-sm text-muted-foreground">
-                      * Closed on major Jain festivals and special occasions
+                      * Closed on Sundays, major Jain festivals and special occasions
                     </div>
                   </div>
                 </CardContent>
