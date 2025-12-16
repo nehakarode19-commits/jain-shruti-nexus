@@ -112,6 +112,10 @@ import AssignmentsManage from "./pages/learning/AssignmentsManage";
 import StudentDashboard from "./pages/learning/StudentDashboard";
 import MyCertificates from "./pages/learning/MyCertificates";
 import EnrolledCourses from "./pages/learning/EnrolledCourses";
+import MySchedule from "./pages/learning/MySchedule";
+import MyAssignments from "./pages/learning/MyAssignments";
+import MyQuizzes from "./pages/learning/MyQuizzes";
+import MyMaterials from "./pages/learning/MyMaterials";
 import LMSCoursesManagement from "./pages/admin/LMSCoursesManagement";
 import LecturesManagement from "./pages/admin/LecturesManagement";
 
@@ -241,6 +245,10 @@ function AppContent() {
       <Route path="/learning/assignments" element={<ProtectedLearningRoute><AssignmentsManage /></ProtectedLearningRoute>} />
       <Route path="/learning/certificates" element={<MyCertificates />} />
       <Route path="/learning/my-courses" element={<EnrolledCourses />} />
+      <Route path="/learning/my-schedule" element={<MySchedule />} />
+      <Route path="/learning/my-assignments" element={<MyAssignments />} />
+      <Route path="/learning/my-quizzes" element={<MyQuizzes />} />
+      <Route path="/learning/my-materials" element={<MyMaterials />} />
       {/* Admin Routes */}
       <Route path="/admin" element={<AdminLogin />} />
       <Route path="/admin/login" element={<AdminLogin />} />

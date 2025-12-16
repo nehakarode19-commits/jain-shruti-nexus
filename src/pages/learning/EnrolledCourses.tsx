@@ -1,4 +1,4 @@
-import { LearningLayout } from "@/components/learning/LearningLayout";
+import { StudentLayout } from "@/components/learning/StudentLayout";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
@@ -181,7 +181,7 @@ export default function EnrolledCourses() {
   );
 
   return (
-    <LearningLayout>
+    <StudentLayout title="My Enrolled Courses">
       <div className="space-y-8">
         {/* Hero Section */}
         <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-primary/10 via-primary/5 to-background p-8">
@@ -328,6 +328,6 @@ export default function EnrolledCourses() {
           </Card>
         )}
       </div>
-    </LearningLayout>
+    </StudentLayout>
   );
 }

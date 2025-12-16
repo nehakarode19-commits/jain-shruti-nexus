@@ -1,4 +1,4 @@
-import { LearningLayout } from "@/components/learning/LearningLayout";
+import { StudentLayout } from "@/components/learning/StudentLayout";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Award, Download, Calendar, BookOpen, Trophy, Star } from "lucide-react";
@@ -57,7 +57,7 @@ export default function MyCertificates() {
   const mockCourseNames = ["Jain Philosophy Foundation", "Advanced Agam Studies"];
 
   return (
-    <LearningLayout>
+    <StudentLayout title="My Certificates">
       <div className="space-y-8">
         {/* Hero Section */}
         <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-primary/10 via-primary/5 to-background p-8">
@@ -168,6 +168,6 @@ export default function MyCertificates() {
           )}
         </div>
       </div>
-    </LearningLayout>
+    </StudentLayout>
   );
 }

@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { LearningLayout } from "@/components/learning/LearningLayout";
+import { StudentLayout } from "@/components/learning/StudentLayout";
 import { SEO } from "@/components/shared/SEO";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -83,7 +83,7 @@ export default function StudentDashboard() {
     .slice(0, 3);
 
   return (
-    <LearningLayout title="My Learning">
+    <StudentLayout title="My Learning">
       <SEO
         title="Student Dashboard | Jambushrusti Learning Portal"
         description="Track your learning progress, enrolled courses, and upcoming lectures."
@@ -349,10 +349,10 @@ export default function StudentDashboard() {
         {/* Quick Links */}
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {[
-            { label: "My Assignments", href: "/learning/assignments", icon: FileText, description: "View pending tasks" },
-            { label: "Study Materials", href: "/learning/materials", icon: BookOpen, description: "Access resources" },
-            { label: "My Progress", href: "/learning/reports", icon: TrendingUp, description: "Track achievements" },
-            { label: "Settings", href: "/learning/settings", icon: Target, description: "Manage preferences" },
+            { label: "My Assignments", href: "/learning/my-assignments", icon: FileText, description: "View pending tasks" },
+            { label: "Study Materials", href: "/learning/my-materials", icon: BookOpen, description: "Access resources" },
+            { label: "My Quizzes", href: "/learning/my-quizzes", icon: TrendingUp, description: "Take assessments" },
+            { label: "My Schedule", href: "/learning/my-schedule", icon: Target, description: "View calendar" },
           ].map((item) => (
             <Link key={item.label} to={item.href}>
               <Card className="h-full border-border rounded-2xl hover:border-primary/40 hover:shadow-xl transition-all duration-300 cursor-pointer group overflow-hidden">
@@ -371,6 +371,6 @@ export default function StudentDashboard() {
           ))}
         </div>
       </div>
-    </LearningLayout>
+    </StudentLayout>
   );
 }
