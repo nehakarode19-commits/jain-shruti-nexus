@@ -1,9 +1,10 @@
 import { ReactNode, useState } from "react";
 import { ScholarSidebar } from "./ScholarSidebar";
 import { Button } from "@/components/ui/button";
-import { Menu, X, Bell, Search, Home } from "lucide-react";
+import { Menu, X, Search, Home } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Link } from "react-router-dom";
+import { NotificationsPanel } from "./NotificationsPanel";
 
 interface ScholarLayoutProps {
   children: ReactNode;
@@ -72,10 +73,7 @@ export function ScholarLayout({ children, title }: ScholarLayoutProps) {
               </Button>
 
               {/* Notifications */}
-              <Button variant="ghost" size="icon" className="relative h-9 w-9">
-                <Bell className="h-5 w-5" />
-                <span className="absolute top-1 right-1 w-2 h-2 bg-orange rounded-full" />
-              </Button>
+              <NotificationsPanel />
             </div>
           </div>
         </header>
