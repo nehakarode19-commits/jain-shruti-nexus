@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { ScholarLayout } from "@/components/scholar/ScholarLayout";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -18,12 +19,35 @@ import {
   MoreHorizontal,
   TrendingUp,
   Clock,
-  Star
+  Star,
+  Send,
+  X
 } from "lucide-react";
 import { useAdminAuth } from "@/contexts/AdminAuthContext";
+import { toast } from "sonner";
 
-// Mock feed data
-const feedPosts = [
+interface FeedPost {
+  id: string;
+  author: {
+    name: string;
+    avatar: string | null;
+    affiliation: string;
+    badge: string;
+  };
+  content: string;
+  image?: string;
+  tags: string[];
+  timestamp: string;
+  likes: number;
+  comments: number;
+  shares: number;
+  isLiked: boolean;
+  isBookmarked: boolean;
+  commentsList?: { author: string; content: string; time: string }[];
+}
+
+// Initial feed data
+const initialFeedPosts: FeedPost[] = [
   {
     id: "1",
     author: {
@@ -40,6 +64,9 @@ const feedPosts = [
     shares: 8,
     isLiked: false,
     isBookmarked: false,
+    commentsList: [
+      { author: "Prof. Meera Patel", content: "Excellent analysis! The section on causality was particularly insightful.", time: "1h ago" }
+    ]
   },
   {
     id: "2",
@@ -58,6 +85,7 @@ const feedPosts = [
     shares: 45,
     isLiked: true,
     isBookmarked: true,
+    commentsList: []
   },
   {
     id: "3",
@@ -75,6 +103,7 @@ const feedPosts = [
     shares: 15,
     isLiked: false,
     isBookmarked: false,
+    commentsList: []
   },
   {
     id: "4",
@@ -92,19 +121,246 @@ const feedPosts = [
     shares: 89,
     isLiked: true,
     isBookmarked: false,
+    commentsList: []
   },
 ];
 
 export default function ScholarFeed() {
   const [newPost, setNewPost] = useState("");
+  const [posts, setPosts] = useState<FeedPost[]>(initialFeedPosts);
+  const [expandedComments, setExpandedComments] = useState<string | null>(null);
+  const [newComment, setNewComment] = useState("");
   const { user } = useAdminAuth();
 
   const handlePost = () => {
     if (newPost.trim()) {
-      console.log("Posting:", newPost);
+      const newFeedPost: FeedPost = {
+        id: Date.now().toString(),
+        author: {
+          name: user?.name || "Demo Scholar",
+          avatar: user?.avatar || null,
+          affiliation: "Jambushrusti Scholar",
+          badge: "Active Scholar"
+        },
+        content: newPost,
+        tags: [],
+        timestamp: "Just now",
+        likes: 0,
+        comments: 0,
+        shares: 0,
+        isLiked: false,
+        isBookmarked: false,
+        commentsList: []
+      };
+      
+      setPosts([newFeedPost, ...posts]);
       setNewPost("");
+      toast.success("Post published successfully!");
     }
   };
+
+  const handleLike = (postId: string) => {
+    setPosts(posts.map(post => {
+      if (post.id === postId) {
+        return {
+          ...post,
+          isLiked: !post.isLiked,
+          likes: post.isLiked ? post.likes - 1 : post.likes + 1
+        };
+      }
+      return post;
+    }));
+  };
+
+  const handleBookmark = (postId: string) => {
+    setPosts(posts.map(post => {
+      if (post.id === postId) {
+        const newBookmarkState = !post.isBookmarked;
+        toast.success(newBookmarkState ? "Post bookmarked" : "Bookmark removed");
+        return { ...post, isBookmarked: newBookmarkState };
+      }
+      return post;
+    }));
+  };
+
+  const handleShare = (postId: string) => {
+    setPosts(posts.map(post => {
+      if (post.id === postId) {
+        return { ...post, shares: post.shares + 1 };
+      }
+      return post;
+    }));
+    toast.success("Post shared!");
+  };
+
+  const handleAddComment = (postId: string) => {
+    if (!newComment.trim()) return;
+    
+    setPosts(posts.map(post => {
+      if (post.id === postId) {
+        return {
+          ...post,
+          comments: post.comments + 1,
+          commentsList: [
+            ...(post.commentsList || []),
+            { author: user?.name || "Demo Scholar", content: newComment, time: "Just now" }
+          ]
+        };
+      }
+      return post;
+    }));
+    
+    setNewComment("");
+    toast.success("Comment added!");
+  };
+
+  const handleDeletePost = (postId: string) => {
+    setPosts(posts.filter(post => post.id !== postId));
+    toast.success("Post deleted");
+  };
+
+  const renderPostCard = (post: FeedPost) => (
+    <Card key={post.id} className="overflow-hidden">
+      <CardHeader className="p-4 pb-0">
+        <div className="flex items-start justify-between">
+          <div className="flex items-center gap-3">
+            <Avatar className="h-12 w-12">
+              {post.author.avatar ? (
+                <AvatarImage src={post.author.avatar} />
+              ) : null}
+              <AvatarFallback className="bg-primary/10 text-primary">
+                {post.author.name.charAt(0)}
+              </AvatarFallback>
+            </Avatar>
+            <div>
+              <div className="flex items-center gap-2">
+                <Link 
+                  to="/scholar/directory" 
+                  className="font-semibold hover:text-primary transition-colors"
+                >
+                  {post.author.name}
+                </Link>
+                <Badge 
+                  variant="secondary" 
+                  className={`text-xs ${
+                    post.author.badge === "Announcement" 
+                      ? "bg-gold/10 text-gold" 
+                      : ""
+                  }`}
+                >
+                  {post.author.badge}
+                </Badge>
+              </div>
+              <p className="text-sm text-muted-foreground">
+                {post.author.affiliation} · {post.timestamp}
+              </p>
+            </div>
+          </div>
+          <Button 
+            variant="ghost" 
+            size="icon"
+            onClick={() => handleDeletePost(post.id)}
+          >
+            <MoreHorizontal className="h-5 w-5" />
+          </Button>
+        </div>
+      </CardHeader>
+      <CardContent className="p-4">
+        <p className="text-foreground whitespace-pre-wrap mb-3">{post.content}</p>
+        
+        {post.image && (
+          <div className="rounded-xl overflow-hidden mb-3">
+            <img 
+              src={post.image} 
+              alt="Post image" 
+              className="w-full h-64 object-cover"
+            />
+          </div>
+        )}
+
+        {/* Tags */}
+        <div className="flex flex-wrap gap-2 mb-4">
+          {post.tags.map((tag) => (
+            <Badge key={tag} variant="outline" className="text-xs cursor-pointer hover:bg-primary/10">
+              #{tag}
+            </Badge>
+          ))}
+        </div>
+
+        {/* Actions */}
+        <div className="flex items-center justify-between pt-3 border-t">
+          <div className="flex items-center gap-1">
+            <Button 
+              variant="ghost" 
+              size="sm"
+              className={post.isLiked ? "text-red-500" : ""}
+              onClick={() => handleLike(post.id)}
+            >
+              <Heart className={`h-4 w-4 mr-1 ${post.isLiked ? "fill-current" : ""}`} />
+              {post.likes}
+            </Button>
+            <Button 
+              variant="ghost" 
+              size="sm"
+              onClick={() => setExpandedComments(expandedComments === post.id ? null : post.id)}
+            >
+              <MessageSquare className="h-4 w-4 mr-1" />
+              {post.comments}
+            </Button>
+            <Button 
+              variant="ghost" 
+              size="sm"
+              onClick={() => handleShare(post.id)}
+            >
+              <Share2 className="h-4 w-4 mr-1" />
+              {post.shares}
+            </Button>
+          </div>
+          <Button 
+            variant="ghost" 
+            size="icon"
+            className={post.isBookmarked ? "text-gold" : ""}
+            onClick={() => handleBookmark(post.id)}
+          >
+            <Bookmark className={`h-5 w-5 ${post.isBookmarked ? "fill-current" : ""}`} />
+          </Button>
+        </div>
+
+        {/* Comments Section */}
+        {expandedComments === post.id && (
+          <div className="mt-4 pt-4 border-t space-y-3">
+            {post.commentsList && post.commentsList.length > 0 && (
+              <div className="space-y-2">
+                {post.commentsList.map((comment, idx) => (
+                  <div key={idx} className="flex gap-2 text-sm">
+                    <span className="font-medium">{comment.author}:</span>
+                    <span className="text-muted-foreground">{comment.content}</span>
+                    <span className="text-xs text-muted-foreground ml-auto">{comment.time}</span>
+                  </div>
+                ))}
+              </div>
+            )}
+            <div className="flex gap-2">
+              <Input
+                placeholder="Write a comment..."
+                value={newComment}
+                onChange={(e) => setNewComment(e.target.value)}
+                onKeyDown={(e) => e.key === "Enter" && handleAddComment(post.id)}
+                className="flex-1"
+              />
+              <Button 
+                size="sm" 
+                onClick={() => handleAddComment(post.id)}
+                disabled={!newComment.trim()}
+              >
+                <Send className="h-4 w-4" />
+              </Button>
+            </div>
+          </div>
+        )}
+      </CardContent>
+    </Card>
+  );
 
   return (
     <ScholarLayout title="Community Feed">
@@ -136,9 +392,11 @@ export default function ScholarFeed() {
                       <Link2 className="h-4 w-4 mr-2" />
                       Link
                     </Button>
-                    <Button variant="ghost" size="sm">
-                      <FileText className="h-4 w-4 mr-2" />
-                      Paper
+                    <Button variant="ghost" size="sm" asChild>
+                      <Link to="/scholar/publications">
+                        <FileText className="h-4 w-4 mr-2" />
+                        Paper
+                      </Link>
                     </Button>
                   </div>
                   <Button onClick={handlePost} disabled={!newPost.trim()}>
@@ -169,200 +427,23 @@ export default function ScholarFeed() {
           </TabsList>
 
           <TabsContent value="all" className="mt-4 space-y-4">
-            {feedPosts.map((post) => (
-              <Card key={post.id} className="overflow-hidden">
-                <CardHeader className="p-4 pb-0">
-                  <div className="flex items-start justify-between">
-                    <div className="flex items-center gap-3">
-                      <Avatar className="h-12 w-12">
-                        {post.author.avatar ? (
-                          <AvatarImage src={post.author.avatar} />
-                        ) : null}
-                        <AvatarFallback className="bg-primary/10 text-primary">
-                          {post.author.name.charAt(0)}
-                        </AvatarFallback>
-                      </Avatar>
-                      <div>
-                        <div className="flex items-center gap-2">
-                          <h4 className="font-semibold">{post.author.name}</h4>
-                          <Badge 
-                            variant="secondary" 
-                            className={`text-xs ${
-                              post.author.badge === "Announcement" 
-                                ? "bg-gold/10 text-gold" 
-                                : ""
-                            }`}
-                          >
-                            {post.author.badge}
-                          </Badge>
-                        </div>
-                        <p className="text-sm text-muted-foreground">
-                          {post.author.affiliation} · {post.timestamp}
-                        </p>
-                      </div>
-                    </div>
-                    <Button variant="ghost" size="icon">
-                      <MoreHorizontal className="h-5 w-5" />
-                    </Button>
-                  </div>
-                </CardHeader>
-                <CardContent className="p-4">
-                  <p className="text-foreground whitespace-pre-wrap mb-3">{post.content}</p>
-                  
-                  {post.image && (
-                    <div className="rounded-xl overflow-hidden mb-3">
-                      <img 
-                        src={post.image} 
-                        alt="Post image" 
-                        className="w-full h-64 object-cover"
-                      />
-                    </div>
-                  )}
-
-                  {/* Tags */}
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    {post.tags.map((tag) => (
-                      <Badge key={tag} variant="outline" className="text-xs cursor-pointer hover:bg-primary/10">
-                        #{tag}
-                      </Badge>
-                    ))}
-                  </div>
-
-                  {/* Actions */}
-                  <div className="flex items-center justify-between pt-3 border-t">
-                    <div className="flex items-center gap-1">
-                      <Button 
-                        variant="ghost" 
-                        size="sm"
-                        className={post.isLiked ? "text-red-500" : ""}
-                      >
-                        <Heart className={`h-4 w-4 mr-1 ${post.isLiked ? "fill-current" : ""}`} />
-                        {post.likes}
-                      </Button>
-                      <Button variant="ghost" size="sm">
-                        <MessageSquare className="h-4 w-4 mr-1" />
-                        {post.comments}
-                      </Button>
-                      <Button variant="ghost" size="sm">
-                        <Share2 className="h-4 w-4 mr-1" />
-                        {post.shares}
-                      </Button>
-                    </div>
-                    <Button 
-                      variant="ghost" 
-                      size="icon"
-                      className={post.isBookmarked ? "text-gold" : ""}
-                    >
-                      <Bookmark className={`h-5 w-5 ${post.isBookmarked ? "fill-current" : ""}`} />
-                    </Button>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
+            {posts.map(renderPostCard)}
           </TabsContent>
 
-          <TabsContent value="trending" className="mt-4">
-            <div className="text-center py-8 text-muted-foreground">
-              Trending posts coming soon...
-            </div>
+          <TabsContent value="trending" className="mt-4 space-y-4">
+            {posts
+              .sort((a, b) => b.likes - a.likes)
+              .slice(0, 5)
+              .map(renderPostCard)}
           </TabsContent>
 
-          <TabsContent value="following" className="mt-4">
-            <div className="text-center py-8 text-muted-foreground">
-              Follow scholars to see their posts here
-            </div>
+          <TabsContent value="following" className="mt-4 space-y-4">
+            {posts.slice(0, 2).map(renderPostCard)}
           </TabsContent>
 
           <TabsContent value="favorites" className="mt-4 space-y-4">
-            {feedPosts.filter(post => post.isBookmarked).length > 0 ? (
-              feedPosts.filter(post => post.isBookmarked).map((post) => (
-                <Card key={post.id} className="overflow-hidden">
-                  <CardHeader className="p-4 pb-0">
-                    <div className="flex items-start justify-between">
-                      <div className="flex items-center gap-3">
-                        <Avatar className="h-12 w-12">
-                          {post.author.avatar ? (
-                            <AvatarImage src={post.author.avatar} />
-                          ) : null}
-                          <AvatarFallback className="bg-primary/10 text-primary">
-                            {post.author.name.charAt(0)}
-                          </AvatarFallback>
-                        </Avatar>
-                        <div>
-                          <div className="flex items-center gap-2">
-                            <h4 className="font-semibold">{post.author.name}</h4>
-                            <Badge 
-                              variant="secondary" 
-                              className={`text-xs ${
-                                post.author.badge === "Announcement" 
-                                  ? "bg-gold/10 text-gold" 
-                                  : ""
-                              }`}
-                            >
-                              {post.author.badge}
-                            </Badge>
-                          </div>
-                          <p className="text-sm text-muted-foreground">
-                            {post.author.affiliation} · {post.timestamp}
-                          </p>
-                        </div>
-                      </div>
-                      <Button variant="ghost" size="icon">
-                        <MoreHorizontal className="h-5 w-5" />
-                      </Button>
-                    </div>
-                  </CardHeader>
-                  <CardContent className="p-4">
-                    <p className="text-foreground whitespace-pre-wrap mb-3">{post.content}</p>
-                    
-                    {post.image && (
-                      <div className="rounded-xl overflow-hidden mb-3">
-                        <img 
-                          src={post.image} 
-                          alt="Post image" 
-                          className="w-full h-64 object-cover"
-                        />
-                      </div>
-                    )}
-
-                    <div className="flex flex-wrap gap-2 mb-4">
-                      {post.tags.map((tag) => (
-                        <Badge key={tag} variant="outline" className="text-xs cursor-pointer hover:bg-primary/10">
-                          #{tag}
-                        </Badge>
-                      ))}
-                    </div>
-
-                    <div className="flex items-center justify-between pt-3 border-t">
-                      <div className="flex items-center gap-1">
-                        <Button 
-                          variant="ghost" 
-                          size="sm"
-                          className={post.isLiked ? "text-red-500" : ""}
-                        >
-                          <Heart className={`h-4 w-4 mr-1 ${post.isLiked ? "fill-current" : ""}`} />
-                          {post.likes}
-                        </Button>
-                        <Button variant="ghost" size="sm">
-                          <MessageSquare className="h-4 w-4 mr-1" />
-                          {post.comments}
-                        </Button>
-                        <Button variant="ghost" size="sm">
-                          <Share2 className="h-4 w-4 mr-1" />
-                          {post.shares}
-                        </Button>
-                      </div>
-                      <Button 
-                        variant="ghost" 
-                        size="icon"
-                        className="text-gold"
-                      >
-                        <Bookmark className="h-5 w-5 fill-current" />
-                      </Button>
-                    </div>
-                  </CardContent>
-                </Card>
-              ))
+            {posts.filter(post => post.isBookmarked).length > 0 ? (
+              posts.filter(post => post.isBookmarked).map(renderPostCard)
             ) : (
               <div className="text-center py-8 text-muted-foreground">
                 <Star className="h-12 w-12 mx-auto mb-3 opacity-30" />

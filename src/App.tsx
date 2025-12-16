@@ -22,6 +22,7 @@ import ScholarSettings from "./pages/scholar/ScholarSettings";
 import ScholarPublications from "./pages/scholar/ScholarPublications";
 import ScholarPublicationSubmit from "./pages/scholar/ScholarPublicationSubmit";
 import ScholarPublicationDetail from "./pages/scholar/ScholarPublicationDetail";
+import ScholarCollaborate from "./pages/scholar/ScholarCollaborate";
 
 import Index from "./pages/Index";
 import About from "./pages/About";
@@ -229,6 +230,7 @@ function AppContent() {
       <Route path="/scholar/publications/submit" element={<ProtectedScholarRoute><ScholarPublicationSubmit /></ProtectedScholarRoute>} />
       <Route path="/scholar/publications/:id" element={<ProtectedScholarRoute><ScholarPublicationDetail /></ProtectedScholarRoute>} />
       <Route path="/scholar/chat" element={<ProtectedScholarRoute><ScholarChat /></ProtectedScholarRoute>} />
+      <Route path="/scholar/collaborate" element={<ProtectedScholarRoute><ScholarCollaborate /></ProtectedScholarRoute>} />
       <Route path="/scholar/feed" element={<ProtectedScholarRoute><ScholarFeed /></ProtectedScholarRoute>} />
       <Route path="/scholar/events" element={<ProtectedScholarRoute><ScholarEvents /></ProtectedScholarRoute>} />
       <Route path="/scholar/ai-tools" element={<ProtectedScholarRoute><ScholarAITools /></ProtectedScholarRoute>} />
