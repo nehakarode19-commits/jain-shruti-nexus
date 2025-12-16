@@ -130,6 +130,7 @@ import SLASettings from "./pages/tickets/SLASettings";
 import MyTickets from "./pages/tickets/MyTickets";
 import { ProtectedTicketRoute } from "@/components/tickets/ProtectedTicketRoute";
 import { ProtectedLearningRoute } from "@/components/learning/ProtectedLearningRoute";
+import { ProtectedStudentRoute } from "@/components/learning/ProtectedStudentRoute";
 
 const queryClient = new QueryClient();
 
@@ -228,7 +229,7 @@ function AppContent() {
       <Route path="/learning/login" element={<LearningLogin />} />
       <Route path="/learning/courses" element={<LearningCourses />} />
       <Route path="/learning/courses/:courseId" element={<LearningCourseDetail />} />
-      <Route path="/learning/student-dashboard" element={<StudentDashboard />} />
+      <Route path="/learning/student-dashboard" element={<ProtectedStudentRoute><StudentDashboard /></ProtectedStudentRoute>} />
       <Route path="/learning/admin-dashboard" element={<ProtectedLearningRoute><LMSAdminDashboard /></ProtectedLearningRoute>} />
       <Route path="/learning/dashboard" element={<ProtectedLearningRoute><LearningDashboard /></ProtectedLearningRoute>} />
       <Route path="/learning/manage-courses" element={<ProtectedLearningRoute><CoursesManage /></ProtectedLearningRoute>} />
@@ -243,12 +244,12 @@ function AppContent() {
       <Route path="/learning/batches" element={<ProtectedLearningRoute><BatchesManage /></ProtectedLearningRoute>} />
       <Route path="/learning/quizzes" element={<ProtectedLearningRoute><QuizzesManage /></ProtectedLearningRoute>} />
       <Route path="/learning/assignments" element={<ProtectedLearningRoute><AssignmentsManage /></ProtectedLearningRoute>} />
-      <Route path="/learning/certificates" element={<MyCertificates />} />
-      <Route path="/learning/my-courses" element={<EnrolledCourses />} />
-      <Route path="/learning/my-schedule" element={<MySchedule />} />
-      <Route path="/learning/my-assignments" element={<MyAssignments />} />
-      <Route path="/learning/my-quizzes" element={<MyQuizzes />} />
-      <Route path="/learning/my-materials" element={<MyMaterials />} />
+      <Route path="/learning/certificates" element={<ProtectedStudentRoute><MyCertificates /></ProtectedStudentRoute>} />
+      <Route path="/learning/my-courses" element={<ProtectedStudentRoute><EnrolledCourses /></ProtectedStudentRoute>} />
+      <Route path="/learning/my-schedule" element={<ProtectedStudentRoute><MySchedule /></ProtectedStudentRoute>} />
+      <Route path="/learning/my-assignments" element={<ProtectedStudentRoute><MyAssignments /></ProtectedStudentRoute>} />
+      <Route path="/learning/my-quizzes" element={<ProtectedStudentRoute><MyQuizzes /></ProtectedStudentRoute>} />
+      <Route path="/learning/my-materials" element={<ProtectedStudentRoute><MyMaterials /></ProtectedStudentRoute>} />
       {/* Admin Routes */}
       <Route path="/admin" element={<AdminLogin />} />
       <Route path="/admin/login" element={<AdminLogin />} />

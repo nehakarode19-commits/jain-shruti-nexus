@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, Link, useLocation } from "react-router-dom";
 import { useAdminAuth } from "@/contexts/AdminAuthContext";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -11,9 +11,13 @@ import { GraduationCap, Loader2, Eye, EyeOff, Home } from "lucide-react";
 
 export default function LearningLogin() {
   const navigate = useNavigate();
+  const location = useLocation();
   const { login, signup, isAuthenticated, isLoading: authLoading } = useAdminAuth();
   const [isLoading, setIsLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+
+  // Get redirect path from state or default to student dashboard
+  const from = (location.state as any)?.from || "/learning/student-dashboard";
 
   // Login form
   const [loginEmail, setLoginEmail] = useState("");
@@ -27,9 +31,9 @@ export default function LearningLogin() {
 
   useEffect(() => {
     if (isAuthenticated && !authLoading) {
-      navigate("/learning/dashboard");
+      navigate(from, { replace: true });
     }
-  }, [isAuthenticated, authLoading, navigate]);
+  }, [isAuthenticated, authLoading, navigate, from]);
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -42,7 +46,7 @@ export default function LearningLogin() {
     try {
       await login(loginEmail, loginPassword);
       toast.success("Login successful!");
-      navigate("/learning/dashboard");
+      navigate(from, { replace: true });
     } catch (error: any) {
       toast.error(error.message || "Login failed. Please try again.");
     } finally {

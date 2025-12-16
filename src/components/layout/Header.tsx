@@ -48,12 +48,7 @@ const navigationItems = [
   {
     title: "Learning",
     href: "/learning/courses",
-    items: [
-      { title: "Browse Courses", href: "/learning/courses", description: "Explore all available courses" },
-      { title: "My Enrolled Courses", href: "/learning/my-courses", description: "View your enrolled courses with progress" },
-      { title: "Student Dashboard", href: "/learning/student-dashboard", description: "Track your learning progress" },
-      { title: "My Certificates", href: "/learning/certificates", description: "View your earned certificates" },
-    ],
+    description: "Browse courses & study materials",
   },
   {
     title: "Library",
