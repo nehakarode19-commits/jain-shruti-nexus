@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { LearningLayout } from "@/components/learning/LearningLayout";
 import { CourseCard } from "@/components/learning/CourseCard";
-import { useCourses } from "@/hooks/useLMS";
+import { EnrollmentDialog } from "@/components/learning/EnrollmentDialog";
+import { useCourses, useEnrollments, LMSCourse } from "@/hooks/useLMS";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import {
@@ -30,10 +31,23 @@ const MODES = ["All Modes", "Online", "Offline", "Hybrid"];
 
 export default function Courses() {
   const { data: courses, isLoading } = useCourses();
+  const { data: enrollments } = useEnrollments();
   const [search, setSearch] = useState("");
   const [subject, setSubject] = useState("All Subjects");
   const [level, setLevel] = useState("All Levels");
   const [mode, setMode] = useState("All Modes");
+  
+  // Enrollment dialog state
+  const [selectedCourse, setSelectedCourse] = useState<LMSCourse | null>(null);
+  const [enrollDialogOpen, setEnrollDialogOpen] = useState(false);
+
+  // Get enrolled course IDs
+  const enrolledCourseIds = new Set(enrollments?.map(e => e.course_id) || []);
+
+  const handleEnrollClick = (course: LMSCourse) => {
+    setSelectedCourse(course);
+    setEnrollDialogOpen(true);
+  };
 
   const filteredCourses = courses?.filter((course) => {
     const matchesSearch =
@@ -198,7 +212,12 @@ export default function Courses() {
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {filteredCourses.map((course) => (
-                <CourseCard key={course.id} course={course} />
+                <CourseCard 
+                  key={course.id} 
+                  course={course} 
+                  onEnroll={handleEnrollClick}
+                  isEnrolled={enrolledCourseIds.has(course.id)}
+                />
               ))}
             </div>
           </>
@@ -229,6 +248,13 @@ export default function Courses() {
           </div>
         )}
       </div>
+
+      {/* Enrollment Dialog */}
+      <EnrollmentDialog 
+        course={selectedCourse}
+        open={enrollDialogOpen}
+        onOpenChange={setEnrollDialogOpen}
+      />
     </LearningLayout>
   );
 }
