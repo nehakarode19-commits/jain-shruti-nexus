@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { Layout } from "@/components/layout/Layout";
 import { PageBreadcrumb } from "@/components/ui/page-breadcrumb";
@@ -7,8 +7,8 @@ import { useBooksFromDB } from "@/hooks/useContent";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { SocialShareButtons } from "@/components/social/SocialShareButtons";
+import { Progress } from "@/components/ui/progress";
 import { 
   ArrowLeft, 
   Download, 
@@ -26,8 +26,19 @@ import {
   Play,
   Pause,
   SkipBack,
-  SkipForward
+  SkipForward,
+  RotateCcw
 } from "lucide-react";
+
+// Helper to format time as mm:ss
+const formatTime = (seconds: number) => {
+  const mins = Math.floor(seconds / 60);
+  const secs = Math.floor(seconds % 60);
+  return `${mins}:${secs.toString().padStart(2, '0')}`;
+};
+
+// LocalStorage key for audio progress
+const getProgressKey = (bookId: string, langKey: string) => `audio_progress_${bookId}_${langKey}`;
 
 const AUDIO_LANGUAGES = [
   { key: 'audio_hindi', label: 'Hindi', flag: '🇮🇳' },
@@ -43,7 +54,9 @@ const BookDetails = () => {
   const { data: books = [], isLoading } = useBooksFromDB();
   const [selectedAudioLang, setSelectedAudioLang] = useState<string | null>(null);
   const [isPlaying, setIsPlaying] = useState(false);
-  const [audioElement, setAudioElement] = useState<HTMLAudioElement | null>(null);
+  const [currentTime, setCurrentTime] = useState(0);
+  const [duration, setDuration] = useState(0);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
   
   const book = books.find((b) => b.id === id);
   
@@ -57,35 +70,107 @@ const BookDetails = () => {
     (book as any)[lang.key]
   ) : [];
 
+  // Get saved progress for a specific language
+  const getSavedProgress = useCallback((langKey: string) => {
+    if (!id) return 0;
+    const saved = localStorage.getItem(getProgressKey(id, langKey));
+    return saved ? parseFloat(saved) : 0;
+  }, [id]);
+
+  // Save progress to localStorage
+  const saveProgress = useCallback((langKey: string, time: number) => {
+    if (!id) return;
+    localStorage.setItem(getProgressKey(id, langKey), time.toString());
+  }, [id]);
+
+  // Cleanup audio on unmount
+  useEffect(() => {
+    return () => {
+      if (audioRef.current) {
+        // Save progress before unmount
+        if (selectedAudioLang && currentTime > 0) {
+          saveProgress(selectedAudioLang, currentTime);
+        }
+        audioRef.current.pause();
+        audioRef.current = null;
+      }
+    };
+  }, [selectedAudioLang, currentTime, saveProgress]);
+
   const handlePlayAudio = (audioUrl: string, langKey: string) => {
-    if (audioElement) {
-      audioElement.pause();
-    }
-    
-    if (selectedAudioLang === langKey && isPlaying) {
-      setIsPlaying(false);
+    // If clicking the same language that's playing, toggle play/pause
+    if (selectedAudioLang === langKey && audioRef.current) {
+      togglePlayPause();
       return;
     }
 
+    // Save progress of current audio before switching
+    if (audioRef.current && selectedAudioLang) {
+      saveProgress(selectedAudioLang, audioRef.current.currentTime);
+      audioRef.current.pause();
+    }
+    
     const audio = new Audio(audioUrl);
-    audio.play();
+    const savedProgress = getSavedProgress(langKey);
+    
+    audio.onloadedmetadata = () => {
+      setDuration(audio.duration);
+      // Resume from saved position
+      if (savedProgress > 0 && savedProgress < audio.duration - 1) {
+        audio.currentTime = savedProgress;
+      }
+    };
+    
+    audio.ontimeupdate = () => {
+      setCurrentTime(audio.currentTime);
+      // Save progress every 5 seconds
+      if (Math.floor(audio.currentTime) % 5 === 0) {
+        saveProgress(langKey, audio.currentTime);
+      }
+    };
+    
     audio.onended = () => {
       setIsPlaying(false);
-      setSelectedAudioLang(null);
+      setCurrentTime(0);
+      // Clear saved progress when finished
+      if (id) localStorage.removeItem(getProgressKey(id, langKey));
     };
-    setAudioElement(audio);
+    
+    audio.onpause = () => {
+      saveProgress(langKey, audio.currentTime);
+    };
+    
+    audio.play();
+    audioRef.current = audio;
     setSelectedAudioLang(langKey);
     setIsPlaying(true);
   };
 
   const togglePlayPause = () => {
-    if (audioElement) {
+    if (audioRef.current) {
       if (isPlaying) {
-        audioElement.pause();
+        audioRef.current.pause();
       } else {
-        audioElement.play();
+        audioRef.current.play();
       }
       setIsPlaying(!isPlaying);
+    }
+  };
+
+  const handleSeek = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!audioRef.current || !duration) return;
+    const rect = e.currentTarget.getBoundingClientRect();
+    const percent = (e.clientX - rect.left) / rect.width;
+    const newTime = percent * duration;
+    audioRef.current.currentTime = newTime;
+    setCurrentTime(newTime);
+  };
+
+  const resetProgress = () => {
+    if (audioRef.current && selectedAudioLang && id) {
+      audioRef.current.currentTime = 0;
+      setCurrentTime(0);
+      localStorage.removeItem(getProgressKey(id, selectedAudioLang));
     }
   };
 
@@ -285,14 +370,18 @@ const BookDetails = () => {
                     const audioUrl = (book as any)[key];
                     const isSelected = selectedAudioLang === key;
                     const isCurrentPlaying = isSelected && isPlaying;
+                    const hasSavedProgress = getSavedProgress(key) > 0;
                     
                     return (
                       <Button
                         key={key}
                         variant={isSelected ? "default" : "outline"}
-                        className={`flex flex-col h-auto py-3 ${isCurrentPlaying ? 'ring-2 ring-primary ring-offset-2' : ''}`}
+                        className={`flex flex-col h-auto py-3 relative ${isCurrentPlaying ? 'ring-2 ring-primary ring-offset-2' : ''}`}
                         onClick={() => handlePlayAudio(audioUrl, key)}
                       >
+                        {hasSavedProgress && !isSelected && (
+                          <span className="absolute top-1 right-1 w-2 h-2 bg-primary rounded-full" title="Resume available" />
+                        )}
                         <span className="text-lg mb-1">{flag}</span>
                         <span className="text-xs">{label}</span>
                         {isCurrentPlaying && (
@@ -301,6 +390,9 @@ const BookDetails = () => {
                             Playing
                           </span>
                         )}
+                        {hasSavedProgress && !isCurrentPlaying && (
+                          <span className="text-[10px] mt-1 text-primary">Resume</span>
+                        )}
                       </Button>
                     );
                   })}
@@ -308,29 +400,64 @@ const BookDetails = () => {
 
                 {/* Audio Controls */}
                 {selectedAudioLang && (
-                  <div className="flex items-center justify-center gap-4 p-4 bg-secondary/50 rounded-lg">
-                    <Button variant="ghost" size="icon" onClick={() => audioElement && (audioElement.currentTime -= 10)}>
-                      <SkipBack className="h-5 w-5" />
-                    </Button>
-                    <Button 
-                      size="lg" 
-                      className="rounded-full w-14 h-14"
-                      onClick={togglePlayPause}
-                    >
-                      {isPlaying ? (
-                        <Pause className="h-6 w-6" />
-                      ) : (
-                        <Play className="h-6 w-6 ml-1" />
-                      )}
-                    </Button>
-                    <Button variant="ghost" size="icon" onClick={() => audioElement && (audioElement.currentTime += 10)}>
-                      <SkipForward className="h-5 w-5" />
-                    </Button>
+                  <div className="space-y-4">
+                    {/* Progress Bar */}
+                    <div className="space-y-2">
+                      <div 
+                        className="relative h-2 bg-secondary rounded-full cursor-pointer overflow-hidden"
+                        onClick={handleSeek}
+                      >
+                        <div 
+                          className="absolute inset-y-0 left-0 bg-primary rounded-full transition-all"
+                          style={{ width: `${duration ? (currentTime / duration) * 100 : 0}%` }}
+                        />
+                      </div>
+                      <div className="flex justify-between text-xs text-muted-foreground">
+                        <span>{formatTime(currentTime)}</span>
+                        <span>{formatTime(duration)}</span>
+                      </div>
+                    </div>
+
+                    {/* Playback Controls */}
+                    <div className="flex items-center justify-center gap-4 p-4 bg-secondary/50 rounded-lg">
+                      <Button 
+                        variant="ghost" 
+                        size="icon" 
+                        onClick={resetProgress}
+                        title="Reset to beginning"
+                      >
+                        <RotateCcw className="h-4 w-4" />
+                      </Button>
+                      <Button variant="ghost" size="icon" onClick={() => audioRef.current && (audioRef.current.currentTime -= 10)}>
+                        <SkipBack className="h-5 w-5" />
+                      </Button>
+                      <Button 
+                        size="lg" 
+                        className="rounded-full w-14 h-14"
+                        onClick={togglePlayPause}
+                      >
+                        {isPlaying ? (
+                          <Pause className="h-6 w-6" />
+                        ) : (
+                          <Play className="h-6 w-6 ml-1" />
+                        )}
+                      </Button>
+                      <Button variant="ghost" size="icon" onClick={() => audioRef.current && (audioRef.current.currentTime += 10)}>
+                        <SkipForward className="h-5 w-5" />
+                      </Button>
+                    </div>
+
+                    {/* Resume indicator */}
+                    {getSavedProgress(selectedAudioLang) > 0 && currentTime === 0 && !isPlaying && (
+                      <p className="text-xs text-center text-primary">
+                        Resume from {formatTime(getSavedProgress(selectedAudioLang))}
+                      </p>
+                    )}
                   </div>
                 )}
 
                 <p className="text-xs text-center text-muted-foreground mt-4">
-                  Select a language above to start listening
+                  {selectedAudioLang ? 'Click on the progress bar to seek' : 'Select a language above to start listening'}
                 </p>
               </CardContent>
             </Card>
