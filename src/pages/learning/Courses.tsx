@@ -1,8 +1,10 @@
 import { useState } from "react";
-import { LearningLayout } from "@/components/learning/LearningLayout";
+import { useNavigate } from "react-router-dom";
+import { Layout } from "@/components/layout/Layout";
 import { CourseCard } from "@/components/learning/CourseCard";
 import { EnrollmentDialog } from "@/components/learning/EnrollmentDialog";
 import { useCourses, useEnrollments, LMSCourse } from "@/hooks/useLMS";
+import { useAdminAuth } from "@/contexts/AdminAuthContext";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import {
@@ -12,9 +14,10 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Search, Filter, BookOpen, GraduationCap, Video, Users, Sparkles } from "lucide-react";
+import { Search, Filter, BookOpen, GraduationCap, Video, Users, Sparkles, LogIn } from "lucide-react";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Badge } from "@/components/ui/badge";
+import { Link } from "react-router-dom";
 
 const SUBJECTS = [
   "All Subjects",
@@ -30,6 +33,8 @@ const LEVELS = ["All Levels", "Beginner", "Intermediate", "Advanced"];
 const MODES = ["All Modes", "Online", "Offline", "Hybrid"];
 
 export default function Courses() {
+  const navigate = useNavigate();
+  const { isAuthenticated } = useAdminAuth();
   const { data: courses, isLoading } = useCourses();
   const { data: enrollments } = useEnrollments();
   const [search, setSearch] = useState("");
@@ -45,6 +50,11 @@ export default function Courses() {
   const enrolledCourseIds = new Set(enrollments?.map(e => e.course_id) || []);
 
   const handleEnrollClick = (course: LMSCourse) => {
+    if (!isAuthenticated) {
+      // Redirect to login with return URL
+      navigate("/learning/login", { state: { from: `/learning/courses/${course.id}` } });
+      return;
+    }
     setSelectedCourse(course);
     setEnrollDialogOpen(true);
   };
@@ -65,7 +75,7 @@ export default function Courses() {
   const offlineCourses = courses?.filter(c => c.course_mode === "Offline").length || 0;
 
   return (
-    <LearningLayout title="All Courses">
+    <Layout>
       <div className="space-y-8">
         {/* Hero Section */}
         <div className="relative bg-gradient-to-br from-primary/10 via-primary/5 to-background rounded-3xl p-8 md:p-10 overflow-hidden border border-primary/10">
@@ -119,6 +129,31 @@ export default function Courses() {
                 </div>
               </div>
             </div>
+
+            {/* Login CTA for non-authenticated users */}
+            {!isAuthenticated && (
+              <div className="mt-6 flex items-center gap-4">
+                <Button asChild className="rounded-xl">
+                  <Link to="/learning/login">
+                    <LogIn className="h-4 w-4 mr-2" />
+                    Login to Enroll
+                  </Link>
+                </Button>
+                <span className="text-sm text-muted-foreground">
+                  Sign in to enroll in courses and track your progress
+                </span>
+              </div>
+            )}
+            {isAuthenticated && (
+              <div className="mt-6">
+                <Button asChild variant="outline" className="rounded-xl">
+                  <Link to="/learning/student-dashboard">
+                    <GraduationCap className="h-4 w-4 mr-2" />
+                    Go to My Dashboard
+                  </Link>
+                </Button>
+              </div>
+            )}
           </div>
         </div>
 
@@ -255,6 +290,6 @@ export default function Courses() {
         open={enrollDialogOpen}
         onOpenChange={setEnrollDialogOpen}
       />
-    </LearningLayout>
+    </Layout>
   );
 }
